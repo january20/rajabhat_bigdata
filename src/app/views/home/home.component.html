@@ -1,0 +1,25 @@
+<!-- Overlay -->
+<a href="/landing" class="ms-conf-btn ms-configurator-btn btn-circle-lg btn-circle btn-circle-raised btn-circle-warning animated rubberBand">
+	<i class="fa fa-android"></i>
+	<i class="fa fa-apple"></i>
+</a>
+
+<div class="ms-site-container mt-5">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h4>โครงการยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น มหาวิทยาลัยราชภัฏสุรินทร์</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body p-1">
+        <agm-map [latitude]="googleMapOptions.lat" [longitude]="googleMapOptions.lng" [zoom]="googleMapOptions.zoom">
+          <agm-marker [latitude]="googleMapOptions.lat" [longitude]="googleMapOptions.lng"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</div>
