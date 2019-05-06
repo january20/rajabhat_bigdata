@@ -1,0 +1,88 @@
+<div class="my-5 text-center" *ngIf="!village">
+  <mat-spinner class="mx-auto my-2"></mat-spinner>
+  กำลังโหลดข้อมูล.
+</div>
+
+<div mat-dialog-content [style.display]="village ? 'block' : 'none'">  
+  <div class="row animated fadeIn">
+    <div class="col-12">
+      <div class="card-body"><h2 class="color-primary no-mb">ข้อมูลทั่วไป</h2></div>
+      <table class="table table-no-border table-striped">
+        <tr>
+          <th>
+            <i class="zmdi zmdi-account mr-1 color-royal"></i> ชื่อหมู่บ้าน</th>
+          <td>{{ village?.village.village_name_th }}</td>
+        </tr>
+        <tr>
+          <th>
+            <i class="zmdi zmdi-face mr-1 color-warning"></i> ที่อยู่</th>
+          <td>ตำบล {{ village?.sub_district.sub_district_name_th+' อำเภอ'+village?.district.district_name_th+' จังหวัด'+village?.province.province_name_th }}</td>
+        </tr>
+        <tr>
+          <th>
+            <i class="zmdi zmdi-email mr-1 color-primary"></i> ประชากร</th>
+          <td>
+            {{ village?.houseowner['total_population'] }} คน
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <i class="zmdi zmdi-email mr-1 color-primary"></i> หลังคาเรือน</th>
+          <td>
+            {{ village?.houseowner['total_houseowner'] }} หลังคาเรือน
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <i class="zmdi zmdi-male-female mr-1 color-success"></i> พิกัดทางภูมิศาสตร์</th>
+          <td>
+            <p>ละติจูด: {{ village?.lat }}</p>
+            <p>ลองจิจูด: {{ village?.lng }}</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row animated fadeIn">
+    <div class="col-12">
+      <div class="card-body">
+        <h2 class="color-primary">โครงการในพื้นที่</h2>
+        <ol>
+          <li *ngFor="let project of village?.projects">
+            <a href="/projects/{{ project.id }}">{{ project.project_name }}</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="row animated fadeIn">
+    <div class="col-12">
+      <div class="card-body">
+        <h2 class="color-primary">ผู้รับบริการ</h2>
+        <ul class="nav nav-tabs indicator-primary nav-tabs-full nav-tabs-4 mb-5" role="tablist">
+          <li class="nav-item"><a class="nav-link withoutripple px-0 active" href="#occupation" aria-controls="occupation" role="tab" data-toggle="tab"><i class="zmdi zmdi-case"></i> <span class="d-none d-sm-inline">อาชีพ</span></a></li>
+          <li class="nav-item"><a class="nav-link withoutripple px-0" href="#education" aria-controls="education" role="tab" data-toggle="tab"><i class="zmdi zmdi-graduation-cap"></i> <span class="d-none d-sm-inline">การศึกษา</span></a></li>
+          <li class="nav-item"><a class="nav-link withoutripple px-0" href="#gender" aria-controls="gender" role="tab" data-toggle="tab"><i class="zmdi zmdi-male-female"></i> <span class="d-none d-sm-inline">เพศ</span></a></li>
+          <li class="nav-item"><a class="nav-link withoutripple px-0" href="#age" aria-controls="age" role="tab" data-toggle="tab"><i class="zmdi zmdi-cake"></i> <span class="d-none d-sm-inline">อายุ</span></a></li>
+        </ul>
+        <div class="tab-content" style="height: calc(100vh - 200px)">
+          <div role="tabpanel" class="tab-pane fade active show" id="occupation">
+            <div id="occupationChart" style="width: 100%; height: 500px"></div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="education">
+            <div id="educationChart" style="width: 100%; height: 500px"></div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="gender">
+            <div id="genderChart" style="width: 100%; height: 500px"></div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="age">
+            <div id="ageChart" style="width: 100%; height: 500px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-primary" (click)="closeModal()">ปิด</button>
+</div>

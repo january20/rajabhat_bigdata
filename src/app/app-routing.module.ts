@@ -4,9 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   
   { path: 'home', loadChildren: './views/home/home.module#HomeModule' },
+  { path: 'projects', loadChildren: './views/projects/projects.module#ProjectsModule' },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'projects/create',
     pathMatch: 'full'
   }
   // {

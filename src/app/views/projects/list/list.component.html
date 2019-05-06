@@ -1,0 +1,151 @@
+<div class="my-5 text-center" *ngIf="!result || !projects" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<ng-container [style.display]="result && projects ? 'block' : 'none'">
+  <div class="container">
+    <h3 class="color-dark text-center">
+      งบประมาณดำเนินการโครงการยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น ระยะ 20 ปี (พ.ศ.2560-2579)
+    </h3>
+    <!--<span><img src="assets/img/i_1.png" alt="" width="200" height="200">xx</span></h3>-->
+    <!--<div class="text-center wow zoomInUp animation-delay-2"><h1 class="color-primary"><img src="assets/img/i_1.png" width="130" height="110">30,000,000 <span class="color-warning">&nbsp;&nbsp;&nbsp; บาท</span></h1></div>-->
+  </div>
+  
+  <div class="container">  
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
+          <h2 class="counter color-success">{{ result?.total_budget | number }}</h2>
+          <i class="fa fa-4x fa-money color-success"></i>
+          <p class="mt-2 no-mb lead small-caps color-success">งบประมาณที่ใช้ทั้งหมด</p>
+        </div>
+      </div>
+      
+      <div class="col-sm-3">
+        <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
+          <h2 class="counter color-danger">{{ result?.total_projects }}</h2>
+          <i class="fa fa-4x fas fa-archive color-danger"></i>
+          <p class="mt-2 no-mb lead small-caps color-danger">จำนวนโครงการ</p>
+        </div>
+      </div>
+      
+      
+      <div class="col-sm-3">
+        <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
+          <a href="/">
+          <h2 class="counter color-primary">{{ result?.total_villages }}</h2>
+          <i class="fa fa-4x fa fa-map-marker color-primary" title="ดูรายละเอียด"></i>
+          <p class="mt-2 no-mb lead small-caps color-primary">พื้นที่บริการ</p>
+          <span class="color-primary">{{ result?.total_districts+' อำเภอ '+result?.total_sub_districts+' ตำบล '+result?.total_villages+' หมู่บ้าน' }}</span>
+          </a>
+        </div>
+      </div>
+  
+      <div class="col-sm-3">
+        <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
+          <a href="/aboutus">
+          <h2 class="counter color-info">6</h2>
+          <i class="fa fa-4x fa fa-ioxhost color-info" title="ดูรายละเอียด"></i>
+          <p class="mt-2 no-mb lead small-caps color-info">ตัวชี้วัดโครงการ</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card mt-5">
+      <div class="card-body m-5 p-5">
+        <h3 class="text-center mb-5">สรุปหน่วยงานที่รับผิดชอบโครงการ</h3>
+        <div id="projectChart" style="width: 100%; height: 500px"></div>
+  
+      </div>
+    </div>
+  
+    <div class="card mt-5">
+      <div class="card-body m-5 p-5">
+        <h3 class="text-center">งบประมาณของแต่ละหน่วยงาน</h3>
+        
+        <div id="budgetChart" style="width: 100%; height: 500px"></div>
+      </div>
+    </div>  
+    
+  </div>
+
+  <div class="container">
+    <h3 class="color-dark text-center">
+      โครงการที่ได้รับอนุมัติ
+    </h3>
+    <div class="card card-primary">
+      <div class="card-body">
+        <div class="col-lg-12">
+          <div class="relative-center text-center" *ngIf="isChange">
+            <mat-spinner class="mx-auto"></mat-spinner>
+            กำลังโหลดข้อมูล.
+          </div>
+          <table class="table table-hover" *ngIf="!isChange || !projects">
+            <thead>
+              <tr>
+                <th>โครงการ</th>
+                <th>หน่วยงาน</th>
+                <th>งบประมาณ</th>
+                <!--<th>ผู้เสนอโครงการ</th>-->
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let project of projects?.data">
+                <td>
+                  <a  href="/projects/{{ project?.id }}"  data-toggle="tooltip" data-placement="top"   class="color-info" title="">
+                    {{ project?.project_name }}
+                  </a>
+                </td>
+                
+                <td>
+                  {{ project?.faculty.fac_name }}
+                </td>
+
+                <td>
+                  {{ project?.budget | number }}
+                </td>
+
+                <td>
+                  <a href="/projects/{{ project?.id }}" class="ms-icon ms-icon-sm ms-icon-circle ms-icon-inverse color-info">
+                    <i data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด" class="fa fa-check color-success" aria-hidden="true"></i>
+                  </a>
+                  <a href="/projects/assessment/create?project_id={{ project?.id }}" class="ms-icon ms-icon-sm ms-icon-circle ms-icon-inverse color-warning">
+                    <i data-toggle="tooltip" data-placement="top" title="ประเมิณ" class="fa fa-file-text color-warning" aria-hidden="true"></i>
+                  </a>                      
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation" class="d-flex justify-content-center">
+            <ul class="pagination pagination-round">
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)" (click)="changePage(1)" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+
+              <ng-container *ngFor="let i of counter(projects?.last_page); let idx = index">
+                <li [className]="(idx+1) == projects?.current_page ? 'page-item active' : 'page-item'">
+                  <a class="page-link" href="javascript:void(0)" (click)="changePage(idx+1)">{{ idx+1 }}</a>
+                </li>
+              </ng-container>              
+
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)" aria-label="Next" (click)="changePage(projects?.last_page)">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

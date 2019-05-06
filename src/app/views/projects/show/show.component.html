@@ -1,0 +1,357 @@
+<div class="ms-site-container mt-5">
+
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{ project?.project_name }}</h1>
+        <p class="lead lead-lg color-white text-center center-block mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">{{ project?.fac.fac_name }}</p>
+      </div>
+    </div>      
+  </div>
+
+  <div class="container">
+    <div class="d-flex flex-column">
+      <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+        <div class="card-header">
+          <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ข้อมูลทั่วไป</h3>
+        </div>
+        <table class="table table-no-border table-striped">
+          <tr>
+            <th><i class="zmdi zmdi-info-outline mr-1 color-success"></i> ชื่อโครงการ</th>
+            <td>{{ project?.project_name }}</td>
+          </tr>
+          <tr>
+            <th>
+              <i class="zmdi zmdi-link mr-1 color-info"></i> รูปแบบโครงการ</th>
+            <td>
+              <ul class="list-unstyled">
+                <li *ngFor="let scheme of project?.schemes; let idx = index">{{ idx+1 }}. {{ scheme.name }}</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <i class="zmdi zmdi-pin mr-1 color-warning"></i> พื้นที่เป้าหมาย</th>
+            <td>
+              <ol>
+                <ng-container *ngFor="let area of project?.target_area">
+                    <li *ngIf="!area.village_id">{{ isNumber(area.target_area) ? 'หมู่ที่ ' + area.target_area : area.target_area + area.village.village_name_th + ' ตำบล' + area.village.sub_district.sub_district_name_th + ' อำเภอ' + area.village.district.district_name_th + ' จังหวัด' + area.village.province.province_name_th }}</li>
+                    <li *ngIf="area.village_id">{{ isNumber(area.target_area) && area.target_area ? 'หมู่ที่ ' + area.target_area + ' ' + area.village.village_name_th + ' ตำบล' + area.village.sub_district.sub_district_name_th : area.target_area ? area.target_area + ' ตำบล' + area.village.sub_district.sub_district_name_th : area.village.village_name_th + ' ตำบล' + area.village.sub_district.sub_district_name_th }}</li>
+                </ng-container>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <i class="zmdi zmdi-group-work mr-1 color-success"></i> กลุ่มเป้าหมาย</th>
+            <td>{{ project?.target_group ? (project?.target_group | striphtml) : 'ไม่พบข้อมูล'}}</td>
+          </tr>
+          <tr>
+            <th>
+              <i class="zmdi zmdi-time mr-1 color-info"></i> วัน เวลา สถานที่ดำเนินการ</th>
+            <td>{{ project?.operation_date ? (project?.operation_date | striphtml) : 'ไม่พบข้อมูล' }}</td>
+          </tr>
+          <tr>
+            <th>
+              <i class="zmdi zmdi-chart mr-1 color-royal"></i> วิธีการประเมินโครงการ</th>
+            <td>{{ project?.assessment_method ? project?.assessment_method : 'ไม่พบข้อมูล' }}</td>
+          </tr>
+          <!-- <tr>
+            <th>
+              <i class="zmdi zmdi-calendar mr-1 color-royal"></i> ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</th>
+            <td>12/11/2015</td>
+          </tr> -->
+        </table>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <div class="card card-warning card-body overflow-hidden text-center wow zoomInUp animation-delay-2">
+            <h2 class="color-warning">{{ project?.budget | number }}</h2>
+            <i class="fa fa-4x fa-money color-warning"></i>
+            <p class="mt-2 no-mb lead small-caps color-warning">งบประมาณ</p>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card card-success card-body overflow-hidden text-center wow zoomInUp animation-delay-5">
+            <h2 class="color-success">{{ project?.participate_organization_count }}</h2>
+            <i class="fa fa-4x fa-handshake-o color-success"></i>
+            <p class="mt-2 no-mb lead small-caps color-success">องค์กรที่ให้ความร่วมมือ</p>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card card-royal card-body overflow-hidden text-center wow zoomInUp animation-delay-4">
+            <h2 class="color-royal">{{ project?.kpi_count }}</h2>
+            <i class="fa fa-4x fa-bar-chart color-royal"></i>
+            <p class="mt-2 no-mb lead small-caps color-royal">ตัวชี้วัด</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <h2 class="color-primary text-center mt-4 mb-2">ผู้รับผิดชอบ</h2> -->
+      <div class="row">
+        <div class="col-7">
+
+          <div class="card card-royal animated fadeInUp animation-delay-12">
+            <div class="card-header">
+              <h3 class="card-title">ความเป็นมา/หลักการและเหตุผล</h3>
+            </div>
+            <div class="card-body">
+              {{ project?.history ? (project?.history | striphtml) : 'ไม่พบข้อมูล' }}
+            </div>
+          </div>
+          
+          <div class="card card-royal animated fadeInUp animation-delay-12">
+            <div class="card-header">
+              <h3 class="card-title">ความสอดคล้องกับยุทธศาสตร์</h3>
+            </div>
+            <div class="card-body">
+              <p *ngIf="project?.srru_strategies.length === 0">ไม่พบข้อมูล</p>
+              <h4 class="color-primary">1. ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h4>
+              <ul class="list-unstyled px-5">
+                <li *ngFor="let strategy of project?.srru_strategies"><strong>{{ strategy.name }}</strong> {{ strategy.details }}</li>
+              </ul>
+              <h4 class="color-primary">2. ยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
+              <ul class="list-unstyled px-5">
+                <li *ngFor="let strategy of project?.rajabhat_strategies"><strong>{{ strategy.name }}</strong> {{ strategy.details }}</li>
+              </ul>
+              <h4 class="color-primary">3. ยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
+              <ul class="list-unstyled px-5">
+                <li *ngFor="let strategy of project?.national_strategies"><strong>{{ strategy.name }}</strong> {{ strategy.details }}</li>
+              </ul>
+              <ng-container *ngIf="project?.faculty_strategy">
+                <h4 class="color-primary">4. ยุทธศาสตร์หน่วยงาน คณะ/ศูนย์/สำนัก</h4>
+                <p class="px-5">{{ project?.faculty_strategy }}</p>
+              </ng-container>                
+            </div>
+          </div>
+
+          <div class="card card-royal animated fadeInUp animation-delay-12">
+            <div class="card-header">
+              <h3 class="card-title">แผนการบูรณาการกับพันธกิจอื่น</h3>
+            </div>
+            <div class="card-body">
+              <p *ngIf="project?.integration_plans.length === 0">ไม่พบข้อมูล</p>
+              <ng-container *ngFor="let i_plan of project?.integration_plans">
+                <h4 class="color-primary">{{ i_plan['type']['id'] + '. ' + i_plan['type'].name_th }}</h4>
+                <ng-container *ngFor="let plan_data of i_plan['data']">
+                  <p class="px-5"><strong>{{ plan_data.integration_activities }}</strong></p>
+                  <p class="px-5">ลักษณะการบูรณาการ {{ plan_data.plan }}</p>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-5 d-flex">
+          <div class="card card-royal animated fadeInUp animation-delay-12 flex-fill">
+            <div class="card-header">
+              <h3 class="card-title">ผู้รับผิดชอบโครงการ</h3>
+            </div>
+            <div class="card-body">
+              <div class="ms-media-list">
+                <ng-container *ngFor="let user of project?.sys_users">
+                  <div class="media mb-2" *ngIf="user.sys_user.mis">
+                    <a class="mr-3" href="#">
+                      <img class="media-object" src="{{ user.sys_user.mis.img }}"> </a>
+                    <div class="media-body">
+                      <h4 class="mt-0 mb-0 color-warning">{{ user.sys_user.mis.ref_prefix_name.fullname + user.sys_user.mis.stf_fname + ' ' + user.sys_user.mis.stf_lname }}</h4>
+                      <a href="mailto:joe@example.com?subject=feedback">{{ user.sys_user.mis.email }}</a>
+                      <div class="">
+                        <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-facebook">
+                          <i class="zmdi zmdi-facebook"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-twitter">
+                          <i class="zmdi zmdi-twitter"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-instagram">
+                          <i class="zmdi zmdi-instagram"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="media mb-2" *ngIf="!user.sys_user.mis">
+                    <a class="mr-3" href="#">
+                      <img class="media-object" src="/assets/img/no-avatar.jpg"> </a>
+                    <div class="media-body">
+                      <h4 class="mt-0 mb-0 color-warning">{{ user.sys_user.firstname + ' ' + user.sys_user.lastname }}</h4>
+                      <a href="mailto:joe@example.com?subject=feedback">{{ user.sys_user.email }}</a>
+                      <div class="">
+                        <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-facebook">
+                          <i class="zmdi zmdi-facebook"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-twitter">
+                          <i class="zmdi zmdi-twitter"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-instagram">
+                          <i class="zmdi zmdi-instagram"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column">
+        <div class="card card-royal animated fadeInUp animation-delay-7">
+          <div class="card-header">
+            <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> วัตถุประสงค์โครงการและตัวชี้วัด</h3>
+          </div>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="color-primary">
+                <th>วัตถุประสงค์</th>
+                <th>กิจกรรม</th>
+                <th>ผลลัพธ์</th>
+                <th>ตัวชี้วัด</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                  <span *ngIf="project?.objectives.length === 0">ไม่พบข้อมูล</span>
+                  <ol>
+                    <li *ngFor="let objective of project?.objectives">{{ objective.objective }}</li>                      
+                  </ol>
+                </td>
+
+                <td>
+                  <span *ngIf="project?.activities.length === 0">ไม่พบข้อมูล</span>
+                  <ol>
+                    <li *ngFor="let activity of project?.activities">{{ activity.activity | striphtml }}</li>                      
+                  </ol>
+                </td>
+
+                <td>
+                  <span *ngIf="project?.outputs.length === 0">ไม่พบข้อมูล</span>
+                  <ol>
+                    <li *ngFor="let output of project?.outputs">{{ output.output }}</li>                      
+                  </ol>
+                </td>
+
+                <td>
+                  <span *ngIf="project?.kpi.length === 0">ไม่พบข้อมูล</span>
+                  <ol>
+                    <li *ngFor="let k of project?.kpi">{{ k.kpi }}</li>                      
+                  </ol>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card card-royal animated fadeInUp animation-delay-7">
+          <div class="card-header">
+            <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> องค์กรภาคีที่มีส่วนร่วมดำเนินการ</h3>
+          </div>
+
+          <div class="card-body" *ngIf="project?.participate_organizations.length === 0">
+            <p>ไม่พบข้อมูล</p>
+          </div>
+
+          <table class="table table-bordered" *ngIf="project?.participate_organizations.length > 0">
+            <thead>
+              <tr class="color-primary">
+                <th>ลำดับ</th>
+                <th>ชื่อหน่วยงาน</th>
+                <th>การมีส่วนร่วม</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let p_o of project?.participate_organizations; let idx = index">
+                <td>{{ idx+1 }}</td>
+                <td>{{ p_o.organization_name }}</td>
+                <td>{{ p_o.participation }}</td>
+              </tr>           
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card card-royal animated fadeInUp animation-delay-7">
+          <div class="card-header">
+            <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ประโยชน์ที่คาดว่าจะได้รับ</h3>
+          </div>
+          <div class="card-body" *ngIf="project?.expected_benefits.length === 0">
+            <p>ไม่พบข้อมูล</p>
+          </div>
+
+          <div class="card-body" *ngIf="project?.expected_benefits.length > 0">
+            <ng-container *ngFor="let exp of project?.expected_benefits">
+              <h4 class="color-primary">{{ exp.expected_benefit_type.name }}</h4>
+              <p class="px-5">{{ exp.benefit }}</p>
+            </ng-container>              
+          </div>
+        </div>
+
+        <div class="card card-royal animated fadeInUp animation-delay-7">
+          <div class="card-header">
+            <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> การรายงานผล</h3>
+          </div>
+          <div class="card-body">
+            {{ project?.reporting ? (project?.reporting | striphtml) : 'ไม่พบข้อมูล' }}
+          </div>
+        </div>
+
+        <div class="container">
+          <h2 class="color-primary text-center mb-4">กิจกรรม/ผลการดำเนินการ</h2>
+          <div class="row">
+            <div class="col-md-12">
+              <ng-container *ngIf="project?.activity_reports.length > 0">
+                <ul class="ms-timeline">
+                  <li class="ms-timeline-item wow materialUp" *ngFor="let activity of project?.activity_reports">
+                    <div class="ms-timeline-date">
+                      <time class="timeline-time" datetime="">{{ activity.day }}
+                        <span>{{ activity.month }}</span>
+                      </time>
+                      <i class="ms-timeline-point"></i>
+                    </div>
+                    <div class="card card-{{ activity.panel_color }}">
+                      <div class="card-header">
+                        <h3 class="card-title">{{ activity.name }}</h3>
+                      </div>
+                      <div class="card-body">
+                        <h4>รายละเอียด</h4>
+                        <p>{{ activity.description }}</p>
+                        <ng-container *ngIf="activity.images">
+                          <h4>รูปภาพ</h4>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let image of activity.images">
+                              <div class="card wow zoomIn">
+                                <div class="ms-thumbnail card-body p-05 ">
+                                  <div class="withripple zoom-img">
+                                    <a href="{{ image }}" data-lightbox="gallery" data-title="" c>
+                                      <img src="{{ image }}" alt="" class="img-fluid">
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>                   
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="activity.files">
+                          <h4>ไฟล์</h4>
+                          <ol>
+                            <li *ngFor="let file of activity.files"><a href="/user/projects/activities/files/{{ file['path'] }}">{{ file['file_name'] }}</a></li>
+                          </ol>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </ng-container>
+              <p class="text-center" *ngIf="project?.activity_reports.length === 0">ไม่พบข้อมูล</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

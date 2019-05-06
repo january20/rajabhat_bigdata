@@ -1,0 +1,126 @@
+<div class="ms-site-container mt-5">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">แบบเสนอโครงการ</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body">
+        <div class="text-center">
+          <p class="h2">
+            <strong>
+              ระบบทำงานได้ดีใน 
+              <a href="https://www.google.com/intl/th_ALL/chrome/">
+                Chrome 
+                <i class="fa fa-chrome" aria-hidden="true"></i>
+              </a>&nbsp; 
+              และ 
+              <a href="https://www.mozilla.org/th/firefox/new/">
+                FireFox 
+                <i class="fa fa-firefox" aria-hidden="true"></i>
+              </a>
+            </strong>
+          </p>
+        </div>
+        
+        <p>คำอธิบาย</p>
+        <ol>
+          <li>
+            กรอกรายละเอียด
+            <a href="/files/proposal_template_plan_budget.docx" target="_blank">
+              แผนการดำเนินงานและรายละเอียดงบประมาณ <i data-toggle="tooltip" data-placement="top" title="ดาวน์โหลด" class="fa fa-cloud-download color-success" aria-hidden="true"></i>
+            </a>
+            &nbsp;และแบบฟอร์มด้านล่าง แล้วปริ้นเอกสารจากระบบหน้าแรกและหน้าสุดท้าย
+            ที่มีระบบติดตามข้อเสนอโครงการผ่าน QR Code
+            (ประหยัดการใช้การดาษและสามารถติดตามโครงการได้
+            <a href="/user/projects/">ผ่านระบบ</a>
+            )
+          </li>
+          <li>
+            ดาวน์โหลดเอกสาร
+            <a href="/files/proposal_template.docx" target="_blank">proposal template</a>
+            กรอกข้อมูลให้ถูกต้องและเสนอโครงการผ่านคณะฯมาที่ สถาบันวิจัยและพัฒนา มหาวิทยาลัยราชภัฏสุรินทร์
+            (ไม่สามารถตรวจสอบสถานะผ่านระบบออนไลน์ได้)(Optional)
+          </li>
+        </ol>
+        <hr class="dashed">
+
+        <form [formGroup]="projectForm" class="form-horizontal" accept-charset="UTF-8" enctype="multipart/form-data">
+          <fieldset>
+            <legend class="color-primary">ส่วนที่ 1 ข้อมูลทั่วไป</legend> 
+
+            <!-- ***project_name -->
+            <h4 [className]="formErrors.project_name ? 'color-danger' : ''">1. ชื่อโครงการ</h4>
+            <div class="form-group label-floating mx-5">
+              <label class="control-label" for="project_name">ชื่อโครงการ</label>
+              <input type="text" class="form-control" formControlName="project_name">
+              <p class="color-danger" *ngIf="formErrors.project_name">*{{ formErrors.project_name }}</p>
+            </div>
+            <!-- end project_name -->
+
+            <!-- ***target_areas -->
+            <div class="d-flex">
+              <span class="flex-grow-1">
+                <h4 [className]="formErrors.target_areas ? 'color-danger' : ''">2. ชุมชน/พื้นที่เป้าหมาย </h4>
+              </span>
+              
+              <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addTargetArea()">
+                <i class="fa fa-plus"></i>
+                 เพิ่มพื้นที่เป้าหมาย                
+              </a> 
+            </div>
+            <div class="mx-5 animated fadeInDown" *ngFor="let area of target_areas.controls; let i = index" formArrayName="target_areas">
+              <div formGroupName="{{ i }}">
+                <div class="form-row">
+                  <div class="form-group col-2">
+                    <select class="form-control" (change)="loadSubDistricts($event, i)">
+                      <option selected disabled>อำเภอ</option>
+                      <ng-container *ngFor="let district of districts">
+                        <option [value]="district.id">{{ district.district_name_th }}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="form-group col-2">
+                    <select class="form-control" formControlName="sub_district_id" (change)="loadVillages($event, i)">
+                      <option selected disabled>ตำบล</option>
+                      <ng-container *ngFor="let sub_district of sub_districtArr[i]">
+                        <option [value]="sub_district.id">{{ sub_district.sub_district_name_th }}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="form-group col-2">
+                    <select class="form-control" formControlName="village_id">
+                      <option selected disabled>หมู่บ้าน</option>
+                      <ng-container *ngFor="let village of villageArr[i]">
+                        <option [value]="village.id">{{ village.village_name_th }}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="form-group col-5">
+                    <input type="text" class="form-control" formControlName="address" placeholder="หมู่ที่/ชือโรงเรียน/ชื่อวัด/อื่นๆ">
+                  </div>
+                  <div class="form-group col-1 text-center">
+                    <a href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removeTargetArea(i)"><i class="fa fa-close m-0"></i></a>
+                  </div>
+                </div>
+                <p class="color-danger" *ngIf="target_areas.at(i).invalid && (target_areas.at(i).dirty || target_areas.at(i).touched)">*กรุณากรอกข้อมูลให้ครบ</p>
+              </div>
+            </div>
+            <!-- end target_areas -->
+
+          </fieldset>
+          
+          <div class="form-group d-flex justify-content-center">
+            <button (click)="submit()" type="submit" class="btn btn-raised btn-primary">เสนอโครงการ</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>

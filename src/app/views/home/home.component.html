@@ -17,7 +17,24 @@
     <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
       <div class="card-body p-1">
         <agm-map [latitude]="googleMapOptions.lat" [longitude]="googleMapOptions.lng" [zoom]="googleMapOptions.zoom">
-          <agm-marker [latitude]="googleMapOptions.lat" [longitude]="googleMapOptions.lng"></agm-marker>
+          <agm-polygon *ngIf="polygonPaths.length > 0" [paths]="polygonPaths" 
+            strokeColor="#FF0000" 
+            strokeOpacity="0.8" 
+            strokeWeight="2" 
+            fillColor="#FF0000" 
+            fillOpacity="0.35"></agm-polygon>
+          <agm-data-layer [geoJson]="geoJsonObject" 
+            [style]="setGeoJsonStyle"></agm-data-layer>
+          <agm-marker [latitude]="googleMapOptions.lat" 
+            [longitude]="googleMapOptions.lng" 
+            iconUrl="/assets/img/logo.png"></agm-marker>
+          <ng-container *ngFor="let village of villages">
+            <agm-info-window [latitude]="village.lat" 
+            [longitude]="village.lng"
+            [isOpen]="true">
+            <a href='javascript:void(0);' (click)="toggleModal(village)">{{ village.village.village_name_th+' ตำบล'+ village.sub_district.sub_district_name_th+' อำเภอ'+village.district.district_name_th }}</a>
+          </agm-info-window>
+          </ng-container>          
         </agm-map>
       </div>
     </div>
