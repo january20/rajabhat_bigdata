@@ -11,7 +11,7 @@ export class ProjectService {
     private http: HttpClient
   ) { }
 
-  getProject(id) {
+  getProject(id: number) {
     return this.http.get(`${environment.api_url}/projects/${id}`);
   }
 
@@ -19,12 +19,8 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/projects?t=result`);
   }
 
-  getProjectList(page) {
+  getProjectList(page: number) {
     return this.http.get(`${environment.api_url}/projects?t=project_list_index&page=${page}`);
-  }
-
-  getDistricts() {
-    return this.http.get(`${environment.api_url}/ref/districts?t=province&province_id=32`);
   }
 
   getSubDistricts(district_id: number) {
@@ -32,6 +28,22 @@ export class ProjectService {
   }
 
   getVillages(sub_district_id: number) {
-    return this.http.get(`${environment.api_url}/ref/villages?t=with_sub_district_id&sub_district_id=${sub_district_id}`)
+    return this.http.get(`${environment.api_url}/ref/villages?t=with_sub_district_id&sub_district_id=${sub_district_id}`);
+  }
+
+  getSubFaculty(fac_id: number) {
+    return this.http.get(`${environment.api_url}/mis?t=sub_fac&fac_id=${fac_id}`);
+  }
+
+  getBranches(sub_fac_id: number) {
+    return this.http.get(`${environment.api_url}/mis?t=branch&sub_fac_id=${sub_fac_id}`);
+  }
+
+  getStaffs(program_id: number) {
+    return this.http.get(`${environment.api_url}/mis?t=staff&program_id=${program_id}`);
+  }
+
+  getMiscData() {
+    return this.http.get(`${environment.api_url}/ref/misc?t=project_create_data`);
   }
 }
