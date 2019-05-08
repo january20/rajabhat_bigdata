@@ -49,7 +49,7 @@
         </ol>
         <hr class="dashed">
 
-        <form [formGroup]="projectForm" class="form-horizontal" accept-charset="UTF-8" enctype="multipart/form-data">
+        <form [formGroup]="form" class="form-horizontal" accept-charset="UTF-8" enctype="multipart/form-data">
           <fieldset>
             <legend class="color-primary">ส่วนที่ 1 ข้อมูลทั่วไป</legend> 
 
@@ -58,118 +58,43 @@
             <div class="form-group label-floating mx-5">
               <label class="control-label" for="project_name">ชื่อโครงการ</label>
               <input type="text" class="form-control" formControlName="project_name">
-              <p class="color-danger" *ngIf="formErrors.project_name">*{{ formErrors.project_name }}</p>
+              <p class="color-danger" *ngIf="formErrors.project_name">{{ formErrors.project_name }}</p>
             </div>
             <!-- end project_name -->
 
             <!-- ***target_areas -->
-            <div class="d-flex">
-              <span class="flex-grow-1">
-                <h4 [className]="formErrors.target_areas ? 'color-danger' : ''">2. ชุมชน/พื้นที่เป้าหมาย </h4>
-              </span>
-              
-              <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addTargetArea()">
-                <i class="fa fa-plus"></i>
-                 เพิ่มพื้นที่เป้าหมาย                
-              </a> 
-            </div>
-            <div class="mx-5 animated fadeInDown" *ngFor="let area of target_areas.controls; let i = index" formArrayName="target_areas">
-              <div formGroupName="{{ i }}">
-                <div class="form-row">
-                  <div class="form-group col-2">
-                    <select class="form-control" (change)="loadSubDistricts($event, i)">
-                      <option selected disabled>อำเภอ</option>
-                      <ng-container *ngFor="let district of districts">
-                        <option [value]="district.id">{{ district.district_name_th }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-2">
-                    <select class="form-control" formControlName="sub_district_id" (change)="loadVillages($event, i)">
-                      <option selected disabled>ตำบล</option>
-                      <ng-container *ngFor="let sub_district of subDistrictArr[i]">
-                        <option [value]="sub_district.id">{{ sub_district.sub_district_name_th }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-2">
-                    <select class="form-control" formControlName="village_id">
-                      <option selected disabled>หมู่บ้าน</option>
-                      <ng-container *ngFor="let village of villageArr[i]">
-                        <option [value]="village.id">{{ village.village_name_th }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-5">
-                    <input type="text" class="form-control" formControlName="address" placeholder="หมู่ที่/ชือโรงเรียน/ชื่อวัด/อื่นๆ">
-                  </div>
-                  <div class="form-group col-1 text-center">
-                    <a *ngIf="i > 0" href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removeTargetArea(i)"><i class="fa fa-close m-0"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p class="color-danger" *ngIf="formErrors.target_areas">*{{ formErrors.target_areas }}</p>
+            <app-target-areas 
+              [target_areas]="target_areas" 
+              [districts]="districts" 
+              [subDistrictArr]="subDistrictArr" 
+              [villageArr]="villageArr" 
+
+              (subDistrictsLoaded)="loadSubDistricts($event)" 
+              (villagesLoaded)="loadVillages($event)" 
+              (targetAreaRemoved)="removeTargetArea($event)">
+            </app-target-areas>
             <!-- end target_areas -->
 
-            <!-- ***main_staffs-->
             <h4>3. ผู้รับผิดชอบโครงการ</h4>
             <h4 class="px-4">3.1 มหาวิทยาลัยราชภัฏสุรินทร์</h4>
-            <div class="d-flex">
-              <span class="flex-grow-1 px-5">
-                <h4 [className]="formErrors.main_staffs ? 'color-danger' : ''">3.1.1 ผู้รับผิดชอบหลัก</h4>
-              </span>              
-              <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addSrruStaff(1)">
-                <i class="fa fa-plus"></i>
-                 เพิ่มผู้รับผิดชอบหลัก       
-              </a> 
-            </div>
-            <div class="mx-5 animated fadeInDown" *ngFor="let staff of main_staffs.controls; let i = index" formArrayName="main_staffs">
-              <div formGroupName="{{ i }}">
-                <div class="form-row">
-                  <div class="form-group col-3">
-                    <select class="form-control" (change)="loadSubFaculty($event, i, 1)">
-                      <option selected disabled>เลือกคณะ</option>
-                      <ng-container *ngFor="let fac of faculty">
-                        <option [value]="fac.id">{{ fac.fac_name }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-2">
-                    <select class="form-control" (change)="loadBranches($event, i, 1)">
-                      <option selected disabled>เลือกหน่วยงาน</option>
-                      <ng-container *ngFor="let sub_fac of mainSubFacultyArr[i]">
-                        <option [value]="sub_fac.id">{{ sub_fac.sub_fac_name }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-2">
-                    <select class="form-control" (change)="loadStaffs($event, i, 1)">
-                      <option selected disabled>เลือกสาขา</option>
-                      <ng-container *ngFor="let branch of mainBranchArr[i]">
-                        <option [value]="branch.ref_program.id">{{ branch.ref_program.program_name }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select class="form-control" formControlName="mis_id">
-                      <option selected disabled>เลือกบุคลากร</option>
-                      <ng-container *ngFor="let staff of mainStaffArr[i]">
-                        <option [value]="staff.id">{{ staff.ref_prefix_name.fullname+staff.display_name }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-1 text-center">
-                    <a *ngIf="i > 0" href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removeSrruStaff(i, 1)"><i class="fa fa-close m-0"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.main_staffs">*{{ formErrors.main_staffs }}</p>
+            <!-- ***main_staffs-->
+            <app-main-staffs
+              [main_staffs]="main_staffs" 
+              [faculty]="faculty"
+              [mainSubFacultyArr]="mainSubFacultyArr" 
+              [mainBranchArr]="mainBranchArr" 
+              [mainStaffArr]="mainStaffArr" 
+
+              (subFacultyLoaded)="loadSubFaculty($event)" 
+              (branchLoaded)="loadBranch($event)" 
+              (staffLoaded)="loadStaff($event)" 
+              (staffRemoved)="removeStaff($event)"
+            >
+            </app-main-staffs>
             <!-- end main_staffs -->
 
             <!-- ***sub_staffs -->
-            <div class="d-flex">
+            <!-- <div class="d-flex">
               <span class="flex-grow-1 px-5">
                 <h4 [className]="formErrors.sub_staffs ? 'color-danger' : ''">3.1.2 ผู้ประสานงาน</h4>
               </span>              
@@ -219,11 +144,11 @@
                 </div>
               </div>
             </div>
-            <p class="color-danger px-5" *ngIf="formErrors.sub_staffs">*{{ formErrors.sub_staffs }}</p>
+            <p class="color-danger px-5" *ngIf="formErrors.sub_staffs">*{{ formErrors.sub_staffs }}</p> -->
             <!-- end sub_staffs -->
 
             <!-- ***ext_staffs -->
-            <h4 class="px-4">3.2 ชุมชน/ท้องถิ่นที่เข้าร่วมโครงการ</h4>
+            <!-- <h4 class="px-4">3.2 ชุมชน/ท้องถิ่นที่เข้าร่วมโครงการ</h4>
             <div class="d-flex">
               <span class="flex-grow-1 px-5">
                 <h4 [className]="formErrors.ext_staffs ? 'color-danger' : ''">3.2.1 ผู้นำชุมชนที่เข้าร่วมโครงการ</h4>
@@ -267,11 +192,11 @@
                 </div>
               </div>
             </div>
-            <p class="color-danger px-4" *ngIf="formErrors.ext_staffs">*{{ formErrors.ext_staffs }}</p>
+            <p class="color-danger px-4" *ngIf="formErrors.ext_staffs">*{{ formErrors.ext_staffs }}</p> -->
             <!-- end ext_staffs -->
 
             <!-- ***project_schemes -->
-            <h4>4. รูปแบบโครงการ</h4>
+            <!-- <h4>4. รูปแบบโครงการ</h4>
             <div class="form-group">
               <div class="checkbox">
                 <ng-container formArrayName="schemes" *ngFor="let scheme of schemes.controls;let i = index">
@@ -280,11 +205,11 @@
                   </label><br>
                 </ng-container>
               </div>
-            </div>
+            </div> -->
             <!-- end project_schemes -->
 
             <!-- ***srru_strategies -->
-            <h4>5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h4>
+            <!-- <h4>5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h4>
             <div class="form-group">
               <div class="checkbox">
                 <ng-container formArrayName="srru_strategies" *ngFor="let strategy of srru_strategies.controls;let i = index">
@@ -293,11 +218,11 @@
                   </label><br>
                 </ng-container>
               </div>
-            </div>
+            </div> -->
             <!-- end srru_strategies -->
 
             <!-- ***rajabhat_strategies -->
-            <h4>6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
+            <!-- <h4>6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
             <div class="form-group">
               <div class="checkbox">
                 <ng-container formArrayName="rajabhat_strategies" *ngFor="let strategy of rajabhat_strategies.controls;let i = index">
@@ -306,11 +231,11 @@
                   </label><br>
                 </ng-container>
               </div>
-            </div>
+            </div> -->
             <!-- end rajabhat_strategies -->
 
             <!-- ***national_strategies -->
-            <h4>7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
+            <!-- <h4>7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
             <div class="form-group">
               <div class="checkbox">
                 <ng-container formArrayName="national_strategies" *ngFor="let strategy of national_strategies.controls;let i = index">
@@ -319,28 +244,28 @@
                   </label><br>
                 </ng-container>
               </div>
-            </div>
+            </div> -->
             <!-- end national_strategies -->
 
             <!-- ***faculty_strategy -->
-            <h4 [className]="formErrors.faculty_strategy ? 'color-danger' : ''">8. สอดคล้องกับยุทธศาสตร์หน่วยงาน คณะ/ศูนย์/สำนัก</h4>
+            <!-- <h4 [className]="formErrors.faculty_strategy ? 'color-danger' : ''">8. สอดคล้องกับยุทธศาสตร์หน่วยงาน คณะ/ศูนย์/สำนัก</h4>
             <div class="form-group">
               <textarea required class="form-control" formControlName="faculty_strategy" rows="8"></textarea>
             </div>
-            <p class="color-danger px-5" *ngIf="formErrors.faculty_strategy">*{{ formErrors.faculty_strategy }}</p>
+            <p class="color-danger px-5" *ngIf="formErrors.faculty_strategy">*{{ formErrors.faculty_strategy }}</p> -->
             <!-- end faculty_strategy -->
 
             <!-- ***integration_plans -->
-            <h4>9. แผนการบูรณาการกับพันธกิจอื่น</h4>
+            <!-- <h4>9. แผนการบูรณาการกับพันธกิจอื่น</h4>
             <div class="form-group">
               <div class="checkbox">
                 <ng-container formArrayName="integration_plans" *ngFor="let plan of integration_plans.controls;let i = index">
                   <label>
-                    <input type="checkbox" [formControlName]="i"> {{ integrationPlans[i].name_th }}
+                    <input type="checkbox" [formControlName]="i" (change)="integrationPlanCheck(i, $event)"> {{ integrationPlans[i].name_th }}
                   </label><br>
                 </ng-container>
               </div>
-            </div>
+            </div> -->
             <!-- end integration_plans -->
            
           </fieldset>
