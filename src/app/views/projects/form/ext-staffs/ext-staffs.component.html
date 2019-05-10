@@ -1,3 +1,20 @@
-<p>
-  ext-staffs works!
-</p>
+<div class="d-flex">
+  <span class="flex-grow-1 px-5">
+    <h4 [className]="formErrors.ext_staffs ? 'color-danger' : ''">3.2.1 ผู้นำชุมชนที่เข้าร่วมโครงการ</h4>
+  </span>              
+  <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addExtStaff()">
+    <i class="fa fa-plus"></i>
+    เพิ่มผู้นำชุมชน
+  </a>
+</div>
+<div class="mx-5 animated fadeInDown" *ngFor="let staff of ext_staffs.controls; let i = index" formArrayName="ext_staffs">
+  <app-ext-staff
+    [form]="staff" 
+    [index]="i" 
+    [prefixName]="prefixName" 
+    [userGroup]="userGroup"
+    
+    (extStaffRemoved)="removeExtStaff($event)">
+  </app-ext-staff>
+</div>
+<p class="color-danger px-4" *ngIf="formErrors.ext_staffs">*{{ formErrors.ext_staffs }}</p>

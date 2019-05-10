@@ -67,7 +67,6 @@ export class FormComponent extends AbstractForm implements OnInit {
   }
 
   loadSubDistricts(obj) {
-    console.log(obj.index)
     this.projectService.getSubDistricts(obj.district_id).subscribe(data => this.subDistrictArr[obj.index] = data);
   }
 
@@ -86,7 +85,7 @@ export class FormComponent extends AbstractForm implements OnInit {
     });
   }
 
-  loadBranches(obj) {
+  loadBranch(obj) {
     this.projectService.getBranches(obj.sub_faculty_id).subscribe(data => {
       if(obj.type === 1) {
         this.mainBranchArr[obj.index] = data;
@@ -97,7 +96,7 @@ export class FormComponent extends AbstractForm implements OnInit {
     });
   }
 
-  loadStaffs(obj) {
+  loadStaff(obj) {
     this.projectService.getStaffs(obj.branch_id).subscribe(data => {
       if(obj.type === 1) {
         this.mainStaffArr[obj.index] = data;
@@ -128,12 +127,8 @@ export class FormComponent extends AbstractForm implements OnInit {
       project_name: ['', Validators.required],
       target_areas: this.formBuilder.array([]),
       main_staffs: this.formBuilder.array([]),
-      // sub_staffs: this.formBuilder.array([
-      //   this.createSrruStaff()
-      // ]),
-      // ext_staffs: this.formBuilder.array([
-      //   this.createExtStaff()
-      // ]),
+      sub_staffs: this.formBuilder.array([]),
+      ext_staffs: this.formBuilder.array([]),
       // schemes: this.formBuilder.array([]),
       // srru_strategies: this.formBuilder.array([]),
       // rajabhat_strategies: this.formBuilder.array([]),
@@ -172,9 +167,9 @@ export class FormComponent extends AbstractForm implements OnInit {
   // End Dynamic Srru Staffs Fields //
 
   // ***Dynamic External Staffs Fields //
-  // removeExtStaff(idx): void { 
-  //   this.ext_staffs.removeAt(idx);
-  // }
+  removeExtStaff(idx): void { 
+    this.ext_staffs.removeAt(idx);
+  }
   // End Dynamic External Staffs Fields //
 
   // ***Dynamic checkbox Fields //
@@ -222,8 +217,8 @@ export class FormComponent extends AbstractForm implements OnInit {
   // ***Getter Functions //  
   get target_areas() { return this.form.get('target_areas') as FormArray; }
   get main_staffs() { return this.form.get('main_staffs') as FormArray; }
-  // get sub_staffs() { return this.form.get('sub_staffs') as FormArray; }
-  // get ext_staffs() { return this.form.get('ext_staffs') as FormArray; }
+  get sub_staffs() { return this.form.get('sub_staffs') as FormArray; }
+  get ext_staffs() { return this.form.get('ext_staffs') as FormArray; }
   // get schemes() { return this.form.get('schemes') as FormArray; }
   // get srru_strategies() { return this.form.get('srru_strategies') as FormArray; }
   // get rajabhat_strategies() { return this.form.get('rajabhat_strategies') as FormArray; }

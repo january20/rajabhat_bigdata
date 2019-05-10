@@ -88,111 +88,36 @@
               (subFacultyLoaded)="loadSubFaculty($event)" 
               (branchLoaded)="loadBranch($event)" 
               (staffLoaded)="loadStaff($event)" 
-              (staffRemoved)="removeStaff($event)"
+              (staffRemoved)="removeMainStaff($event)"
             >
             </app-main-staffs>
             <!-- end main_staffs -->
 
             <!-- ***sub_staffs -->
-            <!-- <div class="d-flex">
-              <span class="flex-grow-1 px-5">
-                <h4 [className]="formErrors.sub_staffs ? 'color-danger' : ''">3.1.2 ผู้ประสานงาน</h4>
-              </span>              
-              <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addSrruStaff(2)">
-                <i class="fa fa-plus"></i>
-                 เพิ่มผู้ประสานงาน       
-              </a> 
-            </div>
-            <div class="mx-5 animated fadeInDown" *ngFor="let staff of sub_staffs.controls; let i = index" formArrayName="sub_staffs">
-              <div formGroupName="{{ i }}">
-                <div class="form-row">
-                  <div class="form-group col-3">
-                    <select class="form-control" (change)="loadSubFaculty($event, i, 2)">
-                      <option selected disabled>เลือกคณะ</option>
-                      <ng-container *ngFor="let fac of faculty">
-                        <option [value]="fac.id">{{ fac.fac_name }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-2">
-                    <select class="form-control" (change)="loadBranches($event, i, 2)">
-                      <option selected disabled>เลือกหน่วยงาน</option>
-                      <ng-container *ngFor="let sub_fac of subSubFacultyArr[i]">
-                        <option [value]="sub_fac.id">{{ sub_fac.sub_fac_name }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-2">
-                    <select class="form-control" (change)="loadStaffs($event, i, 2)">
-                      <option selected disabled>เลือกสาขา</option>
-                      <ng-container *ngFor="let branch of subBranchArr[i]">
-                        <option [value]="branch.ref_program.id">{{ branch.ref_program.program_name }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-4">
-                    <select class="form-control" formControlName="mis_id">
-                      <option selected disabled>เลือกบุคลากร</option>
-                      <ng-container *ngFor="let staff of subStaffArr[i]">
-                        <option [value]="staff.id">{{ staff.ref_prefix_name.fullname+staff.display_name }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-1 text-center">
-                    <a *ngIf="i > 0" href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removeSrruStaff(i, 2)"><i class="fa fa-close m-0"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.sub_staffs">*{{ formErrors.sub_staffs }}</p> -->
+            <app-sub-staffs
+              [sub_staffs]="sub_staffs" 
+              [faculty]="faculty"
+              [subSubFacultyArr]="subSubFacultyArr" 
+              [subBranchArr]="subBranchArr" 
+              [subStaffArr]="subStaffArr" 
+
+              (subFacultyLoaded)="loadSubFaculty($event)" 
+              (branchLoaded)="loadBranch($event)" 
+              (staffLoaded)="loadStaff($event)" 
+              (staffRemoved)="removeSubStaff($event)"
+            >
+            </app-sub-staffs>
             <!-- end sub_staffs -->
 
             <!-- ***ext_staffs -->
-            <!-- <h4 class="px-4">3.2 ชุมชน/ท้องถิ่นที่เข้าร่วมโครงการ</h4>
-            <div class="d-flex">
-              <span class="flex-grow-1 px-5">
-                <h4 [className]="formErrors.ext_staffs ? 'color-danger' : ''">3.2.1 ผู้นำชุมชนที่เข้าร่วมโครงการ</h4>
-              </span>              
-              <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addExtStaff()">
-                <i class="fa fa-plus"></i>
-                เพิ่มผู้นำชุมชน
-              </a>
-            </div>
-            <div class="mx-5 animated fadeInDown" *ngFor="let staff of ext_staffs.controls; let i = index" formArrayName="ext_staffs">
-              <div formGroupName="{{ i }}">
-                <div class="form-row">
-                  <div class="form-group col-1">
-                    <select class="form-control" formControlName="prefix_id">
-                      <option selected disabled>คำนำหน้า</option>
-                      <ng-container *ngFor="let prefix of prefixName">
-                        <option [value]="prefix.id">{{ prefix.prefix_th }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-3">
-                    <input type="text" class="form-control" formControlName="firstname" placeholder="ชื่อ">
-                  </div>
-                  <div class="form-group col-3">
-                    <input type="text" class="form-control" formControlName="lastname" placeholder="นามสกุล">
-                  </div>
-                  <div class="form-group col-2">
-                    <select class="form-control" formControlName="group_id">
-                      <option selected disabled>เลือกกลุ่ม</option>
-                      <ng-container *ngFor="let group of userGroup">
-                        <option [value]="group.id">{{ group.name }}</option>
-                      </ng-container>
-                    </select>
-                  </div>
-                  <div class="form-group col-2">
-                    <input type="text" class="form-control" formControlName="tel" placeholder="เบอร์โทรศัพท์">
-                  </div>
-                  <div class="form-group col-1 text-center">
-                    <a *ngIf="i > 0" href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removeExtStaff()"><i class="fa fa-close m-0"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p class="color-danger px-4" *ngIf="formErrors.ext_staffs">*{{ formErrors.ext_staffs }}</p> -->
+            <h4 class="px-4">3.2 ชุมชน/ท้องถิ่นที่เข้าร่วมโครงการ</h4>
+            <app-ext-staffs
+              [ext_staffs]="ext_staffs"
+              [prefixName]="prefixName"
+              [userGroup]="userGroup"
+              
+              (extStaffRemoved)="removeExtStaff($event)">
+            </app-ext-staffs>
             <!-- end ext_staffs -->
 
             <!-- ***project_schemes -->
