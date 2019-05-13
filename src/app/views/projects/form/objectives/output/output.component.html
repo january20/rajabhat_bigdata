@@ -1,0 +1,9 @@
+<div class="form-row" [formGroup]="form">
+  <div class="form-group col-11">
+    <input type="text" class="form-control" formControlName="output" placeholder="ผลลัพธ์">
+  </div>
+  <div class="form-group col-1 text-center">
+    <a *ngIf="index > 0" href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removeOutput()"><i class="fa fa-close m-0"></i></a>
+  </div>
+</div>
+<p class="color-danger" *ngIf="formErrors.output">{{ formErrors.output }}</p>

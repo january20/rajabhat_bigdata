@@ -1,0 +1,9 @@
+<div class="form-group" [formGroup]="srru_strategies">
+  <div class="checkbox">
+    <ng-container *ngFor="let scheme of srru_strategies.controls;let i = index">
+      <label>        
+        <input type="checkbox" [formControlName]="i"> {{ srruStrategies[i].name+' '+srruStrategies[i].details }}
+      </label><br>
+    </ng-container>
+  </div>
+</div>

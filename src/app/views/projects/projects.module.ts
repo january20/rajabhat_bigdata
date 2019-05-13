@@ -21,9 +21,20 @@ import { SubStaffsComponent } from './form/sub-staffs/sub-staffs.component';
 import { SubStaffComponent } from './form/sub-staffs/sub-staff/sub-staff.component';
 import { ExtStaffsComponent } from './form/ext-staffs/ext-staffs.component';
 import { ExtStaffComponent } from './form/ext-staffs/ext-staff/ext-staff.component';
+import { SchemesComponent } from './form/schemes/schemes.component';
+import { SrruStrategiesComponent } from './form/srru-strategies/srru-strategies.component';
+import { RajabhatStrategiesComponent } from './form/rajabhat-strategies/rajabhat-strategies.component';
+import { NationalStrategiesComponent } from './form/national-strategies/national-strategies.component';
+import { ObjectivesComponent } from './form/objectives/objectives.component';
+import { AlliancesComponent } from './form/alliances/alliances.component';
+import { BenefitsComponent } from './form/benefits/benefits.component';
+import { ObjectiveComponent } from './form/objectives/objective/objective.component';
+import { OutputComponent } from './form/objectives/output/output.component';
+import { KpiComponent } from './form/objectives/kpi/kpi.component';
+import { OactivityComponent } from './form/objectives/oactivity/oactivity.component';
 
 @NgModule({
-  declarations: [ProjectsComponent, ListComponent, ShowComponent, FormComponent, ActivityComponent, MylistComponent, TargetAreasComponent, TargetAreaComponent, MainStaffsComponent, MainStaffComponent, SubStaffsComponent, SubStaffComponent, ExtStaffsComponent, ExtStaffComponent],
+  declarations: [ProjectsComponent, ListComponent, ShowComponent, FormComponent, ActivityComponent, MylistComponent, TargetAreasComponent, TargetAreaComponent, MainStaffsComponent, MainStaffComponent, SubStaffsComponent, SubStaffComponent, ExtStaffsComponent, ExtStaffComponent, SchemesComponent, SrruStrategiesComponent, RajabhatStrategiesComponent, NationalStrategiesComponent, ObjectivesComponent, AlliancesComponent, BenefitsComponent, ObjectiveComponent, OutputComponent, KpiComponent, OactivityComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -14,11 +14,45 @@ export class ExtStaffComponent extends AbstractForm implements OnInit {
   @Input() userGroup;
   @Output() extStaffRemoved = new EventEmitter<number>();
 
+  formErrors = this.createFormErrors();
+  validationMessages = this.createValidationMessages();
+
   constructor() {
     super();
   }
 
   ngOnInit() {
+    this.subscribeToFormChanged();
+  }
+
+  createFormErrors() {
+    return {
+      prefixname: '',
+      firstname: '',
+      lastname: '',
+      user_group: '',
+      tel: ''
+    }
+  }
+
+  createValidationMessages() {
+    return {
+      prefixname: {
+        required: 'กรุณาเลือกคำนำหน้าชื่อ'
+      },
+      firstname: {
+        required: 'กรุณาระบุชื่อ'
+      },
+      lastname: {
+        required: 'กรุณาระบุนามสกุล'
+      },
+      user_group: {
+        required: 'กรุณาเลือกลุ่ม'
+      },
+      tel: {
+        pattern: 'หมายเลขโทรศัพท์ไม่ถูกต้อง กรุณาระบุใหม่อีกครั้ง'
+      }
+    }
   }
 
   removeExtStaff() {

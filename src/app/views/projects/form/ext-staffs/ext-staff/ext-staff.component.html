@@ -23,10 +23,13 @@
       </select>
     </div>
     <div class="form-group col-2">
-      <input type="text" class="form-control" formControlName="tel" placeholder="เบอร์โทรศัพท์">
+      <input type="text" class="form-control" formControlName="tel" maxlength="10" placeholder="เบอร์โทรศัพท์">
     </div>
     <div class="form-group col-1 text-center">
       <a *ngIf="index > 0" href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removeExtStaff()"><i class="fa fa-close m-0"></i></a>
     </div>
   </div>
 </div>
+<p class="color-danger" *ngIf="formErrors.tel">{{ formErrors.tel }}</p>
+<p class="color-danger" *ngIf="formErrors.firstname">{{ formErrors.firstname }}</p>
+<p class="color-danger" *ngIf="formErrors.lastname">{{ formErrors.lastname }}</p>

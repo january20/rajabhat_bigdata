@@ -8,7 +8,7 @@ import { FormArray, FormBuilder, FormControl, Validators, FormGroup } from '@ang
 })
 export class ExtStaffsComponent implements OnInit {
 
-  @Input() ext_staff: FormArray;
+  @Input() ext_staffs: FormArray;
   @Input() prefixName;
   @Input() userGroup;
   @Output() extStaffRemoved = new EventEmitter<number>();
@@ -18,7 +18,7 @@ export class ExtStaffsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.addExtStaff();
+    this.ext_staffs.push(this.createExtStaff());
   }
 
   createExtStaff(): FormGroup {
@@ -27,12 +27,16 @@ export class ExtStaffsComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       group_id: ['', Validators.required],
-      tel: ['']
+      tel: ['', Validators.compose([
+        Validators.pattern("^-?[0-9]\\d*(\\.\\d{1,2})?$")
+      ])]
     });
   }
 
-  addExtStaff() {
-    this.ext_staff.push(this.createExtStaff());
+  addExtStaff(event) {
+    event.preventDefault();
+
+    this.ext_staffs.push(this.createExtStaff());
   }
 
   removeExtStaff(index) {

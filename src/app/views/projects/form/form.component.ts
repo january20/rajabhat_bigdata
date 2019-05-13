@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../shared/project.service';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn } from '@angular/forms';
 import { AbstractForm } from './shared/abstract-form';
 
 @Component({
@@ -58,11 +58,10 @@ export class FormComponent extends AbstractForm implements OnInit {
       this.prefixName = data.prefix;
       this.userGroup = data.user_groups;
       this.faculty = data.faculty;
-      // this.addSchemes(data.schemes);
-      // this.addSrruStrategies(data.srru_strategies);
-      // this.addRajabhatStrategies(data.srru_strategies);
-      // this.addNationalStrategies(data.rajabhat_strategies);
-      // this.addIntegrationPlans(data.integration_plans);
+      this.projectSchemes = data.schemes;
+      this.srruStrategies = data.srru_strategies;
+      this.nationalStrategies = data.national_strategies;
+      this.rajabhatStrategies = data.rajabhat_strategies;
     });
   }
 
@@ -81,7 +80,6 @@ export class FormComponent extends AbstractForm implements OnInit {
       } else if(obj.type === 2) {
         this.subSubFacultyArr[obj.index] = data;
       }
-      
     });
   }
 
@@ -92,7 +90,6 @@ export class FormComponent extends AbstractForm implements OnInit {
       } else if(obj.type === 2) {
         this.subBranchArr[obj.index] = data;
       }
-      
     });
   }
 
@@ -103,20 +100,53 @@ export class FormComponent extends AbstractForm implements OnInit {
       } else if(obj.type === 2) {
         this.subStaffArr[obj.index] = data;
       }
-      
     });
   }
 
   // ***Validation Errors //
   createFormErrors() {
-    return {
-      project_name: ''
-    }
+    return { project_name: '', schemes: '', srru_strategies: '', rajabhat_strategies: '', national_strategies: '', faculty_strategy: '', history: '', target_group: '', operation_date: '', assessment_method: '', reporting: '', budget: '', file: '' }
   }
   createValidationMessages() {
     return {
       project_name: {
         required: 'กรุณาระบุชื่อโครงการ'
+      },
+      schemes: {
+        required: 'กรุณาเลือกรูปแบบโครงการ'
+      },
+      srru_strategies: {
+        required: 'กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏสุรินทร์'
+      },
+      rajabhat_strategies: {
+        required: 'กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี'
+      },
+      national_strategies: {
+        required: 'กรุณาเลือกยุทธศาสตร์ชาติ ระยะ 20 ปี'
+      },
+      faculty_strategy: {
+        required: 'กรุณาระบุยุทธศาสตร์คณะ'
+      },
+      history: {
+        required: 'กรุณาระบุความเป็นมา/หลักการและเหตุผล'
+      },
+      target_group: {
+        required: 'กรุณาระบุกลุ่มเป้าหมาย'
+      },
+      operation_date: {
+        required: 'กรุณาระบุวันเวลา และสถานที่ดำเนินการ'
+      },
+      assessment_method: {
+        required: 'กรุณาระบุวิธีการประเมินผลโครงการ'
+      },
+      reporting: {
+        required: 'กรุณาระบุการรายงานผล'
+      },
+      budget: {
+        required: 'กรุณาระบุงบประมาณ'
+      },
+      file: {
+        required: 'กรุณาแนบรายละเอียดงบประมาณ'
       }
     }
   }
@@ -129,12 +159,25 @@ export class FormComponent extends AbstractForm implements OnInit {
       main_staffs: this.formBuilder.array([]),
       sub_staffs: this.formBuilder.array([]),
       ext_staffs: this.formBuilder.array([]),
-      // schemes: this.formBuilder.array([]),
-      // srru_strategies: this.formBuilder.array([]),
-      // rajabhat_strategies: this.formBuilder.array([]),
-      // national_strategies: this.formBuilder.array([]),
-      // faculty_strategy: ['', Validators.required],
+      schemes: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
+      srru_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
+      rajabhat_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
+      national_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
+      faculty_strategy: ['', Validators.required],
       // integration_plans: this.formBuilder.array([]),
+      history: ['', Validators.required],
+      objectives: this.formBuilder.array([]),
+      activities: this.formBuilder.array([]),
+      outputs: this.formBuilder.array([]),
+      kpi: this.formBuilder.array([]),
+      target_group: ['', Validators.required],
+      operation_date: ['', Validators.required],
+      alliances: this.formBuilder.array([]),
+      assessment_method: ['', Validators.required],
+      benefits: this.formBuilder.array([]),
+      reporting: ['', Validators.required],
+      budget: ['', Validators.required],
+      file: null,
     });
   }
 
@@ -172,57 +215,31 @@ export class FormComponent extends AbstractForm implements OnInit {
   }
   // End Dynamic External Staffs Fields //
 
-  // ***Dynamic checkbox Fields //
-  // addSchemes(schemes) {
-  //   this.projectSchemes = schemes;
-  //   this.projectSchemes.map((o, i) => {
-  //     const control = new FormControl();
-  //     this.schemes.push(control);
-  //   });
-  // }
-  // addSrruStrategies(srru_strategies) {
-  //   this.srruStrategies = srru_strategies;
-  //   this.srruStrategies.map((o, i) => {
-  //     const control = new FormControl();
-  //     this.srru_strategies.push(control);
-  //   });
-  // }
-  // addRajabhatStrategies(rajabhat_strategies) {
-  //   this.rajabhatStrategies = rajabhat_strategies;
-  //   this.rajabhatStrategies.map((o, i) => {
-  //     const control = new FormControl();
-  //     this.rajabhat_strategies.push(control);
-  //   });
-  // }
-  // addNationalStrategies(national_strategies) {
-  //   this.nationalStrategies = national_strategies;
-  //   this.nationalStrategies.map((o, i) => {
-  //     const control = new FormControl();
-  //     this.national_strategies.push(control);
-  //   });
-  // }
-  // addIntegrationPlans(plan) {
-  //   this.integrationPlans = plan;
-  //   this.integrationPlans.map((o, i) => {
-  //     const control = new FormControl();
-  //     this.integration_plans.push(control);
-  //   });
-  // }
-  // End Dynamic checkbox Fields //
-
-  // integrationPlanCheck(idx, e) {
-  //   console.log(idx, 'is', e.target.checked);
-  // }
-
   // ***Getter Functions //  
   get target_areas() { return this.form.get('target_areas') as FormArray; }
   get main_staffs() { return this.form.get('main_staffs') as FormArray; }
   get sub_staffs() { return this.form.get('sub_staffs') as FormArray; }
   get ext_staffs() { return this.form.get('ext_staffs') as FormArray; }
-  // get schemes() { return this.form.get('schemes') as FormArray; }
-  // get srru_strategies() { return this.form.get('srru_strategies') as FormArray; }
-  // get rajabhat_strategies() { return this.form.get('rajabhat_strategies') as FormArray; }
-  // get national_strategies() { return this.form.get('national_strategies') as FormArray; }
+  get schemes() { return this.form.get('schemes') as FormArray; }
+  get srru_strategies() { return this.form.get('srru_strategies') as FormArray; }
+  get rajabhat_strategies() { return this.form.get('rajabhat_strategies') as FormArray; }
+  get national_strategies() { return this.form.get('national_strategies') as FormArray; }
+  get objectives() { return this.form.get('objectives') as FormArray; }
+  get activities() { return this.form.get('activities') as FormArray; }
+  get outputs() { return this.form.get('outputs') as FormArray; }
+  get kpi() { return this.form.get('kpi') as FormArray; }
+  get alliances() { return this.form.get('alliances') as FormArray; }
+  get benefits() { return this.form.get('benefits') as FormArray; }
   // get integration_plans() { return this.form.get('integration_plans') as FormArray; }
   // End Getter Functions //
+
+  minSelectedCheckboxes(min = 1) {
+    const validator: ValidatorFn = (formArray: FormArray) => {
+      const totalSelected = formArray.controls
+        .map(control => control.value)
+        .reduce((prev, next) => next ? prev + next : prev, 0);
+      return totalSelected >= min ? null : { required: true };
+    };  
+    return validator;
+  }
 }

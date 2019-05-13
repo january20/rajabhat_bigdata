@@ -1,0 +1,80 @@
+<div [formGroup]="objectives">
+  <div class="d-flex px-4">
+    <span class="flex-grow-1">
+      <h4>11.1 วัตถุประสงค์</h4>
+    </span>
+    <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addObjective()">
+      <i class="fa fa-plus"></i>
+        เพิ่มวัตถุประสงค์
+    </a> 
+  </div>
+  <div class="mx-5 animated fadeInDown" *ngFor="let obj of objectives.controls; let i = index">
+    <app-objective
+      [objective]="obj" 
+      [index]="i" 
+      
+      (objectiveRemoved)="removeObjective()">
+    </app-objective>
+  </div>
+</div>
+
+<div [formGroup]="activities">
+  <div class="d-flex px-4">
+    <span class="flex-grow-1">
+      <h4>11.2 กิจกรรม</h4>
+    </span>
+    <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addActivity()">
+      <i class="fa fa-plus"></i>
+      เพิ่มกิจกรรม
+    </a> 
+  </div>
+  <div class="mx-5 animated fadeInDown" *ngFor="let activity of activities.controls; let i = index">
+
+    <app-oactivity
+      [activity]="activity" 
+      [index]="i" 
+      
+      (activityRemoved)="removeActivity()">
+    </app-oactivity>
+  </div>
+</div>
+
+<div [formGroup]="outputs">
+  <div class="d-flex px-4">
+    <span class="flex-grow-1">
+      <h4>11.3 ผลลัพธ์</h4>
+    </span>
+    <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addOutput()">
+      <i class="fa fa-plus"></i>
+        เพิ่มผลลัพธ์
+    </a> 
+  </div>
+  <div class="mx-5 animated fadeInDown" *ngFor="let output of outputs.controls; let i = index">
+    <app-output
+      [output]="output" 
+      [index]="i" 
+      
+      (outputRemoved)="removeOutput()">
+    </app-output>
+  </div>
+</div>
+
+<div [formGroup]="kpi">
+  <div class="d-flex px-4">
+    <span class="flex-grow-1">
+      <h4>11.4 ตัวชี้วัด</h4>
+    </span>
+    <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addKpi()">
+      <i class="fa fa-plus"></i>
+        เพิ่มตัวชี้วัด
+    </a> 
+  </div>
+  <div class="mx-5 animated fadeInDown" *ngFor="let k of kpi.controls; let i = index">
+    <app-kpi
+      [kpi]="k" 
+      [index]="i" 
+      
+      (kpiRemoved)="removeKpi()">
+    </app-kpi>
+  </div>
+</div>
