@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
-import { FormArray, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-integration-plans',
@@ -8,7 +8,7 @@ import { FormArray, FormGroup, FormBuilder, Validators, FormControl } from '@ang
 })
 export class IntegrationPlansComponent implements OnInit, OnChanges {
 
-  @Input() integration_plans;
+  @Input() integration_plans: FormArray;
   @Input() integrationPlans;
 
   constructor(
@@ -38,8 +38,6 @@ export class IntegrationPlansComponent implements OnInit, OnChanges {
     integration_plans.map(item => {
       this.integration_plans.push(this.createIntegrationPlans(item.id));
     });
-
-    // console.log(this.integration_plans.controls[0].controls.plans)
   }
 
 }

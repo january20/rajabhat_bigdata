@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-subjects',
@@ -8,18 +8,16 @@ import { FormArray, FormBuilder, FormControl, Validators, FormGroup } from '@ang
 })
 export class SubjectsComponent implements OnInit {
 
-  @Input('plan') form;
+  @Input('plan') form: FormArray;
   @Input() index; 
   @Input() name;
 
   toggle = false;
 
-  constructor(private formBuilder: FormBuilder) {
-
-  }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.form.push(this.createPlan());
+    this.plans.push(this.createPlan());
   }
 
   createPlan(): FormGroup {
@@ -33,15 +31,17 @@ export class SubjectsComponent implements OnInit {
   addPlan(event) {
     event.preventDefault();
 
-    this.form.push(this.createPlan());
+    this.plans.push(this.createPlan());
   }
 
   removePlan(index) {
-    this.form.removeAt(index);
+    this.plans.removeAt(index);
   }
 
   togglePlan() {
     this.toggle = !this.toggle;
   }
+
+  get plans() { return this.form.get('plans') as FormArray; }
 
 }

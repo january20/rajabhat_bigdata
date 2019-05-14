@@ -106,53 +106,25 @@ export class FormComponent extends AbstractForm implements OnInit {
 
   // ***Validation Errors //
   createFormErrors() {
-    return { project_name: '', schemes: '', srru_strategies: '', rajabhat_strategies: '', national_strategies: '', faculty_strategy: '', history: '', target_group: '', operation_date: '', assessment_method: '', benefits: '', reporting: '', budget: '', file: '' }
+    return { project_name: '', schemes: '', srru_strategies: '', rajabhat_strategies: '', national_strategies: '', faculty_strategy: '', integration_plans: '', history: '', target_group: '', operation_date: '', assessment_method: '', benefits: '', reporting: '', budget: '', file: '' }
   }
   createValidationMessages() {
     return {
-      project_name: {
-        required: '*กรุณาระบุชื่อโครงการ'
-      },
-      schemes: {
-        required: '*กรุณาเลือกรูปแบบโครงการ'
-      },
-      srru_strategies: {
-        required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏสุรินทร์'
-      },
-      rajabhat_strategies: {
-        required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี'
-      },
-      national_strategies: {
-        required: '*กรุณาเลือกยุทธศาสตร์ชาติ ระยะ 20 ปี'
-      },
-      faculty_strategy: {
-        required: '*กรุณาระบุยุทธศาสตร์คณะ'
-      },
-      history: {
-        required: '*กรุณาระบุความเป็นมา/หลักการและเหตุผล'
-      },
-      target_group: {
-        required: '*กรุณาระบุกลุ่มเป้าหมาย'
-      },
-      operation_date: {
-        required: '*กรุณาระบุวันเวลา และสถานที่ดำเนินการ'
-      },
-      assessment_method: {
-        required: '*กรุณาระบุวิธีการประเมินผลโครงการ'
-      },
-      benefits: {
-        required: '*กรุณาเลือกประโยชน์'
-      },
-      reporting: {
-        required: '*กรุณาระบุการรายงานผล'
-      },
-      budget: {
-        required: '*กรุณาระบุงบประมาณ',
-        pattern: '*กรุณาระบุเป็นตัวเลขเท่านั้น'
-      },
-      file: {
-        required: '*กรุณาแนบรายละเอียดงบประมาณ'
-      }
+      project_name: { required: '*กรุณาระบุชื่อโครงการ' },
+      schemes: { required: '*กรุณาเลือกรูปแบบโครงการ' },
+      srru_strategies: { required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏสุรินทร์' },
+      rajabhat_strategies: { required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี' },
+      national_strategies: { required: '*กรุณาเลือกยุทธศาสตร์ชาติ ระยะ 20 ปี' },
+      faculty_strategy: { required: '*กรุณาระบุยุทธศาสตร์คณะ' },
+      integration_plans: { required: '*กรุณาเลือกแผนการบูรณาการ' },
+      history: { required: '*กรุณาระบุความเป็นมา/หลักการและเหตุผล' },
+      target_group: { required: '*กรุณาระบุกลุ่มเป้าหมาย' },
+      operation_date: { required: '*กรุณาระบุวันเวลา และสถานที่ดำเนินการ' },
+      assessment_method: { required: '*กรุณาระบุวิธีการประเมินผลโครงการ' },
+      benefits: { required: '*กรุณาเลือกประโยชน์' },
+      reporting: { required: '*กรุณาระบุการรายงานผล' },
+      budget: { required: '*กรุณาระบุงบประมาณ', pattern: '*กรุณาระบุเป็นตัวเลขเท่านั้น' },
+      file: { required: '*กรุณาแนบรายละเอียดงบประมาณ' }
     }
   }
   // End Validation Errors //
@@ -169,7 +141,7 @@ export class FormComponent extends AbstractForm implements OnInit {
       rajabhat_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
       national_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
       faculty_strategy: ['', Validators.required],
-      integration_plans: this.formBuilder.array([]),
+      integration_plans: this.formBuilder.array([], this.checkDynamicCheckboxes(1)),
       history: ['', Validators.required],
       objectives: this.formBuilder.array([]),
       activities: this.formBuilder.array([]),
@@ -179,7 +151,7 @@ export class FormComponent extends AbstractForm implements OnInit {
       operation_date: ['', Validators.required],
       alliances: this.formBuilder.array([]),
       assessment_method: ['', Validators.required],
-      benefits: this.formBuilder.array([], this.minSelectedBenefitsCheckboxes(1)),
+      benefits: this.formBuilder.array([], this.checkDynamicCheckboxes(1)),
       reporting: ['', Validators.required],
       budget: ['', Validators.compose([
         Validators.required,
@@ -242,6 +214,7 @@ export class FormComponent extends AbstractForm implements OnInit {
   get integration_plans() { return this.form.get('integration_plans') as FormArray; }
   // End Getter Functions //
 
+  // **Validations Function //
   minSelectedCheckboxes(min = 1) {
     const validator: ValidatorFn = (formArray: FormArray) => {
       const totalSelected = formArray.controls
@@ -252,7 +225,7 @@ export class FormComponent extends AbstractForm implements OnInit {
     return validator;
   }
 
-  minSelectedBenefitsCheckboxes(min = 1) {
+  checkDynamicCheckboxes(min = 1) {
     const validator: ValidatorFn = (formArray: FormArray) => {
       const totalSelected = formArray.controls
         .map(control => control.value.status)
@@ -261,4 +234,5 @@ export class FormComponent extends AbstractForm implements OnInit {
     };  
     return validator;
   }
+  // End Validations Function //
 }

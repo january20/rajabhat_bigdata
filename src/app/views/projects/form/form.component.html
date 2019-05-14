@@ -165,11 +165,12 @@
             <!-- end faculty_strategy -->
 
             <!-- ***integration_plans -->
-            <h4>9. แผนการบูรณาการกับพันธกิจอื่น</h4>
+            <h4 [className]="formErrors.integration_plans ? 'color-danger' : ''">9. แผนการบูรณาการกับพันธกิจอื่น</h4>
             <app-integration-plans 
               [integration_plans]="integration_plans" 
               [integrationPlans]="integrationPlans">
             </app-integration-plans>
+            <p class="color-danger" *ngIf="formErrors.integration_plans">{{ formErrors.integration_plans }}</p>
             <!-- <p class="color-danger"></p> -->
             <!-- end integration_plans -->
           </fieldset>
@@ -269,7 +270,7 @@
           </fieldset>
           
           <div class="form-group d-flex justify-content-center">
-            <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid">เสนอโครงการ</button>
+            <button (click)="submit()" mat-raised-button color="primary" [disabled]="form.valid">เสนอโครงการ</button>
           </div>
         </form>
 

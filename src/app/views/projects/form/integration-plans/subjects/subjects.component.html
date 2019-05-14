@@ -7,7 +7,7 @@
     </a>
   </div>
   <div class="animated fadeInDown" *ngIf="toggle">
-    <ng-container *ngFor="let subject of form.controls; let i = index">
+    <ng-container *ngFor="let subject of plans.controls; let i = index">
       <app-subject
         [subject]="subject" 
         [index]="i"
