@@ -190,7 +190,7 @@
             <!-- end history -->
 
             <!-- ***objectives -->
-            <h4>11. วัตถุประสงค์โครงการและตัวชี้วัด</h4>
+            <h4 [className]="formErrors.objectives ? 'color-danger' : ''">11. วัตถุประสงค์โครงการและตัวชี้วัด</h4>
             <app-objectives
               [objectives]="objectives" 
               [activities]="activities" 
@@ -216,10 +216,9 @@
             <!-- end operation_date -->
 
             <!-- ***alliances -->
-            <h4>14. องค์กรภาคีที่มีส่วนร่วมดำเนินการ</h4>
-            <!-- <app-alliances
+            <app-alliances
               [alliances]="alliances">
-            </app-alliances> -->
+            </app-alliances>
             <!-- end alliances -->
 
             <!-- ***assessment_method -->
@@ -232,10 +231,9 @@
 
             <!-- ***benefits -->
             <h4 [className]="formErrors.benefits ? 'color-danger' : ''">16. ประโยชน์ที่คาดว่าจะได้รับ</h4>
-            <!-- <app-benefits 
-              [benefits]="benefits" 
-              [nationalStrategies]="nationalStrategies" >
-            </app-benefits> -->
+            <app-benefits 
+              [benefits]="benefits">
+            </app-benefits>
             <p class="color-danger" *ngIf="formErrors.benefits">{{ formErrors.benefits }}</p>
             <!-- end benefits -->
 

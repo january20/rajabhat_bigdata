@@ -32,9 +32,10 @@ import { ObjectiveComponent } from './form/objectives/objective/objective.compon
 import { OutputComponent } from './form/objectives/output/output.component';
 import { KpiComponent } from './form/objectives/kpi/kpi.component';
 import { OactivityComponent } from './form/objectives/oactivity/oactivity.component';
+import { AllianceComponent } from './form/alliances/alliance/alliance.component';
 
 @NgModule({
-  declarations: [ProjectsComponent, ListComponent, ShowComponent, FormComponent, ActivityComponent, MylistComponent, TargetAreasComponent, TargetAreaComponent, MainStaffsComponent, MainStaffComponent, SubStaffsComponent, SubStaffComponent, ExtStaffsComponent, ExtStaffComponent, SchemesComponent, SrruStrategiesComponent, RajabhatStrategiesComponent, NationalStrategiesComponent, ObjectivesComponent, AlliancesComponent, BenefitsComponent, ObjectiveComponent, OutputComponent, KpiComponent, OactivityComponent],
+  declarations: [ProjectsComponent, ListComponent, ShowComponent, FormComponent, ActivityComponent, MylistComponent, TargetAreasComponent, TargetAreaComponent, MainStaffsComponent, MainStaffComponent, SubStaffsComponent, SubStaffComponent, ExtStaffsComponent, ExtStaffComponent, SchemesComponent, SrruStrategiesComponent, RajabhatStrategiesComponent, NationalStrategiesComponent, ObjectivesComponent, AlliancesComponent, BenefitsComponent, ObjectiveComponent, OutputComponent, KpiComponent, OactivityComponent, AllianceComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

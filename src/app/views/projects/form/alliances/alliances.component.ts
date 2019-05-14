@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-alliances',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlliancesComponent implements OnInit {
 
-  constructor() { }
+  @Input() alliances: FormArray;
 
-  ngOnInit() {
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
+
+  ngOnInit() { }
+
+  addAlliance() {
+    this.alliances.push(this.createAlliance());
+  }
+  
+  createAlliance(): FormGroup {
+    return this.formBuilder.group({
+      o_name: ['', Validators.required],
+      o_participate: ['', Validators.required]
+    });
+  }
+
+  removeAlliance(index) {
+    this.alliances.removeAt(index);
   }
 
 }

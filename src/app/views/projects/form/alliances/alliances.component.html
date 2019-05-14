@@ -1,3 +1,19 @@
-<p>
-  alliances works!
-</p>
+<div [formGroup]="alliances">
+  <div class="d-flex">
+    <span class="flex-grow-1">
+      <h4>14. องค์กรภาคีที่มีส่วนร่วมดำเนินการ</h4>
+    </span>
+    <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addAlliance()">
+      <i class="fa fa-plus"></i>
+        เพิ่มองค์กรภาคี
+    </a> 
+  </div>
+  <div class="mx-5 animated fadeInDown" *ngFor="let alliance of alliances.controls; let i = index">
+    <app-alliance
+      [alliance]="alliance" 
+      [index]="i" 
+      
+      (allianceRemoved)="removeAlliance()">
+    </app-alliance>
+  </div>
+</div>
