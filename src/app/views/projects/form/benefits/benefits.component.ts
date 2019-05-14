@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-benefits',
@@ -11,33 +11,32 @@ export class BenefitsComponent implements OnInit {
   @Input() benefits: FormArray;
   
   benefitObj = [
-    { name: 'ด้านเศรษฐกิจ' },
-    { name: 'ด้านสังคม' },
-    { name: 'ด้านสิ่งแวดล้อม' },
-    { name: 'ด้านการศึกษา/เรียนรู้ตลอดชีวิต' },
-  ]
+    { id: 1, name: 'ด้านเศรษฐกิจ' },
+    { id: 2, name: 'ด้านสังคม' },
+    { id: 3, name: 'ด้านสิ่งแวดล้อม' },
+    { id: 4, name: 'ด้านการศึกษา/เรียนรู้ตลอดชีวิต' },
+  ];
 
   constructor(
     private formBuilder: FormBuilder
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.addBenefits();
   }
 
-  createBenefit(): FormGroup {
+  createBenefit(id): FormGroup {
     return this.formBuilder.group({
       status: [false],
-      benefit: ['', Validators.required]
+      id: [id],
+      benefit: ['']
     });
   }
 
   addBenefits() {
-    this.benefitObj.map((o, i) => {
+    this.benefitObj.map((item) => {
       // const control = new FormControl(false);
-      this.benefits.push(this.createBenefit());
+      this.benefits.push(this.createBenefit(item.id));
     });
   }
 

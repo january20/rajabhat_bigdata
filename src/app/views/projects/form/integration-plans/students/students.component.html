@@ -1,0 +1,4 @@
+<div class="form-group my-0" [formGroup]="form">
+  <mat-checkbox formControlName="status" (change)="togglePlan($event)" color="primary">{{ name }}</mat-checkbox>
+  <input *ngIf="toggle" class="form-control animated fadeInDown" type="text">
+</div>

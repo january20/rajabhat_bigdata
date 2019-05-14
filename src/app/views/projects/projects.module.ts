@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { MatButtonModule } from '@angular/material/button';
 
 import { ProjectsComponent } from './projects.component';
 import { ListComponent } from './list/list.component';
@@ -33,15 +35,27 @@ import { OutputComponent } from './form/objectives/output/output.component';
 import { KpiComponent } from './form/objectives/kpi/kpi.component';
 import { OactivityComponent } from './form/objectives/oactivity/oactivity.component';
 import { AllianceComponent } from './form/alliances/alliance/alliance.component';
+import { BenefitComponent } from './form/benefits/benefit/benefit.component';
+import { IntegrationPlansComponent } from './form/integration-plans/integration-plans.component';
+import { SubjectsComponent } from './form/integration-plans/subjects/subjects.component';
+import { SubjectComponent } from './form/integration-plans/subjects/subject/subject.component';
+import { ResearchsComponent } from './form/integration-plans/researchs/researchs.component';
+import { ResearchComponent } from './form/integration-plans/researchs/research/research.component';
+import { CulturesComponent } from './form/integration-plans/cultures/cultures.component';
+import { CultureComponent } from './form/integration-plans/cultures/culture/culture.component';
+import { StudentsComponent } from './form/integration-plans/students/students.component';
+import { StudentComponent } from './form/integration-plans/students/student/student.component';
 
 @NgModule({
-  declarations: [ProjectsComponent, ListComponent, ShowComponent, FormComponent, ActivityComponent, MylistComponent, TargetAreasComponent, TargetAreaComponent, MainStaffsComponent, MainStaffComponent, SubStaffsComponent, SubStaffComponent, ExtStaffsComponent, ExtStaffComponent, SchemesComponent, SrruStrategiesComponent, RajabhatStrategiesComponent, NationalStrategiesComponent, ObjectivesComponent, AlliancesComponent, BenefitsComponent, ObjectiveComponent, OutputComponent, KpiComponent, OactivityComponent, AllianceComponent],
+  declarations: [ProjectsComponent, ListComponent, ShowComponent, FormComponent, ActivityComponent, MylistComponent, TargetAreasComponent, TargetAreaComponent, MainStaffsComponent, MainStaffComponent, SubStaffsComponent, SubStaffComponent, ExtStaffsComponent, ExtStaffComponent, SchemesComponent, SrruStrategiesComponent, RajabhatStrategiesComponent, NationalStrategiesComponent, ObjectivesComponent, AlliancesComponent, BenefitsComponent, ObjectiveComponent, OutputComponent, KpiComponent, OactivityComponent, AllianceComponent, BenefitComponent, IntegrationPlansComponent, SubjectsComponent, SubjectComponent, ResearchsComponent, ResearchComponent, CulturesComponent, CultureComponent, StudentsComponent, StudentComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     ProjectsRoutingModule,
     SharedModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCheckboxModule,
+    MatButtonModule
   ],
   providers: [
     ProjectService

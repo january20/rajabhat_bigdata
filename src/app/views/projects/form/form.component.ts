@@ -62,6 +62,7 @@ export class FormComponent extends AbstractForm implements OnInit {
       this.srruStrategies = data.srru_strategies;
       this.nationalStrategies = data.national_strategies;
       this.rajabhatStrategies = data.rajabhat_strategies;
+      this.integrationPlans = data.integration_plans;
     });
   }
 
@@ -105,48 +106,52 @@ export class FormComponent extends AbstractForm implements OnInit {
 
   // ***Validation Errors //
   createFormErrors() {
-    return { project_name: '', schemes: '', srru_strategies: '', rajabhat_strategies: '', national_strategies: '', faculty_strategy: '', history: '', target_group: '', operation_date: '', assessment_method: '', reporting: '', budget: '', file: '' }
+    return { project_name: '', schemes: '', srru_strategies: '', rajabhat_strategies: '', national_strategies: '', faculty_strategy: '', history: '', target_group: '', operation_date: '', assessment_method: '', benefits: '', reporting: '', budget: '', file: '' }
   }
   createValidationMessages() {
     return {
       project_name: {
-        required: 'กรุณาระบุชื่อโครงการ'
+        required: '*กรุณาระบุชื่อโครงการ'
       },
       schemes: {
-        required: 'กรุณาเลือกรูปแบบโครงการ'
+        required: '*กรุณาเลือกรูปแบบโครงการ'
       },
       srru_strategies: {
-        required: 'กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏสุรินทร์'
+        required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏสุรินทร์'
       },
       rajabhat_strategies: {
-        required: 'กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี'
+        required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี'
       },
       national_strategies: {
-        required: 'กรุณาเลือกยุทธศาสตร์ชาติ ระยะ 20 ปี'
+        required: '*กรุณาเลือกยุทธศาสตร์ชาติ ระยะ 20 ปี'
       },
       faculty_strategy: {
-        required: 'กรุณาระบุยุทธศาสตร์คณะ'
+        required: '*กรุณาระบุยุทธศาสตร์คณะ'
       },
       history: {
-        required: 'กรุณาระบุความเป็นมา/หลักการและเหตุผล'
+        required: '*กรุณาระบุความเป็นมา/หลักการและเหตุผล'
       },
       target_group: {
-        required: 'กรุณาระบุกลุ่มเป้าหมาย'
+        required: '*กรุณาระบุกลุ่มเป้าหมาย'
       },
       operation_date: {
-        required: 'กรุณาระบุวันเวลา และสถานที่ดำเนินการ'
+        required: '*กรุณาระบุวันเวลา และสถานที่ดำเนินการ'
       },
       assessment_method: {
-        required: 'กรุณาระบุวิธีการประเมินผลโครงการ'
+        required: '*กรุณาระบุวิธีการประเมินผลโครงการ'
+      },
+      benefits: {
+        required: '*กรุณาเลือกประโยชน์'
       },
       reporting: {
-        required: 'กรุณาระบุการรายงานผล'
+        required: '*กรุณาระบุการรายงานผล'
       },
       budget: {
-        required: 'กรุณาระบุงบประมาณ'
+        required: '*กรุณาระบุงบประมาณ',
+        pattern: '*กรุณาระบุเป็นตัวเลขเท่านั้น'
       },
       file: {
-        required: 'กรุณาแนบรายละเอียดงบประมาณ'
+        required: '*กรุณาแนบรายละเอียดงบประมาณ'
       }
     }
   }
@@ -164,7 +169,7 @@ export class FormComponent extends AbstractForm implements OnInit {
       rajabhat_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
       national_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
       faculty_strategy: ['', Validators.required],
-      // integration_plans: this.formBuilder.array([]),
+      integration_plans: this.formBuilder.array([]),
       history: ['', Validators.required],
       objectives: this.formBuilder.array([]),
       activities: this.formBuilder.array([]),
@@ -174,10 +179,13 @@ export class FormComponent extends AbstractForm implements OnInit {
       operation_date: ['', Validators.required],
       alliances: this.formBuilder.array([]),
       assessment_method: ['', Validators.required],
-      benefits: this.formBuilder.array([]),
+      benefits: this.formBuilder.array([], this.minSelectedBenefitsCheckboxes(1)),
       reporting: ['', Validators.required],
-      budget: ['', Validators.required],
-      file: null,
+      budget: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,2})?$')
+      ])],
+      file: [null, Validators.required],
     });
   }
 
@@ -230,13 +238,24 @@ export class FormComponent extends AbstractForm implements OnInit {
   get kpi() { return this.form.get('kpi') as FormArray; }
   get alliances() { return this.form.get('alliances') as FormArray; }
   get benefits() { return this.form.get('benefits') as FormArray; }
-  // get integration_plans() { return this.form.get('integration_plans') as FormArray; }
+  get file() { return this.form.get('file') as FormArray; }
+  get integration_plans() { return this.form.get('integration_plans') as FormArray; }
   // End Getter Functions //
 
   minSelectedCheckboxes(min = 1) {
     const validator: ValidatorFn = (formArray: FormArray) => {
       const totalSelected = formArray.controls
         .map(control => control.value)
+        .reduce((prev, next) => next ? prev + next : prev, 0);
+      return totalSelected >= min ? null : { required: true };
+    };  
+    return validator;
+  }
+
+  minSelectedBenefitsCheckboxes(min = 1) {
+    const validator: ValidatorFn = (formArray: FormArray) => {
+      const totalSelected = formArray.controls
+        .map(control => control.value.status)
         .reduce((prev, next) => next ? prev + next : prev, 0);
       return totalSelected >= min ? null : { required: true };
     };  

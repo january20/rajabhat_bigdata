@@ -1,0 +1,5 @@
+<div class="form-group my-0" [formGroup]="form">
+  <mat-checkbox formControlName="status" (change)="toggleBenefit($event)" color="primary">{{ name }}</mat-checkbox>
+  <input *ngIf="toggle" class="form-control animated fadeInDown" type="text" formControlName="benefit" placeholder="ประโยชน์">
+</div>
+<p class="color-danger col-5" *ngIf="formErrors.benefit">{{ formErrors.benefit }}</p>

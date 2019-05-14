@@ -1,9 +1,7 @@
-<div class="form-group" [formGroup]="national_strategies">
-  <div class="checkbox">
-    <ng-container *ngFor="let scheme of national_strategies.controls;let i = index">
-      <label>        
-        <input type="checkbox" [formControlName]="i"> {{ nationalStrategies[i].name+' '+nationalStrategies[i].details }}
-      </label><br>
-    </ng-container>
-  </div>
+<div [formGroup]="national_strategies">
+  <ng-container *ngFor="let scheme of national_strategies.controls;let i = index">
+    <div>
+      <mat-checkbox [formControlName]="i" color="primary">{{ nationalStrategies[i].name+' '+nationalStrategies[i].details }}</mat-checkbox>
+    </div>
+  </ng-container>
 </div>
