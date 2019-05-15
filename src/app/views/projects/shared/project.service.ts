@@ -11,6 +11,10 @@ export class ProjectService {
     private http: HttpClient
   ) { }
 
+  storeProject(formData) {
+    return this.http.post(`${environment.api_url}/projects`, formData);
+  }
+
   getProject(id: number) {
     return this.http.get(`${environment.api_url}/projects/${id}`);
   }

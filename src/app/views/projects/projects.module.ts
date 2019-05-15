@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ProjectsComponent } from './projects.component';
 import { ListComponent } from './list/list.component';
@@ -55,7 +56,8 @@ import { StudentComponent } from './form/integration-plans/students/student/stud
     SharedModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     ProjectService

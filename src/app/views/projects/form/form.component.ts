@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProjectService } from '../shared/project.service';
 import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn } from '@angular/forms';
 import { AbstractForm } from './shared/abstract-form';
@@ -34,10 +34,12 @@ export class FormComponent extends AbstractForm implements OnInit {
   nationalStrategies: Array<Object>;
   // plan
   integrationPlans: Array<Object>;
+  isSubmit = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private changeDetector: ChangeDetectorRef
   ) {
     super();
   }
@@ -48,8 +50,27 @@ export class FormComponent extends AbstractForm implements OnInit {
     this.subscribeToFormChanged();    
   }
 
-  submit() {
-    console.log(this.form.value)
+  submit() {   
+    if(confirm('คุณต้องการเสนนอโครงการใช่หรือไม่')) {
+      this.isSubmit = true;
+
+      this.projectService.storeProject(this.form.value).subscribe(
+        data => {
+          setTimeout(() => {
+            this.isSubmit = false;
+            console.log(data)
+          }, 2000);          
+        },
+        err => {
+          setTimeout(() => {
+            this.isSubmit = false;
+            console.log(err)
+          }, 2000);
+        }
+      );
+    }
+    
+    // console.log(formData)
   }
 
   loadMisc() {
@@ -131,6 +152,7 @@ export class FormComponent extends AbstractForm implements OnInit {
 
   buildForm() {
     this.form = this.formBuilder.group({
+      mis_id: [257],
       project_name: ['', Validators.required],
       target_areas: this.formBuilder.array([]),
       main_staffs: this.formBuilder.array([]),
@@ -194,6 +216,25 @@ export class FormComponent extends AbstractForm implements OnInit {
     this.ext_staffs.removeAt(idx);
   }
   // End Dynamic External Staffs Fields //
+
+  // **Handle File //
+  onFileChange(event) {
+    let reader = new FileReader();
+
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.form.patchValue({
+          file: reader.result
+        });
+      }
+
+      this.changeDetector.markForCheck();
+    } 
+  }
+  // End Handle File //
 
   // ***Getter Functions //  
   get target_areas() { return this.form.get('target_areas') as FormArray; }

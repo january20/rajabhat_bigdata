@@ -254,7 +254,7 @@
             <!-- ***file -->
             <h4 [className]="!file.valid ? 'color-danger' : ''">19. รายละเอียดงบประมาณ*</h4>
             <div class="form-group label-floating">
-              <input type="file" formControlName="file" multiple>
+              <input type="file" (change)="onFileChange($event)">
               <div class="input-group">
                 <input type="text" readonly="" class="form-control" placeholder="แนบรายละเอียดงบประมาณ...">
                 <span class="input-group-btn input-group-sm">
@@ -270,7 +270,10 @@
           </fieldset>
           
           <div class="form-group d-flex justify-content-center">
-            <button (click)="submit()" mat-raised-button color="primary" [disabled]="form.valid">เสนอโครงการ</button>
+            <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+              เสนอโครงการ
+              <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+            </button>
           </div>
         </form>
 
