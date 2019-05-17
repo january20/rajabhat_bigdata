@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProjectService } from '../shared/project.service';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn } from '@angular/forms';
 import { AbstractForm } from './shared/abstract-form';
 
@@ -10,6 +11,8 @@ import { AbstractForm } from './shared/abstract-form';
 })
 export class FormComponent extends AbstractForm implements OnInit {
 
+  title: 'เสนอโครงการ' | 'แก้ไขโครงการ';
+  formType: 'CREATE' | 'EDIT' = this.route.snapshot.data['formType'];
   form: FormGroup;
   formErrors = this.createFormErrors();
   validationMessages = this.createValidationMessages();
@@ -35,11 +38,13 @@ export class FormComponent extends AbstractForm implements OnInit {
   // plan
   integrationPlans: Array<Object>;
   isSubmit = false;
+  // for Edit
 
   constructor(
     private formBuilder: FormBuilder,
     private projectService: ProjectService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private route: ActivatedRoute
   ) {
     super();
   }
@@ -47,7 +52,20 @@ export class FormComponent extends AbstractForm implements OnInit {
   ngOnInit() {
     this.loadMisc();
     this.buildForm();
+
+    if(this.formType == 'EDIT') {
+      this.loadData();
+    }
+
     this.subscribeToFormChanged();    
+  }
+
+  loadData() {
+    const id = this.route.snapshot.params.id;
+
+    this.projectService.getProject(id).subscribe((data: any) => {
+      this.form.get('project_name').setValue(data.project_name);
+    });
   }
 
   submit() {   
@@ -152,7 +170,7 @@ export class FormComponent extends AbstractForm implements OnInit {
 
   buildForm() {
     this.form = this.formBuilder.group({
-      mis_id: [257],
+      // mis_id: [''],
       project_name: ['', Validators.required],
       target_areas: this.formBuilder.array([]),
       main_staffs: this.formBuilder.array([]),

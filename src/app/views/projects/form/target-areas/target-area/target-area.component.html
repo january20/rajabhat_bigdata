@@ -1,13 +1,21 @@
 <div [formGroup]="form">
   <div class="form-row">
-    <div class="form-group col-2">
+    <mat-form-field class="col-2">
+      <mat-label>อำเภอ</mat-label>
+      <mat-select (selectionChange)="loadSubDistricts($event)">
+        <mat-option *ngFor="let district of districts" [value]="district.id">
+            {{ district.district_name_th }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- <div class="form-group col-2">
       <select class="form-control" (change)="loadSubDistricts($event)">
         <option selected disabled>อำเภอ</option>
         <ng-container *ngFor="let district of districts">
           <option [value]="district.id">{{ district.district_name_th }}</option>
         </ng-container>
       </select>
-    </div>
+    </div> -->
     <div class="form-group col-2">
       <select class="form-control" formControlName="sub_district_id" (change)="loadVillages($event)">
         <option selected disabled>ตำบล</option>

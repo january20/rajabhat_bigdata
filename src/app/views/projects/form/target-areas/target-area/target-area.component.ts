@@ -30,11 +30,11 @@ export class TargetAreaComponent extends AbstractForm implements OnInit {
   }
   
   loadSubDistricts(event) {
-    this.subDistrictsLoaded.emit({ district_id: event.target.value, index: this.index });
+    this.subDistrictsLoaded.emit({ district_id: event.value, index: this.index });
   }
 
   loadVillages(event) {
-    this.villagesLoaded.emit({ sub_district_id: event.target.value, index: this.index });
+    this.villagesLoaded.emit({ sub_district_id: event.value, index: this.index });
   }
 
   createFormErrors() {

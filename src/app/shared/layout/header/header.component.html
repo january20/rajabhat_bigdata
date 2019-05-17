@@ -9,233 +9,221 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
-          <a data-scroll class="nav-link" href="/">หน้าแรก</a>
+          <a data-scroll class="nav-link" routerLink="/home">หน้าแรก</a>
         </li>
         <li class="nav-item">
-          <a data-scroll class="nav-link" href="/projects">โครงการ</a>
+          <a data-scroll class="nav-link" routerLink="/projects">โครงการ</a>
         </li>
         <li class="nav-item dropdown dropdown-megamenu-container">
           <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="component">ฐานข้อมูล
             <i class="zmdi zmdi-chevron-down"></i>
           </a>
 
-            <ul class="dropdown-menu dropdown-megamenu animated fadeIn animated-2x">
-              <li class="container">
-                <div class="row">
+          <ul class="dropdown-menu dropdown-megamenu animated fadeIn animated-2x">
+            <li class="container">
+              <div class="row">
 
-                  <div class="col-sm-3 megamenu-col">
-                    <div class="megamenu-block animated fadeInLeft animated-2x">
-                      <h3 class="megamenu-block-title">
-                        <i class="fa fa-bold"></i> ข้อมูลประชากร</h3>
-                      <ul class="megamenu-block-list">
-                        <li>
-                          <a class="withripple" href="/data/population">
-                            <i class="fa fa-users"></i> ประชากร</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="/data/population/age">
-                            <i class="fa fa-graduation-cap"></i> อายุประชากร</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="/data/population/income">
-                            <i class="fa fa-bar-chart"></i> รายได้</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="/data/population/occupation">
-                            <i class="fa fa-arrows-h"></i> อาชีพ</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="/data/population/education">
-                            <i class="fa fa-graduation-cap"></i> การศึกษา</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="https://www.tpmap.in.th">
-                            <i class="fa fa-money" aria-hidden="true"></i> ความยากจน</a>
-                        </li>
-                         <li class="dropdown-divider"></li>
-                         <li>
-                          <a class="withripple" href="/data/experts">
-                            <i class="fa fa-circle-o-notch"></i> ผู้เชี่ยวชาญ</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-
-                  <div class="col-sm-3 megamenu-col">
-                    <div class="megamenu-block animated fadeInLeft animated-2x">
-                      <h3 class="megamenu-block-title">
-                        <i class="fa fa-list-alt"></i> ทรัพยากรธรรมชาติ</h3>
-                      <ul class="megamenu-block-list">
-
-                        <li>
-                          <a class="withripple" href="/bio">
-                            <i class="zmdi zmdi-view-agenda"></i> พืช/สัตว์ท้องถิ่น</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="javascript:void(0)">
-                            <i class="zmdi zmdi-info"></i> *แหล่งน้ำ(กำลังพัฒนา)</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="javascript:void(0)">
-                            <i class="zmdi zmdi-tag"></i> *ภูเขา(กำลังพัฒนา)</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="javascript:void(0)">
-                            <i class="zmdi zmdi-view-list"></i> *สัตว์ป่า(กำลังพัฒนา)</a>
-                        </li>
-
+                <div class="col-sm-3 megamenu-col">
+                  <div class="megamenu-block animated fadeInLeft animated-2x">
+                    <h3 class="megamenu-block-title">
+                      <i class="fa fa-bold"></i> ข้อมูลประชากร</h3>
+                    <ul class="megamenu-block-list">
+                      <li>
+                        <a class="withripple" href="/data/population">
+                          <i class="fa fa-users"></i> ประชากร</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="/data/population/age">
+                          <i class="fa fa-graduation-cap"></i> อายุประชากร</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="/data/population/income">
+                          <i class="fa fa-bar-chart"></i> รายได้</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="/data/population/occupation">
+                          <i class="fa fa-arrows-h"></i> อาชีพ</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="/data/population/education">
+                          <i class="fa fa-graduation-cap"></i> การศึกษา</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="https://www.tpmap.in.th">
+                          <i class="fa fa-money" aria-hidden="true"></i> ความยากจน</a>
+                      </li>
                         <li class="dropdown-divider"></li>
-
                         <li>
-                          <a class="withripple" href="javascript:void(0)">
-                            <i class="zmdi zmdi-view-list"></i>Datasets</a>
-                        </li>
+                        <a class="withripple" href="/data/experts">
+                          <i class="fa fa-circle-o-notch"></i> ผู้เชี่ยวชาญ</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-3 megamenu-col">
+                  <div class="megamenu-block animated fadeInLeft animated-2x">
+                    <h3 class="megamenu-block-title">
+                      <i class="fa fa-list-alt"></i> ทรัพยากรธรรมชาติ</h3>
+                    <ul class="megamenu-block-list">
+
+                      <li>
+                        <a class="withripple" href="/bio">
+                          <i class="zmdi zmdi-view-agenda"></i> พืช/สัตว์ท้องถิ่น</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="javascript:void(0)">
+                          <i class="zmdi zmdi-info"></i> *แหล่งน้ำ(กำลังพัฒนา)</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="javascript:void(0)">
+                          <i class="zmdi zmdi-tag"></i> *ภูเขา(กำลังพัฒนา)</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="javascript:void(0)">
+                          <i class="zmdi zmdi-view-list"></i> *สัตว์ป่า(กำลังพัฒนา)</a>
+                      </li>
+
+                      <li class="dropdown-divider"></li>
+
+                      <li>
+                        <a class="withripple" href="javascript:void(0)">
+                          <i class="zmdi zmdi-view-list"></i>Datasets</a>
+                      </li>
 
 
 
+                    </ul>
+                  </div>
+                  <div class="megamenu-block animated fadeInLeft animated-2x">
+                    <h3 class="megamenu-block-title">
+                      <i class="fa fa-briefcase"></i> นำเข้าข้อมูล</h3>
+                    <ul class="megamenu-block-list">
+                      <li>
+                        <a class="withripple" href="/bio/diversity?t=1">
+                          <i class="fa fa-pagelines"></i> พืชท้องถิ่น</a>
+                      </li>
+                        <li>
+                        <a class="withripple" href="/bio/diversity?t=2">
+                          <i class="fa fa-gg"></i> สัตว์ท้องถิ่น</a>
+                      </li>
                       </ul>
-                    </div>
-                    <div class="megamenu-block animated fadeInLeft animated-2x">
-                      <h3 class="megamenu-block-title">
-                        <i class="fa fa-briefcase"></i> นำเข้าข้อมูล</h3>
+                  </div>
+                </div>
+                <div class="col-sm-3 megamenu-col">
+                <div class="megamenu-block animated fadeInRight animated-2x">
+                    <h3 class="megamenu-block-title">
+                      <i class="fa fa-shopping-bag"></i>สิ่งแวดล้อม</h3>
                       <ul class="megamenu-block-list">
                         <li>
-                          <a class="withripple" href="/bio/diversity?t=1">
-                            <i class="fa fa-pagelines"></i> พืชท้องถิ่น</a>
+                            <a class="withripple" href="/weathers">
+                            <i class="zmdi zmdi-view-agenda"></i> สภาวะอากาศ</a>
                         </li>
-                         <li>
-                          <a class="withripple" href="/bio/diversity?t=2">
-                            <i class="fa fa-gg"></i> สัตว์ท้องถิ่น</a>
+                        <li>
+                            <a class="withripple" href="/data/air">
+                            <i class="zmdi zmdi-view-agenda"></i> ฝุ่นละออง</a>
                         </li>
-                        </ul>
-                    </div>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <a class="withripple" target="_blank" href="http://iwis.pcd.go.th/index.php?method=map&etc=1550802080433">
+                            <i class="zmdi zmdi-view-agenda"></i> ฐานข้อมูลคุณภาพน้ำ</a>
+                        </li>
+
+                      </ul>
                   </div>
-                  <div class="col-sm-3 megamenu-col">
+
                   <div class="megamenu-block animated fadeInRight animated-2x">
-                      <h3 class="megamenu-block-title">
-                        <i class="fa fa-shopping-bag"></i>สิ่งแวดล้อม</h3>
-                        <ul class="megamenu-block-list">
-                          <li>
-                              <a class="withripple" href="/weathers">
-                              <i class="zmdi zmdi-view-agenda"></i> สภาวะอากาศ</a>
-                          </li>
-                          <li>
-                              <a class="withripple" href="/data/air">
-                              <i class="zmdi zmdi-view-agenda"></i> ฝุ่นละออง</a>
-                          </li>
-                          <li class="dropdown-divider"></li>
-                          <li>
-                              <a class="withripple" target="_blank" href="http://iwis.pcd.go.th/index.php?method=map&etc=1550802080433">
-                              <i class="zmdi zmdi-view-agenda"></i> ฐานข้อมูลคุณภาพน้ำ</a>
-                          </li>
+                    <h3 class="megamenu-block-title">
+                      <i class="zmdi zmdi-tab"></i> การเกษตร</h3>
+                    <ul class="megamenu-block-list">
+                      <li>
+                        <a class="withripple" target="_blank" href="http://ssmap.doae.go.th/ssmap/">
+                          <i class="zmdi zmdi-card-membership"></i> แผนที่ส่งเสริมการเกษตร</a>
+                      </li>
 
-                        </ul>
-                    </div>
-
-                    <div class="megamenu-block animated fadeInRight animated-2x">
-                      <h3 class="megamenu-block-title">
-                        <i class="zmdi zmdi-tab"></i> การเกษตร</h3>
-                      <ul class="megamenu-block-list">
+                      <li class="dropdown-divider"></li>
                         <li>
-                          <a class="withripple" target="_blank" href="http://ssmap.doae.go.th/ssmap/">
-                            <i class="zmdi zmdi-card-membership"></i> แผนที่ส่งเสริมการเกษตร</a>
-                        </li>
-
-                        <li class="dropdown-divider"></li>
-                         <li>
-                          <a class="withripple" target="_blank" href="/files/GAP.pdf">
-                            <i class="zmdi zmdi-card-membership"></i> มาตรฐาน GAP</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="javascript:void(0)">
-                            <i class="zmdi zmdi-card-membership"></i> *พืช(กำลังพัฒนา)</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="javascript:void(0)">
-                            <i class="zmdi zmdi-card-giftcard"></i> *ผัก(กำลังพัฒนา)</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="javascript:void(0)">
-                            <i class="zmdi zmdi-n-6-square"></i> *ผลไม้(กำลังพัฒนา)</a>
-                        </li>
-                        <li class="dropdown-divider"></li>
-                        <li>
-                          <a class="withripple" href="javascript:void(0)">
-                            <i class="zmdi zmdi-n-6-square"></i> *สัตว์เลี้ยง(กำลังพัฒนา)</a>
-                        </li>
-                      </ul>
-                    </div>
-
+                        <a class="withripple" target="_blank" href="/files/GAP.pdf">
+                          <i class="zmdi zmdi-card-membership"></i> มาตรฐาน GAP</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="javascript:void(0)">
+                          <i class="zmdi zmdi-card-membership"></i> *พืช(กำลังพัฒนา)</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="javascript:void(0)">
+                          <i class="zmdi zmdi-card-giftcard"></i> *ผัก(กำลังพัฒนา)</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="javascript:void(0)">
+                          <i class="zmdi zmdi-n-6-square"></i> *ผลไม้(กำลังพัฒนา)</a>
+                      </li>
+                      <li class="dropdown-divider"></li>
+                      <li>
+                        <a class="withripple" href="javascript:void(0)">
+                          <i class="zmdi zmdi-n-6-square"></i> *สัตว์เลี้ยง(กำลังพัฒนา)</a>
+                      </li>
+                    </ul>
                   </div>
 
+                </div>
 
 
 
-                  <div class="col-sm-3 megamenu-col">
-                    <div class="megamenu-block animated fadeInRight animated-2x">
-                      <h3 class="megamenu-block-title">
-                        <i class="fa fa-briefcase"></i> สุขภาพ</h3>
-                      <ul class="megamenu-block-list">
+
+                <div class="col-sm-3 megamenu-col">
+                  <div class="megamenu-block animated fadeInRight animated-2x">
+                    <h3 class="megamenu-block-title">
+                      <i class="fa fa-briefcase"></i> สุขภาพ</h3>
+                    <ul class="megamenu-block-list">
+                      <li>
+                        <a class="withripple" href="/data/health">
+                          <i class="fa fa-plus-square"></i> ผู้ป่วย</a>
+                      </li>
+
+                      <!-- <li>
+                        <a class="withripple" href="/data/health">
+                          <i class="fa fa-arrow-circle-right"></i> *ผู้พิการ(กำลังพัฒนา)</a>
+                      </li> -->
+
+                        <li class="dropdown-divider"></li>
                         <li>
-                          <a class="withripple" href="/data/health">
-                            <i class="fa fa-plus-square"></i> ผู้ป่วย</a>
-                        </li>
-
-                        <!-- <li>
-                          <a class="withripple" href="/data/health">
-                            <i class="fa fa-arrow-circle-right"></i> *ผู้พิการ(กำลังพัฒนา)</a>
-                        </li> -->
-
-                         <li class="dropdown-divider"></li>
-                         <li>
-                          <a class="withripple" href="/data/health">
-                            <i class="fa fa-child"></i> เด็ก</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="/data/health">
-                            <i class="fa fa-male"></i> ผู้ใหญ่</a>
-                        </li>
-                        <li>
-                          <a class="withripple" href="/data/health">
-                            <i class="fa fa-blind"></i> ผู้สูงอายุ</a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="megamenu-block animated fadeInRight animated-2x">
-                      <h3 class="megamenu-block-title">
-                        <i class="fa fa-shopping-bag"></i> OTOP</h3>
-                      <ul class="megamenu-block-list">
-                        <li>
-                          <a class="withripple" href="/data/otop">
-                            <i class="fa fa-hand-o-right"></i> สินค้าโอทอป</a>
-                        </li>
-                        </ul>
-                    </div>
-
-
+                        <a class="withripple" href="/data/health">
+                          <i class="fa fa-child"></i> เด็ก</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="/data/health">
+                          <i class="fa fa-male"></i> ผู้ใหญ่</a>
+                      </li>
+                      <li>
+                        <a class="withripple" href="/data/health">
+                          <i class="fa fa-blind"></i> ผู้สูงอายุ</a>
+                      </li>
+                    </ul>
                   </div>
 
+                  <div class="megamenu-block animated fadeInRight animated-2x">
+                    <h3 class="megamenu-block-title">
+                      <i class="fa fa-shopping-bag"></i> OTOP</h3>
+                    <ul class="megamenu-block-list">
+                      <li>
+                        <a class="withripple" href="/data/otop">
+                          <i class="fa fa-hand-o-right"></i> สินค้าโอทอป</a>
+                      </li>
+                      </ul>
+                  </div>
 
 
                 </div>
-              </li>
-            </ul>
-          </li>
 
 
 
+              </div>
+            </li>
+          </ul>
+        </li>
 
-
-
-
-
-
-
-        <!--<li class="nav-item">-->
-       <!--   <a data-scroll class="nav-link" href="/resource">จัดการโครงการ</a>-->
-       <!-- </li>-->
        <li class="nav-item">
          <a data-scroll class="nav-link" href="/media">สื่อ</a>
        </li>
@@ -246,193 +234,86 @@
           <a data-scroll class="nav-link" href="/aboutus">เกี่ยวกับ</a>
         </li>
 
-        <!--@if(Auth::guard('user')->check() || Auth::guard('admin')->check())-->
-
-
-
-        <!--@endif-->
-
-        <!-- @if(Auth::guard('admin')->check()) -->
-
-
-        <li class="nav-item dropdown">
-            <a href="#" class="color-warning nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">ระบบ
-              <i class="zmdi zmdi-chevron-down"></i>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="/projects">
-                  <i class="zmdi zmdi-book"></i> โครงการที่นำเสนอ</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="/projects">
-                  <i class="zmdi zmdi-book"></i> โครงการทั้งหมด</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="/profile">
-                  <i class="zmdi zmdi-book"></i> โปรไฟล์</a>
-              </li>
-              <li class="dropdown-submenu">
-                <a class="dropdown-item" href="javascript:void(0)">
-                  <i class="zmdi zmdi-collection-video"></i> สื่อ</a>
-                <ul class="dropdown-menu dropdown-menu-left">
-                  <li>
-                    <a class="dropdown-item" href="/admin/media/create">
-                      <i class="zmdi zmdi-collection-video"></i> เพิ่มสื่อ</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/admin/media">
-                      <i class="zmdi zmdi-collection-video"></i> สื่อทั้งหมด</a>
-                  </li>
-                  <!--<li>-->
-                  <!--  <a class="dropdown-item" href="/user/projects/activities/create">-->
-                  <!--    <i class="zmdi zmdi-book"></i> รายงานกิจกรรม</a>-->
-                  <!--</li>-->
-                </ul>
-              </li>
+        <li class="nav-item dropdown" *ngIf="currentUser">
+          <a href="#" class="color-warning nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">ระบบ
+            <i class="zmdi zmdi-chevron-down"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="/profile"><i class="fa fa-user-circle" aria-hidden="true"></i> ข้อมูลส่วนตัว</a>
+            </li>
+            <ng-container *ngIf="currentUser.info.role === 2">
               <li class="dropdown-submenu">
                 <a class="dropdown-item" href="javascript:void(0)">
                   <i class="zmdi zmdi-book"></i> โครงการ</a>
                 <ul class="dropdown-menu dropdown-menu-left">
                   <li>
-                    <a class="dropdown-item" href="/user/projects/create">
+                    <a class="dropdown-item" routerLink="/projects/create">
                       <i class="zmdi zmdi-book"></i> เสนอโครงงาน</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/user/projects">
+                    <a class="dropdown-item" routerLink="/projects/mylist">
                       <i class="zmdi zmdi-book"></i> ข้อเสนอของฉัน</a>
                   </li>
-                  <!--<li>-->
-                  <!--  <a class="dropdown-item" href="/user/projects/activities/create">-->
-                  <!--    <i class="zmdi zmdi-book"></i> รายงานกิจกรรม</a>-->
-                  <!--</li>-->
                 </ul>
               </li>
               <li class="dropdown-submenu">
-
-                <a class="dropdown-item" href="javascript:void(0)">
+                <a class="dropdown-item">
                   <i class="fa fa-leaf"></i> ชีวภาพ
                 </a>
-
                 <ul class="dropdown-menu dropdown-menu-left">
                     <li>
-                      <a class="dropdown-item" href="/user/data-management/bio/diversity?t=1"><i class="fa fa-pagelines"></i> พืช</a>
+                      <a class="dropdown-item" routerLink="/bio/diversity?t=1"><i class="fa fa-pagelines"></i> พืช</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="/user/data-management/bio/diversity?t=2"><i class="fa fa-twitter"></i> สัตว์</a>
+                      <a class="dropdown-item" routerLink="/bio/diversity?t=2"><i class="fa fa-twitter"></i> สัตว์</a>
                     </li>
                 </ul>
-
-              </li>
-
-               <li>
-                  <a class="dropdown-item" href="/user/data-management/experts/create">
-                    <i class="fa fa-graduation-cap"></i> ผู้เชี่ยวชาญ
-                  </a>
-              </li>
-
-              <li>
-                <a class="dropdown-item" href="/user/data-management/families"><i class="fa fa-users"></i> ประชากร</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/user/data-management/otop/create"><i class="fa fa-shopping-bag"></i> สินค้า OTOP</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="/developers"><i class="fa fa-cogs"></i> APIs</a>
-              </li>
-            </ul>
-          </li>
-
-        <!-- @elseif(Auth::guard('user')->check()) -->
-
-          <li class="nav-item dropdown">
-            <a href="#" class="color-warning nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">ระบบ
-              <i class="zmdi zmdi-chevron-down"></i>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-submenu">
-                <a class="dropdown-item" href="javascript:void(0)">
-                  <i class="zmdi zmdi-book"></i> โครงการ</a>
-                <ul class="dropdown-menu dropdown-menu-left">
-                  <li>
-                    <a class="dropdown-item" href="/user/projects/create">
-                      <i class="zmdi zmdi-book"></i> เสนอโครงงาน</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/user/projects">
-                      <i class="zmdi zmdi-book"></i> ข้อเสนอของฉัน</a>
-                  </li>
-                  <!--<li>-->
-                  <!--  <a class="dropdown-item" href="/user/projects/activities/create">-->
-                  <!--    <i class="zmdi zmdi-book"></i> รายงานกิจกรรม</a>-->
-                  <!--</li>-->
-                </ul>
-              </li>
-              <li class="dropdown-submenu">
-
-                <a class="dropdown-item" href="javascript:void(0)">
-                  <i class="fa fa-leaf"></i> ชีวภาพ
+                <a class="dropdown-item" routerLink="/experts/create">
+                  <i class="fa fa-graduation-cap"></i> ผู้เชี่ยวชาญ
                 </a>
-
-                <ul class="dropdown-menu dropdown-menu-left">
-                    <li>
-                      <a class="dropdown-item" href="/user/data-management/bio/diversity?t=1"><i class="fa fa-pagelines"></i> พืช</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/user/data-management/bio/diversity?t=2"><i class="fa fa-twitter"></i> สัตว์</a>
-                    </li>
-                </ul>
-
-              </li>
-
-
-               <li>
-                  <a class="dropdown-item" href="/user/data-management/experts/create">
-                    <i class="fa fa-graduation-cap"></i> ผู้เชี่ยวชาญ
-                  </a>
-                  <!-- <ul class="dropdown-menu dropdown-menu-left">
-                      <li>
-                        <a class="dropdown-item" href="/user/data-management/experts"><i class="fa fa-user-circle"></i>ผู้เชี่ยวชาญในพื้นที่</a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="/user/data-management/experts"><i class="fa fa-user-circle"></i>ผู้เชี่ยวชาญในมหาวิทยาลัย</a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="/user/data-management/experts"><i class="fa fa-user-circle"></i>ปราชญ์ชาวบ้าน</a>
-                      </li>
-
-                  </ul> -->
               </li>
 
               <li>
-                <a class="dropdown-item" href="/user/data-management/families"><i class="fa fa-users"></i> ประชากร</a>
+                <a class="dropdown-item" routerLink="/families"><i class="fa fa-users"></i> ประชากร</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/user/data-management/otop/create"><i class="fa fa-shopping-bag"></i> สินค้า OTOP</a>
+                <a class="dropdown-item" routerLink="/otop/create"><i class="fa fa-shopping-bag"></i> สินค้า OTOP</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/developers"><i class="fa fa-cogs"></i> APIs</a>
+                <a class="dropdown-item" routerLink="/developers"><i class="fa fa-cogs"></i> APIs</a>
               </li>
-            </ul>
-          </li>
+            </ng-container>
 
-        <!-- @endif -->
+            <ng-container *ngIf="currentUser.info.role === 8">
+              <li>
+                <a class="dropdown-item" routerLink="/projects"><i class="fa fa-check-square" aria-hidden="true"></i> ประเมินโครงการ</a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/projects/assessment/1"><i class="fa fa-bar-chart" aria-hidden="true"></i> ผลการประเมินโครงการ</a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/assessment_manual"><i class="fa fa-youtube-play" aria-hidden="true"></i> ขั้นตอนการประเมินโครงการ</a>
+              </li>
+            </ng-container>
+
+          </ul>
+
+        </li>
 
       </ul>
 
-
-      <!-- @if(Auth::guard('user')->check() || Auth::guard('admin')->check()) -->
-       <a href="javascript:void(0)" class="btn-circle btn-circle-white no-focus" onclick="event.preventDefault(); document.getElementById('header_logout').submit();">
-            <i class="fa fa-sign-out" data-toggle="tooltip" data-placement="top" title="ออกจากระบบ"></i>
-        </a>
-        <form id="header_logout" action="/logout" method="POST" style="display: none;">
-            <!-- @csrf -->
-        </form>
-      <!-- @else -->
-        <a href="javascript:void(0)" class="btn-circle btn-circle-white no-focus" data-toggle="modal" data-target="#ms-account-modal">
-          <i class="zmdi zmdi-account" data-toggle="tooltip" data-placement="top" title="เข้าสู่ระบบ"></i>
-        </a>
-      <!-- @endif -->
+      <a *ngIf="currentUser" href="/profile" class="no-focus color-white">
+        {{ currentUser.info.display_name }}
+      </a>      
+      <a *ngIf="currentUser" href="javascript:void(0)" class="btn-circle btn-circle-white no-focus" (click)="logout()">
+        <i class="fa fa-sign-out" data-toggle="tooltip" data-placement="top"></i>
+      </a>      
+      <a *ngIf="!currentUser" href="/login" class="btn-circle btn-circle-white no-focus">
+        <i class="zmdi zmdi-account" data-toggle="tooltip" data-placement="top"></i>
+      </a>
 
     </div>
     <a href="javascript:void(0)" class="ms-toggle-left btn-navbar-menu">

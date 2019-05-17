@@ -55,7 +55,7 @@
 
             <!-- ***project_name -->
             <h4 [className]="formErrors.project_name ? 'color-danger' : ''">1. ชื่อโครงการ</h4>
-            <div class="form-group label-floating">
+            <div class="form-group">
               <label class="control-label" for="project_name">ชื่อโครงการ</label>
               <input type="text" class="form-control" formControlName="project_name">
               <p class="color-danger" *ngIf="formErrors.project_name">{{ formErrors.project_name }}</p>
@@ -244,7 +244,7 @@
 
             <!-- ***budget -->
             <h4 [className]="formErrors.budget ? 'color-danger' : ''">18. งบประมาณ(บาท)</h4>
-            <div class="form-group label-floating">
+            <div class="form-group">
               <label class="control-label" for="budget">งบประมาณ</label>
               <input type="text" class="form-control" formControlName="budget">
               <p class="color-danger" *ngIf="formErrors.budget">{{ formErrors.budget }}</p>
@@ -253,7 +253,7 @@
 
             <!-- ***file -->
             <h4 [className]="!file.valid ? 'color-danger' : ''">19. รายละเอียดงบประมาณ*</h4>
-            <div class="form-group label-floating">
+            <div class="form-group">
               <input type="file" (change)="onFileChange($event)">
               <div class="input-group">
                 <input type="text" readonly="" class="form-control" placeholder="แนบรายละเอียดงบประมาณ...">

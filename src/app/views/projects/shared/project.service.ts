@@ -20,11 +20,15 @@ export class ProjectService {
   }
 
   getResult() {
-    return this.http.get(`${environment.api_url}/projects?t=result`);
+    return this.http.get(`${environment.api_url}/projects/result`);
   }
 
   getProjectList(page: number) {
-    return this.http.get(`${environment.api_url}/projects?t=project_list_index&page=${page}`);
+    return this.http.get(`${environment.api_url}/projects?page=${page}`);
+  }
+
+  getMyProjectList() {
+    return this.http.get(`${environment.api_url}/projects/my_projects`);
   }
 
   getSubDistricts(district_id: number) {
@@ -50,4 +54,5 @@ export class ProjectService {
   getMiscData() {
     return this.http.get(`${environment.api_url}/ref/misc?t=project_create_data`);
   }
+
 }

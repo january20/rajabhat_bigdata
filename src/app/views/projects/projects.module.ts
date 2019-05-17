@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { ProjectsComponent } from './projects.component';
 import { ListComponent } from './list/list.component';
@@ -51,13 +52,14 @@ import { StudentComponent } from './form/integration-plans/students/student/stud
   declarations: [ProjectsComponent, ListComponent, ShowComponent, FormComponent, ActivityComponent, MylistComponent, TargetAreasComponent, TargetAreaComponent, MainStaffsComponent, MainStaffComponent, SubStaffsComponent, SubStaffComponent, ExtStaffsComponent, ExtStaffComponent, SchemesComponent, SrruStrategiesComponent, RajabhatStrategiesComponent, NationalStrategiesComponent, ObjectivesComponent, AlliancesComponent, BenefitsComponent, ObjectiveComponent, OutputComponent, KpiComponent, OactivityComponent, AllianceComponent, BenefitComponent, IntegrationPlansComponent, SubjectsComponent, SubjectComponent, ResearchsComponent, ResearchComponent, CulturesComponent, CultureComponent, StudentsComponent, StudentComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     ProjectsRoutingModule,
     SharedModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
   providers: [
     ProjectService
