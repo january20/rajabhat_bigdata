@@ -1,39 +1,43 @@
 <div [formGroup]="form">
   <div class="form-row">
-    <div class="form-group col-3">
-      <select class="form-control" (change)="loadSubFaculty($event)">
-        <option selected disabled>เลือกคณะ</option>
-        <ng-container *ngFor="let fac of faculty">
-          <option [value]="fac.id">{{ fac.fac_name }}</option>
-        </ng-container>
-      </select>
-    </div>
-    <div class="form-group col-2">
-      <select class="form-control" (change)="loadBranch($event)">
-        <option selected disabled>เลือกหน่วยงาน</option>
-        <ng-container *ngFor="let sub_fac of subSubFacultyArr[index]">
-          <option [value]="sub_fac.id">{{ sub_fac.sub_fac_name }}</option>
-        </ng-container>
-      </select>
-    </div>
-    <div class="form-group col-2">
-      <select class="form-control" (change)="loadStaff($event)">
-        <option selected disabled>เลือกสาขา</option>
-        <ng-container *ngFor="let branch of subBranchArr[index]">
-          <option [value]="branch.ref_program.id">{{ branch.ref_program.program_name }}</option>
-        </ng-container>
-      </select>
-    </div>
-    <div class="form-group col-4">
-      <select class="form-control" formControlName="mis_id">
-        <option selected disabled>เลือกบุคลากร</option>
-        <ng-container *ngFor="let staff of subStaffArr[index]">
-          <option [value]="staff.id">{{ staff.ref_prefix_name.fullname+staff.display_name }}</option>
-        </ng-container>
-      </select>
-    </div>
-    <div class="form-group col-1 text-center">
-      <a *ngIf="index > 0" href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removeStaff()"><i class="fa fa-close m-0"></i></a>
-    </div>
+    <mat-form-field class="col-3">
+      <mat-label>เลือกคณะ</mat-label>
+      <mat-select (selectionChange)="loadSubFaculty($event)">
+        <mat-option *ngFor="let fac of faculty" [value]="fac.id">
+            {{ fac.fac_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="col-2">
+      <mat-label>เลือกหน่วยงาน</mat-label>
+      <mat-select (selectionChange)="loadBranch($event)">
+        <mat-option *ngFor="let sub_fac of subSubFacultyArr[index]" [value]="sub_fac.id">
+            {{ sub_fac.sub_fac_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="col-2">
+      <mat-label>เลือกสาขา</mat-label>
+      <mat-select (selectionChange)="loadStaff($event)">
+        <mat-option *ngFor="let branch of subBranchArr[index]" [value]="branch.ref_program.id">
+            {{ branch.ref_program.program_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="col-4">
+      <mat-label>เลือกบุคลากร</mat-label>
+      <mat-select formControlName="mis_id">
+        <mat-option *ngFor="let staff of subStaffArr[index]" [value]="staff.id">
+            {{ staff.ref_prefix_name.fullname+staff.display_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button color="warn" class="col-1" *ngIf="index > 0" (click)="removeStaff()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 </div>

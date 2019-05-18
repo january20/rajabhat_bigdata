@@ -1,13 +1,13 @@
-<div class="d-flex">
+<div class="d-flex mt-2">
   <span class="flex-grow-1">
-    <h4 [className]="target_areas.invalid && (target_areas.dirty || target_areas.touched) ? 'color-danger' : ''">2. ชุมชน/พื้นที่เป้าหมาย </h4>
+    <h3 [className]="target_areas.invalid && (target_areas.dirty || target_areas.touched) ? 'color-danger' : ''">2. ชุมชน/พื้นที่เป้าหมาย </h3>
   </span>
-  <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addTargetArea($event)">
+  <a href="javascript:void(0)" class="btn btn-xs btn-raised btn-success" (click)="addTargetArea($event)">
     <i class="fa fa-plus"></i>
       เพิ่มพื้นที่เป้าหมาย
   </a> 
 </div>
-<div class="mx-5 animated fadeInDown" *ngFor="let area of target_areas.controls; let i = index">
+<div class="animated fadeInDown" *ngFor="let area of target_areas.controls; let i = index">
   <app-target-area 
     [target_area]="area" 
     [index]="i" 

@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'projects', loadChildren: './views/projects/projects.module#ProjectsModule' },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'projects/create',
     pathMatch: 'full'
   }
   // {

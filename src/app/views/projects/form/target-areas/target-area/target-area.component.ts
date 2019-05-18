@@ -9,14 +9,15 @@ import { AbstractForm } from '../../shared/abstract-form';
 })
 export class TargetAreaComponent extends AbstractForm implements OnInit {
 
-  @Output() targetAreaRemoved = new EventEmitter<number>();
-  @Output() subDistrictsLoaded = new EventEmitter<Object>();
-  @Output() villagesLoaded = new EventEmitter<Object>();
   @Input('target_area') form: FormGroup;
   @Input() index: number;  
   @Input() districts: Array<Object>;
   @Input() subDistrictArr: Array<Object>;
   @Input() villageArr: Array<Object>;
+  @Output() targetAreaRemoved = new EventEmitter<number>();
+  @Output() subDistrictsLoaded = new EventEmitter<Object>();
+  @Output() villagesLoaded = new EventEmitter<Object>();
+  
 
   formErrors = this.createFormErrors();
   validationMessages = this.createValidationMessages();
@@ -39,9 +40,9 @@ export class TargetAreaComponent extends AbstractForm implements OnInit {
 
   createFormErrors() {
     return {
-      sub_district_id: '',
-      village_id: '',
-      address: ''
+      sub_district_id: [''],
+      village_id: [''],
+      address: ['']
     }
   }
 

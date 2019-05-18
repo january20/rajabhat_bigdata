@@ -33,7 +33,7 @@ export class CultureComponent extends AbstractForm implements OnInit {
         required: '*กรุณาระบุกิจกรรม'
       },
       plan: {
-        required: '*กรุณาระบุแผนการบูรณาการ'
+        required: '*กรุณาระบุลักษณะบูรณาการ'
       }
     }
   }

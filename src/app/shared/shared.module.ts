@@ -1,13 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { 
+  MatButtonModule, 
+  MatIconModule, 
+  MatSelectModule, 
+  MatFormFieldModule, 
+  MatCheckboxModule, 
+  MatProgressSpinnerModule, 
+  MatInputModule,
+  MatStepperModule
+} from '@angular/material'
 
 import { AgmCoreModule } from '@agm/core';
 import { StriphtmlPipe } from './pipes/striphtml.pipe';
 
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
-
 
 @NgModule({
   declarations: [StriphtmlPipe],
@@ -25,7 +34,15 @@ import { UserService } from './services/user.service';
   exports: [
     ReactiveFormsModule,
     AgmCoreModule,
-    StriphtmlPipe
+    StriphtmlPipe,
+    MatProgressSpinnerModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatStepperModule
   ]
 })
 export class SharedModule { }

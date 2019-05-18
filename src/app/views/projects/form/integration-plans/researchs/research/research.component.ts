@@ -36,7 +36,7 @@ export class ResearchComponent extends AbstractForm implements OnInit {
         required: '*กรุณาเลือกสถานะงานวิจัย'
       },
       plan: {
-        required: '*กรุณาระบุแผนการบูรณาการ'
+        required: '*กรุณาระบุลักษณะบูรณาการ'
       }
     }
   }

@@ -22,7 +22,7 @@ export class BenefitComponent extends AbstractForm implements OnInit {
   }
 
   ngOnInit() {
-    // this.subscribeToFormChanged();
+    this.subscribeToFormChanged();
   }
 
   toggleBenefit(event) {

@@ -1,21 +1,26 @@
 <div class="animated fadeInDown" [formGroup]="form">
   <div class="form-row">
-    <div class="form-group my-0 col-8">
-      <input type="text" class="form-control" formControlName="subject_name" placeholder="ชื่อวิชา">
-    </div>
-    <div class="form-group my-0 col-4">
-      <input type="text" class="form-control" formControlName="subject_id" placeholder="รหัสวิชา">
-    </div>
+    <mat-form-field class="col-8">
+      <mat-label>ชื่อวิชา</mat-label>
+      <input matInput formControlName="subject_name">
+      <mat-error *ngIf="formErrors.subject_name">{{ formErrors.subject_name }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-4">
+      <mat-label>รหัสวิชา</mat-label>
+      <input matInput formControlName="subject_id">
+      <mat-error *ngIf="formErrors.subject_id">{{ formErrors.subject_id }}</mat-error>
+    </mat-form-field>
   </div>
   <div class="form-row">
-    <div class="form-group my-0 col-11">
-      <input type="text" class="form-control" formControlName="plan" placeholder="ลักษณะการบูรณาการ">
-    </div>
-    <div class="form-group col-1 text-center">
-      <a *ngIf="index > 0" href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removePlan()"><i class="fa fa-close m-0"></i></a>
-    </div>
+    <mat-form-field class="col-11">
+      <mat-label>ลักษณะบูรณาการ</mat-label>
+      <textarea matInput formControlName="plan" rows="2"></textarea>
+      <mat-error *ngIf="formErrors.plan">{{ formErrors.plan }}</mat-error>
+    </mat-form-field>
+
+    <button mat-icon-button color="warn" class="col-1" *ngIf="index > 0" (click)="removePlan()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 </div>
-<p class="color-danger" *ngIf="formErrors.subject_name">{{ formErrors.subject_name }}</p>
-<p class="color-danger" *ngIf="formErrors.subject_id">{{ formErrors.subject_id }}</p>
-<p class="color-danger" *ngIf="formErrors.plan">{{ formErrors.plan }}</p>

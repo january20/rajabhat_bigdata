@@ -36,7 +36,7 @@ export class SubjectComponent extends AbstractForm implements OnInit {
         required: '*กรุณาระบุรหัสวิชา'
       },
       plan: {
-        required: '*กรุณาระบุแผนการบูรณาการ'
+        required: '*กรุณาระบุลักษณะบูรณาการ'
       }
     }
   }

@@ -1,7 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import url('https://fonts.googleapis.com/css?family=Sarabun&subset=thai');
+@import '~@angular/material/theming';
 
-body {
-  font-family: 'Sarabun', sans-serif !important;
-}
+$custom-typography: mat-typography-config(
+  $font-family: 'Sarabun, sans-serif',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+// @include angular-material-typography($custom-typography);
+@include mat-core($custom-typography);

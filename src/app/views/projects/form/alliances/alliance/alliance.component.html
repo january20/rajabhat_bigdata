@@ -1,15 +1,17 @@
 <div class="form-row" [formGroup]="form">
-  <div class="form-group col-5">
-    <input type="text" class="form-control" formControlName="o_name" placeholder="ชื่อหน่วยงาน">
-  </div>
-  <div class="form-group col-6">
-    <input type="text" class="form-control" formControlName="o_participate" placeholder="ความร่วมมือ">
-  </div>
-  <div class="form-group col-1 text-center">
-    <a href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-danger py-0 px-2" (click)="removeAlliance()"><i class="fa fa-close m-0"></i></a>
-  </div>
-</div>
-<div class="row">
-  <p class="color-danger col-5" *ngIf="formErrors.o_name">{{ formErrors.o_name }}</p>
-  <p class="color-danger col-6" *ngIf="formErrors.o_participate">{{ formErrors.o_participate }}</p>
+  <mat-form-field class="col-5">
+    <mat-label>ชื่อหน่วยงาน</mat-label>
+    <input matInput formControlName="o_name">
+    <mat-error *ngIf="formErrors.o_name">{{ formErrors.o_name }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="col-6">
+    <mat-label>ความร่วมมือ</mat-label>
+    <input matInput formControlName="o_participate">
+    <mat-error *ngIf="formErrors.o_participate">{{ formErrors.o_participate }}</mat-error>
+  </mat-form-field>
+
+  <button mat-icon-button color="warn" class="col-1" (click)="removeAlliance()">
+    <mat-icon>close</mat-icon>
+  </button>
 </div>

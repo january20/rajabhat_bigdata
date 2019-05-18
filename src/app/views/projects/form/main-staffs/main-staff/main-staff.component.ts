@@ -32,15 +32,15 @@ export class MainStaffComponent extends AbstractForm implements OnInit {
   }
   
   loadSubFaculty(event) {
-    this.subFacultyLoaded.emit({ faculty_id: event.target.value, index: this.index, type: 1 });
+    this.subFacultyLoaded.emit({ faculty_id: event.value, index: this.index, type: 1 });
   }
 
   loadBranch(event) {
-    this.branchLoaded.emit({ sub_faculty_id: event.target.value, index: this.index, type: 1 });
+    this.branchLoaded.emit({ sub_faculty_id: event.value, index: this.index, type: 1 });
   }
 
   loadStaff(event) {
-    this.staffLoaded.emit({ branch_id: event.target.value, index: this.index, type: 1 });
+    this.staffLoaded.emit({ branch_id: event.value, index: this.index, type: 1 });
   }
 
   createFormErrors() {

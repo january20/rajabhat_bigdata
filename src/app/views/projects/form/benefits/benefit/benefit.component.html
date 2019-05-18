@@ -1,5 +1,13 @@
-<div class="form-group my-0" [formGroup]="form">
-  <mat-checkbox formControlName="status" (change)="toggleBenefit($event)" color="primary">{{ name }}</mat-checkbox>
-  <input *ngIf="toggle" class="form-control animated fadeInDown" type="text" formControlName="benefit" placeholder="ประโยชน์">
+<div [formGroup]="form">
+  <div class="form-row">
+    <mat-checkbox formControlName="status" (change)="toggleBenefit($event)" color="primary">{{ name }}</mat-checkbox>
+  </div>
+  <div class="form-row">
+    <mat-form-field *ngIf="toggle" class="animated fadeInDown w-100">
+      <mat-label>ประโยชน์</mat-label>
+      <input matInput type="text" formControlName="benefit">
+      <mat-error *ngIf="formErrors.benefit">{{ formErrors.benefit }}</mat-error>
+    </mat-form-field>
+  </div>
 </div>
-<p class="color-danger col-5" *ngIf="formErrors.benefit">{{ formErrors.benefit }}</p>
+

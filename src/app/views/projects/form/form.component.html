@@ -49,17 +49,17 @@
         </ol>
         <hr class="dashed">
 
-        <form [formGroup]="form" class="form-horizontal" accept-charset="UTF-8" enctype="multipart/form-data">
+        <form [formGroup]="form" accept-charset="UTF-8" enctype="multipart/form-data">
           <fieldset>
             <legend class="color-primary">ส่วนที่ 1 ข้อมูลทั่วไป</legend> 
 
             <!-- ***project_name -->
-            <h4 [className]="formErrors.project_name ? 'color-danger' : ''">1. ชื่อโครงการ</h4>
-            <div class="form-group">
-              <label class="control-label" for="project_name">ชื่อโครงการ</label>
-              <input type="text" class="form-control" formControlName="project_name">
-              <p class="color-danger" *ngIf="formErrors.project_name">{{ formErrors.project_name }}</p>
-            </div>
+            <h3 [className]="formErrors.project_name ? 'color-danger' : ''">1. ชื่อโครงการ</h3>
+            <mat-form-field class="w-100">
+              <mat-label>ชื่อโครงการ</mat-label>
+              <input matInput formControlName="project_name" required>
+              <mat-error *ngIf="formErrors.project_name">{{ formErrors.project_name }}</mat-error>
+            </mat-form-field>
             <!-- end project_name -->
 
             <!-- ***target_areas -->
@@ -75,8 +75,8 @@
             </app-target-areas>
             <!-- end target_areas -->
 
-            <h4>3. ผู้รับผิดชอบโครงการ</h4>
-            <h4 class="px-4">3.1 มหาวิทยาลัยราชภัฏสุรินทร์</h4>
+            <h3 class="mt-2">3. ผู้รับผิดชอบโครงการ</h3>
+            <h3 class="px-4">3.1 มหาวิทยาลัยราชภัฏสุรินทร์</h3>
             <!-- ***main_staffs-->
             <app-main-staffs
               [main_staffs]="main_staffs" 
@@ -110,7 +110,7 @@
             <!-- end sub_staffs -->
 
             <!-- ***ext_staffs -->
-            <h4 class="px-4">3.2 ชุมชน/ท้องถิ่นที่เข้าร่วมโครงการ</h4>
+            <h3 class="px-4">3.2 ชุมชน/ท้องถิ่นที่เข้าร่วมโครงการ</h3>
             <app-ext-staffs
               [ext_staffs]="ext_staffs"
               [prefixName]="prefixName"
@@ -121,7 +121,7 @@
             <!-- end ext_staffs -->
 
             <!-- ***project_schemes -->
-            <h4 [className]="formErrors.schemes ? 'color-danger' : ''">4. รูปแบบโครงการ</h4>
+            <h3 [className]="formErrors.schemes ? 'color-danger mt-2' : 'mt-2'">4. รูปแบบโครงการ</h3>
             <app-schemes 
               [schemes]="schemes" 
               [projectSchemes]="projectSchemes" >
@@ -130,7 +130,7 @@
             <!-- end project_schemes -->
 
             <!-- ***srru_strategies -->
-            <h4 [className]="formErrors.srru_strategies ? 'color-danger' : ''">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h4>
+            <h3 [className]="formErrors.srru_strategies ? 'color-danger mt-2' : 'mt-2'">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h3>
             <app-srru-strategies 
               [srru_strategies]="srru_strategies" 
               [srruStrategies]="srruStrategies" >
@@ -139,7 +139,7 @@
             <!-- end srru_strategies -->
 
             <!-- ***rajabhat_strategies -->
-            <h4 [className]="formErrors.rajabhat_strategies ? 'color-danger' : ''">6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
+            <h3 [className]="formErrors.rajabhat_strategies ? 'color-danger mt-2' : 'mt-2'">6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
             <app-rajabhat-strategies 
               [rajabhat_strategies]="rajabhat_strategies" 
               [rajabhatStrategies]="rajabhatStrategies" >
@@ -148,7 +148,7 @@
             <!-- end rajabhat_strategies -->
 
             <!-- ***national_strategies -->
-            <h4 [className]="formErrors.national_strategies ? 'color-danger' : ''">7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
+            <h3 [className]="formErrors.national_strategies ? 'color-danger mt-2' : 'mt-2'">7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
             <app-national-strategies 
               [national_strategies]="national_strategies" 
               [nationalStrategies]="nationalStrategies" >
@@ -157,15 +157,16 @@
             <!-- end national_strategies -->
 
             <!-- ***faculty_strategy -->
-            <h4 [className]="formErrors.faculty_strategy ? 'color-danger' : ''">8. สอดคล้องกับยุทธศาสตร์หน่วยงาน คณะ/ศูนย์/สำนัก</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="faculty_strategy" rows="8"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.faculty_strategy">*{{ formErrors.faculty_strategy }}</p>
+            <h3 [className]="formErrors.faculty_strategy ? 'color-danger mt-2' : 'mt-2'">8. สอดคล้องกับยุทธศาสตร์หน่วยงาน คณะ/ศูนย์/สำนัก</h3>
+            <mat-form-field class="w-100">
+              <mat-label>ยุทธศาสตร์หน่วยงาน คณะ/ศูนย์/สำนัก</mat-label>
+              <textarea matInput formControlName="faculty_strategy" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.faculty_strategy">{{ formErrors.faculty_strategy }}</mat-error>
+            </mat-form-field>
             <!-- end faculty_strategy -->
 
             <!-- ***integration_plans -->
-            <h4 [className]="formErrors.integration_plans ? 'color-danger' : ''">9. แผนการบูรณาการกับพันธกิจอื่น</h4>
+            <h3 [className]="formErrors.integration_plans ? 'color-danger mt-2' : 'mt-2'">9. แผนการบูรณาการกับพันธกิจอื่น</h3>
             <app-integration-plans 
               [integration_plans]="integration_plans" 
               [integrationPlans]="integrationPlans">
@@ -179,15 +180,16 @@
             <legend class="color-primary">ส่วนที่ 2 รายละเอียดโครงการ</legend> 
 
             <!-- ***history -->
-            <h4 [className]="formErrors.history ? 'color-danger' : ''">10. ความเป็นมา/หลักการและเหตุผล</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="history" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.history">*{{ formErrors.history }}</p>
+            <h3 [className]="formErrors.history ? 'color-danger' : ''">10. ความเป็นมา/หลักการและเหตุผล</h3>
+            <mat-form-field class="w-100">
+              <mat-label>ความเป็นมา/หลักการและเหตุผล</mat-label>
+              <textarea matInput formControlName="history" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.history">{{ formErrors.history }}</mat-error>
+            </mat-form-field>
             <!-- end history -->
 
             <!-- ***objectives -->
-            <h4 [className]="formErrors.objectives ? 'color-danger' : ''">11. วัตถุประสงค์โครงการและตัวชี้วัด</h4>
+            <h3 [className]="formErrors.objectives ? 'color-danger mt-2' : 'mt-2'">11. วัตถุประสงค์โครงการและตัวชี้วัด</h3>
             <app-objectives
               [objectives]="objectives" 
               [activities]="activities" 
@@ -197,19 +199,21 @@
             <!-- end objectives -->
 
             <!-- ***target_group -->
-            <h4 [className]="formErrors.target_group ? 'color-danger' : ''">12. กลุ่มเป้าหมาย</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="target_group" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.target_group">*{{ formErrors.target_group }}</p>
+            <h3 [className]="formErrors.target_group ? 'color-danger mt-2' : 'mt-2'">12. กลุ่มเป้าหมาย</h3>
+            <mat-form-field class="w-100">
+              <mat-label>กลุ่มเป้าหมาย</mat-label>
+              <textarea matInput formControlName="target_group" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.target_group">{{ formErrors.target_group }}</mat-error>
+            </mat-form-field>
             <!-- end target_group -->
 
             <!-- ***operation_date -->
-            <h4 [className]="formErrors.operation_date ? 'color-danger' : ''">13. วันเวลา และสถานที่ดำเนินการ</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="operation_date" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.operation_date">*{{ formErrors.operation_date }}</p>
+            <h3 [className]="formErrors.operation_date ? 'color-danger mt-2' : 'mt-2'">13. วันเวลา และสถานที่ดำเนินการ</h3>
+            <mat-form-field class="w-100">
+              <mat-label>วันเวลา และสถานที่ดำเนินการ</mat-label>
+              <textarea matInput formControlName="operation_date" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.operation_date">{{ formErrors.operation_date }}</mat-error>
+            </mat-form-field>
             <!-- end operation_date -->
 
             <!-- ***alliances -->
@@ -219,15 +223,16 @@
             <!-- end alliances -->
 
             <!-- ***assessment_method -->
-            <h4 [className]="formErrors.assessment_method ? 'color-danger' : ''">15. วิธีการประเมินผลโครงการ</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="assessment_method" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.assessment_method">*{{ formErrors.assessment_method }}</p>
+            <h3 [className]="formErrors.assessment_method ? 'color-danger mt-2' : 'mt-2'">15. วิธีการประเมินผลโครงการ</h3>
+            <mat-form-field class="w-100">
+              <mat-label>วิธีการประเมินผลโครงการ</mat-label>
+              <textarea matInput formControlName="assessment_method" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.assessment_method">{{ formErrors.assessment_method }}</mat-error>
+            </mat-form-field>
             <!-- end assessment_method -->
 
             <!-- ***benefits -->
-            <h4 [className]="formErrors.benefits ? 'color-danger' : ''">16. ประโยชน์ที่คาดว่าจะได้รับ</h4>
+            <h3 [className]="formErrors.benefits ? 'color-danger mt-2' : 'mt-2'">16. ประโยชน์ที่คาดว่าจะได้รับ</h3>
             <app-benefits 
               [benefits]="benefits">
             </app-benefits>
@@ -235,24 +240,25 @@
             <!-- end benefits -->
 
             <!-- ***reporting -->
-            <h4 [className]="formErrors.reporting ? 'color-danger' : ''">17. การรายงานผล</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="reporting" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.reporting">*{{ formErrors.reporting }}</p>
+            <h3 [className]="formErrors.reporting ? 'color-danger mt-2' : 'mt-2'">17. การรายงานผล</h3>
+            <mat-form-field class="w-100">
+              <mat-label>การรายงานผล</mat-label>
+              <textarea matInput formControlName="reporting" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.reporting">{{ formErrors.reporting }}</mat-error>
+            </mat-form-field>
             <!-- end reporting -->
 
             <!-- ***budget -->
-            <h4 [className]="formErrors.budget ? 'color-danger' : ''">18. งบประมาณ(บาท)</h4>
-            <div class="form-group">
-              <label class="control-label" for="budget">งบประมาณ</label>
-              <input type="text" class="form-control" formControlName="budget">
-              <p class="color-danger" *ngIf="formErrors.budget">{{ formErrors.budget }}</p>
-            </div>
+            <h3 [className]="formErrors.budget ? 'color-danger mt-2' : 'mt-2'">18. งบประมาณ(บาท)</h3>
+            <mat-form-field class="w-100">
+              <mat-label>งบประมาณ</mat-label>
+              <input matInput formControlName="budget" required>
+              <mat-error *ngIf="formErrors.budget">{{ formErrors.budget }}</mat-error>
+            </mat-form-field>
             <!-- end budget -->
 
             <!-- ***file -->
-            <h4 [className]="!file.valid ? 'color-danger' : ''">19. รายละเอียดงบประมาณ*</h4>
+            <h3 [className]="!file.valid ? 'color-danger mt-2' : 'mt-2'">19. รายละเอียดงบประมาณ*</h3>
             <div class="form-group">
               <input type="file" (change)="onFileChange($event)">
               <div class="input-group">
@@ -268,7 +274,7 @@
             <!-- end file -->
 
           </fieldset>
-          
+
           <div class="form-group d-flex justify-content-center">
             <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
               เสนอโครงการ
