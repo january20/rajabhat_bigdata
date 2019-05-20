@@ -19,6 +19,10 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/projects/${id}`);
   }
 
+  getEditProject(id: number) {
+    return this.http.get(`${environment.api_url}/projects/${id}/edit`);
+  }
+
   getResult() {
     return this.http.get(`${environment.api_url}/projects/result`);
   }

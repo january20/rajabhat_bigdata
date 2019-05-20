@@ -39,6 +39,9 @@ export class FormComponent extends AbstractForm implements OnInit {
   integrationPlans: Array<Object>;
   isSubmit = false;
   // for Edit
+  editObj = {
+    targetAreas: []
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,6 +68,7 @@ export class FormComponent extends AbstractForm implements OnInit {
 
     this.projectService.getProject(id).subscribe((data: any) => {
       this.form.get('project_name').setValue(data.project_name);
+      this.editObj.targetAreas = data.target_area;
     });
   }
 

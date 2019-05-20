@@ -9,6 +9,7 @@ import { AbstractForm } from '../../shared/abstract-form';
 })
 export class TargetAreaComponent extends AbstractForm implements OnInit {
 
+  @Input() formType: 'CREATE' | 'EDIT';
   @Input('target_area') form: FormGroup;
   @Input() index: number;  
   @Input() districts: Array<Object>;
@@ -27,6 +28,11 @@ export class TargetAreaComponent extends AbstractForm implements OnInit {
   }
 
   ngOnInit() {
+    if(this.formType === 'EDIT') {
+      this.subDistrictsLoaded.emit({ district_id: this.form.get('district_id').value, index: this.index });
+      this.villagesLoaded.emit({ sub_district_id: this.form.get('sub_district_id').value, index: this.index });
+    }
+
     this.subscribeToFormChanged();
   }
   

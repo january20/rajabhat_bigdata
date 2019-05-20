@@ -2,7 +2,7 @@
   <div class="form-row">
     <mat-form-field class="col-2">
       <mat-label>อำเภอ</mat-label>
-      <mat-select (selectionChange)="loadSubDistricts($event)">
+      <mat-select formControlName="district_id" (selectionChange)="loadSubDistricts($event)">
         <mat-option *ngFor="let district of districts" [value]="district.id">
             {{ district.district_name_th }}
         </mat-option>

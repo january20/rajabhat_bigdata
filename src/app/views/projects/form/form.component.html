@@ -64,10 +64,12 @@
 
             <!-- ***target_areas -->
             <app-target-areas 
+              [formType]="formType"
               [target_areas]="target_areas" 
               [districts]="districts" 
               [subDistrictArr]="subDistrictArr" 
               [villageArr]="villageArr" 
+              [editTargetAreas]="editObj.targetAreas"
 
               (subDistrictsLoaded)="loadSubDistricts($event)" 
               (villagesLoaded)="loadVillages($event)" 

@@ -9,6 +9,7 @@
 </div>
 <div class="animated fadeInDown" *ngFor="let area of target_areas.controls; let i = index">
   <app-target-area 
+    [formType]="formType"
     [target_area]="area" 
     [index]="i" 
     [districts]="districts" 
