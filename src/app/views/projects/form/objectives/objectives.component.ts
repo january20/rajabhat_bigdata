@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, SimpleChange, SimpleChanges } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -6,22 +6,48 @@ import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './objectives.component.html',
   styleUrls: ['./objectives.component.scss']
 })
-export class ObjectivesComponent implements OnInit {
+export class ObjectivesComponent implements OnInit, OnChanges {
 
+  @Input() formType: 'CREATE' | 'EDIT';
   @Input() objectives: FormArray;
   @Input() activities: FormArray;
   @Input() outputs: FormArray;
   @Input() kpi: FormArray;
+  @Input() editObjectives: any;
+  @Input() editActivities: any;
+  @Input() editOutputs: any;
+  @Input() editKpi: any;
 
   constructor(
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.addObjective();
-    this.addActivity();
-    this.addOutput();
-    this.addKpi();
+    if(this.formType === 'CREATE') {
+      this.addObjective();
+      this.addActivity();
+      this.addOutput();
+      this.addKpi();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    let objectives: SimpleChange = changes['editObjectives'];
+    let activities: SimpleChange = changes['editActivities'];    
+    let outputs: SimpleChange = changes['editOutputs'];    
+    let kpi: SimpleChange = changes['editKpi'];    
+    let objectivesCurr = objectives ? objectives.currentValue : null;
+    let activitiesCurr = activities ? activities.currentValue : null;
+    let outputsCurr = outputs ? outputs.currentValue : null;
+    let kpiCurr = kpi ? kpi.currentValue : null;
+
+    if(this.formType === 'EDIT') {
+      this.editObjectiveGroup(objectivesCurr);    
+      this.editActivityGroup(activitiesCurr);  
+      this.editOutputGroup(outputsCurr);  
+      this.editKpiGroup(kpiCurr);  
+    }
+
   }
 
   addObjective() {
@@ -37,24 +63,56 @@ export class ObjectivesComponent implements OnInit {
     this.kpi.push(this.createKpi());
   }
 
-  createObjective(): FormGroup {
+  createObjective(objective?: any): FormGroup {
     return this.formBuilder.group({
-      objective: ['', Validators.required]
+      objective: [objective ? objective.objective : '', Validators.required]
     });
   }
-  createActivity(): FormGroup {
+  createActivity(activity?: any): FormGroup {
     return this.formBuilder.group({
-      activity: ['', Validators.required]
+      activity: [activity ? activity.activity : '', Validators.required]
     });
   }
-  createOutput(): FormGroup {
+  createOutput(output?: any): FormGroup {
     return this.formBuilder.group({
-      output: ['', Validators.required]
+      output: [output ? output.output : '', Validators.required]
     });
   }
-  createKpi(): FormGroup {
+  createKpi(kpi?: any): FormGroup {
     return this.formBuilder.group({
-      kpi: ['', Validators.required]
+      kpi: [kpi ? kpi.kpi : '', Validators.required]
+    });
+  }
+
+  editObjectiveGroup(objectives) {
+    if(!objectives) return;
+
+    objectives.map(objective => {
+      this.objectives.push(this.createObjective(objective));
+    });
+  }
+
+  editActivityGroup(activities) {
+    if(!activities) return;
+
+    activities.map(activity => {
+      this.activities.push(this.createActivity(activity));
+    });
+  }
+
+  editOutputGroup(outputs) {
+    if(!outputs) return;
+
+    outputs.map(output => {
+      this.outputs.push(this.createOutput(output));
+    });
+  }
+
+  editKpiGroup(kpi) {
+    if(!kpi) return;
+
+    kpi.map(k => {
+      this.kpi.push(this.createKpi(k));
     });
   }
 

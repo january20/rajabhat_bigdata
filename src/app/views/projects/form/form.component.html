@@ -2,7 +2,7 @@
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
-        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">แบบเสนอโครงการ</h1>
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">แบบฟอร์ม{{ title }}</h1>
       </div>
     </div>
   </div>
@@ -81,11 +81,13 @@
             <h3 class="px-4">3.1 มหาวิทยาลัยราชภัฏสุรินทร์</h3>
             <!-- ***main_staffs-->
             <app-main-staffs
+              [formType]="formType"
               [main_staffs]="main_staffs" 
               [faculty]="faculty"
               [mainSubFacultyArr]="mainSubFacultyArr" 
               [mainBranchArr]="mainBranchArr" 
               [mainStaffArr]="mainStaffArr" 
+              [editMainStaffs]="editObj.mainStaffs"
 
               (subFacultyLoaded)="loadSubFaculty($event)" 
               (branchLoaded)="loadBranch($event)" 
@@ -97,11 +99,13 @@
 
             <!-- ***sub_staffs -->
             <app-sub-staffs
+              [formType]="formType"
               [sub_staffs]="sub_staffs" 
               [faculty]="faculty"
               [subSubFacultyArr]="subSubFacultyArr" 
               [subBranchArr]="subBranchArr" 
               [subStaffArr]="subStaffArr" 
+              [editSubStaffs]="editObj.subStaffs"
 
               (subFacultyLoaded)="loadSubFaculty($event)" 
               (branchLoaded)="loadBranch($event)" 
@@ -114,9 +118,11 @@
             <!-- ***ext_staffs -->
             <h3 class="px-4">3.2 ชุมชน/ท้องถิ่นที่เข้าร่วมโครงการ</h3>
             <app-ext-staffs
+              [formType]="formType"
               [ext_staffs]="ext_staffs"
               [prefixName]="prefixName"
               [userGroup]="userGroup"
+              [editExtStaffs]="editObj.extStaffs"
               
               (extStaffRemoved)="removeExtStaff($event)">
             </app-ext-staffs>
@@ -125,8 +131,10 @@
             <!-- ***project_schemes -->
             <h3 [className]="formErrors.schemes ? 'color-danger mt-2' : 'mt-2'">4. รูปแบบโครงการ</h3>
             <app-schemes 
+              [formType]="formType"
               [schemes]="schemes" 
-              [projectSchemes]="projectSchemes" >
+              [projectSchemes]="projectSchemes" 
+              [editSchemes]="editObj.schemes">
             </app-schemes>
             <p class="color-danger" *ngIf="formErrors.schemes">{{ formErrors.schemes }}</p>
             <!-- end project_schemes -->
@@ -134,8 +142,10 @@
             <!-- ***srru_strategies -->
             <h3 [className]="formErrors.srru_strategies ? 'color-danger mt-2' : 'mt-2'">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h3>
             <app-srru-strategies 
+              [formType]="formType"
               [srru_strategies]="srru_strategies" 
-              [srruStrategies]="srruStrategies" >
+              [srruStrategies]="srruStrategies" 
+              [editSrruStrategies]="editObj.srruStrategies">
             </app-srru-strategies>
             <p class="color-danger" *ngIf="formErrors.srru_strategies">{{ formErrors.srru_strategies }}</p>
             <!-- end srru_strategies -->
@@ -143,8 +153,10 @@
             <!-- ***rajabhat_strategies -->
             <h3 [className]="formErrors.rajabhat_strategies ? 'color-danger mt-2' : 'mt-2'">6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
             <app-rajabhat-strategies 
+              [formType]="formType"
               [rajabhat_strategies]="rajabhat_strategies" 
-              [rajabhatStrategies]="rajabhatStrategies" >
+              [rajabhatStrategies]="rajabhatStrategies"
+              [editRajabhatStrategies]="editObj.rajabhatStrategies">
             </app-rajabhat-strategies>
             <p class="color-danger" *ngIf="formErrors.rajabhat_strategies">{{ formErrors.rajabhat_strategies }}</p>
             <!-- end rajabhat_strategies -->
@@ -152,8 +164,10 @@
             <!-- ***national_strategies -->
             <h3 [className]="formErrors.national_strategies ? 'color-danger mt-2' : 'mt-2'">7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
             <app-national-strategies 
+              [formType]="formType"
               [national_strategies]="national_strategies" 
-              [nationalStrategies]="nationalStrategies" >
+              [nationalStrategies]="nationalStrategies"
+              [editNationalStrategies]="editObj.nationalStrategies">
             </app-national-strategies>
             <p class="color-danger" *ngIf="formErrors.national_strategies">{{ formErrors.national_strategies }}</p>
             <!-- end national_strategies -->
@@ -170,8 +184,10 @@
             <!-- ***integration_plans -->
             <h3 [className]="formErrors.integration_plans ? 'color-danger mt-2' : 'mt-2'">9. แผนการบูรณาการกับพันธกิจอื่น</h3>
             <app-integration-plans 
+              [formType]="formType"
               [integration_plans]="integration_plans" 
-              [integrationPlans]="integrationPlans">
+              [integrationPlans]="integrationPlans"
+              [editPlans]="editObj.integration_plans">
             </app-integration-plans>
             <p class="color-danger" *ngIf="formErrors.integration_plans">{{ formErrors.integration_plans }}</p>
             <!-- <p class="color-danger"></p> -->
@@ -193,10 +209,15 @@
             <!-- ***objectives -->
             <h3 [className]="formErrors.objectives ? 'color-danger mt-2' : 'mt-2'">11. วัตถุประสงค์โครงการและตัวชี้วัด</h3>
             <app-objectives
+              [formType]="formType"
               [objectives]="objectives" 
               [activities]="activities" 
               [outputs]="outputs" 
-              [kpi]="kpi">
+              [kpi]="kpi"
+              [editObjectives]="editObj.objectives"
+              [editActivities]="editObj.activities"
+              [editOutputs]="editObj.outputs"
+              [editKpi]="editObj.kpi">
             </app-objectives>
             <!-- end objectives -->
 
@@ -220,7 +241,9 @@
 
             <!-- ***alliances -->
             <app-alliances
-              [alliances]="alliances">
+              [formType]="formType"
+              [alliances]="alliances"
+              [editAlliances]="editObj.alliances">
             </app-alliances>
             <!-- end alliances -->
 
@@ -236,7 +259,9 @@
             <!-- ***benefits -->
             <h3 [className]="formErrors.benefits ? 'color-danger mt-2' : 'mt-2'">16. ประโยชน์ที่คาดว่าจะได้รับ</h3>
             <app-benefits 
-              [benefits]="benefits">
+              [formType]="formType"
+              [benefits]="benefits"
+              [editBenefits]="editObj.benefits">
             </app-benefits>
             <p class="color-danger" *ngIf="formErrors.benefits">{{ formErrors.benefits }}</p>
             <!-- end benefits -->
@@ -260,8 +285,13 @@
             <!-- end budget -->
 
             <!-- ***file -->
-            <h3 [className]="!file.valid ? 'color-danger mt-2' : 'mt-2'">19. รายละเอียดงบประมาณ*</h3>
-            <div class="form-group">
+            <h3 *ngIf="formType === 'CREATE'" [className]="!file.valid ? 'color-danger mt-2' : 'mt-2'">19. รายละเอียดงบประมาณ</h3>
+            <h3 *ngIf="formType === 'EDIT'" [className]="!project_file ? 'color-danger mt-2' : 'mt-2'">19. รายละเอียดงบประมาณ</h3>
+            <div class="row" *ngIf="formType === 'EDIT'">
+              <p [className]="file_delete ? 'h4 col-8 color-warning' : 'h4 col-8'">{{ file_delete ? 'ไฟล์นี้จะถูกลบ กรุณาแนบไฟล์ใหม่' : project_file }}</p>
+              <a href="javascript:void(0)" class="color-danger col-4" (click)="file_delete = !file_delete"><p class="h4">{{ file_delete ? 'ยกเลิก' : 'ลบไฟล์' }}</p></a>
+            </div>    
+            <div class="form-group animated fadeInDown" *ngIf="file_delete || formType === 'CREATE'">
               <input type="file" (change)="onFileChange($event)">
               <div class="input-group">
                 <input type="text" readonly="" class="form-control" placeholder="แนบรายละเอียดงบประมาณ...">
@@ -273,13 +303,14 @@
               </div>
               <p class="color-danger" *ngIf="formErrors.file">{{ formErrors.file }}</p>
             </div>
+        
             <!-- end file -->
 
           </fieldset>
 
           <div class="form-group d-flex justify-content-center">
             <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
-              เสนอโครงการ
+              {{ title }}
               <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
             </button>
           </div>

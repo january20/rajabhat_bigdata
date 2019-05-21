@@ -1,6 +1,7 @@
 <div [formGroup]="benefits">  
   <ng-container *ngFor="let benefit of benefits.controls;let i = index">
     <app-benefit
+      [formType]="formType"
       [benefit]="benefit"
       [index]="i" 
       [name]="benefitObj[i].name"

@@ -8,7 +8,8 @@
   </a> 
 </div>
 <div class="mx-5 animated fadeInDown" *ngFor="let staff of main_staffs.controls; let i = index">
-  <app-main-staff 
+  <app-main-staff
+    [formType]="formType" 
     [staff]="staff" 
     [index]="i" 
     [faculty]="faculty"

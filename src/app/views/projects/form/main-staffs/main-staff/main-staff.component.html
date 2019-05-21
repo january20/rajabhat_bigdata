@@ -2,7 +2,7 @@
   <div class="form-row">
     <mat-form-field class="col-3">
       <mat-label>เลือกคณะ</mat-label>
-      <mat-select (selectionChange)="loadSubFaculty($event)">
+      <mat-select formControlName="fac_id" (selectionChange)="loadSubFaculty($event)">
         <mat-option *ngFor="let fac of faculty" [value]="fac.id">
             {{ fac.fac_name }}
         </mat-option>
@@ -11,7 +11,7 @@
 
     <mat-form-field class="col-2">
       <mat-label>เลือกหน่วยงาน</mat-label>
-      <mat-select (selectionChange)="loadBranch($event)">
+      <mat-select formControlName="sub_fac_id" (selectionChange)="loadBranch($event)">
         <mat-option *ngFor="let sub_fac of mainSubFacultyArr[index]" [value]="sub_fac.id">
             {{ sub_fac.sub_fac_name }}
         </mat-option>
@@ -20,7 +20,7 @@
 
     <mat-form-field class="col-2">
       <mat-label>เลือกสาขา</mat-label>
-      <mat-select (selectionChange)="loadStaff($event)">
+      <mat-select formControlName="branch_id" (selectionChange)="loadStaff($event)">
         <mat-option *ngFor="let branch of mainBranchArr[index]" [value]="branch.ref_program.id">
             {{ branch.ref_program.program_name }}
         </mat-option>

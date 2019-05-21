@@ -8,25 +8,46 @@ import { FormControl, FormArray } from '@angular/forms';
 })
 export class SrruStrategiesComponent implements OnInit, OnChanges {
 
+  @Input() formType: 'CREATE' | 'EDIT';
   @Input() srru_strategies: FormArray;
   @Input() srruStrategies;
+  @Input() editSrruStrategies: Array<Object>;
 
   constructor() {}
 
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    const srru_strategies: SimpleChange = changes.srruStrategies;
-    this.addSrruStrategies(srru_strategies.currentValue);
+    let strategies: SimpleChange = changes['srruStrategies'];    
+    let edit_strategies: SimpleChange = changes['editSrruStrategies'];
+    let strategiesCurr = strategies ? strategies.currentValue : null;
+    let editStrategiesCurr = edit_strategies ? edit_strategies.currentValue : null;
+
+    this.addStrategies(strategiesCurr); 
+
+    if(this.formType === 'EDIT') {
+      this.addEditStrategies(editStrategiesCurr);    
+    }
+
   }
 
+  addStrategies(strategies) {
+    if(!strategies || strategies.length === 0) return;
 
-  addSrruStrategies(srru_strategies) {
-    if(!srru_strategies) return;
-    srru_strategies.map((o, i) => {
-      const control = new FormControl(false);
-      this.srru_strategies.push(control);
-    });
+    if(strategies) {
+      strategies.map((o, i) => {
+        const control = new FormControl(false);
+        this.srru_strategies.push(control);
+      });
+    }    
+  }
+
+  addEditStrategies(strategies) {
+    if(!strategies || strategies.length === 0) return;
+
+    strategies.map(strategy => {
+      this.srru_strategies.controls[strategy.id - 1].patchValue(true);
+    });    
   }
 
 }

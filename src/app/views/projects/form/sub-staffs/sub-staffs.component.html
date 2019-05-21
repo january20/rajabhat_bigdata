@@ -4,11 +4,12 @@
   </span>              
   <a href="javascript:void(0)" class="btn btn-xs btn-raised btn-success" (click)="addStaff($event)">
     <i class="fa fa-plus"></i>
-      เพิ่มผู้รับผิดชอบหลัก       
+      เพิ่มผู้ประสานงาน
   </a> 
 </div>
 <div class="mx-5 animated fadeInDown" *ngFor="let staff of sub_staffs.controls; let i = index">
   <app-sub-staff 
+    [formType]="formType"
     [staff]="staff" 
     [index]="i" 
     [faculty]="faculty"

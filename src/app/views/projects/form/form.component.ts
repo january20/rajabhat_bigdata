@@ -11,8 +11,8 @@ import { AbstractForm } from './shared/abstract-form';
 })
 export class FormComponent extends AbstractForm implements OnInit {
 
-  title: 'เสนอโครงการ' | 'แก้ไขโครงการ';
   formType: 'CREATE' | 'EDIT' = this.route.snapshot.data['formType'];
+  title = this.route.snapshot.data['formType'] === 'CREATE' ? 'เสนอโครงการ' : 'แก้ไขโครงการ';
   form: FormGroup;
   formErrors = this.createFormErrors();
   validationMessages = this.createValidationMessages();
@@ -40,8 +40,25 @@ export class FormComponent extends AbstractForm implements OnInit {
   isSubmit = false;
   // for Edit
   editObj = {
-    targetAreas: []
+    targetAreas: [],
+    mainStaffs: [],
+    subStaffs: [],
+    extStaffs: [],
+    schemes: [],
+    srruStrategies: [],
+    rajabhatStrategies: [],
+    nationalStrategies: [],
+    integration_plans: [],
+    objectives: [],
+    activities: [],
+    outputs: [],
+    kpi: [],
+    benefits: [],
+    alliances: []
   }
+  // file
+  project_file = null;
+  file_delete = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,9 +83,33 @@ export class FormComponent extends AbstractForm implements OnInit {
   loadData() {
     const id = this.route.snapshot.params.id;
 
-    this.projectService.getProject(id).subscribe((data: any) => {
+    this.projectService.getEditProject(id).subscribe((data: any) => {
       this.form.get('project_name').setValue(data.project_name);
+      this.form.get('faculty_strategy').setValue(data.faculty_strategy);
+      this.form.get('history').setValue(data.history);
+      this.form.get('target_group').setValue(data.target_group);
+      this.form.get('operation_date').setValue(data.operation_date);
+      this.form.get('assessment_method').setValue(data.assessment_method);
+      this.form.get('reporting').setValue(data.reporting);
+      this.form.get('budget').setValue(data.budget);
+
       this.editObj.targetAreas = data.target_area;
+      this.editObj.mainStaffs = data.main_staffs;
+      this.editObj.subStaffs = data.sub_staffs;
+      this.editObj.extStaffs = data.ext_staffs;
+      this.editObj.schemes = data.schemes;
+      this.editObj.srruStrategies = data.srru_strategies;
+      this.editObj.rajabhatStrategies = data.rajabhat_strategies;
+      this.editObj.nationalStrategies = data.national_strategies;
+      this.editObj.integration_plans = data.integration_plans;
+      this.editObj.objectives = data.objectives;
+      this.editObj.activities = data.activities;
+      this.editObj.outputs = data.outputs;
+      this.editObj.kpi = data.kpi;
+      this.editObj.alliances = data.participate_organizations;
+      this.editObj.benefits = data.benefits;
+
+      this.project_file = data.project_detail_file_path;
     });
   }
 
