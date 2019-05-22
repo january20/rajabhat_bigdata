@@ -15,6 +15,14 @@ export class ProjectService {
     return this.http.post(`${environment.api_url}/projects`, formData);
   }
 
+  updateProject(formData, id) {
+    return this.http.put(`${environment.api_url}/projects/${id}`, formData);
+  }
+
+  deleteProject(id) {
+    return this.http.delete(`${environment.api_url}/projects/${id}`);
+  }
+
   getProject(id: number) {
     return this.http.get(`${environment.api_url}/projects/${id}`);
   }
@@ -58,5 +66,7 @@ export class ProjectService {
   getMiscData() {
     return this.http.get(`${environment.api_url}/ref/misc?t=project_create_data`);
   }
+
+
 
 }

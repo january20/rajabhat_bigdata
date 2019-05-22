@@ -3,6 +3,7 @@ import { ProjectService } from '../shared/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn } from '@angular/forms';
 import { AbstractForm } from './shared/abstract-form';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-form',
@@ -64,7 +65,8 @@ export class FormComponent extends AbstractForm implements OnInit {
     private formBuilder: FormBuilder,
     private projectService: ProjectService,
     private changeDetector: ChangeDetectorRef,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
     super();
   }
@@ -113,27 +115,58 @@ export class FormComponent extends AbstractForm implements OnInit {
     });
   }
 
-  submit() {   
+  submit() {
     if(confirm('คุณต้องการเสนนอโครงการใช่หรือไม่')) {
       this.isSubmit = true;
 
-      this.projectService.storeProject(this.form.value).subscribe(
-        data => {
-          setTimeout(() => {
+      if(this.formType === 'CREATE') {
+        this.projectService.storeProject(this.form.value).subscribe(
+          data => {
+            this.snackBar.open('เสนอโครงการสำเร็จ', '', {
+              horizontalPosition: 'right',
+              duration: 2000,
+              panelClass: ['color-white', 'bg-success']
+            });
+
+            setTimeout(() => {
+              this.isSubmit = false;
+              location.href = '/projects/mylist';
+            }, 2000);          
+          },
+          err => {
+            this.snackBar.open('เกิดขข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
+              horizontalPosition: 'right',
+              duration: 2000,
+              panelClass: ['color-white', 'bg-danger']
+            });
             this.isSubmit = false;
-            console.log(data)
-          }, 2000);          
-        },
-        err => {
-          setTimeout(() => {
-            this.isSubmit = false;
-            console.log(err)
-          }, 2000);
-        }
-      );
+          }
+        );
+      } else {
+        this.projectService.updateProject(this.form.value, this.route.snapshot.params.id).subscribe(
+          data => {
+            this.snackBar.open('แก้ไขโครงการสำเร็จ', '', {
+              horizontalPosition: 'right',
+              duration: 2000,
+              panelClass: ['color-white', 'bg-success']
+            });
+
+            setTimeout(() => {
+              this.isSubmit = false;
+              location.href = '/projects/mylist';
+            }, 2000);
+          },
+          err => {
+            this.snackBar.open('เกิดขข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
+              horizontalPosition: 'right',
+              duration: 2000,
+              panelClass: ['color-white', 'bg-danger']
+            });
+            this.isSubmit = false;        
+          }
+        )
+      }      
     }
-    
-    // console.log(formData)
   }
 
   loadMisc() {
@@ -242,7 +275,7 @@ export class FormComponent extends AbstractForm implements OnInit {
         Validators.required,
         Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,2})?$')
       ])],
-      file: [null, Validators.required],
+      file: [null, this.formType === 'CREATE' ? Validators.required : null],
     });
   }
 
@@ -285,8 +318,7 @@ export class FormComponent extends AbstractForm implements OnInit {
     let reader = new FileReader();
 
     if(event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
+      const [file] = event.target.files;    
 
       reader.onload = () => {
         this.form.patchValue({
@@ -294,10 +326,21 @@ export class FormComponent extends AbstractForm implements OnInit {
         });
       }
 
+      reader.readAsDataURL(file);
+
       this.changeDetector.markForCheck();
     } 
   }
   // End Handle File //
+
+  toggleFileButton() {
+    this.file_delete = !this.file_delete;
+    if(!this.file_delete) {
+      this.form.patchValue({
+        file: null
+      });
+    }
+  }
 
   // ***Getter Functions //  
   get target_areas() { return this.form.get('target_areas') as FormArray; }

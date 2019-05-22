@@ -16,8 +16,15 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  // toggleLoginModal() {
+  //   const dialogRef = this.dialog.open(LoginComponent, {
+  //     width: '30%'
+  //   });
+  // }
+
   logout() {
     this.isLogout.emit();
   }
+  
 
 }

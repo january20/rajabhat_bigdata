@@ -1,3 +1,73 @@
-<p>
-  activity works!
-</p>
+<div class="my-5 text-center" *ngIf="!project" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="project">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">รายงานกิจกรรม</h1>
+        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10">{{ project.project_name }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body">        
+        <form [formGroup]="form" class="form-horizontal">
+          <div class="py-4">
+            <label class="h2"><strong>1. ชื่อกิจกรรม</strong></label>
+            <div class="form-group px-5">
+              <input type="text" class="form-control" name="name" placeholder="ชื่อกิจกรรม" required>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <label class="h2"><strong>2. รายละเอียดกิจกรรม</strong></label>
+            <div class="form-group px-5">
+              <textarea class="form-control" name="description" rows="5"></textarea>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <label class="h2"><strong>3. ความสอดคล้องกับวัตถุประสงค์</strong></label>
+            <div class="form-group">
+              <select class="form-control" name="objective_id" onchange="objective_change()">
+                <option selected disabled>วัตถุประสงค์</option>
+              </select>
+            </div>
+            <div id="objective_note" class="form-group" style="display: none">
+              <textarea required class="form-control" name="objective_note" rows="3" placeholder="รายละเอียดเพิ่มเติม(ถ้ามี)"></textarea>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <label class="h2"><strong>4. ความสอดคล้องกับตัวชี้วัด(KPI)</strong></label>
+            <div class="form-group">
+              <select class="form-control" name="kpi_id" onchange="kpi_change()">
+                <option selected disabled>ตัวชี้วัด</option>
+              </select>
+            </div>
+            <div id="kpi_note" class="form-group" style="display: none">
+              <textarea required class="form-control" name="kpi_note" rows="3" placeholder="รายละเอียดเพิ่มเติม(ถ้ามี)"></textarea>
+            </div>
+          </div>
+
+          <ngx-dropzone 
+            [showPreviews]="true"
+            [label]="'เลือกรูปภาพ/ไฟล์'"
+            (filesAdded)="addFiles($event)" >
+          </ngx-dropzone>
+
+          <div class="form-group d-flex justify-content-center">
+            <button id="activity-button" class="btn btn-raised btn-primary">บันทึกกิจกรรม</button>
+          </div>          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

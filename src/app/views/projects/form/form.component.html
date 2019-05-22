@@ -289,7 +289,7 @@
             <h3 *ngIf="formType === 'EDIT'" [className]="!project_file ? 'color-danger mt-2' : 'mt-2'">19. รายละเอียดงบประมาณ</h3>
             <div class="row" *ngIf="formType === 'EDIT'">
               <p [className]="file_delete ? 'h4 col-8 color-warning' : 'h4 col-8'">{{ file_delete ? 'ไฟล์นี้จะถูกลบ กรุณาแนบไฟล์ใหม่' : project_file }}</p>
-              <a href="javascript:void(0)" class="color-danger col-4" (click)="file_delete = !file_delete"><p class="h4">{{ file_delete ? 'ยกเลิก' : 'ลบไฟล์' }}</p></a>
+              <a href="javascript:void(0)" class="color-danger col-4" (click)="toggleFileButton()"><p class="h4">{{ file_delete ? 'ยกเลิก' : 'ลบไฟล์' }}</p></a>
             </div>    
             <div class="form-group animated fadeInDown" *ngIf="file_delete || formType === 'CREATE'">
               <input type="file" (change)="onFileChange($event)">

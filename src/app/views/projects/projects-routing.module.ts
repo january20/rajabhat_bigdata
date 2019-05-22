@@ -16,10 +16,6 @@ const routes: Routes = [
     component: MylistComponent
   },
   {
-    path: 'activity',
-    component: ActivityComponent
-  },
-  {
     path: 'create',
     component: FormComponent,
     data: { formType: 'CREATE' }
@@ -28,6 +24,10 @@ const routes: Routes = [
     path: ':id/edit',
     component: FormComponent,
     data: { formType: 'EDIT' }
+  },
+  {
+    path: ':id/activity',
+    component: ActivityComponent
   },
   {
     path: ':id',

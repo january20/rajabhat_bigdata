@@ -9,8 +9,9 @@ import {
   MatCheckboxModule, 
   MatProgressSpinnerModule, 
   MatInputModule,
-  MatStepperModule
-} from '@angular/material'
+  MatStepperModule,
+  MatSnackBarModule,
+} from '@angular/material';
 
 import { AgmCoreModule } from '@agm/core';
 import { StriphtmlPipe } from './pipes/striphtml.pipe';
@@ -42,7 +43,8 @@ import { UserService } from './services/user.service';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }
