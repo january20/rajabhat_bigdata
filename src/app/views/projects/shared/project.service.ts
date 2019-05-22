@@ -11,16 +11,36 @@ export class ProjectService {
     private http: HttpClient
   ) { }
 
+  storeProject(formData) {
+    return this.http.post(`${environment.api_url}/projects`, formData);
+  }
+
+  updateProject(formData, id) {
+    return this.http.put(`${environment.api_url}/projects/${id}`, formData);
+  }
+
+  deleteProject(id) {
+    return this.http.delete(`${environment.api_url}/projects/${id}`);
+  }
+
   getProject(id: number) {
     return this.http.get(`${environment.api_url}/projects/${id}`);
   }
 
+  getEditProject(id: number) {
+    return this.http.get(`${environment.api_url}/projects/${id}/edit`);
+  }
+
   getResult() {
-    return this.http.get(`${environment.api_url}/projects?t=result`);
+    return this.http.get(`${environment.api_url}/projects/result`);
   }
 
   getProjectList(page: number) {
-    return this.http.get(`${environment.api_url}/projects?t=project_list_index&page=${page}`);
+    return this.http.get(`${environment.api_url}/projects?page=${page}`);
+  }
+
+  getMyProjectList() {
+    return this.http.get(`${environment.api_url}/projects/my_projects`);
   }
 
   getSubDistricts(district_id: number) {
@@ -46,4 +66,7 @@ export class ProjectService {
   getMiscData() {
     return this.http.get(`${environment.api_url}/ref/misc?t=project_create_data`);
   }
+
+
+
 }

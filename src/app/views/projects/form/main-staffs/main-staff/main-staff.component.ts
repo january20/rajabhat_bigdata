@@ -9,6 +9,7 @@ import { AbstractForm } from '../../shared/abstract-form';
 })
 export class MainStaffComponent extends AbstractForm implements OnInit {
 
+  @Input() formType: 'CREATE' | 'EDIT';
   @Output() staffRemoved = new EventEmitter<number>();
   @Output() subFacultyLoaded = new EventEmitter<Object>();
   @Output() branchLoaded = new EventEmitter<Object>();
@@ -27,20 +28,26 @@ export class MainStaffComponent extends AbstractForm implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    if(this.formType === 'EDIT') {
+      await this.subFacultyLoaded.emit({ faculty_id: this.form.get('fac_id').value, index: this.index, type: 1 });
+      await this.branchLoaded.emit({ sub_faculty_id: this.form.get('sub_fac_id').value, index: this.index , type: 1});
+      await this.staffLoaded.emit({ branch_id: this.form.get('branch_id').value, index: this.index, type: 1 });
+    }
+
     this.subscribeToFormChanged();
   }
   
   loadSubFaculty(event) {
-    this.subFacultyLoaded.emit({ faculty_id: event.target.value, index: this.index, type: 1 });
+    this.subFacultyLoaded.emit({ faculty_id: event.value, index: this.index, type: 1 });
   }
 
   loadBranch(event) {
-    this.branchLoaded.emit({ sub_faculty_id: event.target.value, index: this.index, type: 1 });
+    this.branchLoaded.emit({ sub_faculty_id: event.value, index: this.index, type: 1 });
   }
 
   loadStaff(event) {
-    this.staffLoaded.emit({ branch_id: event.target.value, index: this.index, type: 1 });
+    this.staffLoaded.emit({ branch_id: event.value, index: this.index, type: 1 });
   }
 
   createFormErrors() {

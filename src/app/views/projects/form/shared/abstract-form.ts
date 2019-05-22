@@ -2,7 +2,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 export abstract class AbstractForm {
-  form: FormGroup | FormArray;
+  form?: FormGroup | FormArray;
   formErrors: Object;
   validationMessages: Object;
 

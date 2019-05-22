@@ -1,9 +1,7 @@
-<div class="form-group" [formGroup]="rajabhat_strategies">
-  <div class="checkbox">
-    <ng-container *ngFor="let scheme of rajabhat_strategies.controls;let i = index">
-      <label>        
-        <input type="checkbox" [formControlName]="i"> {{ rajabhatStrategies[i].name+' '+rajabhatStrategies[i].details }}
-      </label><br>
-    </ng-container>
-  </div>
+<div [formGroup]="rajabhat_strategies">
+  <ng-container *ngFor="let scheme of rajabhat_strategies.controls;let i = index">
+    <div>
+      <mat-checkbox [formControlName]="i" color="primary">{{ rajabhatStrategies[i].name+' '+rajabhatStrategies[i].details }}</mat-checkbox>
+    </div>
+  </ng-container>  
 </div>

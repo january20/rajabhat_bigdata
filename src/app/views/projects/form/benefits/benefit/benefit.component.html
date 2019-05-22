@@ -1,0 +1,13 @@
+<div [formGroup]="form">
+  <div class="form-row">
+    <mat-checkbox formControlName="status" color="primary">{{ name }}</mat-checkbox>
+  </div>
+  <div class="form-row">
+    <mat-form-field *ngIf="form.get('status').value" class="animated fadeInDown w-100">
+      <mat-label>ประโยชน์</mat-label>
+      <input matInput type="text" formControlName="benefit">
+      <mat-error *ngIf="formErrors.benefit">{{ formErrors.benefit }}</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+

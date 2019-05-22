@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges, SimpleChange } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -6,13 +6,15 @@ import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './sub-staffs.component.html',
   styleUrls: ['./sub-staffs.component.scss']
 })
-export class SubStaffsComponent implements OnInit {
+export class SubStaffsComponent implements OnInit, OnChanges {
 
+  @Input() formType: 'CREATE' | 'EDIT';
   @Input() sub_staffs: FormArray;
   @Input() faculty: Array<Object>;
   @Input() subSubFacultyArr: Array<Object>;
   @Input() subBranchArr: Array<Object>;
   @Input() subStaffArr: Array<Object>;
+  @Input() editSubStaffs: Array<Object>;
   @Output() staffRemoved = new EventEmitter<number>();
   @Output() subFacultyLoaded = new EventEmitter<Object>();
   @Output() branchLoaded = new EventEmitter<Object>();
@@ -23,7 +25,19 @@ export class SubStaffsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.sub_staffs.push(this.createStaff());
+    if(this.formType === 'CREATE') {
+      this.sub_staffs.push(this.createStaff());
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(this.formType === 'CREATE') return;
+
+    const staffs: SimpleChange = changes.editSubStaffs;
+
+    if(staffs) {
+      this.addEditStaffs(staffs.currentValue);
+    }    
   }
 
   loadSubFaculty(event) {
@@ -38,9 +52,12 @@ export class SubStaffsComponent implements OnInit {
     this.staffLoaded.emit(event);
   }
 
-  createStaff(): FormGroup {
+  createStaff(staff?: any): FormGroup {
     return this.formBuilder.group({
-      mis_id: ['', Validators.required]
+      fac_id: [staff ? staff.mis.department_id : ''],
+      sub_fac_id: [staff ? staff.mis.sub_fac_id : ''],
+      branch_id: [staff ? staff.mis.program_id : ''],
+      mis_id: [staff ? staff.mis.id : '', Validators.required]
     });
   }
 
@@ -53,6 +70,12 @@ export class SubStaffsComponent implements OnInit {
   removeStaff(index) {
     this.sub_staffs.removeAt(index);
     this.staffRemoved.emit(index);
+  }
+
+  addEditStaffs(staffs) {
+    staffs.map(staff => {
+      this.sub_staffs.push(this.createStaff(staff));
+    });
   }
 
 }

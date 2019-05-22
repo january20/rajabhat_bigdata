@@ -1,12 +1,11 @@
-<div class="form-group" [formGroup]="benefits">
-  <div class="checkbox">
-    <ng-container *ngFor="let scheme of benefits.controls;let i = index" [formGroupName]="i">
-      <div class="form-group">
-        <label>        
-          <input type="checkbox" formControlName="status" (click)="toggleBenefit(this)"> {{ benefitObj[i].name }}
-        </label>      
-        <input class="form-control" type="text" formControlName="benefit" placeholder="ประโยชน์">
-      </div>
-    </ng-container>
-  </div>
+<div [formGroup]="benefits">  
+  <ng-container *ngFor="let benefit of benefits.controls;let i = index">
+    <app-benefit
+      [formType]="formType"
+      [benefit]="benefit"
+      [index]="i" 
+      [name]="benefitObj[i].name"
+      [id]="benefitObj[i].id">
+    </app-benefit>
+  </ng-container>
 </div>

@@ -2,7 +2,7 @@
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
-        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">แบบเสนอโครงการ</h1>
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">แบบฟอร์ม{{ title }}</h1>
       </div>
     </div>
   </div>
@@ -49,25 +49,27 @@
         </ol>
         <hr class="dashed">
 
-        <form [formGroup]="form" class="form-horizontal" accept-charset="UTF-8" enctype="multipart/form-data">
+        <form [formGroup]="form" accept-charset="UTF-8" enctype="multipart/form-data">
           <fieldset>
             <legend class="color-primary">ส่วนที่ 1 ข้อมูลทั่วไป</legend> 
 
             <!-- ***project_name -->
-            <h4 [className]="formErrors.project_name ? 'color-danger' : ''">1. ชื่อโครงการ</h4>
-            <div class="form-group label-floating mx-5">
-              <label class="control-label" for="project_name">ชื่อโครงการ</label>
-              <input type="text" class="form-control" formControlName="project_name">
-              <p class="color-danger" *ngIf="formErrors.project_name">{{ formErrors.project_name }}</p>
-            </div>
+            <h3 [className]="formErrors.project_name ? 'color-danger' : ''">1. ชื่อโครงการ</h3>
+            <mat-form-field class="w-100">
+              <mat-label>ชื่อโครงการ</mat-label>
+              <input matInput formControlName="project_name" required>
+              <mat-error *ngIf="formErrors.project_name">{{ formErrors.project_name }}</mat-error>
+            </mat-form-field>
             <!-- end project_name -->
 
             <!-- ***target_areas -->
             <app-target-areas 
+              [formType]="formType"
               [target_areas]="target_areas" 
               [districts]="districts" 
               [subDistrictArr]="subDistrictArr" 
               [villageArr]="villageArr" 
+              [editTargetAreas]="editObj.targetAreas"
 
               (subDistrictsLoaded)="loadSubDistricts($event)" 
               (villagesLoaded)="loadVillages($event)" 
@@ -75,15 +77,17 @@
             </app-target-areas>
             <!-- end target_areas -->
 
-            <h4>3. ผู้รับผิดชอบโครงการ</h4>
-            <h4 class="px-4">3.1 มหาวิทยาลัยราชภัฏสุรินทร์</h4>
+            <h3 class="mt-2">3. ผู้รับผิดชอบโครงการ</h3>
+            <h3 class="px-4">3.1 มหาวิทยาลัยราชภัฏสุรินทร์</h3>
             <!-- ***main_staffs-->
             <app-main-staffs
+              [formType]="formType"
               [main_staffs]="main_staffs" 
               [faculty]="faculty"
               [mainSubFacultyArr]="mainSubFacultyArr" 
               [mainBranchArr]="mainBranchArr" 
               [mainStaffArr]="mainStaffArr" 
+              [editMainStaffs]="editObj.mainStaffs"
 
               (subFacultyLoaded)="loadSubFaculty($event)" 
               (branchLoaded)="loadBranch($event)" 
@@ -95,11 +99,13 @@
 
             <!-- ***sub_staffs -->
             <app-sub-staffs
+              [formType]="formType"
               [sub_staffs]="sub_staffs" 
               [faculty]="faculty"
               [subSubFacultyArr]="subSubFacultyArr" 
               [subBranchArr]="subBranchArr" 
               [subStaffArr]="subStaffArr" 
+              [editSubStaffs]="editObj.subStaffs"
 
               (subFacultyLoaded)="loadSubFaculty($event)" 
               (branchLoaded)="loadBranch($event)" 
@@ -110,154 +116,183 @@
             <!-- end sub_staffs -->
 
             <!-- ***ext_staffs -->
-            <h4 class="px-4">3.2 ชุมชน/ท้องถิ่นที่เข้าร่วมโครงการ</h4>
+            <h3 class="px-4">3.2 ชุมชน/ท้องถิ่นที่เข้าร่วมโครงการ</h3>
             <app-ext-staffs
+              [formType]="formType"
               [ext_staffs]="ext_staffs"
               [prefixName]="prefixName"
               [userGroup]="userGroup"
+              [editExtStaffs]="editObj.extStaffs"
               
               (extStaffRemoved)="removeExtStaff($event)">
             </app-ext-staffs>
             <!-- end ext_staffs -->
 
             <!-- ***project_schemes -->
-            <h4 [className]="formErrors.schemes ? 'color-danger' : ''">4. รูปแบบโครงการ</h4>
+            <h3 [className]="formErrors.schemes ? 'color-danger mt-2' : 'mt-2'">4. รูปแบบโครงการ</h3>
             <app-schemes 
+              [formType]="formType"
               [schemes]="schemes" 
-              [projectSchemes]="projectSchemes" >
+              [projectSchemes]="projectSchemes" 
+              [editSchemes]="editObj.schemes">
             </app-schemes>
             <p class="color-danger" *ngIf="formErrors.schemes">{{ formErrors.schemes }}</p>
             <!-- end project_schemes -->
 
             <!-- ***srru_strategies -->
-            <h4 [className]="formErrors.srru_strategies ? 'color-danger' : ''">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h4>
+            <h3 [className]="formErrors.srru_strategies ? 'color-danger mt-2' : 'mt-2'">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h3>
             <app-srru-strategies 
+              [formType]="formType"
               [srru_strategies]="srru_strategies" 
-              [srruStrategies]="srruStrategies" >
+              [srruStrategies]="srruStrategies" 
+              [editSrruStrategies]="editObj.srruStrategies">
             </app-srru-strategies>
             <p class="color-danger" *ngIf="formErrors.srru_strategies">{{ formErrors.srru_strategies }}</p>
             <!-- end srru_strategies -->
 
             <!-- ***rajabhat_strategies -->
-            <h4 [className]="formErrors.rajabhat_strategies ? 'color-danger' : ''">6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
+            <h3 [className]="formErrors.rajabhat_strategies ? 'color-danger mt-2' : 'mt-2'">6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
             <app-rajabhat-strategies 
+              [formType]="formType"
               [rajabhat_strategies]="rajabhat_strategies" 
-              [rajabhatStrategies]="rajabhatStrategies" >
+              [rajabhatStrategies]="rajabhatStrategies"
+              [editRajabhatStrategies]="editObj.rajabhatStrategies">
             </app-rajabhat-strategies>
             <p class="color-danger" *ngIf="formErrors.rajabhat_strategies">{{ formErrors.rajabhat_strategies }}</p>
             <!-- end rajabhat_strategies -->
 
             <!-- ***national_strategies -->
-            <h4 [className]="formErrors.national_strategies ? 'color-danger' : ''">7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
+            <h3 [className]="formErrors.national_strategies ? 'color-danger mt-2' : 'mt-2'">7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
             <app-national-strategies 
+              [formType]="formType"
               [national_strategies]="national_strategies" 
-              [nationalStrategies]="nationalStrategies" >
+              [nationalStrategies]="nationalStrategies"
+              [editNationalStrategies]="editObj.nationalStrategies">
             </app-national-strategies>
             <p class="color-danger" *ngIf="formErrors.national_strategies">{{ formErrors.national_strategies }}</p>
             <!-- end national_strategies -->
 
             <!-- ***faculty_strategy -->
-            <h4 [className]="formErrors.faculty_strategy ? 'color-danger' : ''">8. สอดคล้องกับยุทธศาสตร์หน่วยงาน คณะ/ศูนย์/สำนัก</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="faculty_strategy" rows="8"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.faculty_strategy">*{{ formErrors.faculty_strategy }}</p>
+            <h3 [className]="formErrors.faculty_strategy ? 'color-danger mt-2' : 'mt-2'">8. สอดคล้องกับยุทธศาสตร์หน่วยงาน คณะ/ศูนย์/สำนัก</h3>
+            <mat-form-field class="w-100">
+              <mat-label>ยุทธศาสตร์หน่วยงาน คณะ/ศูนย์/สำนัก</mat-label>
+              <textarea matInput formControlName="faculty_strategy" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.faculty_strategy">{{ formErrors.faculty_strategy }}</mat-error>
+            </mat-form-field>
             <!-- end faculty_strategy -->
 
             <!-- ***integration_plans -->
-            <!-- <h4>9. แผนการบูรณาการกับพันธกิจอื่น</h4>
-            <div class="form-group">
-              <div class="checkbox">
-                <ng-container formArrayName="integration_plans" *ngFor="let plan of integration_plans.controls;let i = index">
-                  <label>
-                    <input type="checkbox" [formControlName]="i" (change)="integrationPlanCheck(i, $event)"> {{ integrationPlans[i].name_th }}
-                  </label><br>
-                </ng-container>
-              </div>
-            </div> -->
+            <h3 [className]="formErrors.integration_plans ? 'color-danger mt-2' : 'mt-2'">9. แผนการบูรณาการกับพันธกิจอื่น</h3>
+            <app-integration-plans 
+              [formType]="formType"
+              [integration_plans]="integration_plans" 
+              [integrationPlans]="integrationPlans"
+              [editPlans]="editObj.integration_plans">
+            </app-integration-plans>
+            <p class="color-danger" *ngIf="formErrors.integration_plans">{{ formErrors.integration_plans }}</p>
+            <!-- <p class="color-danger"></p> -->
             <!-- end integration_plans -->
           </fieldset>
 
-          <fieldset>
+          <fieldset class="mt-5">
             <legend class="color-primary">ส่วนที่ 2 รายละเอียดโครงการ</legend> 
 
             <!-- ***history -->
-            <h4 [className]="formErrors.history ? 'color-danger' : ''">10. ความเป็นมา/หลักการและเหตุผล</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="history" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.history">*{{ formErrors.history }}</p>
+            <h3 [className]="formErrors.history ? 'color-danger' : ''">10. ความเป็นมา/หลักการและเหตุผล</h3>
+            <mat-form-field class="w-100">
+              <mat-label>ความเป็นมา/หลักการและเหตุผล</mat-label>
+              <textarea matInput formControlName="history" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.history">{{ formErrors.history }}</mat-error>
+            </mat-form-field>
             <!-- end history -->
 
             <!-- ***objectives -->
-            <h4 [className]="formErrors.objectives ? 'color-danger' : ''">11. วัตถุประสงค์โครงการและตัวชี้วัด</h4>
+            <h3 [className]="formErrors.objectives ? 'color-danger mt-2' : 'mt-2'">11. วัตถุประสงค์โครงการและตัวชี้วัด</h3>
             <app-objectives
+              [formType]="formType"
               [objectives]="objectives" 
               [activities]="activities" 
               [outputs]="outputs" 
-              [kpi]="kpi">
+              [kpi]="kpi"
+              [editObjectives]="editObj.objectives"
+              [editActivities]="editObj.activities"
+              [editOutputs]="editObj.outputs"
+              [editKpi]="editObj.kpi">
             </app-objectives>
             <!-- end objectives -->
 
             <!-- ***target_group -->
-            <h4 [className]="formErrors.target_group ? 'color-danger' : ''">12. กลุ่มเป้าหมาย</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="target_group" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.target_group">*{{ formErrors.target_group }}</p>
+            <h3 [className]="formErrors.target_group ? 'color-danger mt-2' : 'mt-2'">12. กลุ่มเป้าหมาย</h3>
+            <mat-form-field class="w-100">
+              <mat-label>กลุ่มเป้าหมาย</mat-label>
+              <textarea matInput formControlName="target_group" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.target_group">{{ formErrors.target_group }}</mat-error>
+            </mat-form-field>
             <!-- end target_group -->
 
             <!-- ***operation_date -->
-            <h4 [className]="formErrors.operation_date ? 'color-danger' : ''">13. วันเวลา และสถานที่ดำเนินการ</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="operation_date" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.operation_date">*{{ formErrors.operation_date }}</p>
+            <h3 [className]="formErrors.operation_date ? 'color-danger mt-2' : 'mt-2'">13. วันเวลา และสถานที่ดำเนินการ</h3>
+            <mat-form-field class="w-100">
+              <mat-label>วันเวลา และสถานที่ดำเนินการ</mat-label>
+              <textarea matInput formControlName="operation_date" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.operation_date">{{ formErrors.operation_date }}</mat-error>
+            </mat-form-field>
             <!-- end operation_date -->
 
             <!-- ***alliances -->
             <app-alliances
-              [alliances]="alliances">
+              [formType]="formType"
+              [alliances]="alliances"
+              [editAlliances]="editObj.alliances">
             </app-alliances>
             <!-- end alliances -->
 
             <!-- ***assessment_method -->
-            <h4 [className]="formErrors.assessment_method ? 'color-danger' : ''">15. วิธีการประเมินผลโครงการ</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="assessment_method" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.assessment_method">*{{ formErrors.assessment_method }}</p>
+            <h3 [className]="formErrors.assessment_method ? 'color-danger mt-2' : 'mt-2'">15. วิธีการประเมินผลโครงการ</h3>
+            <mat-form-field class="w-100">
+              <mat-label>วิธีการประเมินผลโครงการ</mat-label>
+              <textarea matInput formControlName="assessment_method" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.assessment_method">{{ formErrors.assessment_method }}</mat-error>
+            </mat-form-field>
             <!-- end assessment_method -->
 
             <!-- ***benefits -->
-            <h4 [className]="formErrors.benefits ? 'color-danger' : ''">16. ประโยชน์ที่คาดว่าจะได้รับ</h4>
+            <h3 [className]="formErrors.benefits ? 'color-danger mt-2' : 'mt-2'">16. ประโยชน์ที่คาดว่าจะได้รับ</h3>
             <app-benefits 
-              [benefits]="benefits">
+              [formType]="formType"
+              [benefits]="benefits"
+              [editBenefits]="editObj.benefits">
             </app-benefits>
             <p class="color-danger" *ngIf="formErrors.benefits">{{ formErrors.benefits }}</p>
             <!-- end benefits -->
 
             <!-- ***reporting -->
-            <h4 [className]="formErrors.reporting ? 'color-danger' : ''">17. การรายงานผล</h4>
-            <div class="form-group">
-              <textarea class="form-control" formControlName="reporting" rows="15"></textarea>
-            </div>
-            <p class="color-danger px-5" *ngIf="formErrors.reporting">*{{ formErrors.reporting }}</p>
+            <h3 [className]="formErrors.reporting ? 'color-danger mt-2' : 'mt-2'">17. การรายงานผล</h3>
+            <mat-form-field class="w-100">
+              <mat-label>การรายงานผล</mat-label>
+              <textarea matInput formControlName="reporting" rows="3" required></textarea>
+              <mat-error *ngIf="formErrors.reporting">{{ formErrors.reporting }}</mat-error>
+            </mat-form-field>
             <!-- end reporting -->
 
             <!-- ***budget -->
-            <h4 [className]="formErrors.budget ? 'color-danger' : ''">18. งบประมาณ(บาท)</h4>
-            <div class="form-group label-floating mx-5">
-              <label class="control-label" for="budget">งบประมาณ</label>
-              <input type="text" class="form-control" formControlName="budget">
-              <p class="color-danger" *ngIf="formErrors.budget">{{ formErrors.budget }}</p>
-            </div>
+            <h3 [className]="formErrors.budget ? 'color-danger mt-2' : 'mt-2'">18. งบประมาณ(บาท)</h3>
+            <mat-form-field class="w-100">
+              <mat-label>งบประมาณ</mat-label>
+              <input matInput formControlName="budget" required>
+              <mat-error *ngIf="formErrors.budget">{{ formErrors.budget }}</mat-error>
+            </mat-form-field>
             <!-- end budget -->
 
             <!-- ***file -->
-            <h4 [className]="formErrors.file ? 'color-danger' : ''">19. รายละเอียดงบประมาณ</h4>
-            <div class="form-group label-floating mx-5">
-              <input type="file" name="file" multiple>
+            <h3 *ngIf="formType === 'CREATE'" [className]="!file.valid ? 'color-danger mt-2' : 'mt-2'">19. รายละเอียดงบประมาณ</h3>
+            <h3 *ngIf="formType === 'EDIT'" [className]="!project_file ? 'color-danger mt-2' : 'mt-2'">19. รายละเอียดงบประมาณ</h3>
+            <div class="row" *ngIf="formType === 'EDIT'">
+              <p [className]="file_delete ? 'h4 col-8 color-warning' : 'h4 col-8'">{{ file_delete ? 'ไฟล์นี้จะถูกลบ กรุณาแนบไฟล์ใหม่' : project_file }}</p>
+              <a href="javascript:void(0)" class="color-danger col-4" (click)="toggleFileButton()"><p class="h4">{{ file_delete ? 'ยกเลิก' : 'ลบไฟล์' }}</p></a>
+            </div>    
+            <div class="form-group animated fadeInDown" *ngIf="file_delete || formType === 'CREATE'">
+              <input type="file" (change)="onFileChange($event)">
               <div class="input-group">
                 <input type="text" readonly="" class="form-control" placeholder="แนบรายละเอียดงบประมาณ...">
                 <span class="input-group-btn input-group-sm">
@@ -268,12 +303,16 @@
               </div>
               <p class="color-danger" *ngIf="formErrors.file">{{ formErrors.file }}</p>
             </div>
+        
             <!-- end file -->
 
           </fieldset>
-          
+
           <div class="form-group d-flex justify-content-center">
-            <button (click)="submit()" type="submit" class="btn btn-raised btn-primary">เสนอโครงการ</button>
+            <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+              {{ title }}
+              <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+            </button>
           </div>
         </form>
 

@@ -1,3 +1,84 @@
-<p>
-  mylist works!
-</p>
+<div class="my-5 text-center" *ngIf="!projects" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="projects">
+  <div class="card card-primary">
+    <div class="card-body">
+    <h3 class="color-primary text-center">ข้อเสนอโครงการของฉัน</h3>
+      <div class="col-lg-12">
+  
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th style="width: 40%;">โครงการ</th>
+              <th style="width: 10%;">งบ(บาท)</th>
+              <th style="width: 30%;">ผู้เสนอโครงการ</th>
+              <th style="width: 10%;">การอนุมัติ</th>
+              <th style="width: 10%;">จัดการ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let project of projects">
+              <td>
+                <a href="{{ project.approved === 0 ? '#' : '/projects/'+project.id }}" data-toggle="tooltip" [className]="project.approved === 0 ? 'color-warning' : 'color-primary'" data-placement="top" title="งบประมาณ {{ project.budget | number }} บาท">
+                    {{ project.project_name }}
+                </a>
+              </td>
+
+              <td [className]="project.approved === 0 ? 'color-warning' : ''">
+                {{ project.budget | number }}
+              </td>
+
+              <td [className]="project.approved === 0 ? 'color-warning' : ''">
+                <ng-container *ngFor="let user of project.sys_users">
+                  <span *ngIf="user.mis">{{ user.mis.ref_prefix_name.initials + user.mis.stf_fname + ' ' + user.mis.stf_lname }},</span>
+                  <span *ngIf="!user.mis">{{ user.firstname + ' ' + user.lastname }},</span>
+                </ng-container>
+              </td>
+
+              <td>
+                <ng-container *ngIf="project.approved == 1">
+                  <a href="/pdfs/{{ project.id}}"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-success">
+                        <i data-toggle="tooltip" data-placement="top" title="สั่งปริ้น pdf" class="fa fa-print" aria-hidden="true"></i>
+                  </a>
+                  <a *ngIf="project.project_detail_file_path" href="/projects/files/{{ project.project_detail_file_path}}"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-success">
+                    <i data-toggle="tooltip" data-placement="top" title="ดาวน์โหลดไฟล์ แผนการดำเนินงานและรายละเอียดงบประมาณ" class="fa fa-cloud-download" aria-hidden="true"></i>
+                  </a>
+                  <span *ngIf="!project.project_detail_file_path">ไม่พบข้อมูล</span>
+                </ng-container>
+                <ng-container *ngIf="project.approved == 0">
+                  <a href="/pdfs/{{ project.id}}"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-warning">
+                    <i data-toggle="tooltip" data-placement="top" title="สั่งปริ้น pdf" class="fa fa-print" aria-hidden="true"></i>
+                  </a>
+                  <a *ngIf="project.project_detail_file_path" href="/projects/files/{{ project.project_detail_file_path}}"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-warning">
+                    <i data-toggle="tooltip" data-placement="top" title="ดาวน์โหลดไฟล์ แผนการดำเนินงานและรายละเอียดงบประมาณ" class="fa fa-cloud-download" aria-hidden="true"></i>
+                  </a>
+                </ng-container>
+              </td>
+
+              <td>
+                <a *ngIf="project.approved == 1" routerLink="/projects/{{ project.id }}/activity"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-royal">
+                  <i data-toggle="tooltip" data-placement="top" title="รายงานกิจกรรม" class="fa fa-star" aria-hidden="true"></i>
+                </a>
+                <a *ngIf="project.approved == 1" routerLink="/projects/{{ project.id }}/edit"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
+                  <i data-toggle="tooltip" data-placement="top" title="แก้ไข" class="fa fa-cog" aria-hidden="true"></i>
+                </a>
+                <a *ngIf="project.approved == 0" href="javascript:void(0)" (click)="deleteProject(project.id)" class="btn-circle btn-circle-sm btn-circle-raised btn-circle-danger">
+                  <i data-toggle="tooltip" data-placement="top" title="ลบ" class="fa fa-close color-white" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr class="dotted">
+            <p><strong><font color="red">หมายเหตุ</font> <i data-toggle="tooltip" data-placement="top" class="fa fa-warning color-danger" aria-hidden="true"></i></strong> : ในการจัดส่งเอกสารข้อเสนอโครงการผ่านคณะต่าง ๆ มายังสถาบันวิจัยและพัฒนา <br>
+            ให้ผู้เสนอโครงการดำเนินการปริ้นไฟล์ <font color="red"><strong>"pdf"</strong></font> และปริ้นไฟล์ <font color="red"><strong>"แผนการดำเนินงานและรายละเอียดงบประมาณ"</strong></font> แนบมาด้วย</p>
+  
+      </div>
+    </div>
+  </div>
+  </div>

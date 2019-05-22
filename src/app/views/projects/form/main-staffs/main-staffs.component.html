@@ -1,14 +1,15 @@
 <div class="d-flex">
   <span class="flex-grow-1 px-5">
-    <h4 [className]="main_staffs.invalid && (main_staffs.dirty || main_staffs.touched) ? 'color-danger' : ''">3.1.1 ผู้รับผิดชอบหลัก</h4>
+    <h3 [className]="main_staffs.invalid && (main_staffs.dirty || main_staffs.touched) ? 'color-danger' : ''">3.1.1 ผู้รับผิดชอบหลัก</h3>
   </span>              
-  <a href="javascript:void(0)" class="btn btn-sm btn-raised btn-success" (click)="addStaff($event)">
+  <a href="javascript:void(0)" class="btn btn-xs btn-raised btn-success" (click)="addStaff($event)">
     <i class="fa fa-plus"></i>
       เพิ่มผู้รับผิดชอบหลัก       
   </a> 
 </div>
 <div class="mx-5 animated fadeInDown" *ngFor="let staff of main_staffs.controls; let i = index">
-  <app-main-staff 
+  <app-main-staff
+    [formType]="formType" 
     [staff]="staff" 
     [index]="i" 
     [faculty]="faculty"

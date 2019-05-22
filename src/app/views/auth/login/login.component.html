@@ -1,0 +1,45 @@
+<div class="mw-500 mx-auto">
+  <div class="card color-dark animated zoomInDown animation-delay-5">
+    <div class="card-body">
+      <h1 class="color-primary">Login</h1>
+      <form [formGroup]="form">
+        <fieldset>
+          <div class="form-group label-floating">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="zmdi zmdi-account"></i>
+              </span>
+              <label class="control-label" for="ms-form-user">Username</label>
+              <input type="text" id="ms-form-user" class="form-control" formControlName="username"> </div>
+          </div>
+          <div class="form-group label-floating">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="zmdi zmdi-lock"></i>
+              </span>
+              <label class="control-label" for="ms-form-pass">Password</label>
+              <input type="password" id="ms-form-pass" class="form-control" formControlName="password"> </div>
+          </div>
+          <p class="color-danger" *ngIf="formError">*{{ formError }}</p>
+          <div class="row">
+            <div class="col-md-12">
+              <button (click)="submit($event)" mat-raised-button color="primary" style="width: 100%;" [disabled]="isSubmit">
+                Login
+                <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <div class="text-center">
+        <h3 class="color-dark">Login with</h3>
+        <a href="javascript:void(0)" class="wave-effect-light btn btn-raised btn-facebook">
+          <i class="zmdi zmdi-facebook"></i> Facebook</a>
+        <a href="javascript:void(0)" class="wave-effect-light btn btn-raised btn-twitter">
+          <i class="zmdi zmdi-twitter"></i> Twitter</a>
+        <a href="javascript:void(0)" class="wave-effect-light btn btn-raised btn-google">
+          <i class="zmdi zmdi-google"></i> Google</a>
+      </div>
+    </div>
+  </div>
+</div>
