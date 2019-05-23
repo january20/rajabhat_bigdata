@@ -115,10 +115,7 @@
                 <td>
                   <a href="/projects/{{ project?.id }}" class="ms-icon ms-icon-sm ms-icon-circle ms-icon-inverse color-info">
                     <i data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด" class="fa fa-check color-success" aria-hidden="true"></i>
-                  </a>
-                  <a *ngIf="currentUser.info.role === 8" href="/projects/assessment/create?project_id={{ project?.id }}" class="ms-icon ms-icon-sm ms-icon-circle ms-icon-inverse color-warning">
-                    <i data-toggle="tooltip" data-placement="top" title="ประเมิณ" class="fa fa-file-text color-warning" aria-hidden="true"></i>
-                  </a>                      
+                  </a>                   
                 </td>
               </tr>
             </tbody>

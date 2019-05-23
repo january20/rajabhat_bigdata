@@ -42,7 +42,7 @@
             <td>
               <ol>
                 <ng-container *ngFor="let area of project?.target_area">
-                    <li *ngIf="!area.village_id">{{ isNumber(area.target_area) ? 'หมู่ที่ ' + area.target_area : area.target_area + area.village.village_name_th + ' ตำบล' + area.village.sub_district.sub_district_name_th + ' อำเภอ' + area.village.district.district_name_th + ' จังหวัด' + area.village.province.province_name_th }}</li>
+                    <li *ngIf="!area.village_id">{{ isNumber(area.target_area) ? 'หมู่ที่ ' + area.target_area : area.target_area + ' ตำบล' + area.sub_district.sub_district_name_th + ' อำเภอ' + area.sub_district.district.district_name_th + ' จังหวัด' + area.sub_district.province.province_name_th }}</li>
                     <li *ngIf="area.village_id">{{ isNumber(area.target_area) && area.target_area ? 'หมู่ที่ ' + area.target_area + ' ' + area.village.village_name_th + ' ตำบล' + area.village.sub_district.sub_district_name_th : area.target_area ? area.target_area + ' ตำบล' + area.village.sub_district.sub_district_name_th : area.village.village_name_th + ' ตำบล' + area.village.sub_district.sub_district_name_th }}</li>
                 </ng-container>
               </ol>

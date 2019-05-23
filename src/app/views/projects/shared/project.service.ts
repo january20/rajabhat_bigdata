@@ -35,6 +35,10 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/projects/${id}/edit`);
   }
 
+  getProjectFormData() {
+    return this.http.get(`${environment.api_url}/projects/create`);
+  }
+
   getResult() {
     return this.http.get(`${environment.api_url}/projects/result`);
   }
@@ -67,16 +71,16 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/mis?t=staff&program_id=${program_id}`);
   }
 
-  getMiscData() {
-    return this.http.get(`${environment.api_url}/ref/misc?t=project_create_data`);
-  }
-
   getCreateActivity(id) {
     return this.http.get(`${environment.api_url}/projects/activity/create?project_id=${id}`);
   }
 
   getAssessmentProjects() {
-    return this.http.get(`${environment.api_url}/projects`);
+    return this.http.get(`${environment.api_url}/projects/assessment/project_list`);
+  }
+
+  getCreateAssessment(id) {
+    return this.http.get(`${environment.api_url}/projects/assessment?project_id=${id}`);
   }
 
 }

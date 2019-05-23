@@ -73,7 +73,7 @@ export class FormComponent extends AbstractForm implements OnInit {
   }
 
   ngOnInit() {
-    this.loadMisc();
+    this.loadProjectFormData();
     this.buildForm();
 
     if(this.formType == 'EDIT') {
@@ -174,8 +174,8 @@ export class FormComponent extends AbstractForm implements OnInit {
     }
   }
 
-  loadMisc() {
-    this.projectService.getMiscData().subscribe((data: any) => {
+  loadProjectFormData() {
+    this.projectService.getProjectFormData().subscribe((data: any) => {
       this.districts = data.districts;
       this.prefixName = data.prefix;
       this.userGroup = data.user_groups;

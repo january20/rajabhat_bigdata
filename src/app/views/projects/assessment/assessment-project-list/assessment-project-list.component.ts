@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../../shared/project.service';
 
 @Component({
   selector: 'app-assessment-project-list',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssessmentProjectListComponent implements OnInit {
 
-  constructor() { }
+  projects: Array<Object>;
+  strategy: Array<Object>;
+
+  constructor(
+    private projectService: ProjectService
+  ) { }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
+    this.projectService.getAssessmentProjects().subscribe((data: any) => {
+      this.projects = data.projects;
+      this.strategy = data.strategy;
+    });
   }
 
 }

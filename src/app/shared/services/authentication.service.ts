@@ -18,6 +18,7 @@ export class AuthenticationService {
   }
 
   public get currentUserValue(): any {
+    this.currentUserSubject.next(JSON.parse(localStorage.getItem('currentUser')));
     return this.currentUserSubject.value;
   }
 
@@ -39,8 +40,8 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 
-  checkToken() {
-    return this.http.get<any>(`${environment.api_url}/check_token`);
-  }
+  // checkToken() {
+  //   return this.http.get<any>(`${environment.api_url}/check_token`);
+  // }
 
 }

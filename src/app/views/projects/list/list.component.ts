@@ -42,10 +42,7 @@ export class ListComponent implements OnInit {
   }
 
   loadUser() {
-    this.authService.checkToken().subscribe(
-      res => this.currentUser = this.authService.currentUserValue,
-      error => this.authService.logout()
-    );
+    this.currentUser = this.authService.currentUserValue;
   }
 
   changePage(page) {
