@@ -27,7 +27,6 @@ export class ShowComponent implements OnInit {
   }
 
   isNumber(num) {
-    console.log(num, 'is ', !isNaN(num));
     return !isNaN(num);
   }
 

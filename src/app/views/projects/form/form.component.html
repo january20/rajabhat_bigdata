@@ -1,4 +1,11 @@
-<div class="ms-site-container mt-5">
+<div class="my-5 text-center" *ngIf="!formReady" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" [style.display]="formReady ? 'block' : 'none'">
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
@@ -139,16 +146,16 @@
             <p class="color-danger" *ngIf="formErrors.schemes">{{ formErrors.schemes }}</p>
             <!-- end project_schemes -->
 
-            <!-- ***srru_strategies -->
-            <h3 [className]="formErrors.srru_strategies ? 'color-danger mt-2' : 'mt-2'">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h3>
-            <app-srru-strategies 
-              [formType]="formType"
-              [srru_strategies]="srru_strategies" 
-              [srruStrategies]="srruStrategies" 
-              [editSrruStrategies]="editObj.srruStrategies">
-            </app-srru-strategies>
-            <p class="color-danger" *ngIf="formErrors.srru_strategies">{{ formErrors.srru_strategies }}</p>
-            <!-- end srru_strategies -->
+            <!-- ***srru_strategy -->
+            <h3 [className]="formErrors.srru_strategy ? 'color-danger mt-2' : 'mt-2'">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h3>
+            <mat-radio-group class="d-flex flex-column" formControlName="srru_strategy">
+              <mat-radio-button color="primary" *ngFor="let strategy of srruStrategies" [value]="strategy.id">
+                {{ strategy.details }}
+              </mat-radio-button>
+              <mat-error *ngIf="formErrors.srru_strategy">{{ formErrors.srru_strategy }}</mat-error>
+            </mat-radio-group>
+            <!-- <p class="color-danger" *ngIf="formErrors.srru_strategies">{{ formErrors.srru_strategies }}</p> -->
+            <!-- end srru_strategy -->
 
             <!-- ***rajabhat_strategies -->
             <h3 [className]="formErrors.rajabhat_strategies ? 'color-danger mt-2' : 'mt-2'">6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>

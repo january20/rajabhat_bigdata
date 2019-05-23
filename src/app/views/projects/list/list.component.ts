@@ -3,7 +3,7 @@ import { ProjectService } from '../shared/project.service';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -16,16 +16,19 @@ export class ListComponent implements OnInit {
   result: any = null;
   projects: any = null;
   isChange = false;
+  currentUser;
 
   private pchart: am4charts.PieChart;
   private bchart: am4charts.XYChart;
 
   constructor(
     private projectService: ProjectService,
+    private authService: AuthenticationService,
     private zone: NgZone
   ) { }
 
   ngOnInit() {
+    this.loadUser();
     this.loadData();
   }
 
@@ -36,6 +39,13 @@ export class ListComponent implements OnInit {
       this.createBudgetChart(data.fac_budget);
     });
     this.projectService.getProjectList(1).subscribe(data => this.projects = data);
+  }
+
+  loadUser() {
+    this.authService.checkToken().subscribe(
+      res => this.currentUser = this.authService.currentUserValue,
+      error => this.authService.logout()
+    );
   }
 
   changePage(page) {

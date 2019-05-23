@@ -79,7 +79,7 @@
     <h3 class="color-dark text-center">
       โครงการที่ได้รับอนุมัติ
     </h3>
-    <div class="card card-primary">
+    <div class="card card-primary" *ngIf="currentUser">
       <div class="card-body">
         <div class="col-lg-12">
           <div class="relative-center text-center" *ngIf="isChange">
@@ -99,7 +99,7 @@
             <tbody>
               <tr *ngFor="let project of projects?.data">
                 <td>
-                  <a  href="/projects/{{ project?.id }}"  data-toggle="tooltip" data-placement="top"   class="color-info" title="">
+                  <a  routerLink="/projects/{{ project?.id }}"  data-toggle="tooltip" data-placement="top"   class="color-info" title="">
                     {{ project?.project_name }}
                   </a>
                 </td>
@@ -116,7 +116,7 @@
                   <a href="/projects/{{ project?.id }}" class="ms-icon ms-icon-sm ms-icon-circle ms-icon-inverse color-info">
                     <i data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด" class="fa fa-check color-success" aria-hidden="true"></i>
                   </a>
-                  <a href="/projects/assessment/create?project_id={{ project?.id }}" class="ms-icon ms-icon-sm ms-icon-circle ms-icon-inverse color-warning">
+                  <a *ngIf="currentUser.info.role === 8" href="/projects/assessment/create?project_id={{ project?.id }}" class="ms-icon ms-icon-sm ms-icon-circle ms-icon-inverse color-warning">
                     <i data-toggle="tooltip" data-placement="top" title="ประเมิณ" class="fa fa-file-text color-warning" aria-hidden="true"></i>
                   </a>                      
                 </td>

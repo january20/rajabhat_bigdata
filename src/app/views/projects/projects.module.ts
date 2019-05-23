@@ -42,9 +42,12 @@ import { CulturesComponent } from './form/integration-plans/cultures/cultures.co
 import { CultureComponent } from './form/integration-plans/cultures/culture/culture.component';
 import { StudentsComponent } from './form/integration-plans/students/students.component';
 import { StudentComponent } from './form/integration-plans/students/student/student.component';
+import { AssessmentFormComponent } from './assessment/assessment-form/assessment-form.component';
+import { AssessmentResultComponent } from './assessment/assessment-result/assessment-result.component';
+import { AssessmentProjectListComponent } from './assessment/assessment-project-list/assessment-project-list.component';
 
 @NgModule({
-  declarations: [ProjectsComponent, ListComponent, ShowComponent, FormComponent, ActivityComponent, MylistComponent, TargetAreasComponent, TargetAreaComponent, MainStaffsComponent, MainStaffComponent, SubStaffsComponent, SubStaffComponent, ExtStaffsComponent, ExtStaffComponent, SchemesComponent, SrruStrategiesComponent, RajabhatStrategiesComponent, NationalStrategiesComponent, ObjectivesComponent, AlliancesComponent, BenefitsComponent, ObjectiveComponent, OutputComponent, KpiComponent, OactivityComponent, AllianceComponent, BenefitComponent, IntegrationPlansComponent, SubjectsComponent, SubjectComponent, ResearchsComponent, ResearchComponent, CulturesComponent, CultureComponent, StudentsComponent, StudentComponent],
+  declarations: [ProjectsComponent, ListComponent, ShowComponent, FormComponent, ActivityComponent, MylistComponent, TargetAreasComponent, TargetAreaComponent, MainStaffsComponent, MainStaffComponent, SubStaffsComponent, SubStaffComponent, ExtStaffsComponent, ExtStaffComponent, SchemesComponent, SrruStrategiesComponent, RajabhatStrategiesComponent, NationalStrategiesComponent, ObjectivesComponent, AlliancesComponent, BenefitsComponent, ObjectiveComponent, OutputComponent, KpiComponent, OactivityComponent, AllianceComponent, BenefitComponent, IntegrationPlansComponent, SubjectsComponent, SubjectComponent, ResearchsComponent, ResearchComponent, CulturesComponent, CultureComponent, StudentsComponent, StudentComponent, AssessmentFormComponent, AssessmentResultComponent, AssessmentProjectListComponent],
   imports: [
     CommonModule,
     ProjectsRoutingModule,

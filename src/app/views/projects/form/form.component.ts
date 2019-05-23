@@ -17,6 +17,7 @@ export class FormComponent extends AbstractForm implements OnInit {
   form: FormGroup;
   formErrors = this.createFormErrors();
   validationMessages = this.createValidationMessages();
+  formReady = false;
   // for target_areas
   districts: any;
   subDistrictArr = [];
@@ -86,7 +87,9 @@ export class FormComponent extends AbstractForm implements OnInit {
     const id = this.route.snapshot.params.id;
 
     this.projectService.getEditProject(id).subscribe((data: any) => {
+      this.formReady = true;
       this.form.get('project_name').setValue(data.project_name);
+      this.form.get('srru_strategy_id').setValue(data.srru_strategy_id);
       this.form.get('faculty_strategy').setValue(data.faculty_strategy);
       this.form.get('history').setValue(data.history);
       this.form.get('target_group').setValue(data.target_group);
@@ -100,7 +103,7 @@ export class FormComponent extends AbstractForm implements OnInit {
       this.editObj.subStaffs = data.sub_staffs;
       this.editObj.extStaffs = data.ext_staffs;
       this.editObj.schemes = data.schemes;
-      this.editObj.srruStrategies = data.srru_strategies;
+      // this.editObj.srruStrategies = data.srru_strategies;
       this.editObj.rajabhatStrategies = data.rajabhat_strategies;
       this.editObj.nationalStrategies = data.national_strategies;
       this.editObj.integration_plans = data.integration_plans;
@@ -112,6 +115,8 @@ export class FormComponent extends AbstractForm implements OnInit {
       this.editObj.benefits = data.benefits;
 
       this.project_file = data.project_detail_file_path;
+
+      
     });
   }
 
@@ -180,6 +185,8 @@ export class FormComponent extends AbstractForm implements OnInit {
       this.nationalStrategies = data.national_strategies;
       this.rajabhatStrategies = data.rajabhat_strategies;
       this.integrationPlans = data.integration_plans;
+
+      if(this.formType === 'CREATE') this.formReady = true;
     });
   }
 
@@ -223,13 +230,13 @@ export class FormComponent extends AbstractForm implements OnInit {
 
   // ***Validation Errors //
   createFormErrors() {
-    return { project_name: '', schemes: '', srru_strategies: '', rajabhat_strategies: '', national_strategies: '', faculty_strategy: '', integration_plans: '', history: '', target_group: '', operation_date: '', assessment_method: '', benefits: '', reporting: '', budget: '', file: '' }
+    return { project_name: '', schemes: '', srru_strategy: '', rajabhat_strategies: '', national_strategies: '', faculty_strategy: '', integration_plans: '', history: '', target_group: '', operation_date: '', assessment_method: '', benefits: '', reporting: '', budget: '', file: '' }
   }
   createValidationMessages() {
     return {
       project_name: { required: '*กรุณาระบุชื่อโครงการ' },
       schemes: { required: '*กรุณาเลือกรูปแบบโครงการ' },
-      srru_strategies: { required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏสุรินทร์' },
+      srru_strategy: { required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏสุรินทร์' },
       rajabhat_strategies: { required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี' },
       national_strategies: { required: '*กรุณาเลือกยุทธศาสตร์ชาติ ระยะ 20 ปี' },
       faculty_strategy: { required: '*กรุณาระบุยุทธศาสตร์คณะ' },
@@ -255,7 +262,8 @@ export class FormComponent extends AbstractForm implements OnInit {
       sub_staffs: this.formBuilder.array([]),
       ext_staffs: this.formBuilder.array([]),
       schemes: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
-      srru_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
+      // srru_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
+      srru_strategy: ['', Validators.required],
       rajabhat_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
       national_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
       faculty_strategy: ['', Validators.required],
@@ -348,7 +356,7 @@ export class FormComponent extends AbstractForm implements OnInit {
   get sub_staffs() { return this.form.get('sub_staffs') as FormArray; }
   get ext_staffs() { return this.form.get('ext_staffs') as FormArray; }
   get schemes() { return this.form.get('schemes') as FormArray; }
-  get srru_strategies() { return this.form.get('srru_strategies') as FormArray; }
+  // get srru_strategies() { return this.form.get('srru_strategies') as FormArray; }
   get rajabhat_strategies() { return this.form.get('rajabhat_strategies') as FormArray; }
   get national_strategies() { return this.form.get('national_strategies') as FormArray; }
   get objectives() { return this.form.get('objectives') as FormArray; }
