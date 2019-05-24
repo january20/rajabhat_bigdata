@@ -1,4 +1,4 @@
-<!-- <div class="my-5 text-center" *ngIf="!project" style="height: 100vh;">
+<div class="my-5 text-center" *ngIf="!project" style="height: 100vh;">
   <div class="absolute-center">
     <mat-spinner class="mx-auto"></mat-spinner>
     กำลังโหลดข้อมูล.
@@ -10,12 +10,12 @@
     <div class="container">
       <div class="text-center">
         <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">ประเมินโครงการ</h1>
-        <p class="lead lead-lg color-white text-center center-block mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7"><a href="/projects/{{ project.id }}" class="color-white" target="blank"><i class="fa fa-external-link-square" aria-hidden="true"></i> {{ project.project_name }}</a></p>
+        <p class="lead lead-lg color-white text-center center-block mx-auto mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7"><a href="/projects/{{ project.id }}" class="color-white" target="blank"><i class="fa fa-external-link-square" aria-hidden="true"></i> {{ project.project_name }}</a></p>
       </div>
     </div>      
   </div>
 
-  <div class="container">
+  <div class="container" [formGroup]="form">
     <input type="hidden" name="project_id" value="{{ project.id }}">
     <div class="d-flex flex-column">
       <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
@@ -25,151 +25,128 @@
         <table class="table table-bordered">
           <thead>
             <tr class="color-primary">
-              <th class="text-center" style="width: 30%;">วัตถุประสงค์</th>
-              <th class="text-center" style="width: 20%;">ประเมิน</th>
+              <th class="text-center" style="width: 40%;">วัตถุประสงค์</th>
+              <th class="text-center" style="width: 10%;">ประเมิน</th>
               <th class="text-center" style="width: 50%;">ข้อเสนอแนะ</th>
             </tr>
-
-            <tbody>
-              @foreach(project.objectives as $idx=>$objective)
-                <tr>                
-                  <td>
-                    {{ ($idx+1).'. '.$objective->objective }}                    
-                  </td>
-                  <td>
-                    <div class="form-group m-0 text-center">
-                      <div class="radio">
-                        <label><input type="radio" name="objective[{{ $idx }}][status]" value="1"></label>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group m-0 text-center">
-                      <div class="radio">
-                        <label><input type="radio" name="objective[{{ $idx }}][status]" value="0"></label>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group m-0">
-                      <textarea class="form-control" rows="5" name="objective[{{ $idx }}][suggestion]"></textarea>
-                    </div>
-                  </td>                
-                </tr>
-              @endforeach
           </thead>
+          <tbody formArrayName="objectives">
+            <tr *ngFor="let objective of project.objectives; let i = index" [formGroupName]="i">                
+              <td>
+                {{ objective.objective }}
+              </td>
+
+              <td>
+                <mat-radio-group class="d-flex flex-column" formControlName="status">
+                  <mat-radio-button color="primary" value="1">บรรลุ</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่บรรลุ</mat-radio-button>
+                </mat-radio-group>
+              </td>
+
+              <td>
+                <div class="form-group m-0">
+                  <mat-form-field class="w-100">
+                    <mat-label>ข้อเสนอแนะ</mat-label>
+                    <textarea matInput rows="1" formControlName="note"></textarea>
+                  </mat-form-field>
+                </div>
+              </td>                
+            </tr>
+          </tbody>
+
           <thead>
             <tr class="color-primary">
-              <th class="text-center" style="width: 30%;">กิจกรรม</th>
-              <th class="text-center" style="width: 10%;">ปฏิบัติ</th>
-              <th class="text-center" style="width: 10%;">ไม่ปฏิบัติ</th>
+              <th class="text-center" style="width: 40%;">กิจกรรม</th>
+              <th class="text-center" style="width: 10%;">ประเมิน</th>
               <th class="text-center" style="width: 50%;">ข้อเสนอแนะ</th>
             </tr>
-
-            <tbody>
-              @foreach(project.activities as $idx=>$activity)
-                <input type="hidden" name="activity[{{ $idx }}][id]" value="{{ $activity->id }}">
-                <tr>                
-                  <td>
-                    {!! ($idx+1).'. '.$activity->activity !!}                    
-                  </td>
-                  <td>
-                    <div class="form-group m-0 text-center">
-                      <div class="radio">
-                        <label><input type="radio" name="activity[{{ $idx }}][status]" value="1"></label>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group m-0 text-center">
-                      <div class="radio">
-                        <label><input type="radio" name="activity[{{ $idx }}][status]" value="0"></label>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group m-0">
-                      <textarea class="form-control" rows="5" name="activity[{{ $idx }}][suggestion]"></textarea>
-                    </div>
-                  </td>                
-                </tr>
-              @endforeach
           </thead>
+          <tbody formArrayName="activities">
+            <tr *ngFor="let activity of project.activities; let i = index" [formGroupName]="i">                
+              <td>
+                {{ activity.activity }}
+              </td>
+
+              <td>
+                <mat-radio-group class="d-flex flex-column" formControlName="status">
+                  <mat-radio-button color="primary" value="1">บรรลุ</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่บรรลุ</mat-radio-button>
+                </mat-radio-group>
+              </td>
+
+              <td>
+                <div class="form-group m-0">
+                  <mat-form-field class="w-100">
+                    <mat-label>ข้อเสนอแนะ</mat-label>
+                    <textarea matInput rows="1" formControlName="note"></textarea>
+                  </mat-form-field>
+                </div>
+              </td>                
+            </tr>
+          </tbody>
+
           <thead>
             <tr class="color-primary">
-              <th class="text-center" style="width: 30%;">ผลลัพธ์</th>
-              <th class="text-center" style="width: 10%;">บรรลุ</th>
-              <th class="text-center" style="width: 10%;">ไม่บรรลุ</th>
+              <th class="text-center" style="width: 40%;">ผลลัพธ์</th>
+              <th class="text-center" style="width: 10%;">ประเมิน</th>
               <th class="text-center" style="width: 50%;">ข้อเสนอแนะ</th>
             </tr>
-
-            <tbody>
-              @foreach(project.outputs as $idx=>$output)
-                <input type="hidden" name="output[{{ $idx }}][id]" value="{{ $output->id }}">
-                <tr>                
-                  <td>
-                    {!! ($idx+1).'. '.$output->output !!}                    
-                  </td>
-                  <td>
-                    <div class="form-group m-0 text-center">
-                      <div class="radio">
-                        <label><input type="radio" name="output[{{ $idx }}][status]" value="1"></label>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group m-0 text-center">
-                      <div class="radio">
-                        <label><input type="radio" name="output[{{ $idx }}][status]" value="0"></label>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group m-0">
-                      <textarea class="form-control" rows="5" name="output[{{ $idx }}][suggestion]"></textarea>
-                    </div>
-                  </td>                
-                </tr>
-              @endforeach
           </thead>
+          <tbody formArrayName="outputs">
+            <tr *ngFor="let output of project.outputs; let i = index" [formGroupName]="i">                
+              <td>
+                {{ output.output }}
+              </td>
+
+              <td>
+                <mat-radio-group class="d-flex flex-column" formControlName="status">
+                  <mat-radio-button color="primary" value="1">บรรลุ</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่บรรลุ</mat-radio-button>
+                </mat-radio-group>
+              </td>
+
+              <td>
+                <div class="form-group m-0">
+                  <mat-form-field class="w-100">
+                    <mat-label>ข้อเสนอแนะ</mat-label>
+                    <textarea matInput rows="1" formControlName="note"></textarea>
+                  </mat-form-field>
+                </div>
+              </td>                
+            </tr>
+          </tbody>
+
           <thead>
             <tr class="color-primary">
-              <th class="text-center" style="width: 30%;">ตัวชี้วัด</th>
-              <th class="text-center" style="width: 10%;">สอดคล้องตามวัตถุประสงค์</th>
-              <th class="text-center" style="width: 10%;">ไม่สอดคล้องตามวัตถุประสงค์</th>
+              <th class="text-center" style="width: 40%;">ตัวชี้วัด</th>
+              <th class="text-center" style="width: 10%;">ประเมิน</th>
               <th class="text-center" style="width: 50%;">ข้อเสนอแนะ</th>
             </tr>
-
-            <tbody>
-              @foreach(project.kpi as $idx=>$k)
-                <input type="hidden" name="kpi[{{ $idx }}][id]" value="{{ $k->id }}">
-                <tr>                
-                  <td>
-                    {!! ($idx+1).'. '.$k->kpi !!}                    
-                  </td>
-                  <td>
-                    <div class="form-group m-0 text-center">
-                      <div class="radio">
-                        <label><input type="radio" name="kpi[{{ $idx }}][status]" value="1"></label>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group m-0 text-center">
-                      <div class="radio">
-                        <label><input type="radio" name="kpi[{{ $idx }}][status]" value="0"></label>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group m-0">
-                      <textarea class="form-control" rows="5" name="kpi[{{ $idx }}][suggestion]"></textarea>
-                    </div>
-                  </td>                
-                </tr>
-              @endforeach
           </thead>
-        </table>        
+          <tbody formArrayName="kpi">
+            <tr *ngFor="let k of project.kpi; let i = index" [formGroupName]="i">                
+              <td>
+                {{ k.kpi }}
+              </td>
+
+              <td>
+                <mat-radio-group class="d-flex flex-column" formControlName="status">
+                  <mat-radio-button color="primary" value="1">บรรลุ</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่บรรลุ</mat-radio-button>
+                </mat-radio-group>
+              </td>
+
+              <td>
+                <div class="form-group m-0">
+                  <mat-form-field class="w-100">
+                    <mat-label>ข้อเสนอแนะ</mat-label>
+                    <textarea matInput rows="1" formControlName="note"></textarea>
+                  </mat-form-field>
+                </div>
+              </td>                
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -178,28 +155,27 @@
         <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ตอนที่ 2: ผลปรากฏตามสภาพจริงในระหว่างทำการประเมิน (จากการสังเกต/สัมภาษณ์)</h3>
       </div>
       <div class="card-body">
-        <h4>2.1 รูปแบบ/วิธีการจัดกิจกรรมหลัก</h4>
-        <div class="form-group m-0">
-          <textarea class="form-control" rows="5" name="result_method" required></textarea>
-        </div>
-        <h4>2.2 สภาพบรรยากาศในการดำเนินกิจกรรมและการมีส่วนร่วมของกลุ่มเป้าหมาย</h4>
-        <div class="form-group m-0">
-          <textarea class="form-control" rows="5" name="result_vibe" required></textarea>
-        </div>
-        <h4>2.3 แนบรูปภาพ/ไฟล์ (เพิ่มเติม)</h4>
-        <div class="form-group m-0">
-          <div class="form-group">
-            <input type="file" name="afiles[]" multiple>
-            <div class="input-group">
-              <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
-              <span class="input-group-btn input-group-sm">
-                <button type="button" class="btn btn-fab btn-fab-mini">
-                  <i class="material-icons">attach_file</i>
-                </button>
-              </span>
-            </div>
-          </div>
-        </div>          
+        <h3 [className]="formErrors.result_method ? 'color-danger mt-2' : 'mt-2'">2.1 รูปแบบ/วิธีการจัดกิจกรรมหลัก</h3>
+        <mat-form-field class="w-100">
+          <mat-label>...</mat-label>
+          <textarea matInput formControlName="result_method" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.result_method">{{ formErrors.result_method }}</mat-error>
+        </mat-form-field>
+
+        <h3 [className]="formErrors.result_vibe ? 'color-danger mt-2' : 'mt-2'">2.2 สภาพบรรยากาศในการดำเนินกิจกรรมและการมีส่วนร่วมของกลุ่มเป้าหมาย</h3>
+        <mat-form-field class="w-100">
+          <mat-label>...</mat-label>
+          <textarea matInput formControlName="result_vibe" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.result_vibe">{{ formErrors.result_vibe }}</mat-error>
+        </mat-form-field>
+
+        <h3>2.3 แนบรูปภาพ/ไฟล์ (เพิ่มเติม)</h3>
+        <ngx-dropzone 
+          [preserveFiles]="false"
+          [showPreviews]="true"
+          [label]="'เลือกรูปภาพ/ไฟล์'"
+          (filesAdded)="addFiles($event)" >
+        </ngx-dropzone>       
       </div>
     </div>
 
@@ -208,14 +184,19 @@
         <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ตอนที่ 3: ปัญหาอุปสรรค แนวทางการปรับปรุงพัฒนาโครงการ</h3>
       </div>   
       <div class="card-body">
-        <h4>3.1 ปัญหาและอุปสรรค</h4>
-        <div class="form-group m-0">
-          <textarea class="form-control" rows="5" name="problem" required></textarea>
-        </div>
-        <h4>3.2 แนวทางในการแก้ไข</h4>
-        <div class="form-group m-0">
-          <textarea class="form-control" rows="5" name="problem_solving" required></textarea>
-        </div>
+        <h3 [className]="formErrors.problem ? 'color-danger mt-2' : 'mt-2'">3.1 ปัญหาและอุปสรรค</h3>
+        <mat-form-field class="w-100">
+          <mat-label>...</mat-label>
+          <textarea matInput formControlName="problem" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.problem">{{ formErrors.problem }}</mat-error>
+        </mat-form-field>
+
+        <h3 [className]="formErrors.problem_solving ? 'color-danger mt-2' : 'mt-2'">3.2 แนวทางในการแก้ไข</h3>
+        <mat-form-field class="w-100">
+          <mat-label>...</mat-label>
+          <textarea matInput formControlName="problem_solving" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.problem_solving">{{ formErrors.problem_solving }}</mat-error>
+        </mat-form-field>
       </div>     
     </div>
 
@@ -224,21 +205,27 @@
         <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ตอนที่ 4: ข้อเสนอแนะในการพัฒนากิจกรรม/งาน/โครงการ หรือการต่อยอดผลงาน ครั้งต่อไป</h3>
       </div>
       <div class="card-body">
-        <h4>4.1 จุดแข็งของโครงการ</h4>
-        <div class="form-group m-0">
-          <textarea class="form-control" rows="5" name="good_point" required></textarea>
-        </div>
-        <h4>4.2 จุดอ่อนของโครงการและโอกาสการพัฒนา</h4>
-        <div class="form-group m-0">
-          <textarea class="form-control" rows="5" name="weak_point" required></textarea>
-        </div>
+        <h3 [className]="formErrors.good_point ? 'color-danger mt-2' : 'mt-2'">4.1 จุดแข็งของโครงการ</h3>
+        <mat-form-field class="w-100">
+          <mat-label>...</mat-label>
+          <textarea matInput formControlName="good_point" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.good_point">{{ formErrors.good_point }}</mat-error>
+        </mat-form-field>
+
+        <h3 [className]="formErrors.weak_point ? 'color-danger mt-2' : 'mt-2'">3.2 จุดอ่อนของโครงการและโอกาสการพัฒนา</h3>
+        <mat-form-field class="w-100">
+          <mat-label>...</mat-label>
+          <textarea matInput formControlName="weak_point" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.weak_point">{{ formErrors.weak_point }}</mat-error>
+        </mat-form-field>
       </div>
     </div>
 
-    <div class="form-group row animated fadeInUp animation-delay-7">
-      <div class="col-lg-12 text-center">
-        <button type="submit" class="btn btn-raised btn-primary">ส่งแบบประเมิน</button>
-      </div>
+    <div class="form-group d-flex justify-content-center">
+      <button (click)="submit()" mat-raised-button color="primary">
+        ส่งแบบประเมิน
+        <!-- <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon> -->
+      </button>
     </div>
   </div>
-</div> -->
+</div>

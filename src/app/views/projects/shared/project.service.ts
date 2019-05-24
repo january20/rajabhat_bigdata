@@ -80,7 +80,7 @@ export class ProjectService {
   }
 
   getCreateAssessment(id) {
-    return this.http.get(`${environment.api_url}/projects/assessment?project_id=${id}`);
+    return this.http.get(`${environment.api_url}/projects/assessment/create?project_id=${id}`);
   }
 
 }
