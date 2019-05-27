@@ -15,6 +15,14 @@ export class ProjectService {
     return this.http.post(`${environment.api_url}/projects`, formData);
   }
 
+  storeProjectActivity(formData) {
+    return this.http.post(`${environment.api_url}/projects/activity`, formData);
+  }
+
+  storeProjectAssessment(formData) {
+    return this.http.post(`${environment.api_url}/projects/assessment`, formData);
+  }
+
   updateProject(formData, id) {
     return this.http.put(`${environment.api_url}/projects/${id}`, formData);
   }
@@ -29,6 +37,10 @@ export class ProjectService {
 
   getEditProject(id: number) {
     return this.http.get(`${environment.api_url}/projects/${id}/edit`);
+  }
+
+  getProjectFormData() {
+    return this.http.get(`${environment.api_url}/projects/create`);
   }
 
   getResult() {
@@ -63,10 +75,16 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/mis?t=staff&program_id=${program_id}`);
   }
 
-  getMiscData() {
-    return this.http.get(`${environment.api_url}/ref/misc?t=project_create_data`);
+  getCreateActivity(id) {
+    return this.http.get(`${environment.api_url}/projects/activity/create?project_id=${id}`);
   }
 
+  getAssessmentProjects() {
+    return this.http.get(`${environment.api_url}/projects/assessment/project_list`);
+  }
 
+  getCreateAssessment(id) {
+    return this.http.get(`${environment.api_url}/projects/assessment/create?project_id=${id}`);
+  }
 
 }

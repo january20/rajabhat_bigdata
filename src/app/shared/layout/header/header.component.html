@@ -235,7 +235,7 @@
         </li>
 
         <li class="nav-item dropdown" *ngIf="currentUser">
-          <a href="#" class="color-warning nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">ระบบ
+          <a href="#" class="color-warning nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">ระบบ
             <i class="zmdi zmdi-chevron-down"></i>
           </a>
           <ul class="dropdown-menu">
@@ -289,13 +289,13 @@
 
             <ng-container *ngIf="currentUser.info.role === 8">
               <li>
-                <a class="dropdown-item" routerLink="/projects"><i class="fa fa-check-square" aria-hidden="true"></i> ประเมินโครงการ</a>
+                <a class="dropdown-item" routerLink="/projects/assessment/project_list"><i class="fa fa-check-square" aria-hidden="true"></i> ประเมินโครงการ</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/projects/assessment/1"><i class="fa fa-bar-chart" aria-hidden="true"></i> ผลการประเมินโครงการ</a>
+                <a class="dropdown-item" routerLink="/projects/assessment/result"><i class="fa fa-bar-chart" aria-hidden="true"></i> ผลการประเมินโครงการ</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/assessment_manual"><i class="fa fa-youtube-play" aria-hidden="true"></i> ขั้นตอนการประเมินโครงการ</a>
+                <a class="dropdown-item" routerLink="/projects/assessment/manual"><i class="fa fa-youtube-play" aria-hidden="true"></i> ขั้นตอนการประเมินโครงการ</a>
               </li>
             </ng-container>
 

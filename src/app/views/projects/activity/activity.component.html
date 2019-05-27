@@ -18,54 +18,66 @@
   <div class="container">
     <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
       <div class="card-body">        
-        <form [formGroup]="form" class="form-horizontal">
-          <div class="py-4">
-            <label class="h2"><strong>1. ชื่อกิจกรรม</strong></label>
-            <div class="form-group px-5">
-              <input type="text" class="form-control" name="name" placeholder="ชื่อกิจกรรม" required>
-            </div>
-          </div>
+        <form [formGroup]="form">
 
-          <div class="py-4">
-            <label class="h2"><strong>2. รายละเอียดกิจกรรม</strong></label>
-            <div class="form-group px-5">
-              <textarea class="form-control" name="description" rows="5"></textarea>
-            </div>
-          </div>
+          <h3 [className]="formErrors.name ? 'color-danger' : ''">1. ชื่อกิจกรรม</h3>
+          <mat-form-field class="w-100 px-5">
+            <mat-label>ชื่อกิจกรรม</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
+          </mat-form-field>
+          
+          <h3 [className]="formErrors.description ? 'color-danger' : ''">2. รายละเอียดกิจกรรม</h3>
+          <mat-form-field class="w-100 px-5">
+            <mat-label>รายละเอียดกิจกรรม</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+            <mat-error *ngIf="formErrors.description">{{ formErrors.description }}</mat-error>
+          </mat-form-field>
 
-          <div class="py-4">
-            <label class="h2"><strong>3. ความสอดคล้องกับวัตถุประสงค์</strong></label>
-            <div class="form-group">
-              <select class="form-control" name="objective_id" onchange="objective_change()">
-                <option selected disabled>วัตถุประสงค์</option>
-              </select>
-            </div>
-            <div id="objective_note" class="form-group" style="display: none">
-              <textarea required class="form-control" name="objective_note" rows="3" placeholder="รายละเอียดเพิ่มเติม(ถ้ามี)"></textarea>
-            </div>
-          </div>
+          <h3 [className]="formErrors.objective ? 'color-danger' : ''">3. ความสอดคล้องกับวัตถุประสงค์</h3>
+          <mat-form-field class="w-100 px-5">
+            <mat-label>ความสอดคล้องกับวัตถุประสงค์</mat-label>
+            <mat-select formControlName="objective">
+              <mat-option *ngFor="let objective of project.objectives" [value]="objective.id">
+                  {{ objective.objective }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formErrors.objective">{{ formErrors.objective }}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100 px-5 animated fadeInDown" *ngIf="form.get('objective').value">
+            <mat-label>รายละเอียดเพิ่มเติม(ถ้ามี)</mat-label>
+            <textarea matInput formControlName="objective_note"></textarea>
+          </mat-form-field>
 
-          <div class="py-4">
-            <label class="h2"><strong>4. ความสอดคล้องกับตัวชี้วัด(KPI)</strong></label>
-            <div class="form-group">
-              <select class="form-control" name="kpi_id" onchange="kpi_change()">
-                <option selected disabled>ตัวชี้วัด</option>
-              </select>
-            </div>
-            <div id="kpi_note" class="form-group" style="display: none">
-              <textarea required class="form-control" name="kpi_note" rows="3" placeholder="รายละเอียดเพิ่มเติม(ถ้ามี)"></textarea>
-            </div>
-          </div>
+          <h3 [className]="formErrors.kpi ? 'color-danger' : ''">4. ความสอดคล้องกับตัวชี้วัด(KPI)</h3>
+          <mat-form-field class="w-100 px-5">
+            <mat-label>ความสอดคล้องกับตัวชี้วัด</mat-label>
+            <mat-select formControlName="kpi">
+              <mat-option *ngFor="let k of project.kpi" [value]="k.id">
+                  {{ k.kpi }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formErrors.kpi">{{ formErrors.kpi }}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100 px-5 animated fadeInDown" *ngIf="form.get('kpi').value">
+            <mat-label>รายละเอียดเพิ่มเติม(ถ้ามี)</mat-label>
+            <textarea matInput formControlName="kpi_note"></textarea>
+          </mat-form-field>
 
+          <h3>5. รูปภาพ/ไฟล์(ถ้ามี)</h3>
           <ngx-dropzone 
+            [preserveFiles]="false"
             [showPreviews]="true"
             [label]="'เลือกรูปภาพ/ไฟล์'"
             (filesAdded)="addFiles($event)" >
           </ngx-dropzone>
 
           <div class="form-group d-flex justify-content-center">
-            <button id="activity-button" class="btn btn-raised btn-primary">บันทึกกิจกรรม</button>
-          </div>          
+            <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+              บันทึกกิจกรรม
+              <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+            </button>
+          </div>   
         </form>
       </div>
     </div>

@@ -1,10 +1,17 @@
-<div class="ms-site-container mt-5">
+<div class="my-5 text-center" *ngIf="!project" style="height: 100vh;">
+    <div class="absolute-center">
+      <mat-spinner class="mx-auto"></mat-spinner>
+      กำลังโหลดข้อมูล.
+    </div>
+  </div>
+
+<div class="ms-site-container mt-5" [style.display]="project ? 'block' : 'none'">
 
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
         <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{ project?.project_name }}</h1>
-        <p class="lead lead-lg color-white text-center center-block mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">{{ project?.fac.fac_name }}</p>
+        <p class="lead lead-lg color-white text-center center-block mx-auto mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">{{ project?.fac.fac_name }}</p>
       </div>
     </div>      
   </div>
@@ -35,7 +42,7 @@
             <td>
               <ol>
                 <ng-container *ngFor="let area of project?.target_area">
-                    <li *ngIf="!area.village_id">{{ isNumber(area.target_area) ? 'หมู่ที่ ' + area.target_area : area.target_area + area.village.village_name_th + ' ตำบล' + area.village.sub_district.sub_district_name_th + ' อำเภอ' + area.village.district.district_name_th + ' จังหวัด' + area.village.province.province_name_th }}</li>
+                    <li *ngIf="!area.village_id">{{ isNumber(area.target_area) ? 'หมู่ที่ ' + area.target_area : area.target_area + ' ตำบล' + area.sub_district.sub_district_name_th + ' อำเภอ' + area.sub_district.district.district_name_th + ' จังหวัด' + area.sub_district.province.province_name_th }}</li>
                     <li *ngIf="area.village_id">{{ isNumber(area.target_area) && area.target_area ? 'หมู่ที่ ' + area.target_area + ' ' + area.village.village_name_th + ' ตำบล' + area.village.sub_district.sub_district_name_th : area.target_area ? area.target_area + ' ตำบล' + area.village.sub_district.sub_district_name_th : area.village.village_name_th + ' ตำบล' + area.village.sub_district.sub_district_name_th }}</li>
                 </ng-container>
               </ol>

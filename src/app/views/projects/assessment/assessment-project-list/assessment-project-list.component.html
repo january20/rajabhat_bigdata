@@ -1,0 +1,55 @@
+<div class="my-5 text-center" *ngIf="!projects && !strategy" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="projects && strategy">
+
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">การประเมิณโครงการ</h1>
+        <p class="lead lead-lg color-white text-center center-block mx-auto mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">{{ strategy.name + ' ' + strategy.details }}</p>
+      </div>
+    </div>      
+  </div>
+
+  <div class="container">
+    <div class="d-flex flex-column">
+      <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+        <div class="card-header">
+          <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> รายชื่อโครงการ</h3>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th style="width: 60%;">ชื่อโครงการ</th>
+              <th style="width: 30%;">คณะ</th>
+              <th style="width: 10%;">ประเมิณ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let project of projects">
+              <td>
+                <a routerLink="{{ '/projects/'+project.id }}" data-toggle="tooltip" class="color-primary" data-placement="top">
+                    {{ project.project_name }}
+                </a>
+              </td>
+
+              <td>{{ project.fac.fac_name }}</td>
+
+              <td>
+                <a routerLink="/projects/assessment/{{ project?.id }}/create" class="ms-icon ms-icon-sm ms-icon-circle ms-icon-inverse color-warning">
+                  <i data-toggle="tooltip" data-placement="top" title="ประเมิณ" class="fa fa-file-text color-warning" aria-hidden="true"></i>
+                </a>   
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

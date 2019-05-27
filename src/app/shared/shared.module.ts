@@ -11,6 +11,7 @@ import {
   MatInputModule,
   MatStepperModule,
   MatSnackBarModule,
+  MatRadioModule
 } from '@angular/material';
 
 import { AgmCoreModule } from '@agm/core';
@@ -44,7 +45,8 @@ import { UserService } from './services/user.service';
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatRadioModule
   ]
 })
 export class SharedModule { }

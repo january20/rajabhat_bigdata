@@ -24,7 +24,7 @@
           <tbody>
             <tr *ngFor="let project of projects">
               <td>
-                <a href="{{ project.approved === 0 ? '#' : '/projects/'+project.id }}" data-toggle="tooltip" [className]="project.approved === 0 ? 'color-warning' : 'color-primary'" data-placement="top" title="งบประมาณ {{ project.budget | number }} บาท">
+                <a routerLink="{{ project.approved === 0 ? '#' : '/projects/'+project.id }}" data-toggle="tooltip" [className]="project.approved === 0 ? 'color-warning' : 'color-primary'" data-placement="top" title="งบประมาณ {{ project.budget | number }} บาท">
                     {{ project.project_name }}
                 </a>
               </td>

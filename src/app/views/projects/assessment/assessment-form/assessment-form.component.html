@@ -1,0 +1,231 @@
+<div class="my-5 text-center" *ngIf="!project" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="project">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">ประเมินโครงการ</h1>
+        <p class="lead lead-lg color-white text-center center-block mx-auto mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7"><a routerLink="/projects/{{ project.id }}" class="color-white"><i class="fa fa-external-link-square" aria-hidden="true"></i> {{ project.project_name }}</a></p>
+      </div>
+    </div>      
+  </div>
+
+  <div class="container" [formGroup]="form">
+    <input type="hidden" name="project_id" value="{{ project.id }}">
+    <div class="d-flex flex-column">
+      <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+        <div class="card-header">
+          <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ตอนที่ 1: วัตถุประสงค์โครงการและตัวชี้วัด</h3>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="color-primary">
+              <th class="text-center" style="width: 40%;">วัตถุประสงค์</th>
+              <th class="text-center" style="width: 10%;">ประเมิน</th>
+              <th class="text-center" style="width: 50%;">ข้อเสนอแนะ</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="objectives">
+            <tr *ngFor="let objective of project.objectives; let i = index" [formGroupName]="i">                
+              <td>
+                {{ objective.objective }}
+              </td>
+
+              <td>
+                <mat-radio-group class="d-flex flex-column" formControlName="status">
+                  <mat-radio-button color="primary" value="1">บรรลุ</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่บรรลุ</mat-radio-button>
+                </mat-radio-group>
+              </td>
+
+              <td>
+                <div class="form-group m-0">
+                  <mat-form-field class="w-100">
+                    <mat-label>ข้อเสนอแนะ</mat-label>
+                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
+                  </mat-form-field>
+                </div>
+              </td>                
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr class="color-primary">
+              <th class="text-center" style="width: 40%;">กิจกรรม</th>
+              <th class="text-center" style="width: 10%;">ประเมิน</th>
+              <th class="text-center" style="width: 50%;">ข้อเสนอแนะ</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="activities">
+            <tr *ngFor="let activity of project.activities; let i = index" [formGroupName]="i">                
+              <td>
+                {{ activity.activity }}
+              </td>
+
+              <td>
+                <mat-radio-group class="d-flex flex-column" formControlName="status">
+                  <mat-radio-button color="primary" value="1">ปฏิบัติ</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่ปฏิบัติ</mat-radio-button>
+                </mat-radio-group>
+              </td>
+
+              <td>
+                <div class="form-group m-0">
+                  <mat-form-field class="w-100">
+                    <mat-label>ข้อเสนอแนะ</mat-label>
+                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
+                  </mat-form-field>
+                </div>
+              </td>                
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr class="color-primary">
+              <th class="text-center" style="width: 40%;">ผลลัพธ์</th>
+              <th class="text-center" style="width: 10%;">ประเมิน</th>
+              <th class="text-center" style="width: 50%;">ข้อเสนอแนะ</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="outputs">
+            <tr *ngFor="let output of project.outputs; let i = index" [formGroupName]="i">                
+              <td>
+                {{ output.output }}
+              </td>
+
+              <td>
+                <mat-radio-group class="d-flex flex-column" formControlName="status">
+                  <mat-radio-button color="primary" value="1">บรรลุ</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่บรรลุ</mat-radio-button>
+                </mat-radio-group>
+              </td>
+
+              <td>
+                <div class="form-group m-0">
+                  <mat-form-field class="w-100">
+                    <mat-label>ข้อเสนอแนะ</mat-label>
+                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
+                  </mat-form-field>
+                </div>
+              </td>                
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr class="color-primary">
+              <th class="text-center" style="width: 40%;">ตัวชี้วัด</th>
+              <th class="text-center" style="width: 10%;">ประเมิน</th>
+              <th class="text-center" style="width: 50%;">ข้อเสนอแนะ</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="kpi">
+            <tr *ngFor="let k of project.kpi; let i = index" [formGroupName]="i">                
+              <td>
+                {{ k.kpi }}
+              </td>
+
+              <td>
+                <mat-radio-group class="d-flex flex-column" formControlName="status">
+                  <mat-radio-button color="primary" value="1">สอดคล้อง</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่สอดคล้อง</mat-radio-button>
+                </mat-radio-group>
+              </td>
+
+              <td>
+                <div class="form-group m-0">
+                  <mat-form-field class="w-100">
+                    <mat-label>ข้อเสนอแนะ</mat-label>
+                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
+                  </mat-form-field>
+                </div>
+              </td>                
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card card-royal animated fadeInUp animation-delay-7">
+      <div class="card-header">
+        <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ตอนที่ 2: ผลปรากฏตามสภาพจริงในระหว่างทำการประเมิน (จากการสังเกต/สัมภาษณ์)</h3>
+      </div>
+      <div class="card-body">
+        <h3 [className]="formErrors.result_method ? 'color-danger mt-2' : 'mt-2'">2.1 รูปแบบ/วิธีการจัดกิจกรรมหลัก</h3>
+        <mat-form-field class="w-100">
+          <mat-label>รูปแบบ/วิธีการจัดกิจกรรมหลัก</mat-label>
+          <textarea matInput formControlName="result_method" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.result_method">{{ formErrors.result_method }}</mat-error>
+        </mat-form-field>
+
+        <h3 [className]="formErrors.result_vibe ? 'color-danger mt-2' : 'mt-2'">2.2 สภาพบรรยากาศในการดำเนินกิจกรรมและการมีส่วนร่วมของกลุ่มเป้าหมาย</h3>
+        <mat-form-field class="w-100">
+          <mat-label>สภาพบรรยากาศในการดำเนินกิจกรรมและการมีส่วนร่วมของกลุ่มเป้าหมาย</mat-label>
+          <textarea matInput formControlName="result_vibe" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.result_vibe">{{ formErrors.result_vibe }}</mat-error>
+        </mat-form-field>
+
+        <h3>2.3 แนบรูปภาพ/ไฟล์ (เพิ่มเติม)</h3>
+        <ngx-dropzone 
+          [preserveFiles]="false"
+          [showPreviews]="true"
+          [label]="'เลือกรูปภาพ/ไฟล์'"
+          (filesAdded)="addFiles($event)" >
+        </ngx-dropzone>       
+      </div>
+    </div>
+
+    <div class="card card-royal animated fadeInUp animation-delay-7">
+      <div class="card-header">
+        <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ตอนที่ 3: ปัญหาอุปสรรค แนวทางการปรับปรุงพัฒนาโครงการ</h3>
+      </div>   
+      <div class="card-body">
+        <h3 [className]="formErrors.problem ? 'color-danger mt-2' : 'mt-2'">3.1 ปัญหาและอุปสรรค</h3>
+        <mat-form-field class="w-100">
+          <mat-label>ปัญหาและอุปสรรค</mat-label>
+          <textarea matInput formControlName="problem" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.problem">{{ formErrors.problem }}</mat-error>
+        </mat-form-field>
+
+        <h3 [className]="formErrors.problem_solving ? 'color-danger mt-2' : 'mt-2'">3.2 แนวทางในการแก้ไข</h3>
+        <mat-form-field class="w-100">
+          <mat-label>แนวทางในการแก้ไข</mat-label>
+          <textarea matInput formControlName="problem_solving" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.problem_solving">{{ formErrors.problem_solving }}</mat-error>
+        </mat-form-field>
+      </div>     
+    </div>
+
+    <div class="card card-royal animated fadeInUp animation-delay-7">
+      <div class="card-header">
+        <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ตอนที่ 4: ข้อเสนอแนะในการพัฒนากิจกรรม/งาน/โครงการ หรือการต่อยอดผลงาน ครั้งต่อไป</h3>
+      </div>
+      <div class="card-body">
+        <h3 [className]="formErrors.good_point ? 'color-danger mt-2' : 'mt-2'">4.1 จุดแข็งของโครงการ</h3>
+        <mat-form-field class="w-100">
+          <mat-label>จุดแข็ง</mat-label>
+          <textarea matInput formControlName="good_point" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.good_point">{{ formErrors.good_point }}</mat-error>
+        </mat-form-field>
+
+        <h3 [className]="formErrors.weak_point ? 'color-danger mt-2' : 'mt-2'">3.2 จุดอ่อนของโครงการและโอกาสการพัฒนา</h3>
+        <mat-form-field class="w-100">
+          <mat-label>จุดอ่อน</mat-label>
+          <textarea matInput formControlName="weak_point" rows="5" required></textarea>
+          <mat-error *ngIf="formErrors.weak_point">{{ formErrors.weak_point }}</mat-error>
+        </mat-form-field>
+
+        <div class="form-group d-flex justify-content-center">
+          <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+            ส่งข้อเสนอแนะ
+            <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

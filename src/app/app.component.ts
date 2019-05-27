@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from './shared/models/role';
 import { AuthenticationService } from './shared/services/authentication.service';
-import { UserService } from './shared/services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +12,10 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.authService.checkToken().subscribe(
-      res => this.currentUser = this.authService.currentUserValue,
-      error => this.authService.logout()
-    );
+    this.currentUser = this.authService.currentUserValue;
   }
 
   logout() {
