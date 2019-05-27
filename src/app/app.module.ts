@@ -8,6 +8,8 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 import {
   HeaderComponent,
   FooterComponent  
@@ -26,6 +28,7 @@ import {
     HttpClientModule
   ],
   providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

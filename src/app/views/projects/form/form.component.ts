@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProjectService } from '../shared/project.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn } from '@angular/forms';
 import { AbstractForm } from './shared/abstract-form';
 import { MatSnackBar } from '@angular/material';
@@ -46,8 +46,6 @@ export class FormComponent extends AbstractForm implements OnInit {
     mainStaffs: [],
     subStaffs: [],
     extStaffs: [],
-    schemes: [],
-    srruStrategies: [],
     rajabhatStrategies: [],
     nationalStrategies: [],
     integration_plans: [],
@@ -67,6 +65,7 @@ export class FormComponent extends AbstractForm implements OnInit {
     private projectService: ProjectService,
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar
   ) {
     super();
@@ -89,7 +88,8 @@ export class FormComponent extends AbstractForm implements OnInit {
     this.projectService.getEditProject(id).subscribe((data: any) => {
       this.formReady = true;
       this.form.get('project_name').setValue(data.project_name);
-      this.form.get('srru_strategy_id').setValue(data.srru_strategy_id);
+      this.form.get('scheme').setValue(data.scheme_id);
+      this.form.get('srru_strategy').setValue(data.srru_strategy_id);
       this.form.get('faculty_strategy').setValue(data.faculty_strategy);
       this.form.get('history').setValue(data.history);
       this.form.get('target_group').setValue(data.target_group);
@@ -102,8 +102,6 @@ export class FormComponent extends AbstractForm implements OnInit {
       this.editObj.mainStaffs = data.main_staffs;
       this.editObj.subStaffs = data.sub_staffs;
       this.editObj.extStaffs = data.ext_staffs;
-      this.editObj.schemes = data.schemes;
-      // this.editObj.srruStrategies = data.srru_strategies;
       this.editObj.rajabhatStrategies = data.rajabhat_strategies;
       this.editObj.nationalStrategies = data.national_strategies;
       this.editObj.integration_plans = data.integration_plans;
@@ -135,7 +133,7 @@ export class FormComponent extends AbstractForm implements OnInit {
 
             setTimeout(() => {
               this.isSubmit = false;
-              location.href = '/projects/mylist';
+              this.router.navigate(['projects/mylist']);
             }, 2000);          
           },
           err => {
@@ -158,7 +156,7 @@ export class FormComponent extends AbstractForm implements OnInit {
 
             setTimeout(() => {
               this.isSubmit = false;
-              location.href = '/projects/mylist';
+              this.router.navigate(['projects/mylist']);
             }, 2000);
           },
           err => {
@@ -230,12 +228,12 @@ export class FormComponent extends AbstractForm implements OnInit {
 
   // ***Validation Errors //
   createFormErrors() {
-    return { project_name: '', schemes: '', srru_strategy: '', rajabhat_strategies: '', national_strategies: '', faculty_strategy: '', integration_plans: '', history: '', target_group: '', operation_date: '', assessment_method: '', benefits: '', reporting: '', budget: '', file: '' }
+    return { project_name: '', scheme: '', srru_strategy: '', rajabhat_strategies: '', national_strategies: '', faculty_strategy: '', integration_plans: '', history: '', target_group: '', operation_date: '', assessment_method: '', benefits: '', reporting: '', budget: '', file: '' }
   }
   createValidationMessages() {
     return {
       project_name: { required: '*กรุณาระบุชื่อโครงการ' },
-      schemes: { required: '*กรุณาเลือกรูปแบบโครงการ' },
+      scheme: { required: '*กรุณาเลือกรูปแบบโครงการ' },
       srru_strategy: { required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏสุรินทร์' },
       rajabhat_strategies: { required: '*กรุณาเลือกยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี' },
       national_strategies: { required: '*กรุณาเลือกยุทธศาสตร์ชาติ ระยะ 20 ปี' },
@@ -261,13 +259,12 @@ export class FormComponent extends AbstractForm implements OnInit {
       main_staffs: this.formBuilder.array([]),
       sub_staffs: this.formBuilder.array([]),
       ext_staffs: this.formBuilder.array([]),
-      schemes: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
-      // srru_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
+      scheme: ['', Validators.required],
       srru_strategy: ['', Validators.required],
       rajabhat_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
       national_strategies: this.formBuilder.array([], this.minSelectedCheckboxes(1)),
       faculty_strategy: ['', Validators.required],
-      integration_plans: this.formBuilder.array([], this.checkDynamicCheckboxes(1)),
+      integration_plans: this.formBuilder.array([], this.checkIntegrationCheckboxes(1)),
       history: ['', Validators.required],
       objectives: this.formBuilder.array([]),
       activities: this.formBuilder.array([]),
@@ -355,7 +352,7 @@ export class FormComponent extends AbstractForm implements OnInit {
   get main_staffs() { return this.form.get('main_staffs') as FormArray; }
   get sub_staffs() { return this.form.get('sub_staffs') as FormArray; }
   get ext_staffs() { return this.form.get('ext_staffs') as FormArray; }
-  get schemes() { return this.form.get('schemes') as FormArray; }
+  // get schemes() { return this.form.get('schemes') as FormArray; }
   // get srru_strategies() { return this.form.get('srru_strategies') as FormArray; }
   get rajabhat_strategies() { return this.form.get('rajabhat_strategies') as FormArray; }
   get national_strategies() { return this.form.get('national_strategies') as FormArray; }
@@ -385,6 +382,19 @@ export class FormComponent extends AbstractForm implements OnInit {
       const totalSelected = formArray.controls
         .map(control => control.value.status)
         .reduce((prev, next) => next ? prev + next : prev, 0);
+      return totalSelected >= min ? null : { required: true };
+    };  
+    return validator;
+  }
+
+  checkIntegrationCheckboxes(min = 1) {
+    const validator: ValidatorFn = (formArray: FormArray) => {
+      const totalSelected = formArray.controls
+        .map(control => {
+          return control.value.status
+        })
+        .reduce((prev, next) => next ? prev + next : prev, 0);
+      
       return totalSelected >= min ? null : { required: true };
     };  
     return validator;

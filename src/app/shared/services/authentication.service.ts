@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticationService {
 
-  private currentUserSubject: BehaviorSubject<any>;
+  public currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {

@@ -19,11 +19,7 @@ export class ExtStaffsComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder
   ) { }
 
-  ngOnInit() {
-    if(this.formType === 'CREATE') {
-      this.ext_staffs.push(this.createExtStaff());
-    }
-  }
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.formType === 'CREATE') return;

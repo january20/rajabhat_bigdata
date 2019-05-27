@@ -136,14 +136,21 @@
             <!-- end ext_staffs -->
 
             <!-- ***project_schemes -->
-            <h3 [className]="formErrors.schemes ? 'color-danger mt-2' : 'mt-2'">4. รูปแบบโครงการ</h3>
-            <app-schemes 
+            <h3 [className]="formErrors.scheme ? 'color-danger mt-2' : 'mt-2'">4. รูปแบบโครงการ</h3>
+            <mat-radio-group class="d-flex flex-column" formControlName="scheme">
+              <mat-radio-button color="primary" *ngFor="let scheme of projectSchemes" [value]="scheme.id">
+                {{ scheme.name }}
+              </mat-radio-button>
+              <mat-error *ngIf="formErrors.scheme">{{ formErrors.scheme }}</mat-error>
+            </mat-radio-group>
+            
+            <!-- <app-schemes 
               [formType]="formType"
               [schemes]="schemes" 
               [projectSchemes]="projectSchemes" 
               [editSchemes]="editObj.schemes">
             </app-schemes>
-            <p class="color-danger" *ngIf="formErrors.schemes">{{ formErrors.schemes }}</p>
+            <p class="color-danger" *ngIf="formErrors.schemes">{{ formErrors.schemes }}</p> -->
             <!-- end project_schemes -->
 
             <!-- ***srru_strategy -->
@@ -154,7 +161,6 @@
               </mat-radio-button>
               <mat-error *ngIf="formErrors.srru_strategy">{{ formErrors.srru_strategy }}</mat-error>
             </mat-radio-group>
-            <!-- <p class="color-danger" *ngIf="formErrors.srru_strategies">{{ formErrors.srru_strategies }}</p> -->
             <!-- end srru_strategy -->
 
             <!-- ***rajabhat_strategies -->
@@ -214,7 +220,7 @@
             <!-- end history -->
 
             <!-- ***objectives -->
-            <h3 [className]="formErrors.objectives ? 'color-danger mt-2' : 'mt-2'">11. วัตถุประสงค์โครงการและตัวชี้วัด</h3>
+            <h3>11. วัตถุประสงค์โครงการและตัวชี้วัด</h3>
             <app-objectives
               [formType]="formType"
               [objectives]="objectives" 

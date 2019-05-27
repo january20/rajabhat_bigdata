@@ -12,7 +12,7 @@ export class HomeService {
   ) { }
 
   getSurinCoorddinates() {
-    return this.http.get('/assets/json/surin-polygon.json');
+    return this.http.get('assets/json/surin-polygon.json');
   }
 
   getVillages() {

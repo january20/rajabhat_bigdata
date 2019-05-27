@@ -18,9 +18,13 @@ export class StudentsComponent implements OnInit, OnChanges {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
-    if(this.formType === 'CREATE') {
+  ngOnInit() { }
+
+  checked(event) {
+    if(event.checked) {
       this.plans.push(this.createPlan());
+    } else {
+      this.plans.controls = [];
     }
   }
 

@@ -31,9 +31,7 @@
             <th>
               <i class="zmdi zmdi-link mr-1 color-info"></i> รูปแบบโครงการ</th>
             <td>
-              <ul class="list-unstyled">
-                <li *ngFor="let scheme of project?.schemes; let idx = index">{{ idx+1 }}. {{ scheme.name }}</li>
-              </ul>
+              {{ project?.scheme.name }}
             </td>
           </tr>
           <tr>
@@ -113,11 +111,8 @@
               <h3 class="card-title">ความสอดคล้องกับยุทธศาสตร์</h3>
             </div>
             <div class="card-body">
-              <p *ngIf="project?.srru_strategies.length === 0">ไม่พบข้อมูล</p>
               <h4 class="color-primary">1. ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h4>
-              <ul class="list-unstyled px-5">
-                <li *ngFor="let strategy of project?.srru_strategies"><strong>{{ strategy.name }}</strong> {{ strategy.details }}</li>
-              </ul>
+              <p class="px-5"><strong>{{ project?.srru_strategy.name }}</strong> {{ project?.srru_strategy.details }}</p>
               <h4 class="color-primary">2. ยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h4>
               <ul class="list-unstyled px-5">
                 <li *ngFor="let strategy of project?.rajabhat_strategies"><strong>{{ strategy.name }}</strong> {{ strategy.details }}</li>

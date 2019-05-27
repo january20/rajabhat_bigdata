@@ -34,7 +34,7 @@
             [style]="setGeoJsonStyle"></agm-data-layer>
           <agm-marker [latitude]="googleMapOptions.lat" 
             [longitude]="googleMapOptions.lng" 
-            iconUrl="/assets/img/logo.png"></agm-marker>
+            iconUrl="assets/img/logo.png"></agm-marker>
           <ng-container *ngFor="let village of villages">
             <agm-info-window [latitude]="village.lat" 
             [longitude]="village.lng"
