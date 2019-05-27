@@ -79,8 +79,8 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/projects/activity/create?project_id=${id}`);
   }
 
-  getAssessmentProjects() {
-    return this.http.get(`${environment.api_url}/projects/assessment/project_list`);
+  getAssessmentProjects(id) {
+    return this.http.get(`${environment.api_url}/projects/assessment/project_list?strategy_id=${id}`);
   }
 
   getCreateAssessment(id) {
