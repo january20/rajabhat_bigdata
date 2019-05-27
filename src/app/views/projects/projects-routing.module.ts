@@ -8,6 +8,7 @@ import { FormComponent } from './form/form.component';
 import { AssessmentProjectListComponent } from './assessment/assessment-project-list/assessment-project-list.component';
 import { AssessmentResultComponent } from './assessment/assessment-result/assessment-result.component';
 import { AssessmentFormComponent } from './assessment/assessment-form/assessment-form.component';
+import { AssessmentManualComponent } from './assessment/assessment-manual/assessment-manual.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'result',
         component: AssessmentResultComponent
+      },
+      {
+        path: 'manual',
+        component: AssessmentManualComponent
       },
       {
         path: ':id/create',

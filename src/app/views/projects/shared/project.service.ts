@@ -19,6 +19,10 @@ export class ProjectService {
     return this.http.post(`${environment.api_url}/projects/activity`, formData);
   }
 
+  storeProjectAssessment(formData) {
+    return this.http.post(`${environment.api_url}/projects/assessment`, formData);
+  }
+
   updateProject(formData, id) {
     return this.http.put(`${environment.api_url}/projects/${id}`, formData);
   }

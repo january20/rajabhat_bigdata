@@ -10,7 +10,7 @@
     <div class="container">
       <div class="text-center">
         <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">ประเมินโครงการ</h1>
-        <p class="lead lead-lg color-white text-center center-block mx-auto mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7"><a href="/projects/{{ project.id }}" class="color-white" target="blank"><i class="fa fa-external-link-square" aria-hidden="true"></i> {{ project.project_name }}</a></p>
+        <p class="lead lead-lg color-white text-center center-block mx-auto mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7"><a routerLink="/projects/{{ project.id }}" class="color-white"><i class="fa fa-external-link-square" aria-hidden="true"></i> {{ project.project_name }}</a></p>
       </div>
     </div>      
   </div>
@@ -47,7 +47,7 @@
                 <div class="form-group m-0">
                   <mat-form-field class="w-100">
                     <mat-label>ข้อเสนอแนะ</mat-label>
-                    <textarea matInput rows="1" formControlName="note"></textarea>
+                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
                   </mat-form-field>
                 </div>
               </td>                
@@ -69,8 +69,8 @@
 
               <td>
                 <mat-radio-group class="d-flex flex-column" formControlName="status">
-                  <mat-radio-button color="primary" value="1">บรรลุ</mat-radio-button>
-                  <mat-radio-button color="primary" value="0">ไม่บรรลุ</mat-radio-button>
+                  <mat-radio-button color="primary" value="1">ปฏิบัติ</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่ปฏิบัติ</mat-radio-button>
                 </mat-radio-group>
               </td>
 
@@ -78,7 +78,7 @@
                 <div class="form-group m-0">
                   <mat-form-field class="w-100">
                     <mat-label>ข้อเสนอแนะ</mat-label>
-                    <textarea matInput rows="1" formControlName="note"></textarea>
+                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
                   </mat-form-field>
                 </div>
               </td>                
@@ -109,7 +109,7 @@
                 <div class="form-group m-0">
                   <mat-form-field class="w-100">
                     <mat-label>ข้อเสนอแนะ</mat-label>
-                    <textarea matInput rows="1" formControlName="note"></textarea>
+                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
                   </mat-form-field>
                 </div>
               </td>                
@@ -131,8 +131,8 @@
 
               <td>
                 <mat-radio-group class="d-flex flex-column" formControlName="status">
-                  <mat-radio-button color="primary" value="1">บรรลุ</mat-radio-button>
-                  <mat-radio-button color="primary" value="0">ไม่บรรลุ</mat-radio-button>
+                  <mat-radio-button color="primary" value="1">สอดคล้อง</mat-radio-button>
+                  <mat-radio-button color="primary" value="0">ไม่สอดคล้อง</mat-radio-button>
                 </mat-radio-group>
               </td>
 
@@ -140,7 +140,7 @@
                 <div class="form-group m-0">
                   <mat-form-field class="w-100">
                     <mat-label>ข้อเสนอแนะ</mat-label>
-                    <textarea matInput rows="1" formControlName="note"></textarea>
+                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
                   </mat-form-field>
                 </div>
               </td>                
@@ -157,14 +157,14 @@
       <div class="card-body">
         <h3 [className]="formErrors.result_method ? 'color-danger mt-2' : 'mt-2'">2.1 รูปแบบ/วิธีการจัดกิจกรรมหลัก</h3>
         <mat-form-field class="w-100">
-          <mat-label>...</mat-label>
+          <mat-label>รูปแบบ/วิธีการจัดกิจกรรมหลัก</mat-label>
           <textarea matInput formControlName="result_method" rows="5" required></textarea>
           <mat-error *ngIf="formErrors.result_method">{{ formErrors.result_method }}</mat-error>
         </mat-form-field>
 
         <h3 [className]="formErrors.result_vibe ? 'color-danger mt-2' : 'mt-2'">2.2 สภาพบรรยากาศในการดำเนินกิจกรรมและการมีส่วนร่วมของกลุ่มเป้าหมาย</h3>
         <mat-form-field class="w-100">
-          <mat-label>...</mat-label>
+          <mat-label>สภาพบรรยากาศในการดำเนินกิจกรรมและการมีส่วนร่วมของกลุ่มเป้าหมาย</mat-label>
           <textarea matInput formControlName="result_vibe" rows="5" required></textarea>
           <mat-error *ngIf="formErrors.result_vibe">{{ formErrors.result_vibe }}</mat-error>
         </mat-form-field>
@@ -186,14 +186,14 @@
       <div class="card-body">
         <h3 [className]="formErrors.problem ? 'color-danger mt-2' : 'mt-2'">3.1 ปัญหาและอุปสรรค</h3>
         <mat-form-field class="w-100">
-          <mat-label>...</mat-label>
+          <mat-label>ปัญหาและอุปสรรค</mat-label>
           <textarea matInput formControlName="problem" rows="5" required></textarea>
           <mat-error *ngIf="formErrors.problem">{{ formErrors.problem }}</mat-error>
         </mat-form-field>
 
         <h3 [className]="formErrors.problem_solving ? 'color-danger mt-2' : 'mt-2'">3.2 แนวทางในการแก้ไข</h3>
         <mat-form-field class="w-100">
-          <mat-label>...</mat-label>
+          <mat-label>แนวทางในการแก้ไข</mat-label>
           <textarea matInput formControlName="problem_solving" rows="5" required></textarea>
           <mat-error *ngIf="formErrors.problem_solving">{{ formErrors.problem_solving }}</mat-error>
         </mat-form-field>
@@ -207,25 +207,25 @@
       <div class="card-body">
         <h3 [className]="formErrors.good_point ? 'color-danger mt-2' : 'mt-2'">4.1 จุดแข็งของโครงการ</h3>
         <mat-form-field class="w-100">
-          <mat-label>...</mat-label>
+          <mat-label>จุดแข็ง</mat-label>
           <textarea matInput formControlName="good_point" rows="5" required></textarea>
           <mat-error *ngIf="formErrors.good_point">{{ formErrors.good_point }}</mat-error>
         </mat-form-field>
 
         <h3 [className]="formErrors.weak_point ? 'color-danger mt-2' : 'mt-2'">3.2 จุดอ่อนของโครงการและโอกาสการพัฒนา</h3>
         <mat-form-field class="w-100">
-          <mat-label>...</mat-label>
+          <mat-label>จุดอ่อน</mat-label>
           <textarea matInput formControlName="weak_point" rows="5" required></textarea>
           <mat-error *ngIf="formErrors.weak_point">{{ formErrors.weak_point }}</mat-error>
         </mat-form-field>
-      </div>
-    </div>
 
-    <div class="form-group d-flex justify-content-center">
-      <button (click)="submit()" mat-raised-button color="primary">
-        ส่งแบบประเมิน
-        <!-- <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon> -->
-      </button>
+        <div class="form-group d-flex justify-content-center">
+          <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+            ส่งข้อเสนอแนะ
+            <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

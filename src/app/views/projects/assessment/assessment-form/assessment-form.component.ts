@@ -14,38 +14,72 @@ export class AssessmentFormComponent implements OnInit {
 
   project: any;
   form: FormGroup;
+  isSubmit = false;
   formErrors = this.createFormErrors();
-  validationMessages = this.createValidationMessages;
+  validationMessages = this.createValidationMessages();
 
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadData();
   }
 
   submit() {
-    console.log(this.form.value);
+    if(confirm('คุณต้องการส่งแบบประเมินใช่หรือไม่')) {
+      this.isSubmit = true;
+
+      this.projectService.storeProjectAssessment(this.form.value).subscribe(
+        data => {
+          this.snackBar.open('ประเมินโครงการสำเร็จ', '', {
+            horizontalPosition: 'right',
+            duration: 2000,
+            panelClass: ['color-white', 'bg-success']
+          });
+  
+          setTimeout(() => {
+            this.isSubmit = false;
+            this.router.navigateByUrl('/projects/'+this.route.snapshot.params.id);
+          }, 2000);
+        },
+        err => {
+          this.snackBar.open('เกิดขข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
+            horizontalPosition: 'right',
+            duration: 2000,
+            panelClass: ['color-white', 'bg-danger']
+          });
+          this.isSubmit = false;
+        }
+      );
+    }
+
+    // console.log(this.form.value);
   }
 
   loadData() {
     this.projectService.getCreateAssessment(this.route.snapshot.params.id).subscribe((data: any) => {
-      this.buildForm(data).then(() => this.project = data);
+      this.buildForm(data).then(() => {
+        this.project = data;
+        this.subscribeToFormChanged();
+      });
     });
   }
 
   async buildForm(data: any) {
     this.form = this.formBuilder.group({
+      project_id: [this.route.snapshot.params.id],
       objectives: this.formBuilder.array(this.createData(data.objectives)),
       activities: this.formBuilder.array(this.createData(data.activities)),
       outputs: this.formBuilder.array(this.createData(data.outputs)),
       kpi: this.formBuilder.array(this.createData(data.kpi)),
       result_method: ['', Validators.required],
       result_vibe: ['', Validators.required],
-      files: null,
+      files: this.formBuilder.array([]),
       problem: ['', Validators.required],
       problem_solving: ['', Validators.required],
       good_point: ['', Validators.required],
@@ -53,12 +87,30 @@ export class AssessmentFormComponent implements OnInit {
     });
   }
 
+  addFiles(files: File[]) {
+    this.files.controls = [];
+    files.forEach((file) => {
+      const reader = new FileReader();
+   
+      reader.onload = (e: ProgressEvent) => {
+        const content = (e.target as FileReader).result;
+        this.files.push(this.formBuilder.group({
+          filename: [file.name],
+          mimeType: [file.type],
+          base64: [content]
+        }))
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
   createData(obj): Array<FormGroup> {
     return obj.map(data => {
       return this.formBuilder.group({
-        id: [''],
-        status: [''],
-        note: ['']
+        id: [data.id],
+        status: ['', Validators.required],
+        suggestion: ['']
       });
     });
   }
@@ -109,5 +161,7 @@ export class AssessmentFormComponent implements OnInit {
     }
 
   }
+
+  get files() { return this.form.get('files') as FormArray; }
 
 }
