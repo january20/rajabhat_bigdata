@@ -235,7 +235,7 @@
         </li>
 
         <li class="nav-item" *ngIf="currentUser">
-          <a data-scroll class="nav-link" routerLink="/dashboard">Dashboard</a>
+          <a data-scroll class="nav-link" routerLink="/dashboard">แดชบอร์ด</a>
         </li>
 
         <li class="nav-item dropdown" *ngIf="currentUser">
@@ -315,7 +315,7 @@
       <a *ngIf="currentUser" href="javascript:void(0)" class="btn-circle btn-circle-white no-focus" (click)="logout()">
         <i class="fa fa-sign-out" data-toggle="tooltip" data-placement="top"></i>
       </a>      
-      <a *ngIf="!currentUser" href="/login" class="btn-circle btn-circle-white no-focus">
+      <a *ngIf="!currentUser" routerLink="/login" class="btn-circle btn-circle-white no-focus">
         <i class="zmdi zmdi-account" data-toggle="tooltip" data-placement="top"></i>
       </a>
 
