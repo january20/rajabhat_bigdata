@@ -1,0 +1,40 @@
+<div class="my-5 text-center" *ngIf="!animals && !plants" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="animals && plants">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">ความหลากหลายทางชีวภาพ</h1>
+        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10">พืช/สัตว์ท้องถิ่น</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body p-2">        
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="10">
+          <ng-container *ngFor="let plant of plants">
+            <agm-marker [latitude]="plant.lat" [longitude]="plant.lng" [iconUrl]="'/assets/img/plant.png'">
+              <agm-info-window [disableAutoPan]="true">
+                <a href="javascript:void(0)">{{ plant.id }}</a>
+              </agm-info-window>
+            </agm-marker>
+          </ng-container>
+          <ng-container *ngFor="let animal of animals">
+            <agm-marker [latitude]="animal.lat" [longitude]="animal.lng" [iconUrl]="'/assets/img/paw.png'">
+              <agm-info-window [disableAutoPan]="true">
+                <a href="javascript:void(0)">{{ animal.id }}</a>
+              </agm-info-window>
+            </agm-marker>
+          </ng-container>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</div>

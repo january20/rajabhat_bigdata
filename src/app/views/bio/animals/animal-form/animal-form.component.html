@@ -1,0 +1,74 @@
+<div class="my-5 text-center" *ngIf="!animalGroups" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="animalGroups">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">นำเข้าข้อมูล</h1>
+        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10">สัตว์ท้องถิ่น</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body">        
+        <form [formGroup]="form">
+
+          <h3 class="color-primary mt-4">1. แนบไฟล์ภาพ</h3>
+          <ngx-dropzone 
+            [preserveFiles]="false"
+            [showPreviews]="true"
+            [label]="'เลือกรูปภาพ'"
+            [accept]="'image/*'"
+            (filesAdded)="addFiles($event)" >
+          </ngx-dropzone>
+
+          <h3 class="color-primary mt-4">2. แหล่งที่พบ</h3>
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+            <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="changePosition($event)"></agm-marker>
+          </agm-map>
+
+          <h3 class="color-primary mt-4">3. ข้อมูลเบื้องต้น</h3>
+          <mat-form-field class="w-100 px-5">
+            <mat-label>พิกัด</mat-label>
+            <input matInput [value]="lat + ', ' + lng">
+          </mat-form-field>
+
+          <mat-form-field class="w-100 px-5">
+            <mat-label>ชนิดของสัตว์</mat-label>
+            <mat-select formControlName="group">
+              <mat-option *ngFor="let group of animalGroups" [value]="group.id">
+                  {{ group.name_th }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formErrors.group">{{ formErrors.group }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-100 px-5">
+            <mat-label>ชื่อของสัตว์</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-100 px-5">
+            <mat-label>ผู้ให้ข้อมูล(ไม่ระบุก็ได้)</mat-label>
+            <input matInput formControlName="informant">
+          </mat-form-field>
+
+          <div class="form-group d-flex justify-content-center">
+            <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+              บันทึกข้อมูล
+              <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+            </button>
+          </div>   
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

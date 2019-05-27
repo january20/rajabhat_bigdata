@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   
   { path: 'home', loadChildren: './views/home/home.module#HomeModule' },
+  { path: 'dashboard', loadChildren: './views/dashboard/dashboard.module#DashboardModule' },
   { path: 'login', loadChildren: './views/auth/auth.module#AuthModule' },
   { path: 'projects', loadChildren: './views/projects/projects.module#ProjectsModule' },
+  { path: 'bio', loadChildren: './views/bio/bio.module#BioModule' },
   {
     path: '',
-    redirectTo: 'projects/create',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
   // {

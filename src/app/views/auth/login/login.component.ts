@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.subscribeToFormChanged();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
 
   submit(event) {

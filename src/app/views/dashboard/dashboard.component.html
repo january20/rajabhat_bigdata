@@ -1,0 +1,167 @@
+<div class="my-5 text-center" *ngIf="!currentUser" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<ng-container *ngIf="currentUser">
+  <div class="container" [ngSwitch]="currentUser.info.role">
+    <div class="text-center color-dark mw-800 center-block mb-4">
+      <h1 class="mb-2 wow fadeInDown animation-delay-4">{{ currentUser.info.display_name }}</h1>
+      <h2 class="mb-2 wow fadeInDown animation-delay-4">{{ currentUser.info.email }}</h2>
+      <p class="lead wow fadeInDown animation-delay-5">{{ currentUser.info.role_name }}</p>
+    </div>
+
+    <div class="text-center" *ngSwitchCase="2">
+      <h3>จัดการโครงการ</h3>
+      <div class="row color-dark">
+        <div class="col-xl-6 col-lg-6 col-sm-6">
+          <div class="card card-royal wow fadeInLeft animation-delay-3">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-royal">
+                <i class="fa fa-file-o"></i>
+              </span>
+              <h4 class="color-royal">เสนอโครงการ</h4>
+              <p class="">สำหรับเสนอโครงการตามยุทธศาสตร์มหาวิทยาลัย</p>
+              <a routerLink="/projects/create" class="btn btn-royal btn-raised">เสนอโครงการ</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-sm-6">
+          <div class="card card-info wow fadeInRight animation-delay-4">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-info">
+                <i class="fa fa-paperclip"></i>
+              </span>
+              <h4 class="color-info">ข้อเสนอของฉัน</h4>
+              <p class="">สำหรับดูข้อมูลโครงการที่ท่านได้นำเสนอไปแล้ว</p>
+              <a routerLink="/projects/mylist" class="btn btn-info btn-raised">ดูข้อมูล</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h3 class="mt-4">จัดการข้อมูลชีวภาพ</h3>
+      <div class="row color-dark">
+        <div class="col-xl-6 col-lg-6 col-sm-6">
+          <div class="card card-success wow fadeInLeft animation-delay-3">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-success">
+                <i class="fa fa-leaf"></i>
+              </span>
+              <h4 class="color-success">นำเข้าข้อมูลพืช</h4>
+              <p class="">สำหรับนำเข้าข้อมูลพืชท้องถิ่น</p>
+              <a routerLink="/bio/plants/create" class="btn btn-success btn-raised">นำเข้าข้อมูล</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-sm-6">
+          <div class="card card-warning wow fadeInRight animation-delay-4">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-warning">
+                <i class="fa fa-paw"></i>
+              </span>
+              <h4 class="color-warning">นำเข้าข้อมูลสัตว์</h4>
+              <p class="">สำหรับนำเข้าข้อมูลสัตว์ท้องถิ่น</p>
+              <a routerLink="/bio/animals/mylist" class="btn btn-warning btn-raised">นำเข้าข้อมูล</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="mt-4">อื่นๆ</h3>
+      <div class="row color-dark">
+        <div class="col-xl-4 col-lg-6 col-sm-6">
+          <div class="card card-danger wow fadeInLeft animation-delay-3">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-danger">
+                <i class="fa fa-vcard "></i>
+              </span>
+              <h4 class="color-danger">ข้อมูลผู้เชี่ยวชาญ</h4>
+              <p class="">สำหรับนำเข้าข้อมูลผู้เชี่ยวชาญ</p>
+              <a routerLink="/bio/plants/create" class="btn btn-danger btn-raised">นำเข้าข้อมูล</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-sm-6">
+          <div class="card card-warning wow fadeInRight animation-delay-4">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-warning">
+                <i class="fa fa-users"></i>
+              </span>
+              <h4 class="color-warning">ข้อมูลผู้ครัวเรือน</h4>
+              <p class="">สำหรับนำเข้าข้อมูลผู้ครัวเรือน</p>
+              <a routerLink="/bio/animals/mylist" class="btn btn-warning btn-raised">นำเข้าข้อมูล</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-sm-6">
+          <div class="card card-royal wow fadeInRight animation-delay-4">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-royal">
+                <i class="fa fa-shopping-bag"></i>
+              </span>
+              <h4 class="color-royal">ข้อมูลสินค้าโอทอป</h4>
+              <p class="">สำหรับนำเข้าข้อมูลสินค้าโอทอป</p>
+              <a routerLink="/bio/animals/mylist" class="btn btn-royal btn-raised">นำเข้าข้อมูล</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="8">
+      <div class="row color-dark">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
+          <div class="card card-warning wow fadeInLeft animation-delay-4">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-warning">
+                <i class="fa fa-check-square"></i>
+              </span>
+              <h4 class="color-warning">ประเมิณโครงการ</h4>
+              <p class="">สำหรับประเมิณโครงการตามตัวชี้วัดที่ท่านรับผิดชอบ</p>
+              <a routerLink="/projects/assessment/project_list" class="btn btn-warning btn-raised">ประเมิน</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-sm-6">
+          <div class="card card-success wow fadeInLeft animation-delay-3">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-success">
+                <i class="fa fa-bar-chart"></i>
+              </span>
+              <h4 class="color-success">ผลการประเมินโครงการ</h4>
+              <p class="">สำหรับแสดงผลการประเมินโครงการ</p>
+              <a routerLink="/projects/assessment/result" class="btn btn-success btn-raised">แสดงผล</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-sm-6">
+          <div class="card card-danger wow fadeInRight animation-delay-3">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-danger">
+                <i class="fa fa-youtube-play"></i>
+              </span>
+              <h4 class="color-danger">ขั้นตอนการประเมินโครงการ</h4>
+              <p class="">วีดีโอแสดงขั้นตอนการประเมินโครงการ</p>
+              <a routerLink="/projects/assessment/manual" class="btn btn-danger btn-raised">ดูวีดีโอ</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-sm-6">
+          <div class="card card-info wow fadeInRight animation-delay-4">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-info">
+                <i class="fa fa-user-circle"></i>
+              </span>
+              <h4 class="color-info">ข้อมูลส่วนตัว</h4>
+              <p class="">สำหรับจัดการข้อมูลส่วนตัวของท่าน</p>
+              <a href="javascript:void(0)" class="btn btn-info btn-raised">จัดการ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
