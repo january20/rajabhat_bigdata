@@ -44,7 +44,8 @@ export class AssessmentFormComponent implements OnInit {
   
           setTimeout(() => {
             this.isSubmit = false;
-            this.router.navigateByUrl('/projects/'+this.route.snapshot.params.id);
+            location.href = '/projects/assessment/'+data;
+            // this.router.navigateByUrl('/projects/'+this.route.snapshot.params.id);
           }, 2000);
         },
         err => {
