@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../shared/project.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-assessment-project-list',
@@ -10,17 +11,20 @@ export class AssessmentProjectListComponent implements OnInit {
 
   projects: Array<Object>;
   strategy: Array<Object>;
+  currentUser: any;
 
   constructor(
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit() {
-    this.loadData();
+    this.currentUser = this.authService.currentUserValue;
+    this.loadData(this.currentUser.info.assessor_kpi_id);
   }
 
-  loadData() {
-    this.projectService.getAssessmentProjects().subscribe((data: any) => {
+  loadData(id) {
+    this.projectService.getAssessmentProjects(id).subscribe((data: any) => {
       this.projects = data.projects;
       this.strategy = data.strategy;
     });

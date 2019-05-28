@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './shared/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +13,16 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
+    private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.currentUser = this.authService.currentUserValue;
   }
 
   logout() {
     this.authService.logout();
-    location.href = '/home';
+    this.router.navigate(['home']).then(() => location.reload(true));
   }
 
 }

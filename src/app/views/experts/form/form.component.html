@@ -1,0 +1,114 @@
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!formReady">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="formReady">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">รายงานกิจกรรม</h1>
+        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10"></h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body">        
+        <form [formGroup]="form">
+          <h3>1. ประเภทผู้เชี่ยวชาญ</h3>
+          <mat-radio-group class="d-flex justify-content-start flex-wrap row" formControlName="expert_type">
+            <mat-radio-button class="col-4" color="primary" *ngFor="let type of expertTypes" [value]="type.id">
+              {{ type.name_th }}
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <h3 class="mt-3">2. ประเภทความเชี่ยวชาญ</h3>
+          <mat-radio-group class="d-flex justify-content-start flex-wrap row" formControlName="expertise">
+            <mat-radio-button class="col-4" color="primary" *ngFor="let expertise of expertises" [value]="expertise.id">
+              {{ expertise.name_th }}
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <h3 class="mt-3">3. ข้อมูลผู้เชี่ยวชาญ</h3>
+          <div class="row">
+            <div class="col-2">
+              <ngx-dropzone 
+                [multiple]="false"
+                [preserveFiles]="false"
+                [showPreviews]="true"
+                [label]="'เลือกรูปผู้เชี่ยวชาญ'"
+                (filesAdded)="addFiles($event)" >
+              </ngx-dropzone>
+            </div>
+            <div class="col-10">
+              <div class="row">
+                <mat-form-field class="w-100 col-2">
+                  <mat-label>คำนำหน้า</mat-label>
+                  <mat-select formControlName="prefix">
+                    <mat-option *ngFor="let prefix of prefixes" [value]="prefix.id">
+                        {{ prefix.prefix_th }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="w-100 col-5">
+                  <mat-label>ชื่อ</mat-label>
+                  <input matInput formControlName="firstname">
+                  <mat-error *ngIf="formErrors.firstname">{{ formErrors.firstname }}</mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100 col-5">
+                  <mat-label>นามสกุล</mat-label>
+                  <input matInput formControlName="lastname">
+                  <mat-error *ngIf="formErrors.lastname">{{ formErrors.lastname }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="row">
+                <mat-form-field class="w-100 col-8">
+                  <mat-label>อีเมลล์</mat-label>
+                  <input matInput formControlName="email">
+                </mat-form-field>
+                <mat-form-field class="w-100 col-4">
+                  <mat-label>เบอร์โทรศัพท์</mat-label>
+                  <input matInput formControlName="tel">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          
+          <h3 [className]="formErrors.expertise_name ? 'color-danger mt-3' : 'mt-3'">4. ความเชี่ยวชาญ</h3>
+          <mat-form-field class="w-100 px-5">
+            <mat-label>ความเชี่ยวชาญ</mat-label>
+            <input matInput formControlName="expertise_name">
+            <mat-error *ngIf="formErrors.expertise_name">{{ formErrors.expertise_name }}</mat-error>
+          </mat-form-field>
+
+          <h3 [className]="formErrors.expertise_description ? 'color-danger mt-3' : 'mt-3'">5. รายละเอียดความเชี่ยวชาญ</h3>
+          <mat-form-field class="w-100 px-5">
+            <mat-label>รายละเอียดความเชี่ยวชาญ</mat-label>
+            <textarea matInput formControlName="expertise_description"></textarea>
+            <mat-error *ngIf="formErrors.expertise_description">{{ formErrors.expertise_description }}</mat-error>
+          </mat-form-field>
+
+          <h3 class="mt-3">5. รูปภาพ/ไฟล์</h3>
+          <ngx-dropzone 
+            [preserveFiles]="false"
+            [showPreviews]="true"
+            [label]="'เลือกรูปภาพ/ไฟล์'"
+            (filesAdded)="addFiles($event)" >
+          </ngx-dropzone>
+
+          <div class="form-group d-flex justify-content-center">
+            <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+              บันทึกกิจกรรม
+              <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+            </button>
+          </div>   
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,17 @@
+<div class="my-5 text-center" *ngIf="!villages" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
 <!-- Overlay -->
 <a href="/landing" class="ms-conf-btn ms-configurator-btn btn-circle-lg btn-circle btn-circle-raised btn-circle-warning animated rubberBand">
 	<i class="fa fa-android"></i>
 	<i class="fa fa-apple"></i>
 </a>
 
-<div class="ms-site-container mt-5">
+<div class="ms-site-container mt-5" *ngIf="villages">
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
@@ -27,7 +34,7 @@
             [style]="setGeoJsonStyle"></agm-data-layer>
           <agm-marker [latitude]="googleMapOptions.lat" 
             [longitude]="googleMapOptions.lng" 
-            iconUrl="/assets/img/logo.png"></agm-marker>
+            iconUrl="assets/img/logo.png"></agm-marker>
           <ng-container *ngFor="let village of villages">
             <agm-info-window [latitude]="village.lat" 
             [longitude]="village.lng"

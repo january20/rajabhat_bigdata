@@ -2,7 +2,7 @@
   <div class="container container-full">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">
-        <span align="right"><img src="/assets/img/logo.png" width="60%" alt=""></span>
+        <span align="right"><img src="assets/img/logo.png" width="60%" alt=""></span>
         <span class="ms-title"> SRRU <B>Big Data</B></span>
       </a>
     </div>
@@ -235,7 +235,7 @@
         </li>
 
         <li class="nav-item" *ngIf="currentUser">
-          <a data-scroll class="nav-link" routerLink="/dashboard">Dashboard</a>
+          <a data-scroll class="nav-link" routerLink="/dashboard">แดชบอร์ด</a>
         </li>
 
         <li class="nav-item dropdown" *ngIf="currentUser">
@@ -267,10 +267,10 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-left">
                     <li>
-                      <a class="dropdown-item" routerLink="/bio/diversity?t=1"><i class="fa fa-pagelines"></i> พืช</a>
+                      <a class="dropdown-item" routerLink="/bio/plants/create"><i class="fa fa-pagelines"></i> พืช</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" routerLink="/bio/diversity?t=2"><i class="fa fa-twitter"></i> สัตว์</a>
+                      <a class="dropdown-item" routerLink="/bio/animals/create"><i class="fa fa-twitter"></i> สัตว์</a>
                     </li>
                 </ul>
               </li>
@@ -315,7 +315,7 @@
       <a *ngIf="currentUser" href="javascript:void(0)" class="btn-circle btn-circle-white no-focus" (click)="logout()">
         <i class="fa fa-sign-out" data-toggle="tooltip" data-placement="top"></i>
       </a>      
-      <a *ngIf="!currentUser" href="/login" class="btn-circle btn-circle-white no-focus">
+      <a *ngIf="!currentUser" routerLink="/login" class="btn-circle btn-circle-white no-focus">
         <i class="zmdi zmdi-account" data-toggle="tooltip" data-placement="top"></i>
       </a>
 
@@ -338,7 +338,7 @@
               </span>
             </button>
             <div class="modal-title text-center">
-               <span class="ms-logo ms-logo-white ms-logo-sm"><img src="/assets/img/logo.png"></span>
+               <span class="ms-logo ms-logo-white ms-logo-sm"><img src="assets/img/logo.png"></span>
               <h3 class="no-m ms-site-title">เข้าสู่ระบบ
               </h3>
             </div>

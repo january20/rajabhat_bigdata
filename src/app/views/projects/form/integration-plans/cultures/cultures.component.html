@@ -1,6 +1,6 @@
 <div [formGroup]="form">
   <div class="d-flex form-group my-0" >
-    <mat-checkbox class="flex-grow-1" formControlName="status" color="primary">{{ name }}</mat-checkbox>
+    <mat-checkbox class="flex-grow-1" formControlName="status" color="primary" (change)="checked($event)">{{ name }}</mat-checkbox>
     <a *ngIf="form.get('status').value" href="javascript:void(0)" class="btn btn-xs btn-raised btn-success my-0 animated fadeIn" (click)="addPlan($event)">
       <i class="fa fa-plus"></i>
       เพิ่มแผน

@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './views/auth/auth.module#AuthModule' },
   { path: 'projects', loadChildren: './views/projects/projects.module#ProjectsModule' },
   { path: 'bio', loadChildren: './views/bio/bio.module#BioModule' },
+  { path: 'experts', loadChildren: './views/experts/experts.module#ExpertsModule' },
   {
     path: '',
     redirectTo: '/home',
@@ -20,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true , onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

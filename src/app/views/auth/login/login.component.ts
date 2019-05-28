@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.subscribeToFormChanged();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
   }
 
   submit(event) {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(username, password).subscribe(user => {      
       setTimeout(() => {
         if(user && user.token) {
-          location.href = this.returnUrl;
+          this.router.navigate([this.returnUrl]).then(() => location.reload(true));
         } else {
           this.formError = user.error;
           this.isSubmit = false;
