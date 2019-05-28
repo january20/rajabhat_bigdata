@@ -9,6 +9,8 @@ import { AssessmentProjectListComponent } from './assessment/assessment-project-
 import { AssessmentResultComponent } from './assessment/assessment-result/assessment-result.component';
 import { AssessmentFormComponent } from './assessment/assessment-form/assessment-form.component';
 import { AssessmentManualComponent } from './assessment/assessment-manual/assessment-manual.component';
+import { ActivityListComponent } from './activity/activity-list/activity-list.component';
+import { ActivityFormComponent } from './activity/activity-form/activity-form.component';
 
 const routes: Routes = [
   {
@@ -52,7 +54,22 @@ const routes: Routes = [
   },
   {
     path: ':id/activity',
-    component: ActivityComponent
+    children: [
+      {
+        path: '',
+        component: ActivityListComponent
+      },
+      {
+        path: 'create',
+        component: ActivityFormComponent,
+        data: { formType: 'CREATE' }
+      },
+      {
+        path: ':activity_id/edit',
+        component: ActivityFormComponent,
+        data: { formType: 'EDIT' }
+      }
+    ]
   },
   {
     path: ':id',

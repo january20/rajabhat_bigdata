@@ -61,8 +61,11 @@
               </td>
 
               <td>
-                <a *ngIf="project.approved == 1" routerLink="/projects/{{ project.id }}/activity"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-royal">
-                  <i data-toggle="tooltip" data-placement="top" title="รายงานกิจกรรม" class="fa fa-file-o" aria-hidden="true"></i>
+                <a *ngIf="project.approved == 1" routerLink="/projects/{{ project.id }}/activity/create"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-royal">
+                  <i data-toggle="tooltip" data-placement="top" title="กิจกรรม" class="fa fa-file-o" aria-hidden="true"></i>
+                </a>
+                <a *ngIf="project.approved == 1" routerLink="/projects/{{ project.id }}/activity"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-success">
+                  <i data-toggle="tooltip" data-placement="top" title="จัดการกิจกรรม" class="fa fa-list-ul" aria-hidden="true"></i>
                 </a>
                 <a *ngIf="project.approved == 1" routerLink="/projects/{{ project.id }}/edit"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
                   <i data-toggle="tooltip" data-placement="top" title="แก้ไข" class="fa fa-cog" aria-hidden="true"></i>

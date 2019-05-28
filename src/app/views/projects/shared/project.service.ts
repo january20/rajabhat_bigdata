@@ -55,6 +55,10 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/projects/my_projects`);
   }
 
+  getProjectActivities(id) {
+    return this.http.get(`${environment.api_url}/projects/activity?project_id=${id}`);
+  }
+
   getSubDistricts(district_id: number) {
     return this.http.get(`${environment.api_url}/ref/sub_districts?t=with_district_id&district_id=${district_id}`);
   }

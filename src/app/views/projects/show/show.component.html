@@ -175,7 +175,7 @@
 
                   <div class="media mb-2" *ngIf="!user.sys_user.mis">
                     <a class="mr-3" href="#">
-                      <img class="media-object" src="/assets/img/no-avatar.jpg"> </a>
+                      <img class="media-object" src="assets/img/no-avatar.jpg"> </a>
                     <div class="media-body">
                       <h4 class="mt-0 mb-0 color-warning">{{ user.sys_user.firstname + ' ' + user.sys_user.lastname }}</h4>
                       <a href="mailto:joe@example.com?subject=feedback">{{ user.sys_user.email }}</a>
@@ -311,6 +311,7 @@
                     <div class="ms-timeline-date">
                       <time class="timeline-time" datetime="">{{ activity.day }}
                         <span>{{ activity.month }}</span>
+                        <span>{{ activity.year }}</span>
                       </time>
                       <i class="ms-timeline-point"></i>
                     </div>
