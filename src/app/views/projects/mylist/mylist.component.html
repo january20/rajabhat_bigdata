@@ -51,9 +51,9 @@
                   <span *ngIf="!project.project_detail_file_path">ไม่พบข้อมูล</span>
                 </ng-container>
                 <ng-container *ngIf="project.approved == 0">
-                  <a href="/pdfs/{{ project.id}}"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-warning">
+                  <!-- <a href="/pdfs/{{ project.id}}"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-warning">
                     <i data-toggle="tooltip" data-placement="top" title="สั่งปริ้น pdf" class="fa fa-print" aria-hidden="true"></i>
-                  </a>
+                  </a> -->
                   <a *ngIf="project.project_detail_file_path" href="/projects/files/{{ project.project_detail_file_path}}"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-warning">
                     <i data-toggle="tooltip" data-placement="top" title="ดาวน์โหลดไฟล์ แผนการดำเนินงานและรายละเอียดงบประมาณ" class="fa fa-cloud-download" aria-hidden="true"></i>
                   </a>
@@ -62,7 +62,7 @@
 
               <td>
                 <a *ngIf="project.approved == 1" routerLink="/projects/{{ project.id }}/activity"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-royal">
-                  <i data-toggle="tooltip" data-placement="top" title="รายงานกิจกรรม" class="fa fa-star" aria-hidden="true"></i>
+                  <i data-toggle="tooltip" data-placement="top" title="รายงานกิจกรรม" class="fa fa-file-o" aria-hidden="true"></i>
                 </a>
                 <a *ngIf="project.approved == 1" routerLink="/projects/{{ project.id }}/edit"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
                   <i data-toggle="tooltip" data-placement="top" title="แก้ไข" class="fa fa-cog" aria-hidden="true"></i>

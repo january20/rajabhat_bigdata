@@ -214,7 +214,7 @@
             <h3 [className]="formErrors.history ? 'color-danger' : ''">10. ความเป็นมา/หลักการและเหตุผล</h3>
             <mat-form-field class="w-100">
               <mat-label>ความเป็นมา/หลักการและเหตุผล</mat-label>
-              <textarea matInput formControlName="history" rows="3" required></textarea>
+              <textarea matInput formControlName="history" rows="15" required></textarea>
               <mat-error *ngIf="formErrors.history">{{ formErrors.history }}</mat-error>
             </mat-form-field>
             <!-- end history -->
