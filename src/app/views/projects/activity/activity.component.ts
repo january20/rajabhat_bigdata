@@ -90,6 +90,10 @@ export class ActivityComponent implements OnInit {
       objective_note: [''],
       kpi: ['', Validators.required],
       kpi_note: [''],
+      budget: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,2})?$')
+      ])],
       files: this.formBuilder.array([])
     });
   }
@@ -98,7 +102,7 @@ export class ActivityComponent implements OnInit {
 
   // ***Validation Errors //
   createFormErrors() {
-    return { name: '', description: '', objective: '', kpi: ''}
+    return { name: '', description: '', objective: '', kpi: '', budget: ''}
   }
   createValidationMessages() {
     return {
@@ -106,6 +110,7 @@ export class ActivityComponent implements OnInit {
       description: { required: '*กรุณาระบุรายละเอียด' },
       objective: { required: '*กรุณาเลือกวัตถุประสงค์' },
       kpi: { required: '*กรุณาเลือกตัวชี้วัด' },
+      budget: { required: '*กรุณาระบุงบประมาณ', pattern: '*กรุณาระบุเป็นตัวเลขเท่านั้น' },
     }
   }
   // End Validation Errors //

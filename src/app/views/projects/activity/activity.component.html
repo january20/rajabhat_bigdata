@@ -27,14 +27,14 @@
             <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
           </mat-form-field>
           
-          <h3 [className]="formErrors.description ? 'color-danger' : ''">2. รายละเอียดกิจกรรม</h3>
+          <h3 [className]="formErrors.description ? 'color-danger mt-2' : 'mt-2'">2. รายละเอียดกิจกรรม</h3>
           <mat-form-field class="w-100 px-5">
             <mat-label>รายละเอียดกิจกรรม</mat-label>
-            <textarea matInput formControlName="description"></textarea>
+            <textarea matInput formControlName="description" rows="10"></textarea>
             <mat-error *ngIf="formErrors.description">{{ formErrors.description }}</mat-error>
           </mat-form-field>
 
-          <h3 [className]="formErrors.objective ? 'color-danger' : ''">3. ความสอดคล้องกับวัตถุประสงค์</h3>
+          <h3 [className]="formErrors.objective ? 'color-danger mt-2' : 'mt-2'">3. ความสอดคล้องกับวัตถุประสงค์</h3>
           <mat-form-field class="w-100 px-5">
             <mat-label>ความสอดคล้องกับวัตถุประสงค์</mat-label>
             <mat-select formControlName="objective">
@@ -46,10 +46,10 @@
           </mat-form-field>
           <mat-form-field class="w-100 px-5 animated fadeInDown" *ngIf="form.get('objective').value">
             <mat-label>รายละเอียดเพิ่มเติม(ถ้ามี)</mat-label>
-            <textarea matInput formControlName="objective_note"></textarea>
+            <textarea matInput formControlName="objective_note" rows="5"></textarea>
           </mat-form-field>
 
-          <h3 [className]="formErrors.kpi ? 'color-danger' : ''">4. ความสอดคล้องกับตัวชี้วัด(KPI)</h3>
+          <h3 [className]="formErrors.kpi ? 'color-danger mt-2' : 'mt-2'">4. ความสอดคล้องกับตัวชี้วัด(KPI)</h3>
           <mat-form-field class="w-100 px-5">
             <mat-label>ความสอดคล้องกับตัวชี้วัด</mat-label>
             <mat-select formControlName="kpi">
@@ -61,10 +61,17 @@
           </mat-form-field>
           <mat-form-field class="w-100 px-5 animated fadeInDown" *ngIf="form.get('kpi').value">
             <mat-label>รายละเอียดเพิ่มเติม(ถ้ามี)</mat-label>
-            <textarea matInput formControlName="kpi_note"></textarea>
+            <textarea matInput formControlName="kpi_note" rows="5"></textarea>
           </mat-form-field>
 
-          <h3>5. รูปภาพ/ไฟล์(ถ้ามี)</h3>
+          <h3 [className]="formErrors.budget ? 'color-danger mt-2' : 'mt-2'">5. งบประมาณ(บาท)</h3>
+          <mat-form-field class="w-100">
+            <mat-label>งบประมาณ</mat-label>
+            <input matInput formControlName="budget" required>
+            <mat-error *ngIf="formErrors.budget">{{ formErrors.budget }}</mat-error>
+          </mat-form-field>
+
+          <h3 class="mt-2">6. รูปภาพ/ไฟล์(ถ้ามี)</h3>
           <ngx-dropzone 
             [preserveFiles]="false"
             [showPreviews]="true"

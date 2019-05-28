@@ -319,8 +319,25 @@
                         <h3 class="card-title">{{ activity.name }}</h3>
                       </div>
                       <div class="card-body">
+                        <p class="h3"><strong>งบประมาณที่ใช้ไปทั้งหมด:</strong> {{ activity.budget | number }} บาท</p>
                         <h4>รายละเอียด</h4>
                         <p>{{ activity.description }}</p>
+                        <ng-container *ngIf="activity.objective_id">
+                          <h4>สอดคล้องกับวัตถุประสงค์</h4>
+                          <div class="mx-3">                            
+                            <p class="color-primary"><strong>วัตถุประสงค์:</strong> {{ activity.activity_objcetive['objective'] }}</p>
+                            <p>รายละเอียดเพิ่มเติม: {{ activity.objective_note }}</p>
+                          </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="activity.kpi_id">
+                          <h4>สอดคล้องกับตัวชี้วัด</h4>
+                          <div class="mx-3">                            
+                            <p class="color-primary"><strong>ตัวชี้วัด:</strong> {{ activity.activity_kpi['kpi'] }}</p>
+                            <p>รายละเอียดเพิ่มเติม: {{ activity.kpi_note }}</p>
+                          </div>
+                        </ng-container>
+
                         <ng-container *ngIf="activity.images">
                           <h4>รูปภาพ</h4>
                           <div class="row">
@@ -328,8 +345,8 @@
                               <div class="card wow zoomIn">
                                 <div class="ms-thumbnail card-body p-05 ">
                                   <div class="withripple zoom-img">
-                                    <a href="{{ image }}" data-lightbox="gallery" data-title="" c>
-                                      <img src="{{ image }}" alt="" class="img-fluid">
+                                    <a href="/app/{{ image }}" data-lightbox="gallery" data-title="" c>
+                                      <img src="/app/{{ image }}" alt="" class="img-fluid">
                                     </a>
                                   </div>
                                 </div>
