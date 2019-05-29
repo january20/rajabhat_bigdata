@@ -31,6 +31,10 @@ export class ProjectService {
     return this.http.delete(`${environment.api_url}/projects/${id}`);
   }
 
+  deleteActivity(id) {
+    return this.http.delete(`${environment.api_url}/projects/activity/${id}`);
+  }
+
   getProject(id: number) {
     return this.http.get(`${environment.api_url}/projects/${id}`);
   }
@@ -53,6 +57,10 @@ export class ProjectService {
 
   getMyProjectList() {
     return this.http.get(`${environment.api_url}/projects/my_projects`);
+  }
+
+  getActivity(id) {
+    return this.http.get(`${environment.api_url}/projects/activity/${id}`);
   }
 
   getProjectActivities(id) {
@@ -81,6 +89,10 @@ export class ProjectService {
 
   getCreateActivity(id) {
     return this.http.get(`${environment.api_url}/projects/activity/create?project_id=${id}`);
+  }
+
+  getEditActivity(id) {
+    return this.http.get(`${environment.api_url}/projects/activity/${id}/edit`);
   }
 
   getAssessmentProjects(id) {

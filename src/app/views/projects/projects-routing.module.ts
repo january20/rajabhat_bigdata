@@ -62,12 +62,12 @@ const routes: Routes = [
       {
         path: 'create',
         component: ActivityFormComponent,
-        data: { formType: 'CREATE' }
+        data: { formType: 'CREATE', title: 'รายงานกิจกรรม' }
       },
       {
         path: ':activity_id/edit',
         component: ActivityFormComponent,
-        data: { formType: 'EDIT' }
+        data: { formType: 'EDIT', title: 'แก้ไขกิจกรรม' }
       }
     ]
   },
