@@ -27,6 +27,10 @@ export class ProjectService {
     return this.http.put(`${environment.api_url}/projects/${id}`, formData);
   }
 
+  updateProjectActivity(formData, id) {
+    return this.http.put(`${environment.api_url}/projects/activity/${id}`, formData);
+  }
+
   deleteProject(id) {
     return this.http.delete(`${environment.api_url}/projects/${id}`);
   }

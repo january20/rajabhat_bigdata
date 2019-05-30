@@ -68,8 +68,28 @@ export class ActivityFormComponent implements OnInit {
       );
     } else {
       this.addDeleted().then(() => {
-        console.log(this.form.value);
-        this.isSubmit = false;
+        this.projectService.updateProjectActivity(this.form.value, this.route.snapshot.params.activity_id).subscribe(
+          res => {
+            this.snackBar.open('แก้ไขกิจกรรมสำเร็จ', '', {
+              horizontalPosition: 'right',
+              duration: 2000,
+              panelClass: ['color-white', 'bg-success']
+            });
+    
+            setTimeout(() => {
+              this.isSubmit = false;
+              this.router.navigateByUrl('/projects/'+this.route.snapshot.params.id);
+            }, 2000);          
+          },
+          err => {
+            this.snackBar.open('เกิดขข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
+              horizontalPosition: 'right',
+              duration: 2000,
+              panelClass: ['color-white', 'bg-danger']
+            });
+            this.isSubmit = false;
+          }
+        );
       })
     }
 
@@ -124,12 +144,18 @@ export class ActivityFormComponent implements OnInit {
     this.deleted_files.controls = [];
     this.deleted_images.controls = [];
     
-    this.documents.map((file: any) => {
-      if(file.status === 0) this.deleted_files.push(this.formBuilder.group(file));
-    });
-    this.images.map((image: any) => {
-      if(image.status === 0) this.deleted_images.push(this.formBuilder.group(image));
-    });
+    if(this.documents) {
+      this.documents.map((file: any) => {
+        if(file.status === 0) this.deleted_files.push(this.formBuilder.group(file));
+      });
+    }
+    
+    if(this.images) {
+      this.images.map((image: any) => {
+        if(image.status === 0) this.deleted_images.push(this.formBuilder.group(image));
+      });
+    }
+
   }
 
   manageImages(status) {

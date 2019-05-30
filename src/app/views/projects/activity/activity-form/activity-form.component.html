@@ -78,7 +78,7 @@
             <mat-error *ngIf="formErrors.budget">{{ formErrors.budget }}</mat-error>
           </mat-form-field>
 
-          <ng-container *ngIf="formType === 'EDIT' && images">
+          <ng-container *ngIf="formType === 'EDIT' && images && images.length > 0">
             <div class="d-flex mt-2">
               <span class="flex-grow-1">
                 <h3>รูปภาพที่อัพโหลด</h3>
@@ -109,7 +109,7 @@
             </div>
           </ng-container>
 
-          <ng-container *ngIf="formType === 'EDIT' && documents">
+          <ng-container *ngIf="formType === 'EDIT' && documents && documents.length > 0">
             <div class="d-flex mt-2">
               <span class="flex-grow-1">
                 <h3>ไฟล์ที่อัพโหลด</h3>
