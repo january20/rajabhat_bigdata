@@ -327,7 +327,7 @@
                           <h4>สอดคล้องกับวัตถุประสงค์</h4>
                           <div class="mx-3">                            
                             <p class="color-primary"><strong>วัตถุประสงค์:</strong> {{ activity.activity_objcetive['objective'] }}</p>
-                            <p>รายละเอียดเพิ่มเติม: {{ activity.objective_note }}</p>
+                            <p *ngIf="activity.objective_note">รายละเอียดเพิ่มเติม: {{ activity.objective_note }}</p>
                           </div>
                         </ng-container>
 
@@ -335,11 +335,11 @@
                           <h4>สอดคล้องกับตัวชี้วัด</h4>
                           <div class="mx-3">                            
                             <p class="color-primary"><strong>ตัวชี้วัด:</strong> {{ activity.activity_kpi['kpi'] }}</p>
-                            <p>รายละเอียดเพิ่มเติม: {{ activity.kpi_note }}</p>
+                            <p *ngIf="activity.kpi_note">รายละเอียดเพิ่มเติม: {{ activity.kpi_note }}</p>
                           </div>
                         </ng-container>
 
-                        <ng-container *ngIf="activity.images">
+                        <ng-container *ngIf="activity.images && activity.images.length > 0">
                           <h4>รูปภาพ</h4>
                           <div class="row">
                             <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let image of activity.images">
@@ -355,7 +355,7 @@
                             </div>                   
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="activity.files">
+                        <ng-container *ngIf="activity.files && activity.files.length > 0">
                           <h4>ไฟล์</h4>
                           <ol>
                             <li *ngFor="let file of activity.files"><a href="/user/projects/activities/files/{{ file['path'] }}">{{ file['file_name'] }}</a></li>

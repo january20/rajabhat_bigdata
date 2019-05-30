@@ -78,7 +78,7 @@ export class ActivityFormComponent implements OnInit {
     
             setTimeout(() => {
               this.isSubmit = false;
-              this.router.navigateByUrl('/projects/'+this.route.snapshot.params.id);
+              this.router.navigateByUrl('/projects/'+this.route.snapshot.params.id+'/activity');
             }, 2000);          
           },
           err => {
