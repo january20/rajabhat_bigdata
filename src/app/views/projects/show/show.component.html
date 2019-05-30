@@ -358,7 +358,7 @@
                         <ng-container *ngIf="activity.files && activity.files.length > 0">
                           <h4>ไฟล์</h4>
                           <ol>
-                            <li *ngFor="let file of activity.files"><a href="/user/projects/activities/files/{{ file['path'] }}">{{ file['file_name'] }}</a></li>
+                            <li *ngFor="let file of activity.files"><a href="/app/files/projects/activities/{{ file['path'] }}">{{ file['file_name'] }}</a></li>
                           </ol>
                         </ng-container>
                       </div>
