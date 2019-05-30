@@ -1,3 +1,70 @@
-<p>
-  list works!
-</p>
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!experts">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="experts">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">ผู้เชี่ยวชาญ</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card d-none d-md-block card-hero">
+      <mat-tab-group animationDuration="100ms" mat-align-tabs="center">
+        <mat-tab label="ทั้งหมด">
+          <mat-grid-list cols="2" rowHeight="100px">
+            <mat-grid-tile colspan="1">
+              <mat-form-field>
+                <mat-label>Favorite food</mat-label>
+                <mat-select>
+                  <mat-option>
+                    xxx
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="1">
+              <mat-form-field>
+                <mat-icon matSuffix>search</mat-icon>
+                <input type="text" matInput>              
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+          
+          <mat-grid-list cols="3">
+            <mat-grid-tile colspan="1">
+              <div class="card card-warning wow zoomInUp animation-delay-7 h-100 w-100 m-5">
+                <div class="ms-hero-bg-warning ms-hero-img-city">
+                  <img src="assets/img/demo/avatar3.jpg" alt="..." class="img-avatar-circle"> </div>
+                <div class="card-body pt-6 text-center">
+                  <h3 class="color-warning">Joan Fawert</h3>
+                  <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook">
+                    <i class="zmdi zmdi-facebook"></i>
+                  </a>
+                  <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter">
+                    <i class="zmdi zmdi-twitter"></i>
+                  </a>
+                  <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram">
+                    <i class="zmdi zmdi-instagram"></i>
+                  </a>
+                </div>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+          
+
+        </mat-tab>
+        <mat-tab label="ผู้เชี่ยวชาญในมหาวิทยาลัย">Content 2</mat-tab>
+        <mat-tab label="ผู้เชี่ยวชาญในพื้นที่">Content 3</mat-tab>
+        <mat-tab label="ปราชญ์ชาวบ้าน">Content 3</mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>  
+</div>

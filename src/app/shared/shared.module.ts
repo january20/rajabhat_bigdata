@@ -15,7 +15,11 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatTableModule,
-  MatSortModule
+  MatSortModule,
+  MatButtonToggleModule,
+  MatTabsModule,
+  MatGridListModule,
+  MatCardModule
 } from '@angular/material';
 
 import { StriphtmlPipe } from './pipes/striphtml.pipe';
@@ -49,7 +53,11 @@ import { UserService } from './services/user.service';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatButtonToggleModule,
+    MatTabsModule,
+    MatGridListModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

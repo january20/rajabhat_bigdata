@@ -19,6 +19,7 @@ export class FormComponent implements OnInit {
   expertTypes: Array<Object>;
   lat: number = 14.882564;
   lng: number = 103.494215;
+  previewAvatar;
   formReady = false;
   formErrors = {
     avatar: '',
@@ -26,6 +27,7 @@ export class FormComponent implements OnInit {
     lastname: '',
     expertise_name: '',
     expertise_description: '',
+    tel: ''
   };
   validationMessages = {
     avatar: {
@@ -43,6 +45,9 @@ export class FormComponent implements OnInit {
     expertise_description: {
       required: '*กรุณาระบุรายละเอียดความเชี่ยวชาญ'
     },
+    tel: {
+      pattern: '*หมายเลขโทรศัพท์ไม่ถูกต้อง'
+    }
   }
 
   constructor(
@@ -58,8 +63,12 @@ export class FormComponent implements OnInit {
     this.subscribeToFormChanged();
   }
 
+  submit() {
+    console.log(this.form.value);
+  }
+
   loadData() {
-    this.expertService.createExpert().subscribe((data: any) => {
+    this.expertService.create().subscribe((data: any) => {
       this.prefixes = data.prefixes;
       this.expertises = data.expertises;
       this.expertTypes = data.expert_types;
@@ -85,11 +94,13 @@ export class FormComponent implements OnInit {
     });
   }
 
-  triggerAvatarUpload() {
+  triggerAvatarUpload(event) {
+    event.preventDefault();
+    
     this.renderer.invokeElementMethod(
       this.avatarInput.nativeElement,
       'dispatchEvent',
-      [ new MouseEvent('clic', { bubbles: true }) ]
+      [ new MouseEvent('click', { bubbles: true }) ]
     );
   }
 
@@ -99,11 +110,13 @@ export class FormComponent implements OnInit {
 
     reader.onload = () => {
       const content = reader.result;
-
-      // this.avatar.setValue({
-      //   filename: 
-      // })
+      this.previewAvatar = content;
+      this.avatar.get('filename').patchValue(image.name);
+      this.avatar.get('mimeType').patchValue(image.type);
+      this.avatar.get('base64').patchValue(content);
     }
+
+    reader.readAsDataURL(image);
   }
 
   changePosition(event) {
@@ -128,7 +141,7 @@ export class FormComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: [''],
-      tel: [''],
+      tel: ['', Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,2})?$')],
       expertise_name: ['', Validators.required],
       expertise_description: ['', Validators.required],
       files: this.formBuilder.array([]),
