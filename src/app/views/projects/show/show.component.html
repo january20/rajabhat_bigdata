@@ -49,12 +49,12 @@
           <tr>
             <th>
               <i class="zmdi zmdi-group-work mr-1 color-success"></i> กลุ่มเป้าหมาย</th>
-            <td>{{ project?.target_group ? (project?.target_group | striphtml) : 'ไม่พบข้อมูล'}}</td>
+            <td style="white-space: pre-line;">{{ project?.target_group ? (project?.target_group | striphtml) : 'ไม่พบข้อมูล'}}</td>
           </tr>
           <tr>
             <th>
               <i class="zmdi zmdi-time mr-1 color-info"></i> วัน เวลา สถานที่ดำเนินการ</th>
-            <td>{{ project?.operation_date ? (project?.operation_date | striphtml) : 'ไม่พบข้อมูล' }}</td>
+            <td style="white-space: pre-line;">{{ project?.operation_date ? (project?.operation_date | striphtml) : 'ไม่พบข้อมูล' }}</td>
           </tr>
           <tr>
             <th>
@@ -101,7 +101,7 @@
             <div class="card-header">
               <h3 class="card-title">ความเป็นมา/หลักการและเหตุผล</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="white-space: pre-line;">
               {{ project?.history ? (project?.history | striphtml) : 'ไม่พบข้อมูล' }}
             </div>
           </div>
@@ -322,12 +322,12 @@
                       <div class="card-body">
                         <p class="h3"><strong>งบประมาณที่ใช้ไปทั้งหมด:</strong> {{ activity.budget | number }} บาท</p>
                         <h4>รายละเอียด</h4>
-                        <p>{{ activity.description }}</p>
+                        <p style="white-space: pre-line;">{{ activity.description }}</p>
                         <ng-container *ngIf="activity.objective_id">
                           <h4>สอดคล้องกับวัตถุประสงค์</h4>
                           <div class="mx-3">                            
                             <p class="color-primary"><strong>วัตถุประสงค์:</strong> {{ activity.activity_objcetive['objective'] }}</p>
-                            <p *ngIf="activity.objective_note">รายละเอียดเพิ่มเติม: {{ activity.objective_note }}</p>
+                            <p style="white-space: pre-line;" *ngIf="activity.objective_note">รายละเอียดเพิ่มเติม: {{ activity.objective_note }}</p>
                           </div>
                         </ng-container>
 
@@ -335,7 +335,7 @@
                           <h4>สอดคล้องกับตัวชี้วัด</h4>
                           <div class="mx-3">                            
                             <p class="color-primary"><strong>ตัวชี้วัด:</strong> {{ activity.activity_kpi['kpi'] }}</p>
-                            <p *ngIf="activity.kpi_note">รายละเอียดเพิ่มเติม: {{ activity.kpi_note }}</p>
+                            <p style="white-space: pre-line;" *ngIf="activity.kpi_note">รายละเอียดเพิ่มเติม: {{ activity.kpi_note }}</p>
                           </div>
                         </ng-container>
 

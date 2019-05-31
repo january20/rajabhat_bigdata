@@ -10,6 +10,12 @@ export class ListComponent implements OnInit {
 
   experts: Array<Object>;
 
+  expert_type_color = {
+    1: 'success',
+    2: 'royal',
+    3: 'warning'
+  }
+
   constructor(
     private expertService: ExpertService
   ) { }

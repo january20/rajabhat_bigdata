@@ -15,56 +15,73 @@
   </div>
 
   <div class="container">
-    <div class="card d-none d-md-block card-hero">
-      <mat-tab-group animationDuration="100ms" mat-align-tabs="center">
-        <mat-tab label="ทั้งหมด">
-          <mat-grid-list cols="2" rowHeight="100px">
-            <mat-grid-tile colspan="1">
-              <mat-form-field>
-                <mat-label>Favorite food</mat-label>
+    <div class="card card-hero card-primary">
+      <ul class="nav nav-tabs nav-tabs-primary nav-tabs-full nav-tabs-4 indicator-dark" role="tablist">
+        <li class="nav-item"><a class="nav-link withoutripple active" href="#all" aria-controls="all" role="tab" data-toggle="tab"><i class="zmdi zmdi-group-work"></i> <span class="d-none d-sm-inline">ทั้งหมด</span></a></li>
+        <li class="nav-item"><a class="nav-link withoutripple" href="#inside" aria-controls="inside" role="tab" data-toggle="tab"><i class="zmdi zmdi-graduation-cap"></i> <span class="d-none d-sm-inline">ในมหาวิทยาลัย</span></a></li>
+        <li class="nav-item"><a class="nav-link withoutripple" href="#outside" aria-controls="outside" role="tab" data-toggle="tab"><i class="zmdi zmdi-pin-drop"></i> <span class="d-none d-sm-inline">ในพื้นที่</span></a></li>
+        <li class="nav-item"><a class="nav-link withoutripple" href="#villager" aria-controls="villager" role="tab" data-toggle="tab"><i class="zmdi zmdi-home"></i> <span class="d-none d-sm-inline">ปราชญ์ชาวบ้าน</span></a></li>
+      </ul>
+
+      <div class="card-body px-5 py-2">
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane fade active show" id="all">
+            <div class="row">
+              <mat-form-field class="col">
+                <mat-label>เลือกประเภทความเชี่ยวชาญ</mat-label>
                 <mat-select>
                   <mat-option>
-                    xxx
+                      xxx
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-            </mat-grid-tile>
 
-            <mat-grid-tile colspan="1">
-              <mat-form-field>
+              <mat-form-field class="col">
                 <mat-icon matSuffix>search</mat-icon>
-                <input type="text" matInput>              
+                <input type="text" matInput placeholder="ค้นหา ชื่อ-นามสกุล">                
               </mat-form-field>
-            </mat-grid-tile>
-          </mat-grid-list>
-          
-          <mat-grid-list cols="3">
-            <mat-grid-tile colspan="1">
-              <div class="card card-warning wow zoomInUp animation-delay-7 h-100 w-100 m-5">
-                <div class="ms-hero-bg-warning ms-hero-img-city">
-                  <img src="assets/img/demo/avatar3.jpg" alt="..." class="img-avatar-circle"> </div>
-                <div class="card-body pt-6 text-center">
-                  <h3 class="color-warning">Joan Fawert</h3>
-                  <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook">
-                    <i class="zmdi zmdi-facebook"></i>
-                  </a>
-                  <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter">
-                    <i class="zmdi zmdi-twitter"></i>
-                  </a>
-                  <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram">
-                    <i class="zmdi zmdi-instagram"></i>
-                  </a>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-4 col-sm-6" *ngFor="let expert of experts">
+                <div [className]="'card mt-4 card-'+expert_type_color[expert.expert_type.id]+' wow zoomInUp animation-delay-7'">
+                  <div [className]="'ms-hero-bg-'+expert_type_color[expert.expert_type.id]+' ms-hero-img-city'">
+                    <img src="/app/images/users/avatar/{{ expert.sys_user.profile_image }}" alt="..." class="img-avatar-circle"> </div>
+                  <div class="card-body pt-6 text-center">
+                    <h3 [className]="'color-'+expert_type_color[expert.expert_type.id]">{{ expert.sys_user.firstname + ' ' + expert.sys_user.lastname}}</h3>
+                    <div class="row"><span [className]="'mx-auto badge badge-'+expert_type_color[expert.expert_type.id]+' my-1'">{{ expert.expert_type.name_th }}</span></div>
+                    <div class="row"><span class="mx-auto badge badge-info my-1">{{ expert.expertise.name_th }}</span></div>
+                    <div class="row mt-2">
+                      <div class="col">
+                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook">
+                          <i class="zmdi zmdi-facebook"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram">
+                          <i class="zmdi zmdi-instagram"></i>
+                        </a>
+                      </div>
+                      <div class="col text-right">
+                        <a routerLink="/experts/{{ expert.id }}"  [className]="'btn btn-raised btn-sm btn-'+expert_type_color[expert.expert_type.id]">
+                          <i class="zmdi zmdi-account"></i> ดูข้อมูล</a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </mat-grid-tile>
-          </mat-grid-list>
-          
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="inside">
+              ในมหาวิทยาลัย
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="outside">
+              ในพื้นที่
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="villager">
+              ปราชญ์ชาวบ้าน
+          </div>
+        </div>
+      </div>
 
-        </mat-tab>
-        <mat-tab label="ผู้เชี่ยวชาญในมหาวิทยาลัย">Content 2</mat-tab>
-        <mat-tab label="ผู้เชี่ยวชาญในพื้นที่">Content 3</mat-tab>
-        <mat-tab label="ปราชญ์ชาวบ้าน">Content 3</mat-tab>
-      </mat-tab-group>
     </div>
   </div>  
 </div>

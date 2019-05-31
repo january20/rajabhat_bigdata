@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'create',
     component: FormComponent,
-    data: { formType: 'CREATE' }
+    data: { formType: 'CREATE', title: 'เพิ่มผู้เชี่ยวชาญ' }
   },
   {
     path: 'mylist',
@@ -22,7 +22,7 @@ const routes: Routes = [
   {
     path: ':id/edit',
     component: FormComponent,
-    data: { formType: 'EDIT' }
+    data: { formType: 'EDIT', title: 'แก้ไขผู้เชี่ยวชาญ' }
   },
   {
     path: ':id',
