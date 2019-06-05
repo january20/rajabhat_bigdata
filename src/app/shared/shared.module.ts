@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { 
   MatButtonModule, 
   MatIconModule, 
@@ -19,7 +19,8 @@ import {
   MatButtonToggleModule,
   MatTabsModule,
   MatGridListModule,
-  MatCardModule
+  MatCardModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 import { StriphtmlPipe } from './pipes/striphtml.pipe';
@@ -39,6 +40,7 @@ import { UserService } from './services/user.service';
   ],
   exports: [
     ReactiveFormsModule,
+    FormsModule,
     StriphtmlPipe,
     MatProgressSpinnerModule,
     MatCheckboxModule,
@@ -57,7 +59,8 @@ import { UserService } from './services/user.service';
     MatButtonToggleModule,
     MatTabsModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
   ]
 })
 export class SharedModule { }

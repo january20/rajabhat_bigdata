@@ -208,7 +208,7 @@
                       <i class="fa fa-shopping-bag"></i> OTOP</h3>
                     <ul class="megamenu-block-list">
                       <li>
-                        <a class="withripple" href="/data/otop">
+                        <a class="withripple" routerLink="/otop">
                           <i class="fa fa-hand-o-right"></i> สินค้าโอทอป</a>
                       </li>
                       </ul>
@@ -281,11 +281,11 @@
                 <ul class="dropdown-menu dropdown-menu-left">
                   <li>
                     <a class="dropdown-item" routerLink="/experts/create">
-                      <i class="zmdi zmdi-book"></i> เพิ่มผู้เชี่ยวชาญ</a>
+                      <i class="zmdi zmdi-plus"></i> เพิ่มผู้เชี่ยวชาญ</a>
                   </li>
                   <li>
                     <a class="dropdown-item" routerLink="/experts/mylist">
-                      <i class="zmdi zmdi-book"></i> รายการของฉัน</a>
+                      <i class="zmdi zmdi-view-list-alt"></i> รายการของฉัน</a>
                   </li>
                 </ul>
               </li>
@@ -293,9 +293,23 @@
               <li>
                 <a class="dropdown-item" routerLink="/families"><i class="fa fa-users"></i> ประชากร</a>
               </li>
-              <li>
-                <a class="dropdown-item" routerLink="/otop/create"><i class="fa fa-shopping-bag"></i> สินค้า OTOP</a>
+              
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="javascript:void(0)">
+                  <i class="fa fa-shopping-bag"></i> สินค้า OTOP
+                </a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li>
+                    <a class="dropdown-item" routerLink="/otop/create">
+                      <i class="zmdi zmdi-plus"></i> เพิ่มสินค้า OTOP</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/otop/mylist">
+                      <i class="zmdi zmdi-view-list-alt"></i> รายการของฉัน</a>
+                  </li>
+                </ul>
               </li>
+
               <li>
                 <a class="dropdown-item" routerLink="/developers"><i class="fa fa-cogs"></i> APIs</a>
               </li>
