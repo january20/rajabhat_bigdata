@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { OtopService } from '../shared/otop.service';
+import { ActivatedRoute } from '@angular/router';
+import { Otop } from '../shared/otop';
 
 @Component({
   selector: 'app-show',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowComponent implements OnInit {
 
-  constructor() { }
+  product: Otop;
+  related_products: any;
+
+  constructor(
+    private otopService: OtopService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  async loadData() {
+    this.product = await this.otopService.get(this.route.snapshot.params.id).toPromise();
+    this.related_products = await this.otopService.getRelatedProducts(this.product.category_id).toPromise();
+  }
+
+  convertFloat(val): number {
+    return parseFloat(val);
   }
 
 }

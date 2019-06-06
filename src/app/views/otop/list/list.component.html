@@ -25,22 +25,29 @@
               <h4 class="mb-1 no-mt">ประเภทสินค้า</h4>
               <fieldset>
                 <div class="form-group no-mt">
-                  <ng-container *ngFor="let category of categories">
-                    <div class="checkbox">
-                      <label class="text-truncate"><input type="checkbox" value=".otop-{{ category.id }}"> {{ category.name_th }}</label>
-                    </div>
-                  </ng-container>
+                  <mat-radio-group (change)="filterProducts($event)" class="d-flex flex-column">
+                    <mat-radio-button [checked]="true" value="0">ทั้งหมด</mat-radio-button>
+                    <ng-container *ngFor="let category of categories" >
+                      <mat-radio-button [value]="category.id">{{ category.name_th }}</mat-radio-button>
+                    </ng-container>
+                  </mat-radio-group>
                 </div>
               </fieldset>
-              <button class="btn btn-danger btn-block no-mb mt-2" id="Reset"><i class="zmdi zmdi-delete"></i> ล้างการกรอง</button>
             </form>
           </div>
         </div>
       </div>
       <div class="col-lg-9">
+        <mat-paginator 
+          class="mb-5"
+          [length]="otop.total"
+          [pageSize]="otop.per_page"
+          [showFirstLastButtons]="true"
+          (page)="changePage($event)">
+        </mat-paginator>
         <div class="row" id="Container">
           <ng-container *ngFor="let product of otop.data">
-            <div class="col-xl-4 col-md-6 mix otop-{{ product.category_id }}" style="display: inline-block;" data-bound="">
+            <div class="col-xl-4 col-md-6 mix animated fadeIn" style="display: inline-block;" data-bound="">
               <div class="card ms-feature">
                 <div class="card-body overflow-hidden text-center">
                   <img src="{{ product.images ? product.images[0] : 'assets/img/no_product.png'}}" alt="" class="img-fluid center-block" style="height: 160px">
@@ -62,14 +69,6 @@
             </div>
           </ng-container>
         </div>
-
-        <mat-paginator 
-          [length]="otop.total"
-          [pageSize]="otop.per_page"
-          [showFirstLastButtons]="true"
-          (page)="changePage($event)">
-        </mat-paginator>
-
       </div>
     </div>
   </div>

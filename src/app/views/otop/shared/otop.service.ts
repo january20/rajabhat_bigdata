@@ -12,8 +12,8 @@ export class OtopService {
     private http: HttpClient
   ) { }
 
-  getAll(page) {
-    return this.http.get<Array<Otop>>(`${environment.api_url}/otop?page=${page}`);
+  getAll(page, category?) {
+    return this.http.get<Array<Otop>>(`${environment.api_url}/otop?${category ? 'category_id='+category+'&' : ''}page=${page}`);
   }
 
   getMyList() {
@@ -22,6 +22,10 @@ export class OtopService {
   
   get(id) {
     return this.http.get<Otop>(`${environment.api_url}/otop/${id}`);
+  }
+
+  getRelatedProducts(cat_id) {
+    return this.http.get(`${environment.api_url}/otop/related?category_id=${cat_id}`);
   }
 
   create() {

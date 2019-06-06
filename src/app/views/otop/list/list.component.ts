@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OtopService } from '../shared/otop.service';
 import { Otop } from '../shared/otop';
+import { map } from 'rxjs/operators';
+import { MatRadioButton } from '@angular/material';
 
 @Component({
   selector: 'app-list',
@@ -9,8 +11,9 @@ import { Otop } from '../shared/otop';
 })
 export class ListComponent implements OnInit {
 
-  otop: Array<Otop>;
+  otop: any;
   categories: any;
+  current_category = 0;
 
   constructor(
     private otopService: OtopService
@@ -22,14 +25,23 @@ export class ListComponent implements OnInit {
   }
 
   changePage(event) {
-    this.loadData(event.pageIndex + 1);
+    this.loadData(event.pageIndex + 1, this.current_category);
   }
 
-  loadData(page = 1) {
-    this.otopService.getAll(page).subscribe(data => this.otop = data);    
+  filterProducts(event) {
+    if(event.value == 0) { this.loadData() }
+    else {
+      this.current_category = event.value;    
+      this.loadData(1, event.value);
+    }    
+  }
+
+  async loadData(page = 1, category?) {
+    this.otopService.getAll(page, category).subscribe((data: any) => this.otop = data);    
   }
 
   loadCategories() {
-    this.otopService.categories().subscribe(data => this.categories = data);
+    this.otopService.categories().subscribe((data: any) => this.categories = data);
   }
+  
 }
