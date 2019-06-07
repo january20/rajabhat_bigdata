@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Otop } from './otop';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +52,9 @@ export class OtopService {
 
   categories() {
     return this.http.get(`${environment.api_url}/otop/categories`);
+  }
+
+  searchSubDistricts(query: string): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/ref/sub_districts?t=q&name=${query}`);
   }
 }

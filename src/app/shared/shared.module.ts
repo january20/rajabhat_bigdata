@@ -20,7 +20,8 @@ import {
   MatTabsModule,
   MatGridListModule,
   MatCardModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 import { StriphtmlPipe } from './pipes/striphtml.pipe';
@@ -60,7 +61,8 @@ import { UserService } from './services/user.service';
     MatTabsModule,
     MatGridListModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatAutocompleteModule
   ]
 })
 export class SharedModule { }

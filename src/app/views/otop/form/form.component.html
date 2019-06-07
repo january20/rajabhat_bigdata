@@ -1,3 +1,72 @@
-<p>
-  form works!
-</p>
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!categories">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="categories">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{ title }}</h1>
+        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10"></h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body">        
+        <form [formGroup]="form">
+          <h3>1. ข้อมูลทั่วไป</h3>
+          <div class="row">
+            <mat-form-field class="w-100 col-8">
+              <input matInput placeholder="ตำบลของผลิตภัณฑ์" aria-label="sub_district" [matAutocomplete]="auto" formControlName="sub_district">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displaySubDistrict">
+                <mat-option *ngFor="let sub_district of subDistricts | async" [value]="sub_district">
+                  <span>{{ 'ตำบล'+sub_district.sub_district_name_th+' อำเภอ'+sub_district.district.district_name_th+' จังหวัด'+sub_district.province.province_name_th }}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field class="w-100 col-4">
+              <mat-label>ประเภทของผลิตภัณฑ์</mat-label>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                  {{ category.name_th }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- <mat-form-field class="w-100">
+              <mat-label>ชื่อผลิตภัณฑ์</mat-label>
+              <input matInput formControlName="name">
+              <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>รายละเอียดผลิตภัณฑ์</mat-label>
+              <input matInput formControlName="description">
+              <mat-error *ngIf="formErrors.description">{{ formErrors.description }}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>ราคา</mat-label>
+              <input matInput formControlName="price">
+              <mat-error *ngIf="formErrors.price">{{ formErrors.price }}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>หมายเหตุ</mat-label>
+              <input matInput formControlName="note">
+              <mat-error *ngIf="formErrors.note">{{ formErrors.note }}</mat-error>
+            </mat-form-field> -->
+          </div>
+
+          <div class="form-group d-flex justify-content-center">
+            <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+              {{ title }}
+              <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+            </button>
+          </div>   
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
