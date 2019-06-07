@@ -12,7 +12,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import {
   HeaderComponent,
-  FooterComponent  
+  FooterComponent
 } from './shared/layout';
 
 @NgModule({
