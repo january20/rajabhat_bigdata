@@ -1,0 +1,75 @@
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!otop && !categories">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="otop && categories">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light mb-6">
+    <div class="text-center color-white mt-6 index-1">
+      <h1>สินค้าโอทอป</h1>
+      <p class="lead lead-lg">สินค้าทั้งหมด</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Filter List</h3>
+          </div>
+          <div class="card-body">
+            <form class="form-horizontal" id="Filters">
+              <h4 class="mb-1 no-mt">ประเภทสินค้า</h4>
+              <fieldset>
+                <div class="form-group no-mt">
+                  <mat-radio-group (change)="filterProducts($event)" class="d-flex flex-column">
+                    <mat-radio-button [checked]="true" value="0">ทั้งหมด</mat-radio-button>
+                    <ng-container *ngFor="let category of categories" >
+                      <mat-radio-button [value]="category.id">{{ category.name_th }}</mat-radio-button>
+                    </ng-container>
+                  </mat-radio-group>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <mat-paginator 
+          class="mb-5"
+          [length]="otop.total"
+          [pageSize]="otop.per_page"
+          [showFirstLastButtons]="true"
+          (page)="changePage($event)">
+        </mat-paginator>
+        <div class="row" id="Container">
+          <ng-container *ngFor="let product of otop.data">
+            <div class="col-xl-4 col-md-6 mix animated fadeIn" style="display: inline-block;" data-bound="">
+              <div class="card ms-feature">
+                <div class="card-body overflow-hidden text-center">
+                  <img src="{{ product.images ? product.images[0] : 'assets/img/no_product.png'}}" alt="" class="img-fluid center-block" style="height: 160px">
+                  <h4 class="text-normal text-center text-truncate">{{ product.name }}</h4>
+                  <p class="text-truncate">{{ product.description }}</p>
+                  <div class="mt-2">
+                    <span class="mr-2">
+                      <i class="zmdi zmdi-star color-warning"></i>
+                      <i class="zmdi zmdi-star color-warning"></i>
+                      <i class="zmdi zmdi-star color-warning"></i>
+                      <i class="zmdi zmdi-star color-warning"></i>
+                      <i class="zmdi zmdi-star color-warning"></i>
+                    </span>
+                    <span class="ms-tag ms-tag-success">฿ {{ product.price | number }}</span>
+                  </div>              
+                  <a routerLink="/otop/{{ product.id }}" class="btn btn-primary btn-sm btn-block btn-raised mt-2 no-mb"><i class="zmdi zmdi-info"></i>ดูรายละเอียด</a>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

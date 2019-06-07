@@ -36,6 +36,8 @@
               "node_modules/jquery/dist/jquery.js",
               "src/assets/js/plugins.min.js",
               "src/assets/js/app.min.js",
+              "src/assets/js/portfolio.js",
+              "src/assets/js/ecommerce.js",
               "src/assets/js/palette.js"
             ],
             "es5BrowserSupport": true

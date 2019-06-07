@@ -11,9 +11,10 @@ import { ListComponent } from './list/list.component';
 import { ShowComponent } from './show/show.component';
 
 import { environment } from 'src/environments/environment';
+import { MylistComponent } from './mylist/mylist.component';
 
 @NgModule({
-  declarations: [ExpertsComponent, FormComponent, ListComponent, ShowComponent],
+  declarations: [ExpertsComponent, FormComponent, ListComponent, ShowComponent, MylistComponent],
   imports: [
     CommonModule,
     ExpertsRoutingModule,

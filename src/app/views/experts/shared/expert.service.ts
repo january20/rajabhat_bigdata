@@ -11,7 +11,35 @@ export class ExpertService {
     private http: HttpClient
   ) { }
 
-  createExpert() {
-    return this.http.get(`${environment.api_url}/experts/create`)
+  getAll() {
+    return this.http.get(`${environment.api_url}/experts`); 
+  }
+
+  get(id) {
+    return this.http.get(`${environment.api_url}/experts/${id}`);
+  }
+
+  getMyList() {
+    return this.http.get(`${environment.api_url}/experts/mylist`);
+  }
+
+  create() {
+    return this.http.get(`${environment.api_url}/experts/create`);
+  }
+
+  store(formData) {
+    return this.http.post(`${environment.api_url}/experts`, formData);
+  }
+
+  edit(id) {
+    return this.http.get(`${environment.api_url}/experts/${id}/edit`);
+  }
+
+  update(formData, id) {
+    return this.http.put(`${environment.api_url}/experts/${id}`, formData);
+  }
+
+  delete(id) {
+    return this.http.delete(`${environment.api_url}/experts/${id}`);
   }
 }

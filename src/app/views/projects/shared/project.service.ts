@@ -27,8 +27,16 @@ export class ProjectService {
     return this.http.put(`${environment.api_url}/projects/${id}`, formData);
   }
 
+  updateProjectActivity(formData, id) {
+    return this.http.put(`${environment.api_url}/projects/activity/${id}`, formData);
+  }
+
   deleteProject(id) {
     return this.http.delete(`${environment.api_url}/projects/${id}`);
+  }
+
+  deleteActivity(id) {
+    return this.http.delete(`${environment.api_url}/projects/activity/${id}`);
   }
 
   getProject(id: number) {
@@ -55,6 +63,14 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/projects/my_projects`);
   }
 
+  getActivity(id) {
+    return this.http.get(`${environment.api_url}/projects/activity/${id}`);
+  }
+
+  getProjectActivities(id) {
+    return this.http.get(`${environment.api_url}/projects/activity?project_id=${id}`);
+  }
+
   getSubDistricts(district_id: number) {
     return this.http.get(`${environment.api_url}/ref/sub_districts?t=with_district_id&district_id=${district_id}`);
   }
@@ -77,6 +93,10 @@ export class ProjectService {
 
   getCreateActivity(id) {
     return this.http.get(`${environment.api_url}/projects/activity/create?project_id=${id}`);
+  }
+
+  getEditActivity(id) {
+    return this.http.get(`${environment.api_url}/projects/activity/${id}/edit`);
   }
 
   getAssessmentProjects(id) {

@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'projects', loadChildren: './views/projects/projects.module#ProjectsModule' },
   { path: 'bio', loadChildren: './views/bio/bio.module#BioModule' },
   { path: 'experts', loadChildren: './views/experts/experts.module#ExpertsModule' },
+  { path: 'otop', loadChildren: './views/otop/otop.module#OtopModule' },
   {
     path: '',
     redirectTo: '/home',

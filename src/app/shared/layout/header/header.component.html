@@ -15,7 +15,7 @@
           <a data-scroll class="nav-link" routerLink="/projects">โครงการ</a>
         </li>
         <li class="nav-item dropdown dropdown-megamenu-container">
-          <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="component">ฐานข้อมูล
+          <a href="javascript:void(0)" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="component">ฐานข้อมูล
             <i class="zmdi zmdi-chevron-down"></i>
           </a>
 
@@ -29,32 +29,32 @@
                       <i class="fa fa-bold"></i> ข้อมูลประชากร</h3>
                     <ul class="megamenu-block-list">
                       <li>
-                        <a class="withripple" href="/data/population">
+                        <a class="withripple" routerLink="/info/population">
                           <i class="fa fa-users"></i> ประชากร</a>
                       </li>
                       <li>
-                        <a class="withripple" href="/data/population/age">
+                        <a class="withripple" routerLink="/info/population/age">
                           <i class="fa fa-graduation-cap"></i> อายุประชากร</a>
                       </li>
                       <li>
-                        <a class="withripple" href="/data/population/income">
+                        <a class="withripple" routerLink="/info/population/income">
                           <i class="fa fa-bar-chart"></i> รายได้</a>
                       </li>
                       <li>
-                        <a class="withripple" href="/data/population/occupation">
+                        <a class="withripple" routerLink="/info/population/occupation">
                           <i class="fa fa-arrows-h"></i> อาชีพ</a>
                       </li>
                       <li>
-                        <a class="withripple" href="/data/population/education">
+                        <a class="withripple" routerLink="/info/population/education">
                           <i class="fa fa-graduation-cap"></i> การศึกษา</a>
                       </li>
                       <li>
-                        <a class="withripple" href="https://www.tpmap.in.th">
+                        <a class="withripple" routerLink="https://www.tpmap.in.th">
                           <i class="fa fa-money" aria-hidden="true"></i> ความยากจน</a>
                       </li>
                         <li class="dropdown-divider"></li>
                         <li>
-                        <a class="withripple" href="/data/experts">
+                        <a class="withripple" routerLink="/experts">
                           <i class="fa fa-circle-o-notch"></i> ผู้เชี่ยวชาญ</a>
                       </li>
                     </ul>
@@ -208,7 +208,7 @@
                       <i class="fa fa-shopping-bag"></i> OTOP</h3>
                     <ul class="megamenu-block-list">
                       <li>
-                        <a class="withripple" href="/data/otop">
+                        <a class="withripple" routerLink="/otop">
                           <i class="fa fa-hand-o-right"></i> สินค้าโอทอป</a>
                       </li>
                       </ul>
@@ -239,12 +239,12 @@
         </li>
 
         <li class="nav-item dropdown" *ngIf="currentUser">
-          <a href="#" class="color-warning nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">ระบบ
+          <a href="javascript:void(0)" class="color-warning nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">ระบบ
             <i class="zmdi zmdi-chevron-down"></i>
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="/profile"><i class="fa fa-user-circle" aria-hidden="true"></i> ข้อมูลส่วนตัว</a>
+              <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-user-circle" aria-hidden="true"></i> ข้อมูลส่วนตัว</a>
             </li>
             <ng-container *ngIf="currentUser.info.role === 2">
               <li class="dropdown-submenu">
@@ -262,7 +262,7 @@
                 </ul>
               </li>
               <li class="dropdown-submenu">
-                <a class="dropdown-item">
+                <a class="dropdown-item" href="javascript:void(0)">
                   <i class="fa fa-leaf"></i> ชีวภาพ
                 </a>
                 <ul class="dropdown-menu dropdown-menu-left">
@@ -274,18 +274,42 @@
                     </li>
                 </ul>
               </li>
-              <li>
-                <a class="dropdown-item" routerLink="/experts/create">
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="javascript:void(0)">
                   <i class="fa fa-graduation-cap"></i> ผู้เชี่ยวชาญ
                 </a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li>
+                    <a class="dropdown-item" routerLink="/experts/create">
+                      <i class="zmdi zmdi-plus"></i> เพิ่มผู้เชี่ยวชาญ</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/experts/mylist">
+                      <i class="zmdi zmdi-view-list-alt"></i> รายการของฉัน</a>
+                  </li>
+                </ul>
               </li>
 
               <li>
                 <a class="dropdown-item" routerLink="/families"><i class="fa fa-users"></i> ประชากร</a>
               </li>
-              <li>
-                <a class="dropdown-item" routerLink="/otop/create"><i class="fa fa-shopping-bag"></i> สินค้า OTOP</a>
+              
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="javascript:void(0)">
+                  <i class="fa fa-shopping-bag"></i> สินค้า OTOP
+                </a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li>
+                    <a class="dropdown-item" routerLink="/otop/create">
+                      <i class="zmdi zmdi-plus"></i> เพิ่มสินค้า OTOP</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/otop/mylist">
+                      <i class="zmdi zmdi-view-list-alt"></i> รายการของฉัน</a>
+                  </li>
+                </ul>
               </li>
+
               <li>
                 <a class="dropdown-item" routerLink="/developers"><i class="fa fa-cogs"></i> APIs</a>
               </li>
@@ -324,143 +348,199 @@
       <i class="zmdi zmdi-menu"></i>
     </a>
   </div>
-
 </nav>
 
-<div class="ms-site-container">
-    <div class="modal modal-primary" id="ms-account-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog animated zoomIn animated-3x" role="document">
-        <div class="modal-content">
-          <div class="modal-header d-block shadow-2dp no-pb">
-            <button type="button" class="close d-inline pull-right mt-2" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">
-                <i class="zmdi zmdi-close"></i>
-              </span>
-            </button>
-            <div class="modal-title text-center">
-               <span class="ms-logo ms-logo-white ms-logo-sm"><img src="assets/img/logo.png"></span>
-              <h3 class="no-m ms-site-title">เข้าสู่ระบบ
-              </h3>
-            </div>
-            <div class="modal-header-tabs">
-              <ul class="nav nav-tabs nav-tabs-full nav-tabs-3 nav-tabs-primary" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <a href="#ms-login-tab" aria-controls="ms-login-tab" role="tab" data-toggle="tab" class="nav-link active withoutripple">
-                      <i class="zmdi zmdi-account"></i> เข้าสู่ระบบ</a>
-                  </li>
-              </ul>
-            </div>
-          </div>
-          <div class="modal-body">
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane fade active show" id="ms-login-tab">
-                <form autocomplete="off" action="" method="POST" >
-                  <fieldset>
-                    <div class="form-group label-floating">
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="zmdi zmdi-account"></i>
-                        </span>
-                        <label class="control-label" for="ms-form-user">Username</label>
-                        <input type="text" name="username" id="ms-form-user" class="form-control" required> </div>
-                    </div>
-                    <div class="form-group label-floating">
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="zmdi zmdi-lock"></i>
-                        </span>
-                        <label class="control-label" for="ms-form-pass">Password</label>
-                        <input type="password" name="password" id="ms-form-pass" class="form-control" required> </div>
-                    </div>
-                    <div class="row mt-2">
-                      <div class="col-md-6">
-                        <div class="form-group no-mt">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox"> Remember Me </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <button class="btn btn-raised btn-primary pull-right">Login</button>
-                      </div>
-                    </div>
-                  </fieldset>
-                </form>
-                <div class="text-center">
-                  <h4>การเข้าสู่ระบบ</h4>
-                    <p class="text-left">
-                      ใช้ Username และ Password เดียวกับระบบยืนยันตัวตนของมหาวิทยาลัย<BR>
-                      username : ชื่อภาษาอังกฤษ.อักษรแรกของนามสกุล <BR>
-                      password : รหัสบัตรประชาชน<BR>
-                    </p>
-                </div>
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="ms-register-tab">
-                <form>
-                  <fieldset>
-                    <div class="form-group label-floating">
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="zmdi zmdi-account"></i>
-                        </span>
-                        <label class="control-label" for="ms-form-user-r">Username</label>
-                        <input type="text" id="ms-form-user-r" class="form-control"> </div>
-                    </div>
-                    <div class="form-group label-floating">
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="zmdi zmdi-email"></i>
-                        </span>
-                        <label class="control-label" for="ms-form-email-r">Email</label>
-                        <input type="email" id="ms-form-email-r" class="form-control"> </div>
-                    </div>
-                    <div class="form-group label-floating">
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="zmdi zmdi-lock"></i>
-                        </span>
-                        <label class="control-label" for="ms-form-pass-r">Password</label>
-                        <input type="password" id="ms-form-pass-r" class="form-control"> </div>
-                    </div>
-                    <div class="form-group label-floating">
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="zmdi zmdi-lock"></i>
-                        </span>
-                        <label class="control-label" for="ms-form-pass-rn">Re-type Password</label>
-                        <input type="password" id="ms-form-pass-rn" class="form-control"> </div>
-                    </div>
-                    <button class="btn btn-raised btn-block btn-primary">Register Now</button>
-                  </fieldset>
-                </form>
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="ms-recovery-tab">
-                <form>
-                <fieldset>
-                  <div class="form-group label-floating">
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <i class="zmdi zmdi-account"></i>
-                      </span>
-                      <label class="control-label" for="ms-form-user-re">Username</label>
-                      <input type="text" id="ms-form-user-re" class="form-control"> </div>
-                  </div>
-                  <div class="form-group label-floating">
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <i class="zmdi zmdi-email"></i>
-                      </span>
-                      <label class="control-label" for="ms-form-email-re">Email</label>
-                      <input type="email" id="ms-form-email-re" class="form-control"> </div>
-                  </div>
-                  <button class="btn btn-raised btn-block btn-primary">Send Password</button>
-                </fieldset>
-                </form>
-              </div>
-            </div>
-          </div>
+<!-- Sidebar -->
+<div class="ms-slidebar sb-slidebar sb-left sb-style-overlay" id="ms-slidebar">
+  <div class="sb-slidebar-container">
+    <header class="ms-slidebar-header">
+      <div class="ms-slidebar-login">
+        <a routerLink="/login" class="withripple">
+          <i class="zmdi zmdi-account"></i> Login</a>
+      </div>
+      <div class="ms-slidebar-title">
+        <form class="search-form">
+          <input id="search-box-slidebar" type="text" class="search-input" placeholder="Search..." name="q" />
+          <label for="search-box-slidebar">
+            <i class="zmdi zmdi-search"></i>
+          </label>
+        </form>
+        <div class="ms-slidebar-t">
+          <!-- <span class="ms-logo ms-logo-sm">SRRU</span> -->
+          <h3>SRRU
+            <span>Big Data</span>
+          </h3>
         </div>
       </div>
-    </div>
+    </header>
+    <ul class="ms-slidebar-menu" id="slidebar-menu" role="tablist" aria-multiselectable="true">
+      <li>
+        <a class="link" routerLink="/">
+            <i class="zmdi zmdi-home"></i> หน้าแรก</a>
+      </li>
+      <li>
+        <a class="link" routerLink="/projects">
+            <i class="zmdi zmdi-collection-image-o"></i> โครงการ</a>
+      </li>
+      <li class="card" role="tab" id="sch1">
+        <a class="collapsed" role="button" data-toggle="collapse" href="#sc1" aria-expanded="false" aria-controls="sc1">
+          <i class="zmdi zmdi-accounts"></i> ฐานข้อมูลประชากร </a>
+        <ul id="sc1" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch1" data-parent="#slidebar-menu">
+          <li>
+            <a routerLink="/info/population">ประชากร</a>
+          </li>
+          <li>
+            <a routerLink="/info/population/age">อายุประชากร</a>
+          </li>
+          <li>
+            <a routerLink="/info/population/income">รายได้</a>
+          </li>
+          <li>
+            <a routerLink="/info/population/occupation">อาชีพ</a>
+          </li>
+          <li>
+            <a routerLink="/info/population/education">การศึกษา</a>
+          </li>
+          <li>
+            <a routerLink="https://www.tpmap.in.th">ข้อมูลความยากจน</a>
+          </li>
+          <li>
+            <a routerLink="/experts">ผู้เชี่ยวชาญ</a>
+          </li>
+        </ul>
+      </li>
+      <li class="card" role="tab" id="sch2">
+        <a class="collapsed" role="button" data-toggle="collapse" href="#sc2" aria-expanded="false" aria-controls="sc2">
+          <i class="zmdi zmdi-landscape"></i> ฐานข้อมูลทรัทรัพยากรธรรมชาติ </a>
+        <ul id="sc2" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch2" data-parent="#slidebar-menu">
+          <li>
+            <a routerLink="/bio">พืช/สัตว์ท้องถิ่น</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">แหล่งน้ำ (กำลังพัฒนา)</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">ภูเขา (กำลังพัฒนา)</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">สัตว์ป่า (กำลังพัฒนา)</a>
+          </li>
+        </ul>
+      </li>
+      <li class="card" role="tab" id="sch4">
+        <a class="collapsed" role="button" data-toggle="collapse" href="#sc4" aria-expanded="false" aria-controls="sc4">
+          <i class="zmdi zmdi-brightness-5"></i> ฐานข้อมูลสิ่งแวดล้อม </a>
+        <ul id="sc4" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch4" data-parent="#slidebar-menu">
+          <li>
+            <a routerLink="/weathers">สภาวะอากาศ</a>
+          </li>
+          <li>
+            <a routerLink="/info/air">ฝุ่นละออง</a>
+          </li>
+        </ul>
+      </li>
+      <li class="card" role="tab" id="sch5">
+        <a class="collapsed" role="button" data-toggle="collapse" href="#sc5" aria-expanded="false" aria-controls="sc5">
+          <i class="zmdi zmdi-globe-alt"></i> ฐานข้อมูลการเกษตร </a>
+        <ul id="sc5" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch5" data-parent="#slidebar-menu">
+          <li>
+            <a href="http://ssmap.doae.go.th/ssmap/">แผนที่ส่งเสริมการเกษตร</a>
+          </li>
+          <li>
+            <a href="https://surin.srru.ac.th/files/GAP.pdf">มาตรฐาน GAP</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">พืช (กำลังพัฒนา)</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">ผัก (กำลังพัฒนา)</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">ผลไม้ (กำลังพัฒนา)</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">สัตว์เลี้ยง (กำลังพัฒนา)</a>
+          </li>
+        </ul>
+      </li>
+      <li class="card" role="tab" id="sch6">
+        <a class="collapsed" role="button" data-toggle="collapse" href="#sc6" aria-expanded="false" aria-controls="sc6">
+          <i class="zmdi zmdi-hospital"></i> ฐานข้อมูลสุขภาพ </a>
+        <ul id="sc6" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch6" data-parent="#slidebar-menu">
+          <li>
+            <a routerLink="/info/health">ผู้ป่วย</a>
+          </li>
+          <li>
+            <a routerLink="/info/health">เด็ก</a>
+          </li>
+          <li>
+            <a routerLink="/info/health">ผู้ใหญ่</a>
+          </li>
+          <li>
+            <a routerLink="/info/health">ผู้สูงอายุ</a>
+          </li>
+        </ul>
+      </li>
 
+      <li class="card" role="tab" id="sch7">
+        <a class="collapsed" role="button" data-toggle="collapse" href="#sc7" aria-expanded="false" aria-controls="sc7">
+          <i class="zmdi zmdi-shopping-cart"></i> ฐานข้อมูล OTOP </a>
+        <ul id="sc7" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch7" data-parent="#slidebar-menu">
+          <li>
+            <a href="/data/otop">สินค้า OTOP</a>
+          </li>
+
+        </ul>
+      </li>
+      <li class="card" role="tab" id="sch8">
+        <a class="collapsed" role="button" data-toggle="collapse" href="#sc8" aria-expanded="false" aria-controls="sc8">
+          <i class="zmdi zmdi-keyboard-hide"></i> นำเข้าฐานข้อมูล</a>
+        <ul id="sc8" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch8" data-parent="#slidebar-menu">
+          <li>
+            <a routerLink="/bio/plants/create">พืชท้องถิ่น</a>
+          </li>
+          <li>
+            <a routerLink="/bio/animals/create">สัตว์ท้องถิ่น</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a class="link" routerLink="/media">
+          <i class="zmdi zmdi-collection-video"></i> สื่อ</a>
+      </li>
+      <li>
+        <a class="link" routerLink="/download">
+          <i class="zmdi zmdi-cloud-download"></i> ดาวน์โหลด</a>
+      </li>
+      <li>
+        <a class="link" routerLink="/aboutus">
+          <i class="zmdi zmdi-chart"></i> เกี่ยวกับ</a>
+      </li>
+    </ul>
+    <div class="ms-slidebar-social ms-slidebar-block">
+      <h4 class="ms-slidebar-block-title">Social Links</h4>
+      <div class="ms-slidebar-social">
+        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-facebook">
+          <i class="zmdi zmdi-facebook"></i>
+          <span class="badge-pill badge-pill-pink">12</span>
+          <div class="ripple-container"></div>
+        </a>
+        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-twitter">
+          <i class="zmdi zmdi-twitter"></i>
+          <span class="badge-pill badge-pill-pink">4</span>
+          <div class="ripple-container"></div>
+        </a>
+        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-google">
+          <i class="zmdi zmdi-google"></i>
+          <div class="ripple-container"></div>
+        </a>
+        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-instagram">
+          <i class="zmdi zmdi-instagram"></i>
+          <div class="ripple-container"></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Sidebar -->

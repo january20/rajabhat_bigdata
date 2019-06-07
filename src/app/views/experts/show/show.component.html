@@ -1,3 +1,107 @@
-<p>
-  show works!
-</p>
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!expert">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container" *ngIf="expert">
+  <div class="ms-hero-page-override ms-hero-img-coffee ms-bg-fixed ms-hero-bg-primary">
+    <div class="container">
+      <div class="text-center mt-2">
+        <img src="/app/images/users/avatar/{{ expert.sys_user.profile_image}}" alt="..." class="ms-avatar-hero animated zoomIn animation-delay-7">
+        <h1 class="color-white mt-4 animated fadeInUp animation-delay-10">{{ expert.sys_user.firstname }} {{ expert.sys_user.lastname }}</h1>
+        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10">{{ expert.sys_user.email }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="card card-hero card-primary animated fadeInUp animation-delay-7">
+      <div class="card-header-100 bg-primary-dark">
+        <div class="row justify-content-center">
+          <div class="col col-12">
+            <div class="text-center">
+              <h3 class="mt-1"><strong>ผู้เชี่ยวชาญในเรื่อง: {{ expert.title }}</strong></h3>
+              <div class="d-flex flex-row justify-content-center">
+                <h4 class="my-0 mx-1"><a routerLink="/experts"><span class="badge badge-success">{{ expert.expert_type.name_th }}</span></a></h4>
+                <h4 class="my-0 mx-1"><a routerLink="/experts"><span class="badge badge-info">ด้าน{{ expert.expertise.name_th }}</span></a></h4>
+              </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row p-5">
+        <div class="col-xl-6 col-12">
+          <div class="card-body">
+            <h2 class="color-primary no-mb">ข้อมูลทั่วไป</h2>
+          </div>
+          <table class="table table-no-border table-striped">
+            <tr>
+              <th>
+                <i class="zmdi zmdi-face mr-1 color-warning"></i> ชื่อ</th>
+              <td>{{ expert.sys_user.firstname}} {{ expert.sys_user.lastname }}</td>
+            </tr>
+            <tr>
+              <th>
+                <i class="zmdi zmdi-email mr-1 color-primary"></i> Email</th>
+              <td>
+                <a href="javascript:void(0)">{{ expert.sys_user.email ?  expert.sys_user.email : '-' }}</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <i class="zmdi zmdi-link mr-1 color-danger"></i> Website</th>
+              <td>
+                <a href="#">-</a>
+              </td>
+            </tr>
+          </table>
+          <div class="card-body">
+            <h2 class="color-primary no-mb">ตำแหน่งที่อยู่</h2>
+          </div>
+          <agm-map [latitude]="convertFloat(expert.sys_user.lat)" [longitude]="convertFloat(expert.sys_user.lng)" [zoom]="16">
+            <agm-marker [latitude]="convertFloat(expert.sys_user.lat)" [longitude]="convertFloat(expert.sys_user.lng)"></agm-marker>
+          </agm-map>
+        </div>
+        
+        <div class="col-xl-6 col-md-6">
+          <div class="card-body">
+            <h2 class="color-primary no-mb">รายละเอียดความเชี่ยวชาญ</h2>
+          </div>
+          {{ expert.description }}
+
+          <div class="card-body">
+            <h2 class="color-primary no-mb">ไฟล์ / เอกสาร</h2>
+          </div>
+          <div class="list-group" *ngIf="expert.files">
+            <ng-container *ngFor="let file of expert.files">
+              <a href="/experts/files/{{ file['path'] }}" class="list-group-item list-group-item-action withripple"><i class="zmdi zmdi-download"></i> {{ file['file_name'] }}</a>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h1 class="color-primary text-center mb-4">อัลบัมภาพ / ผลงาน</h1>
+    <div class="row" *ngIf="expert.pictures">
+      <div class="col-md-12">
+        <div class="row">
+          <ng-container *ngFor="let pic of expert.pictures">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="card wow zoomIn">
+                <div class="ms-thumbnail card-body p-05 ">
+                  <div class="withripple zoom-img">
+                    <!-- <a href="javascript:void(0)" data-lightbox="gallery" data-title="My caption" c> -->
+                    <img src="/app/{{ pic }}" alt="" class="img-fluid">
+                    <!-- </a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>

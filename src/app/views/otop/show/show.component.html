@@ -1,0 +1,107 @@
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!product && !related_products">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="container" *ngIf="product && related_products">
+  <div class="row">
+    <div class="col-md-6">
+      <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
+        <div class="card card-body">
+          <div class="carousel-inner" role="listbox">
+            <ng-container *ngIf="product.images">
+              <ng-container *ngFor="let image of product.images; let idx = index">
+                <div [className]="idx == 0 ? 'carousel-item active': 'carousel-item'">
+                  <img src="{{ image }}" style="max-height: 500px">
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!product.images">
+              <img src="/images/noimg.png">
+              ไม่พบข้อมูลรูปภาพ
+            </ng-container>
+          </div>
+        </div>
+
+        <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside">
+          <ng-container *ngIf="product.images">
+            <ng-container *ngFor="let image of product.images; let idx = index">
+              <li data-target="#carousel-product" attr.data-slide-to="{{idx}}" [className]="idx == 0 ? 'active': ''">
+                
+                <img src="{{ image }}" alt="" width="80" height="80">
+              </li>
+            </ng-container>
+          </ng-container>
+        </ol>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card animated zoomInDown animation-delay-5">
+        <div class="card-body">
+          <h2>{{ product.name }}</h2>
+          <div class="mb-2 mt-4">
+            <div class="row">
+              <div class="col-sm-6">
+                <span class="mr-2">
+                  <i class="zmdi zmdi-hc-lg zmdi-star color-warning"></i>
+                  <i class="zmdi zmdi-hc-lg zmdi-star color-warning"></i>
+                  <i class="zmdi zmdi-hc-lg zmdi-star color-warning"></i>
+                  <i class="zmdi zmdi-hc-lg zmdi-star color-warning"></i>
+                  <i class="zmdi zmdi-hc-lg zmdi-star color-warning"></i>
+                </span>
+              </div>
+              <div class="col-sm-6 text-center">
+                <h2 class="color-success no-m text-normal">฿ {{ product.price | number }}</h2>
+              </div>
+            </div>
+          </div>
+          <p class="lead">{{ product.description }}</p>
+          <ul class="list-unstyled">
+            <li>
+              <strong>ประเภทสินค้า: </strong>{{ product.category.name_th }}
+            </li>
+            <li *ngIf="product.sub_district">              
+              <strong>แหล่งที่ขาย: </strong>ตำบล{{ product.sub_district.sub_district_name_th }} อำเภอ{{ product.sub_district.district.district_name_th}} จังหวัด{{product.sub_district.province.province_name_th}}
+            </li>
+            <li *ngIf="product.note">              
+              <strong>หมายเหตุ: </strong>{{ product.note }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card card-success animated fadeInUp animation-delay-10">
+        <agm-map [latitude]="convertFloat(product.sub_district.lat)" [longitude]="convertFloat(product.sub_district.lng)" [zoom]="16">
+          <agm-marker [latitude]="convertFloat(product.sub_district.lat)" [longitude]="convertFloat(product.sub_district.lng)"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+  <h2 class="mt-4 mb-4 right-line">สินค้าที่เกี่ยวข้อง</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let r_product of related_products">
+      <div class="card ms-feature wow zoomInUp animation-delay-3">
+        <div class="card-body overflow-hidden text-center">
+          <a href="javascript:void(0)">
+            <img src="{{ r_product.images ? r_product.images[0] : '/images/noimg.png'}}" alt="" class="img-fluid center-block" style="height: 160px">
+          </a>
+          <h4 class="text-normal text-center text-truncate">{{ r_product.name }}</h4>
+          <p class="text-truncate">{{ r_product.description }}</p>
+          <div class="mt-2">
+            <span class="mr-2">
+              <i class="zmdi zmdi-star color-warning"></i>
+              <i class="zmdi zmdi-star color-warning"></i>
+              <i class="zmdi zmdi-star color-warning"></i>
+              <i class="zmdi zmdi-star color-warning"></i>
+              <i class="zmdi zmdi-star color-warning"></i>
+            </span>
+            <span class="ms-tag ms-tag-success">฿ {{ r_product.price | number }}</span>
+          </div>
+          <a href="{{ r_product.id }}" class="btn btn-primary btn-sm btn-block btn-raised mt-2 no-mb">
+            <i class="zmdi zmdi-info"></i> ดูรายละเอียด</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
