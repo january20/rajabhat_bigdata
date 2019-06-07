@@ -18,8 +18,8 @@ export class OtopService {
     return this.http.get<Array<Otop>>(`${environment.api_url}/otop?${category ? 'category_id='+category+'&' : ''}page=${page}`);
   }
 
-  getMyList() {
-    return this.http.get<Array<Otop>>(`${environment.api_url}/otop/mylist`);
+  getMyList(page) {
+    return this.http.get<Array<Otop>>(`${environment.api_url}/otop/mylist?page=${page}`);
   }
 
   get(id) {
@@ -46,7 +46,7 @@ export class OtopService {
     return this.http.put(`${environment.api_url}/otop/${id}`, formData);
   }
 
-  delete(id) {
+  destroy(id) {
     return this.http.delete(`${environment.api_url}/otop/${id}`);
   }
 

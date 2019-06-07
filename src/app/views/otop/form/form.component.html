@@ -37,27 +37,70 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <!-- <mat-form-field class="w-100">
-              <mat-label>ชื่อผลิตภัณฑ์</mat-label>
-              <input matInput formControlName="name">
-              <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
-            </mat-form-field>
-            <mat-form-field class="w-100">
-              <mat-label>รายละเอียดผลิตภัณฑ์</mat-label>
-              <input matInput formControlName="description">
-              <mat-error *ngIf="formErrors.description">{{ formErrors.description }}</mat-error>
-            </mat-form-field>
-            <mat-form-field class="w-100">
+          </div>
+
+          <mat-form-field class="w-100">
+            <mat-label>ชื่อผลิตภัณฑ์</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>รายละเอียดผลิตภัณฑ์</mat-label>
+            <textarea matInput formControlName="description" rows="10"></textarea>
+            <mat-error *ngIf="formErrors.description">{{ formErrors.description }}</mat-error>
+          </mat-form-field>
+
+          <div class="row">
+            <mat-form-field class="w-100 col-2">
               <mat-label>ราคา</mat-label>
               <input matInput formControlName="price">
               <mat-error *ngIf="formErrors.price">{{ formErrors.price }}</mat-error>
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field class="w-100 col-10">
               <mat-label>หมายเหตุ</mat-label>
               <input matInput formControlName="note">
-              <mat-error *ngIf="formErrors.note">{{ formErrors.note }}</mat-error>
-            </mat-form-field> -->
+            </mat-form-field>
           </div>
+
+          <h3 class="mt-2">2. รูปภาพ</h3>
+          <ng-container *ngIf="formType === 'EDIT' && images && images.length > 0">
+            <div class="d-flex mt-2">
+              <span class="flex-grow-1">
+                <h3>รูปภาพที่อัพโหลด</h3>
+              </span>              
+              <a href="javascript:void(0)" [className]="!removeImagesAll ? 'btn btn-xs btn-raised btn-danger' : 'btn btn-xs btn-raised btn-success'" (click)="manageImages(!removeImagesAll ? 0 : 1)">
+                <i [className]="!removeImagesAll ? 'zmdi zmdi-close' : 'zmdi zmdi-check'"></i>
+                {{ !removeImagesAll ? 'ลบทั้งหมด' : 'กู้คืน'}}
+              </a>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-4" *ngFor="let image of images">
+                <div class="card">
+                  <figure class="ms-thumbnail">
+                    <img src="/app/{{ image.src }}" style="height: 200px" [className]="image.status === 1 ? 'img-fluid' : 'img-fluid grayscale'">
+                    <figcaption class="ms-thumbnail-caption text-center">
+                      <div class="ms-thumbnail-caption-content">
+                        <a *ngIf="image.status === 1" (click)="image.status = 0" href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-lg mr-1 btn-circle-white color-danger">
+                          <i class="zmdi zmdi-close"></i>
+                        </a>
+                        <a *ngIf="image.status === 0" (click)="image.status = 1" href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-lg mr-1 btn-circle-white color-success">
+                          <i class="zmdi zmdi-check"></i>
+                        </a>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ngx-dropzone 
+            [preserveFiles]="false"
+            [showPreviews]="true"
+            [accept]="'image/*'"
+            [label]="'เลือกรูปภาพ'"
+            (filesAdded)="addFiles($event)" >
+          </ngx-dropzone>
 
           <div class="form-group d-flex justify-content-center">
             <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
