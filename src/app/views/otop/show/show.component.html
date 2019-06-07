@@ -71,7 +71,7 @@
           </ul>
         </div>
       </div>
-      <div class="card card-success animated fadeInUp animation-delay-10">
+      <div class="card card-success animated fadeInUp animation-delay-10" *ngIf="product.sub_district">
         <agm-map [latitude]="convertFloat(product.sub_district.lat)" [longitude]="convertFloat(product.sub_district.lng)" [zoom]="16">
           <agm-marker [latitude]="convertFloat(product.sub_district.lat)" [longitude]="convertFloat(product.sub_district.lng)"></agm-marker>
         </agm-map>
@@ -98,7 +98,7 @@
             </span>
             <span class="ms-tag ms-tag-success">฿ {{ r_product.price | number }}</span>
           </div>
-          <a href="{{ r_product.id }}" class="btn btn-primary btn-sm btn-block btn-raised mt-2 no-mb">
+          <a [routerLink]="['../',  r_product.id]" class="btn btn-primary btn-sm btn-block btn-raised mt-2 no-mb">
             <i class="zmdi zmdi-info"></i> ดูรายละเอียด</a>
         </div>
       </div>

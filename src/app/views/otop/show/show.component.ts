@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OtopService } from '../shared/otop.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Otop } from '../shared/otop';
 
 @Component({
@@ -15,8 +15,13 @@ export class ShowComponent implements OnInit {
 
   constructor(
     private otopService: OtopService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
+  }
 
   ngOnInit() {
     this.loadData();
