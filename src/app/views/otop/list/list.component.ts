@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { OtopService } from '../shared/otop.service';
 import { Otop } from '../shared/otop';
 import { map } from 'rxjs/operators';
-import { MatRadioButton } from '@angular/material';
+import { MatRadioButton, PageEvent, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-list',
@@ -11,6 +11,7 @@ import { MatRadioButton } from '@angular/material';
 })
 export class ListComponent implements OnInit {
 
+  @ViewChild('paginator') paginator: MatPaginator;
   otop: any;
   categories: any;
   current_category = 0;
@@ -29,11 +30,15 @@ export class ListComponent implements OnInit {
   }
 
   filterProducts(event) {
-    if(event.value == 0) { this.loadData() }
+    this.paginator.pageIndex = 0;
+    if(event.value == 0) { 
+      this.current_category = 0;
+      this.loadData();
+    }
     else {
       this.current_category = event.value;    
       this.loadData(1, event.value);
-    }    
+    }
   }
 
   async loadData(page = 1, category?) {
