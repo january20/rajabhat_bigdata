@@ -21,7 +21,7 @@ export class OtopService {
   getMyList() {
     return this.http.get<Array<Otop>>(`${environment.api_url}/otop/mylist`);
   }
-  
+
   get(id) {
     return this.http.get<Otop>(`${environment.api_url}/otop/${id}`);
   }
