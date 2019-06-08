@@ -28,6 +28,7 @@ import { StriphtmlPipe } from './pipes/striphtml.pipe';
 
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
+import { ReferenceService } from './services/reference.service';
 
 @NgModule({
   declarations: [StriphtmlPipe],
@@ -37,7 +38,8 @@ import { UserService } from './services/user.service';
   ],
   providers: [
     AuthenticationService,
-    UserService
+    UserService,
+    ReferenceService
   ],
   exports: [
     ReactiveFormsModule,

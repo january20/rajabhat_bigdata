@@ -5,6 +5,7 @@ const routes: Routes = [
 
   { path: 'home', loadChildren: './views/home/home.module#HomeModule' },
   { path: 'dashboard', loadChildren: './views/dashboard/dashboard.module#DashboardModule' },
+  { path: 'admin', loadChildren: './views/admin/admin.module#AdminModule' },
   { path: 'login', loadChildren: './views/auth/auth.module#AuthModule' },
   { path: 'projects', loadChildren: './views/projects/projects.module#ProjectsModule' },
   { path: 'bio', loadChildren: './views/bio/bio.module#BioModule' },

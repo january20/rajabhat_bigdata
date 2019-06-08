@@ -1,0 +1,71 @@
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!districts">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="districts">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">สร้างผู้ใช้งาน</h1>
+        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10">ผู้ใหญ่บ้าน</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body">        
+        <form [formGroup]="form" *ngIf="!createSuccess">
+          <h2>1. เลือกหมู่บ้าน</h2>
+          <div class="row">
+            <mat-form-field class="w-100 col-4">
+              <mat-label>อำเภอ</mat-label>
+              <mat-select (selectionChange)="loadSubDistricts($event)">
+                <mat-option *ngFor="let district of districts" [value]="district.id">
+                  {{ district.district_name_th }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100 col-4">
+              <mat-label>ตำบล</mat-label>
+              <mat-select (selectionChange)="loadVillages($event)">
+                <mat-option *ngFor="let sub_district of sub_districts" [value]="sub_district.id">
+                  {{ sub_district.sub_district_name_th }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100 col-4">
+              <mat-label>หมู่บ้าน</mat-label>
+              <mat-select formControlName="village_id">
+                <mat-option *ngFor="let village of villages" [value]="village.id">
+                  {{ village.village_name_th }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+          </div>
+
+          <div class="form-group d-flex justify-content-center">
+            <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+              สร้างผู้ใช้งาน
+              <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+            </button>
+          </div>
+        </form>
+
+        <div *ngIf="createSuccess" class="text-center mt-5 animated zoomInDown animation-delay-5">
+          <span class="ms-icon ms-icon-circle ms-icon-xlg color-success"><i class="fa fa-check"></i></span>
+          <h1 class="no-m ms-site-title color-dark center-block ms-site-title-lg mt-2 mb-2">สร้าง<span>ผู้ใช้งานสำเร็จ</span></h1>
+          <h2>ชื่อผู้ใช้: {{ successUsername }}</h2>
+          <h2>รหัสผ่าน: {{ successPassword }}</h2>
+          <button (click)="toDashboard()" mat-raised-button color="primary">
+            กลับไปหน้าแดชบอร์ด
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

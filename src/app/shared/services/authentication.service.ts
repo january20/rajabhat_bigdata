@@ -40,6 +40,14 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 
+  ext_register(formData) {
+    return this.http.post(`${environment.api_url}/ext_register`, formData);
+  }
+
+  ext_login() {
+
+  }
+
   // checkToken() {
   //   return this.http.get<any>(`${environment.api_url}/check_token`);
   // }

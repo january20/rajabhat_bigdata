@@ -246,7 +246,22 @@
             <li>
               <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-user-circle" aria-hidden="true"></i> ข้อมูลส่วนตัว</a>
             </li>
-            <ng-container *ngIf="currentUser.info.role === 2">
+
+            <ng-container *ngIf="currentUser.info.role === 1">
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="javascript:void(0)">
+                  <i class="fa fa-eye"></i> ผู้ดูแลระบบ
+                </a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/users/create">
+                      <i class="fa fa-user-plus"></i> สร้างผู้ใช้งาน</a>
+                  </li>
+                </ul>
+              </li>
+            </ng-container>
+
+            <ng-container *ngIf="currentUser.info.role === 2 || currentUser.info.role === 1">
               <li class="dropdown-submenu">
                 <a class="dropdown-item" href="javascript:void(0)">
                   <i class="zmdi zmdi-book"></i> โครงการ</a>
@@ -315,7 +330,7 @@
               </li>
             </ng-container>
 
-            <ng-container *ngIf="currentUser.info.role === 8">
+            <ng-container *ngIf="currentUser.info.role === 8 || currentUser.info.role === 1">
               <li>
                 <a class="dropdown-item" routerLink="/projects/assessment/project_list"><i class="fa fa-check-square" aria-hidden="true"></i> ประเมินโครงการ</a>
               </li>
