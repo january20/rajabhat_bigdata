@@ -1,3 +1,72 @@
-<p>
-  user-list works!
-</p>
+<div class="my-5 text-center" *ngIf="!users" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="users">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">รายการผู้ใช้งาน</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body">        
+        <table class="table table-hover">
+          <thead class="text-center">
+            <tr>
+              <th style="width: 10%;">ชื่อผู้ใช้</th>
+              <th style="width: 10%;">รหัสผ่าน</th>
+              <th style="width: 10%;">อำเภอ</th>
+              <th style="width: 10%;">ตำบล</th>
+              <th style="width: 20%;">หมู่บ้าน</th>
+              <th style="width: 20%;">ชื่อ</th>
+              <th style="width: 20%;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users.data">
+              <td class="text-center">
+                {{ user.username }}
+              </td>
+
+              <td class="text-center">
+                {{ user.auth_key }}
+              </td>
+
+              <td class="text-center">
+                {{ user.village.district.district_name_th }}
+              </td>
+
+              <td class="text-center">
+                {{ user.village.sub_district.sub_district_name_th }}
+              </td>
+
+              <td class="text-center">
+                {{ user.village.village_name_th }}
+              </td>
+              
+              <td class="text-center">
+                {{ user.firstname && user.lastname ? user.firstname + ' ' + user.lastname : '-' }}
+              </td>
+
+              <td class="text-center">
+                <a href="javascript:void(0)"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
+                  <i data-toggle="tooltip" data-placement="top" title="แก้ไข" class="fa fa-edit" aria-hidden="true"></i>
+                </a>&nbsp;
+                <a href="javascript:void(0)" class="btn-circle btn-circle-sm btn-circle-raised btn-circle-danger">
+                  <i data-toggle="tooltip" data-placement="top" title="ลบ" class="fa fa-close color-white" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>  
+</div>

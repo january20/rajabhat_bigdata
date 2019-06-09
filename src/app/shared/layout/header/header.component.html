@@ -257,6 +257,10 @@
                     <a class="dropdown-item" routerLink="/admin/users/create">
                       <i class="fa fa-user-plus"></i> สร้างผู้ใช้งาน</a>
                   </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/users/list">
+                      <i class="fa fa-user"></i> รายการผู้ใช้งาน</a>
+                  </li>
                 </ul>
               </li>
             </ng-container>
@@ -327,6 +331,24 @@
 
               <li>
                 <a class="dropdown-item" routerLink="/developers"><i class="fa fa-cogs"></i> APIs</a>
+              </li>
+            </ng-container>
+
+            <ng-container *ngIf="currentUser.info.role === 6 || currentUser.info.role === 1">
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="javascript:void(0)">
+                  <i class="fa fa-users"></i> ครอบครัว
+                </a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li>
+                    <a class="dropdown-item" routerLink="/families">
+                      <i class="fa fa-list-ul"></i> รายการครอบครัว</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/families/create">
+                      <i class="fa fa-user-plus"></i> เพิ่มครอบครัว</a>
+                  </li>
+                </ul>
               </li>
             </ng-container>
 

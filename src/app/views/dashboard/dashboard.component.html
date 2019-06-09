@@ -111,6 +111,36 @@
       </div>
     </div>
 
+    <div class="text-center" *ngSwitchCase="6">
+      <h3 class="mt-4">การจัดการ</h3>
+      <div class="row color-dark">
+        <div class="col-xl-6 col-lg-6 col-sm-6">
+          <div class="card card-warning wow fadeInRight animation-delay-4">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-warning">
+                <i class="fa fa-users"></i>
+              </span>
+              <h4 class="color-warning">ข้อมูลครัวเรือน</h4>
+              <p class="">สำหรับนำเข้าข้อมูลผู้ครัวเรือน</p>
+              <a routerLink="/families" class="btn btn-warning btn-raised">จัดการ</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-sm-6">
+          <div class="card card-info wow fadeInRight animation-delay-4">
+            <div class="text-center card-body">
+              <span class="ms-icon ms-icon-circle ms-icon-xxlg color-info">
+                <i class="fa fa-user-circle"></i>
+              </span>
+              <h4 class="color-info">ข้อมูลส่วนตัว</h4>
+              <p class="">สำหรับจัดการข้อมูลส่วนตัวของท่าน</p>
+              <a href="javascript:void(0)" class="btn btn-info btn-raised">จัดการ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div *ngSwitchCase="8">
       <div class="row color-dark">
         <div class="col-xl-3 col-lg-6 col-sm-6">

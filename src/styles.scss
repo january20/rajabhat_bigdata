@@ -11,3 +11,8 @@ $custom-typography: mat-typography-config(
 
 // @include angular-material-typography($custom-typography);
 @include mat-core($custom-typography);
+
+.mat-success {
+  background-color: #4caf50;
+  color: #fff;
+}

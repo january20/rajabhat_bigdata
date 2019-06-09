@@ -31,24 +31,39 @@ export class LoginComponent implements OnInit {
 
   submit(event) {
     event.preventDefault();
+
     this.isSubmit = true;
 
-    const { username, password } = this.form.value;    
+    const { username, password, type } = this.form.value;    
 
-    this.authenticationService.login(username, password).subscribe(user => {      
-      setTimeout(() => {
-        if(user && user.token) {
-          this.router.navigate([this.returnUrl]).then(() => location.reload(true));
-        } else {
-          this.formError = user.error;
-          this.isSubmit = false;
-        }
-      }, 1000);      
-    });
+    if(type === 1 || type === '1') {
+      this.authenticationService.login(username, password).subscribe(user => {      
+        setTimeout(() => {
+          if(user && user.token) {
+            this.router.navigate([this.returnUrl]).then(() => location.reload(true));
+          } else {
+            this.formError = user.error;
+            this.isSubmit = false;
+          }
+        }, 1000);      
+      });
+    } else if(type === 2 || type === '2') {
+      this.authenticationService.ext_login(username, password).subscribe(user => {      
+        setTimeout(() => {
+          if(user && user.token) {
+            this.router.navigate([this.returnUrl]).then(() => location.reload(true));
+          } else {
+            this.formError = user.error;
+            this.isSubmit = false;
+          }
+        }, 1000);      
+      });
+    }    
   }
 
   buildForm() {
     this.form = this.formBuilder.group({
+      type: ['1'],
       username: ['', Validators.required],
       password: ['', Validators.required]
     });

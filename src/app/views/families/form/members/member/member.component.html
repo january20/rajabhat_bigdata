@@ -1,0 +1,75 @@
+<div [formGroup]="form">
+  <div class="row">            
+    <mat-form-field class="w-100 col-2">
+      <mat-label>เพศ</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option *ngFor="let gender of genders" [value]="gender.id">
+          {{ gender.name_th }}
+        </mat-option>
+        <mat-error *ngIf="formErrors.gender">{{ formErrors.gender }}</mat-error>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100 col-2">
+      <mat-label>คำนำหน้า</mat-label>
+      <mat-select formControlName="prefix">
+        <mat-option *ngFor="let prefix of prefixes" [value]="prefix.id">
+            {{ prefix.prefix_th }}
+        </mat-option>
+        <mat-error *ngIf="formErrors.prefix">{{ formErrors.prefix }}</mat-error>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100 col-4">
+      <mat-label>ชื่อ</mat-label>
+      <input matInput formControlName="firstname">
+      <mat-error *ngIf="formErrors.firstname">{{ formErrors.firstname }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100 col-4">
+      <mat-label>นามสกุล</mat-label>
+      <input matInput formControlName="lastname">
+      <mat-error *ngIf="formErrors.lastname">{{ formErrors.lastname }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="w-100 col-5">
+      <mat-label>อาชีพ</mat-label>
+      <mat-select formControlName="occupation">
+        <mat-option *ngFor="let occupation of occupations" [value]="occupation.id">
+            {{ occupation.name_th }}
+        </mat-option>
+        <mat-error *ngIf="formErrors.occupation">{{ formErrors.occupation }}</mat-error>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100 col-5">
+      <mat-label>การศึกษา</mat-label>
+      <mat-select formControlName="education">
+        <mat-option *ngFor="let education of educations" [value]="education.id">
+            {{ education.name_th }}
+        </mat-option>
+        <mat-error *ngIf="formErrors.education">{{ formErrors.education }}</mat-error>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100 col-2">
+      <mat-label>รายได้ต่อเดือน</mat-label>
+      <input matInput formControlName="monthly_income">
+      <mat-error *ngIf="formErrors.monthly_income">{{ formErrors.monthly_income }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="w-100 col-2">
+      <input matInput [matDatepicker]="picker" placeholder="วัน/เดือน/ปีเกิด" formControlName="born">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="formErrors.born">{{ formErrors.born }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100 col-6">
+      <mat-label>อีเมลล์</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100 col-4">
+      <mat-label>เบอร์โทรศัพท์</mat-label>
+      <input matInput formControlName="tel">
+      <mat-error *ngIf="formErrors.tel">{{ formErrors.tel }}</mat-error>
+    </mat-form-field>
+  </div>
+</div>

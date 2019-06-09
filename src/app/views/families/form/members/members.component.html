@@ -1,0 +1,27 @@
+<div class="d-flex mt-2">
+  <span class="flex-grow-1">
+    <h3><strong>2. สมาชิกในครอบครัว</strong></h3>
+  </span>    
+  <button mat-raised-button color="success" (click)="addMember($event)">
+    <mat-icon>add</mat-icon>
+    เพิ่มสมาชิก
+  </button>          
+</div>
+<div class="mx-5 animated fadeInDown" *ngFor="let member of members.controls; let i = index">
+  <div class="d-flex mt-2">
+    <h4 class="my-auto"><strong>สมาชิกคนที่ {{ i+1 }}</strong></h4>
+    <button mat-icon-button color="warn" (click)="removeMember(i, member.value.id)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <app-member
+    [form]="member" 
+    [index]="i"
+    [prefixes]="prefixes"
+    [genders]="genders"
+    [occupations]="occupations"
+    [educations]="educations"
+    
+    (memberRemoved)="removeMember($event)">
+  </app-member>
+</div>

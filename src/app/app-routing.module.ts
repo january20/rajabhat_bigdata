@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'projects', loadChildren: './views/projects/projects.module#ProjectsModule' },
   { path: 'bio', loadChildren: './views/bio/bio.module#BioModule' },
   { path: 'experts', loadChildren: './views/experts/experts.module#ExpertsModule' },
+  { path: 'families', loadChildren: './views/families/families.module#FamiliesModule' },
   { path: 'otop', loadChildren: './views/otop/otop.module#OtopModule' },
   { path: 'download', loadChildren: './views/download/download.module#DownloadModule' },
   { path: 'media', loadChildren: './views/media/media.module#MediaModule' },

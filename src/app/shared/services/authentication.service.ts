@@ -35,6 +35,19 @@ export class AuthenticationService {
     );
   }
 
+  ext_login(username, password) {
+    return this.http.post<any>(`${environment.api_url}/ext_login`, { username, password }).pipe(
+      map(user => {
+        if(user && user.token) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+        }
+
+        return user;
+      })
+    );
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
@@ -42,11 +55,7 @@ export class AuthenticationService {
 
   ext_register(formData) {
     return this.http.post(`${environment.api_url}/ext_register`, formData);
-  }
-
-  ext_login() {
-
-  }
+  }  
 
   // checkToken() {
   //   return this.http.get<any>(`${environment.api_url}/check_token`);

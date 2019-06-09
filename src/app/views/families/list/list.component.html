@@ -1,0 +1,78 @@
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!dataSource">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+  
+<div class="ms-site-container mt-5" *ngIf="dataSource">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">ครอบครัวในหมู่บ้าน</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">   
+      <header class="ms-header ms-header-primary ms-hero-img-mountain ms-hero-bg-primary">
+        <div class="container container-full">
+          <div class="ms-title">
+            <a href="index.html">
+              <span class="ms-logo animated zoomInDown animation-delay-5"><i class="zmdi zmdi-accounts-alt"></i></span>
+              <h1 class="animated fadeInRight animation-delay-6">รายชื่อ
+                <span>ครอบครัว</span>
+              </h1>
+            </a>
+          </div>
+          <div class="header-right">
+            <form class="search-form animated zoomInDown animation-delay-9">
+              <input id="families-filter" name="families-filter" matInput (keyup)="applyFilter($event.target.value)" type="text" class="search-input" placeholder="บ้านเลขที่/ชื่อหัวหน้าครอบครัว">
+              <label for="families-filter">
+                <i class="zmdi zmdi-search"></i>
+              </label>
+            </form>
+            <button mat-raised-button color="success" (click)="createFamily()">
+              <mat-icon>add</mat-icon>
+              เพิ่มครอบครัว
+            </button>
+          </div>
+        </div>
+      </header>
+      
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort>
+        <ng-container matColumnDef="house_address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>บ้านเลขที่</th>
+          <td mat-cell *matCellDef="let row"> {{row.house_address}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="householder_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>หัวหน้าครอบครัว</th>
+          <td mat-cell *matCellDef="let row">{{ row.householder_name }}</td>
+        </ng-container>
+      
+        <ng-container matColumnDef="family_members">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>สมาชิก</th>
+          <td mat-cell *matCellDef="let row"> {{ row.family_members }} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="manage">
+          <th mat-header-cell *matHeaderCellDef>จัดการ</th>
+          <td mat-cell *matCellDef="let row">
+            <a routerLink="/families/{{ row.id }}/edit"  class="btn-circle btn-circle-xs btn-circle-raised btn-circle-info">
+              <i data-toggle="tooltip" data-placement="top" title="แก้ไข" class="fa fa-edit" aria-hidden="true"></i>
+            </a>&nbsp;
+            <a href="javascript:void(0)" (click)="deleteFamily(row.id)" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-danger">
+              <i data-toggle="tooltip" data-placement="top" title="ลบ" class="fa fa-close color-white" aria-hidden="true"></i>
+            </a>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[15, 30, 100]"></mat-paginator>
+    </div>
+  </div>
+</div>
