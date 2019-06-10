@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@agm/core/-/core-1.0.0-beta.5.tgz#6dbceb666b2dbc4a868b97e1340a3faceb5f2113"
   integrity sha512-LVENJqtBZEWpX+uJkGI0zgg+Xkm2KkktQm4ojZozArbeNvQkVL6pqVc04Mme6vvOzwJpD1cET5w4byC8Xaq1QQ==
 
-"@amcharts/amcharts4@^4.4.6":
-  version "4.4.6"
-  resolved "https://registry.yarnpkg.com/@amcharts/amcharts4/-/amcharts4-4.4.6.tgz#f29b8679b20892650e2cffdb351b4b851bfe9936"
-  integrity sha512-K0C5FLsgZxGrTMtVuVzNcmnydDEiaYoXYsQxmm6f9/rZEisr1EWsUYLAL65bgcwabRz/1PuK6KOPSgFtxyfAig==
+"@amcharts/amcharts4@^4.4.7":
+  version "4.4.10"
+  resolved "https://registry.yarnpkg.com/@amcharts/amcharts4/-/amcharts4-4.4.10.tgz#2ecf1851841d610ab6d3533f33f25da4a984f94d"
+  integrity sha512-MRgUrofIc8x2JoXPZ3QQujtGseQVSjsVUlXdIlUKD+fwbcErnItvwUMG/GqSa2OAzgbE0xie/haIc0tDXYPiBQ==
   dependencies:
     "@types/regression" "^2.0.0"
     canvg "^1.5.3"
@@ -4956,6 +4956,13 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
+
+ngx-dropzone@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-dropzone/-/ngx-dropzone-1.2.0.tgz#70434b778c37553a311bac1c396de80fe51f0b64"
+  integrity sha512-jyy9nUjphl3szFhl/Jc7F1TGYpP2WwGR/+XrajEKjCBTcfiWjtIauKNPzR3ELGe7ITNqIY357WVHrYwa2E29+Q==
+  dependencies:
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
