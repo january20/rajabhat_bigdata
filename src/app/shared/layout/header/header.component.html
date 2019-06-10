@@ -225,13 +225,13 @@
         </li>
 
        <li class="nav-item">
-         <a data-scroll class="nav-link" href="/media">สื่อ</a>
+         <a data-scroll class="nav-link" routerLink="/media">สื่อ</a>
        </li>
         <li class="nav-item">
-          <a data-scroll class="nav-link" href="/download">ดาวน์โหลด</a>
+          <a data-scroll class="nav-link" routerLink="/download">ดาวน์โหลด</a>
         </li>
         <li class="nav-item">
-          <a data-scroll class="nav-link" href="/aboutus">เกี่ยวกับ</a>
+          <a data-scroll class="nav-link" routerLink="/aboutus">เกี่ยวกับ</a>
         </li>
 
         <li class="nav-item" *ngIf="currentUser">
@@ -312,7 +312,7 @@
               <li>
                 <a class="dropdown-item" routerLink="/families"><i class="fa fa-users"></i> ประชากร</a>
               </li>
-              
+
               <li class="dropdown-submenu">
                 <a class="dropdown-item" href="javascript:void(0)">
                   <i class="fa fa-shopping-bag"></i> สินค้า OTOP
@@ -375,7 +375,7 @@
       </a>       -->
       <a *ngIf="currentUser" href="javascript:void(0)" class="btn-circle btn-circle-white no-focus" (click)="logout()">
         <i class="fa fa-sign-out" data-toggle="tooltip" data-placement="top"></i>
-      </a>      
+      </a>
       <a *ngIf="!currentUser" routerLink="/login" class="btn-circle btn-circle-white no-focus">
         <i class="zmdi zmdi-account" data-toggle="tooltip" data-placement="top"></i>
       </a>
