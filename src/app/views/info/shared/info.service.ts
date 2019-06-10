@@ -11,7 +11,7 @@ export class InfoService {
     private http: HttpClient
   ) { }
 
-  populationAll() {
-    return this.http.get(`${environment.api_url}/info/population`);
+  populationAll(query?) {
+    return this.http.get(`${environment.api_url}/info/population${query ? query : ''}`);
   }
 }

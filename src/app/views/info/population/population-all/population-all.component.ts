@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import { ReferenceService } from 'src/app/shared/services/reference.service';
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -16,22 +17,25 @@ export class PopulationAllComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   ready = false;
-  families: any;
+  districts = [];
+  sub_districts = [];
   displayedColumns: string[] = ['year', 'male', 'female', 'total', 'house'];
   dataSource: MatTableDataSource<any>;
   private chart: am4charts.XYChart;
 
   constructor(
     private zone: NgZone,
-    private infoService: InfoService
+    private infoService: InfoService,
+    private refService: ReferenceService
   ) { }
 
   ngOnInit() {
     this.loadData();
   }
 
-  loadData() {
-    this.infoService.populationAll().subscribe((data: any) => {
+  loadData(query?) {
+    this.refService.districts().subscribe((data: any) => this.districts = data);
+    this.infoService.populationAll(query).subscribe((data: any) => {
       this.dataSource = new MatTableDataSource(data);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
@@ -39,6 +43,19 @@ export class PopulationAllComponent implements OnInit {
       this.createChart(data);
       this.ready = true;
     });
+  }
+
+  loadSubDistricts(district_id) {
+    this.refService.sub_districts(district_id).subscribe((data: any) => this.sub_districts = data);
+  }
+
+  filter(place_id, type) {
+    if(type === 1) {
+      this.loadData(`?district_id=${place_id}`);
+      this.loadSubDistricts(place_id);
+    } else {
+      this.loadData(`?sub_district_id=${place_id}`);
+    }
   }
 
   createChart(data) {

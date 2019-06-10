@@ -15,8 +15,23 @@
   </div>
 
   <div class="container">
-    <div class="card card-hero card-primary">
-      <h3 class="text-center mt-5">ข้อมูลประชากรจังหวัดสุรินทร์</h3>
+    <div class="card card-hero card-primary">     
+      <h3 class="text-center flex-grow-1 mt-5">ข้อมูลประชากรจังหวัดสุรินทร์</h3>
+      <div class="d-flex flex-row justify-content-center">
+        <mat-form-field class="mx-1">
+          <mat-label>อำเภอ</mat-label>
+          <mat-select (change)="filter($event.value, 1)">
+            <mat-option [value]="0">รวมทั้งหมด</mat-option>
+            <mat-option *ngFor="let district of districts" [value]="district.id">{{ district.district_name_th }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mx-1">
+          <mat-label>ตำบล</mat-label>
+          <mat-select (change)="filter($event.value, 2)">
+            <mat-option *ngFor="let sub_district of sub_districts" [value]="sub_district.id">{{ sub_district.sub_district_name_th }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <div id="popChart" style="width: 100%; height: 500px"></div>
     </div>
 
