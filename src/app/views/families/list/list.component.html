@@ -58,7 +58,7 @@
         </ng-container>
         
         <ng-container matColumnDef="manage">
-          <th mat-header-cell *matHeaderCellDef>จัดการ</th>
+          <th mat-header-cell *matHeaderCellDef>จัดการ<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
           <td mat-cell *matCellDef="let row">
             <a routerLink="/families/{{ row.id }}/edit"  class="btn-circle btn-circle-xs btn-circle-raised btn-circle-info">
               <i data-toggle="tooltip" data-placement="top" title="แก้ไข" class="fa fa-edit" aria-hidden="true"></i>

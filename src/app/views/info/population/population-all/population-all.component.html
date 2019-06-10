@@ -1,0 +1,23 @@
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!ready">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" [style.display]="ready ? 'block' : 'none'">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">ประชากร</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-hero card-primary mx-5 px-5">
+      <h3 class="text-center mt-5">ข้อมูลประชากรจังหวัดสุรินทร์</h3>
+      <div id="popChart" style="width: 100%; height: 500px"></div>
+    </div>
+  </div>
+</div>

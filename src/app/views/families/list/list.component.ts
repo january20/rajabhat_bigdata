@@ -18,6 +18,7 @@ export class ListComponent implements OnInit {
   families: any;
   displayedColumns: string[] = ['house_address', 'householder_name', 'family_members', 'manage'];
   dataSource: MatTableDataSource<any>;
+  isDeleted = false;
 
   constructor(
     private familiesService: FamiliesService,
@@ -47,6 +48,17 @@ export class ListComponent implements OnInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  deleteFamily(id) {
+    if(confirm('คุณต้องการลบครอบครัวนี้ใช่หรือไม่ ?')) {
+      this.isDeleted = true;
+
+      this.familiesService.destroy(id).subscribe(res => {
+        this.loadData();
+        this.isDeleted = false;
+      });
     }
   }
 

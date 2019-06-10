@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'otop', loadChildren: './views/otop/otop.module#OtopModule' },
   { path: 'download', loadChildren: './views/download/download.module#DownloadModule' },
   { path: 'media', loadChildren: './views/media/media.module#MediaModule' },
+  { path: 'info', loadChildren: './views/info/info.module#InfoModule' },
   {
     path: '',
     redirectTo: '/home',
