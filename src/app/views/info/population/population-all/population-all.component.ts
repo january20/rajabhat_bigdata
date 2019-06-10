@@ -1,5 +1,7 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { InfoService } from '../../shared/info.service';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -12,7 +14,11 @@ am4core.useTheme(am4themes_animated);
 })
 export class PopulationAllComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
   ready = false;
+  families: any;
+  displayedColumns: string[] = ['year', 'male', 'female', 'total', 'house'];
+  dataSource: MatTableDataSource<any>;
   private chart: am4charts.XYChart;
 
   constructor(
@@ -25,7 +31,11 @@ export class PopulationAllComponent implements OnInit {
   }
 
   loadData() {
-    this.infoService.populationAll().subscribe(data => {
+    this.infoService.populationAll().subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource(data);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+      });
       this.createChart(data);
       this.ready = true;
     });
