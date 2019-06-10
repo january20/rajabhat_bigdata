@@ -18,4 +18,12 @@ export class InfoService {
   populationAge(query?) {
     return this.http.get(`${environment.api_url}/info/population/age${query ? query : ''}`);
   }
+
+  populationEducation(query?) {
+    return this.http.get(`${environment.api_url}/info/population/education${query ? query : ''}`);
+  }
+
+  populationOccupation(query?) {
+    return this.http.get(`${environment.api_url}/info/population/occupation${query ? query : ''}`);
+  }
 }
