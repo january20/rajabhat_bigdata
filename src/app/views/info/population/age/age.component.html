@@ -1,3 +1,66 @@
-<p>
-  age works!
-</p>
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!ready">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" [style.display]="ready ? 'block' : 'none'">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">อายุประชากร</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-hero card-primary">     
+      <h3 class="text-center flex-grow-1 mt-5">{{ rangeEnd ? 'ช่วงอายุ '+rangeStart+' - '+rangeEnd+' ปี' : 'อายุ '+rangeStart+' ปี' }}<mat-icon [className]="!isDataLoaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></h3>
+      <div class="d-flex flex-row justify-content-center">
+        <mat-form-field class="mx-2">
+          <mat-label>อำเภอ</mat-label>
+          <mat-select (selectionChange)="filter($event.value, 1)">
+            <mat-option [value]="32">รวมทั้งหมด</mat-option>
+            <mat-option *ngFor="let district of districts" [value]="district.id">{{ district.district_name_th }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mx-2">
+          <mat-label>ตำบล</mat-label>
+          <mat-select (selectionChange)="filter($event.value, 2)">
+            <mat-option *ngFor="let sub_district of sub_districts" [value]="sub_district.id">{{ sub_district.sub_district_name_th }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mx-2">
+          <input type="search" matInput placeholder="กำหนดช่วงอายุ" [(ngModel)]="age_range">
+        </mat-form-field>
+        <button mat-icon-button color="primary" class="align-items-end" (click)="filterRange()">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+      <div id="popChart" style="width: 100%; height: 500px"></div>
+    </div>
+
+    <div class="card card-primary">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort>
+        <ng-container matColumnDef="year">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ปี</th>
+          <td mat-cell *matCellDef="let row"> {{row.year}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="dataset_male">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ชาย</th>
+          <td mat-cell *matCellDef="let row">{{ row.dataset_male }}</td>
+        </ng-container>
+      
+        <ng-container matColumnDef="dataset_female">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>หญิง</th>
+          <td mat-cell *matCellDef="let row"> {{ row.dataset_female }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

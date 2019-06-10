@@ -14,4 +14,8 @@ export class InfoService {
   populationAll(query?) {
     return this.http.get(`${environment.api_url}/info/population${query ? query : ''}`);
   }
+
+  populationAge(query?) {
+    return this.http.get(`${environment.api_url}/info/population/age${query ? query : ''}`);
+  }
 }

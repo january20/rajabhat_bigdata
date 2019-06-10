@@ -17,6 +17,7 @@ export class PopulationAllComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   ready = false;
+  isDataLoaded = false;
   districts = [];
   sub_districts = [];
   displayedColumns: string[] = ['year', 'male', 'female', 'total', 'house'];
@@ -34,6 +35,8 @@ export class PopulationAllComponent implements OnInit {
   }
 
   loadData(query?) {
+    this.isDataLoaded = false;
+
     this.refService.districts().subscribe((data: any) => this.districts = data);
     this.infoService.populationAll(query).subscribe((data: any) => {
       this.dataSource = new MatTableDataSource(data);
@@ -42,6 +45,7 @@ export class PopulationAllComponent implements OnInit {
       });
       this.createChart(data);
       this.ready = true;
+      this.isDataLoaded = true;
     });
   }
 
@@ -76,6 +80,7 @@ export class PopulationAllComponent implements OnInit {
       categoryAxis.renderer.minGridDistance = 50;
       categoryAxis.renderer.grid.template.location = 0;
 
+      this.chart = null;
       this.chart = popChart;
 
       this.createAxisAndSeries("total", "รวม", "circle", false);

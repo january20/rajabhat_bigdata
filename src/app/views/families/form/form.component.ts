@@ -54,7 +54,7 @@ export class FormComponent implements OnInit {
           console.log(res);
           setTimeout(() => {
             this.isSubmit = false;
-            // this.router.navigateByUrl('/families');
+            this.router.navigateByUrl('/families');
           }, 2000);          
         },
         err => {
@@ -78,7 +78,7 @@ export class FormComponent implements OnInit {
           console.log(res);
           setTimeout(() => {
             this.isSubmit = false;
-            // this.router.navigateByUrl('/families/'+res);
+            this.router.navigateByUrl('/families');
           }, 2000);          
         },
         err => {
