@@ -1,48 +1,69 @@
 <div class="card card-royal animated fadeInUp animation-delay-7">
-  <div class="card-header">
-    <h3 class="card-title"><mat-icon>attach_file</mat-icon> โครงการที่ฉันรับผิดชอบ</h3>
+  <div class="card-header d-flex">
+    <h3 class="card-title flex-grow-1"><mat-icon>attach_file</mat-icon> โครงการที่ฉันรับผิดชอบ</h3>
+    <a routerLink="/projects/create" mat-raised-button color="success">
+      <mat-icon>add</mat-icon>
+      เสนอโครงการ
+    </a>   
   </div>
   
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort>
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>สถานะ</th>
-      <td mat-cell *matCellDef="let row">
-        <button mat-icon-button>
-          <mat-icon class="green-icon" matTooltip="อนุมัติแล้ว" *ngIf="row.approved === 1">checked</mat-icon>
-          <mat-icon class="red-icon" matTooltip="ยังไม่อนุมัติ" *ngIf="row.approved === 0">close</mat-icon>
-        </button>
-    </ng-container>
+  <div class="card-body" *ngIf="!dataSource">
+    <h3 class="text-center">ไม่พบข้อมูล</h3>
+  </div>
 
-    <ng-container matColumnDef="project_name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ชื่อโครงการ</th>
-      <td mat-cell *matCellDef="let row"> {{ row.project_name }} </td>
-    </ng-container>
+  <ng-container *ngIf="dataSource">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button>
+            <mat-icon class="green-icon" matTooltip="อนุมัติแล้ว" *ngIf="row.approved === 1">checked</mat-icon>
+            <mat-icon class="red-icon" matTooltip="ยังไม่อนุมัติ" *ngIf="row.approved === 0">close</mat-icon>
+          </button>
+      </ng-container>
 
-    <ng-container matColumnDef="activity">
-      <th mat-header-cell *matHeaderCellDef class="text-center">รายงาน</th>
-      <td mat-cell *matCellDef="let row">
-        <a mat-icon-button routerLink="/projects/{{ row.id }}/activity/create" color="accent" matTooltip="รายงานกิจกรรม" *ngIf="row.approved === 1">
-          <mat-icon>insert_drive_file</mat-icon>
-        </a>
-        <a mat-icon-button routerLink="/projects/{{ row.id }}/activity" color="primary" matTooltip="รายการกิจกรรมที่นำเสนอ" *ngIf="row.approved === 1">
-          <mat-icon>list_alt</mat-icon>
-        </a>
-    </ng-container>
+      <ng-container matColumnDef="project_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ชื่อโครงการ</th>
+        <td mat-cell *matCellDef="let row">
+          <a routerLink="/projects/{{ row.id }}">{{ row.project_name }}</a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="file">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">ไฟล์</th>
+        <td mat-cell *matCellDef="let row">
+          <a mat-icon-button href="/files/projects/{{ row.project_detail_file_path }}" matTooltip="ไฟล์รายละเอียดโครงการ" *ngIf="row.approved === 1">
+            <mat-icon class="green-icon">cloud_download</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="activity">
+        <th mat-header-cell *matHeaderCellDef class="text-center">รายงาน</th>
+        <td mat-cell *matCellDef="let row">
+          <a mat-icon-button routerLink="/projects/{{ row.id }}/activity/create" color="accent" matTooltip="รายงานกิจกรรม" *ngIf="row.approved === 1">
+            <mat-icon>insert_drive_file</mat-icon>
+          </a>
+          <a mat-icon-button routerLink="/projects/{{ row.id }}/activity" color="primary" matTooltip="รายการกิจกรรมที่นำเสนอ" *ngIf="row.approved === 1">
+            <mat-icon>list_alt</mat-icon>
+          </a>
+      </ng-container>
+      
+      <ng-container matColumnDef="manage">
+        <th mat-header-cell *matHeaderCellDef class="text-center">จัดการ<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
+        <td mat-cell *matCellDef="let row">
+          <a mat-icon-button routerLink="/projects/{{ row.id }}/edit" matTooltip="แก้ไขโครงการ" *ngIf="row.approved === 1">
+            <mat-icon class="info-icon">edit</mat-icon>
+          </a>
+          <a mat-icon-button (click)="deleteProject(row.id)" routerLink="/projects/{{ row.id }}/edit" matTooltip="ลบโครงการ" color="warn" *ngIf="row.approved === 0">
+            <mat-icon>delete</mat-icon>
+          </a>
+        </td>
+      </ng-container>
     
-    <ng-container matColumnDef="manage">
-      <th mat-header-cell *matHeaderCellDef class="text-center">จัดการ<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
-      <td mat-cell *matCellDef="let row">
-        <a mat-icon-button routerLink="/projects/{{ row.id }}/edit" matTooltip="แก้ไขโครงการ" *ngIf="row.approved === 1">
-          <mat-icon class="info-icon">edit</mat-icon>
-        </a>
-        <a mat-icon-button (click)="deleteProject(row.id)" routerLink="/projects/{{ row.id }}/edit" matTooltip="ลบโครงการ" color="warn" *ngIf="row.approved === 0">
-          <mat-icon>delete</mat-icon>
-        </a>
-      </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[15, 30, 100]"></mat-paginator>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[15, 30, 100]"></mat-paginator>
+  </ng-container>  
 </div>

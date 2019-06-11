@@ -10,7 +10,6 @@
     <div class="text-center color-dark mw-800 center-block mb-4">
       <h1 class="mb-2 wow fadeInDown animation-delay-4">{{ currentUser.info.display_name }}</h1>
       <h2 class="mb-2 wow fadeInDown animation-delay-4">{{ currentUser.info.email }}</h2>
-      <p class="lead wow fadeInDown animation-delay-5">{{ currentUser.info.role_name }}</p>
     </div>
 
     <app-admin
@@ -30,6 +29,12 @@
       [currentUser]="currentUser"
       [myEvaluationList]="myEvaluationList"
     ></app-assessor>
+
+    <app-village-headman
+      *ngIf="currentUser.roles.village_headman && families"
+      [currentUser]="currentUser"
+      [families]="families"
+    ></app-village-headman>
 
     
   </div>

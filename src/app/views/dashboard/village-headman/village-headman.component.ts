@@ -4,25 +4,25 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-srru-personnel',
-  templateUrl: './srru-personnel.component.html',
-  styleUrls: ['./srru-personnel.component.scss']
+  selector: 'app-village-headman',
+  templateUrl: './village-headman.component.html',
+  styleUrls: ['./village-headman.component.scss']
 })
-export class SrruPersonnelComponent implements OnInit {
+export class VillageHeadmanComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @Input() myProjectList;
+  @Input() families;
   @Input() currentUser;
   @Output() projectDeleted = new EventEmitter<number>();
-  displayedColumns: string[] = ['status', 'project_name', 'file', 'activity', 'manage'];
+  displayedColumns: string[] = ['house_address', 'householder_name', 'family_members', 'manage'];
   dataSource: MatTableDataSource<any>;
   isDeleted = false;
 
   constructor() { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.myProjectList);
+    this.dataSource = new MatTableDataSource(this.families);
     setTimeout(() => {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
@@ -30,7 +30,7 @@ export class SrruPersonnelComponent implements OnInit {
   }
 
   deleteProject(id) {
-    if(confirm('คุณต้องการลบโครงการนี้ใช่หรือไม่ ?')) {
+    if(confirm('คุณต้องการลบครอบครัวนี้ใช่หรือไม่ ?')) {
       this.projectDeleted.emit(id);
     }
   }

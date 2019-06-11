@@ -1,3 +1,39 @@
-<p>
-  assessor works!
-</p>
+<div class="card card-warning animated fadeInUp animation-delay-7">
+  <div class="card-header">
+    <h3 class="card-title"><mat-icon>assessment</mat-icon> โครงการที่ฉันประเมิน</h3>
+  </div>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort>
+
+    <ng-container matColumnDef="project_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ชื่อโครงการ</th>
+      <td mat-cell *matCellDef="let row">
+        <a routerLink="/projects/{{ row.id }}" class="color-warning">{{ row.project_name }}</a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="file">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">ไฟล์</th>
+      <td mat-cell *matCellDef="let row">
+        <a mat-icon-button href="/files/projects/{{ row.project_detail_file_path }}" matTooltip="ไฟล์รายละเอียดโครงการ" *ngIf="row.approved === 1">
+          <mat-icon class="green-icon">cloud_download</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assessment">
+      <th mat-header-cell *matHeaderCellDef class="text-center">การประเมิน</th>
+      <td mat-cell *matCellDef="let row">
+        <a mat-icon-button routerLink="/projects/assessment/{{ row.id }}/create" color="primary" matTooltip="ประเมิน" *ngIf="row.approved === 1">
+          <mat-icon>assessment</mat-icon>
+        </a>
+        <a mat-icon-button routerLink="/projects/assessment/{{ row.id }}/result" matTooltip="ผลการประเมิน" *ngIf="row.approved === 1">
+          <mat-icon>playlist_add_check</mat-icon>
+        </a>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[15, 30, 100]"></mat-paginator>
+</div>

@@ -1,0 +1,51 @@
+<div class="text-center color-dark mw-800 center-block mb-4">
+  <h2 class="mb-2 wow fadeInDown animation-delay-4">{{ currentUser.info.role_name }}</h2>
+</div>
+<div class="card card-royal animated fadeInUp animation-delay-7">
+    <div class="card-header d-flex">
+      <h3 class="card-title flex-grow-1"><mat-icon>people</mat-icon> รายชื่อครอบครัวในหมู่บ้านที่ฉันรับผิดชอบ</h3>
+      <a routerLink="/families/create" mat-raised-button color="success">
+        <mat-icon>group_add</mat-icon>
+        เพิ่มครอบครัว
+      </a>   
+    </div>
+    
+    <div class="card-body" *ngIf="!dataSource">
+      <h3 class="text-center">ไม่พบข้อมูล</h3>
+    </div>
+  
+    <ng-container *ngIf="dataSource">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort>
+        <ng-container matColumnDef="house_address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>บ้านเลขที่</th>
+          <td mat-cell *matCellDef="let row"> {{row.house_address}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="householder_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>หัวหน้าครอบครัว</th>
+          <td mat-cell *matCellDef="let row">{{ row.householder_name }}</td>
+        </ng-container>
+      
+        <ng-container matColumnDef="family_members">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>สมาชิก</th>
+          <td mat-cell *matCellDef="let row"> {{ row.family_members }} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="manage">
+          <th mat-header-cell *matHeaderCellDef>จัดการ<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
+          <td mat-cell *matCellDef="let row">
+            <a routerLink="/families/{{ row.id }}/edit"  class="btn-circle btn-circle-xs btn-circle-raised btn-circle-info">
+              <i data-toggle="tooltip" data-placement="top" title="แก้ไข" class="fa fa-edit" aria-hidden="true"></i>
+            </a>&nbsp;
+            <a href="javascript:void(0)" (click)="deleteFamily(row.id)" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-danger">
+              <i data-toggle="tooltip" data-placement="top" title="ลบ" class="fa fa-close color-white" aria-hidden="true"></i>
+            </a>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[15, 30, 100]"></mat-paginator>
+    </ng-container>  
+  </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { ProjectService } from '../projects/shared/project.service';
 import { MatSnackBar } from '@angular/material';
+import { FamiliesService } from '../families/shared/families.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,10 +14,12 @@ export class DashboardComponent implements OnInit {
   currentUser: any;
   myProjectList: any;
   myEvaluationList: any;
+  families: any;
 
   constructor(
     private authService: AuthenticationService,
     private projectService: ProjectService,
+    private familiesService: FamiliesService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -39,6 +42,9 @@ export class DashboardComponent implements OnInit {
       this.projectService.getAssessmentProjects(user.info.assessor_kpi_id).subscribe((data: any) => this.myEvaluationList = data);
     }
     
+    if(user.roles.village_headman) {
+      this.familiesService.getAll().subscribe((data: any) => this.families = data);
+    }
 
     this.currentUser = user;
   }

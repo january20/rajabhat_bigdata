@@ -7,9 +7,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminComponent } from './admin/admin.component';
 import { AssessorComponent } from './assessor/assessor.component';
 import { SrruPersonnelComponent } from './srru-personnel/srru-personnel.component';
+import { VillageHeadmanComponent } from './village-headman/village-headman.component';
 
 @NgModule({
-  declarations: [DashboardComponent, AdminComponent, AssessorComponent, SrruPersonnelComponent],
+  declarations: [DashboardComponent, AdminComponent, AssessorComponent, SrruPersonnelComponent, VillageHeadmanComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
