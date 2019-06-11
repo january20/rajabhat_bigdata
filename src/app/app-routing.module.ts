@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'download', loadChildren: './views/download/download.module#DownloadModule' },
   { path: 'media', loadChildren: './views/media/media.module#MediaModule' },
   { path: 'info', loadChildren: './views/info/info.module#InfoModule' },
+  { path: 'kpi', loadChildren: './views/kpi/kpi.module#KpiModule' },
   {
     path: '',
     redirectTo: '/home',
