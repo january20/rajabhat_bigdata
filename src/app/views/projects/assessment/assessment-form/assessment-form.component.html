@@ -12,7 +12,7 @@
         <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">ประเมินโครงการ</h1>
         <p class="lead lead-lg color-white text-center center-block mx-auto mt-2 mb-4 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7"><a routerLink="/projects/{{ project.id }}" class="color-white"><i class="fa fa-external-link-square" aria-hidden="true"></i> {{ project.project_name }}</a></p>
       </div>
-    </div>      
+    </div>
   </div>
 
   <div class="container" [formGroup]="form">
@@ -31,7 +31,7 @@
             </tr>
           </thead>
           <tbody formArrayName="objectives">
-            <tr *ngFor="let objective of project.objectives; let i = index" [formGroupName]="i">                
+            <tr *ngFor="let objective of project.objectives; let i = index" [formGroupName]="i">
               <td>
                 {{ objective.objective }}
               </td>
@@ -47,10 +47,10 @@
                 <div class="form-group m-0">
                   <mat-form-field class="w-100">
                     <mat-label>ข้อเสนอแนะ</mat-label>
-                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
+                    <textarea matInput rows="4" formControlName="suggestion"></textarea>
                   </mat-form-field>
                 </div>
-              </td>                
+              </td>
             </tr>
           </tbody>
 
@@ -62,7 +62,7 @@
             </tr>
           </thead>
           <tbody formArrayName="activities">
-            <tr *ngFor="let activity of project.activities; let i = index" [formGroupName]="i">                
+            <tr *ngFor="let activity of project.activities; let i = index" [formGroupName]="i">
               <td>
                 {{ activity.activity }}
               </td>
@@ -78,10 +78,10 @@
                 <div class="form-group m-0">
                   <mat-form-field class="w-100">
                     <mat-label>ข้อเสนอแนะ</mat-label>
-                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
+                    <textarea matInput rows="4" formControlName="suggestion"></textarea>
                   </mat-form-field>
                 </div>
-              </td>                
+              </td>
             </tr>
           </tbody>
 
@@ -93,7 +93,7 @@
             </tr>
           </thead>
           <tbody formArrayName="outputs">
-            <tr *ngFor="let output of project.outputs; let i = index" [formGroupName]="i">                
+            <tr *ngFor="let output of project.outputs; let i = index" [formGroupName]="i">
               <td>
                 {{ output.output }}
               </td>
@@ -109,10 +109,10 @@
                 <div class="form-group m-0">
                   <mat-form-field class="w-100">
                     <mat-label>ข้อเสนอแนะ</mat-label>
-                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
+                    <textarea matInput rows="4" formControlName="suggestion"></textarea>
                   </mat-form-field>
                 </div>
-              </td>                
+              </td>
             </tr>
           </tbody>
 
@@ -124,7 +124,7 @@
             </tr>
           </thead>
           <tbody formArrayName="kpi">
-            <tr *ngFor="let k of project.kpi; let i = index" [formGroupName]="i">                
+            <tr *ngFor="let k of project.kpi; let i = index" [formGroupName]="i">
               <td>
                 {{ k.kpi }}
               </td>
@@ -140,10 +140,10 @@
                 <div class="form-group m-0">
                   <mat-form-field class="w-100">
                     <mat-label>ข้อเสนอแนะ</mat-label>
-                    <textarea matInput rows="1" formControlName="suggestion"></textarea>
+                    <textarea matInput rows="4" formControlName="suggestion"></textarea>
                   </mat-form-field>
                 </div>
-              </td>                
+              </td>
             </tr>
           </tbody>
         </table>
@@ -170,19 +170,19 @@
         </mat-form-field>
 
         <h3>2.3 แนบรูปภาพ/ไฟล์ (เพิ่มเติม)</h3>
-        <ngx-dropzone 
+        <ngx-dropzone
           [preserveFiles]="false"
           [showPreviews]="true"
           [label]="'เลือกรูปภาพ/ไฟล์'"
           (filesAdded)="addFiles($event)" >
-        </ngx-dropzone>       
+        </ngx-dropzone>
       </div>
     </div>
 
     <div class="card card-royal animated fadeInUp animation-delay-7">
       <div class="card-header">
         <h3 class="card-title"><i class="zmdi zmdi-file-text"></i> ตอนที่ 3: ปัญหาอุปสรรค แนวทางการปรับปรุงพัฒนาโครงการ</h3>
-      </div>   
+      </div>
       <div class="card-body">
         <h3 [className]="formErrors.problem ? 'color-danger mt-2' : 'mt-2'">3.1 ปัญหาและอุปสรรค</h3>
         <mat-form-field class="w-100">
@@ -197,7 +197,7 @@
           <textarea matInput formControlName="problem_solving" rows="5" required></textarea>
           <mat-error *ngIf="formErrors.problem_solving">{{ formErrors.problem_solving }}</mat-error>
         </mat-form-field>
-      </div>     
+      </div>
     </div>
 
     <div class="card card-royal animated fadeInUp animation-delay-7">

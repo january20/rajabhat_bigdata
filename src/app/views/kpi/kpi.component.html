@@ -19,21 +19,21 @@
     <div class="d-flex flex-column">
       <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
         <div class="card-header">
-          <h3 class="card-title"><i class="zmdi zmdi-check-all"></i> ตัวชี้วัดโครงการ (KPI)</h3>
+          <h3 class="card-title"><i class="zmdi zmdi-check-all"></i> ตัวชี้วัดโครงการ (พ.ศ. {{kpi_year+543}})</h3>
         </div>
 				<table class="table table-no-border table-striped">
 					<thead>
 						<tr>
-							<th>ยุธศาสตร์</th>
-							<th>กลุ่มตัวชี้วัด</th>
-							<th>ตัวชี้วัด</th>
+							<th style="width: 15%;">ยุธศาสตร์</th>
+							<th style="width: 40%;">กลุ่มตัวชี้วัด</th>
+							<th style="width: 45%;">ตัวชี้วัด</th>
 						</tr>
 					</thead>
           <tbody>
             <tr *ngFor="let kpi of srru_kpis">
-            <td>{{kpi.name}}</td>
-              <td>{{kpi.details}}</td>
-              <td></td>
+              <td style="width: 15%;">{{kpi.name}}</td>
+              <td style="width: 40%;">{{kpi.group}}</td>
+              <td style="width: 45%; white-space: pre-line;">{{kpi.details}}</td>
             </tr>
 
           </tbody>

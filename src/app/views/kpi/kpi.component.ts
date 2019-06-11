@@ -10,10 +10,12 @@ export class KpiComponent implements OnInit {
 
   srru_kpis:any;
 
+  kpi_year:Number = 2018;
+
   constructor(private kpi:KpiService) { }
 
   ngOnInit() {
-    this.kpi.srru_strategies().subscribe(data=>{
+    this.kpi.srru_strategies(2018).subscribe(data=>{
       console.log(data);
       this.srru_kpis = data;
    });
