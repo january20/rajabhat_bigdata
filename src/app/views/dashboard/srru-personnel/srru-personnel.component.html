@@ -1,7 +1,7 @@
 <div class="card card-royal animated fadeInUp animation-delay-7">
   <div class="card-header d-flex">
     <h3 class="card-title flex-grow-1"><mat-icon>attach_file</mat-icon> โครงการที่ฉันรับผิดชอบ</h3>
-    <a routerLink="/projects/create" mat-raised-button color="success">
+    <a routerLink="/projects/create" mat-raised-button color="success" *ngIf="currentUser.roles.srru_personnel">
       <mat-icon>add</mat-icon>
       เสนอโครงการ
     </a>   
