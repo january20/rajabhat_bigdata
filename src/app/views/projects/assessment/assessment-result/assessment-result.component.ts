@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../../shared/project.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-assessment-result',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssessmentResultComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private projectService: ProjectService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
+    this.projectService.getAssessmentResult(this.route.snapshot.params.id).subscribe(console.log);
   }
 
 }

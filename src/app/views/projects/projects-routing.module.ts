@@ -34,7 +34,7 @@ const routes: Routes = [
         component: AssessmentProjectListComponent
       },
       {
-        path: 'result',
+        path: ':id/result',
         component: AssessmentResultComponent
       },
       {
