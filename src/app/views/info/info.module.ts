@@ -10,9 +10,12 @@ import { AgeComponent } from './population/age/age.component';
 import { OccupationComponent } from './population/occupation/occupation.component';
 import { PopulationAllComponent } from './population/population-all/population-all.component';
 import { EducationComponent } from './population/education/education.component';
+import { EnvComponent } from './env/env.component';
+import { AirComponent } from './env/air/air.component';
+import { WeatherComponent } from './env/weather/weather.component';
 
 @NgModule({
-  declarations: [InfoComponent, IncomeComponent, PopulationComponent, AgeComponent, OccupationComponent, PopulationAllComponent, EducationComponent],
+  declarations: [InfoComponent, IncomeComponent, PopulationComponent, AgeComponent, OccupationComponent, PopulationAllComponent, EducationComponent, EnvComponent, AirComponent, WeatherComponent],
   imports: [
     CommonModule,
     InfoRoutingModule,
