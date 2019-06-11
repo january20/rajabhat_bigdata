@@ -7,11 +7,11 @@
     </a>   
   </div>
   
-  <div class="card-body" *ngIf="!dataSource">
+  <div class="card-body" *ngIf="!dataSource && myProjectList.length === 0">
     <h3 class="text-center">ไม่พบข้อมูล</h3>
   </div>
 
-  <ng-container *ngIf="dataSource">
+  <ng-container *ngIf="dataSource && myProjectList.length > 0">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort>
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>สถานะ</th>
