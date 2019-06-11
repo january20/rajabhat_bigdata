@@ -12,7 +12,37 @@
         </p>
   	</div>
   </div>
-
-
-  
 </div>
+
+
+<div class="container">
+    <div class="d-flex flex-column">
+      <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+        <div class="card-header">
+          <h3 class="card-title"><i class="zmdi zmdi-check-all"></i> ตัวชี้วัดโครงการ (KPI)</h3>
+        </div>
+				<table class="table table-no-border table-striped">
+					<thead>
+						<tr>
+							<th>ยุธศาสตร์</th>
+							<th>กลุ่มตัวชี้วัด</th>
+							<th>ตัวชี้วัด</th>
+						</tr>
+					</thead>
+          <tbody>
+            <tr *ngFor="let kpi of srru_kpis">
+            <td>{{kpi.name}}</td>
+              <td>{{kpi.details}}</td>
+              <td></td>
+            </tr>
+
+          </tbody>
+				</table>
+      </div>
+
+
+
+
+
+    </div>
+  </div>

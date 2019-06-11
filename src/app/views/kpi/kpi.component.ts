@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KpiService } from './shared/kpi.service';
 
 @Component({
   selector: 'app-kpi',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KpiComponent implements OnInit {
 
-  constructor() { }
+  srru_kpis:any;
+
+  constructor(private kpi:KpiService) { }
 
   ngOnInit() {
+    this.kpi.srru_strategies().subscribe(data=>{
+      console.log(data);
+      this.srru_kpis = data;
+   });
+
+
   }
 
 }
