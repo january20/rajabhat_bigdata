@@ -17,7 +17,11 @@ export class KpiService {
   }
   srru_strategies(year=2018){
     console.log(`service_strategies = ${year}`)
-      return this.http.get(`${environment.api_url}/ref/srru_strategies?strategy_year=${year}`);
+    return this.http.get(`${environment.api_url}/ref/srru_strategies?strategy_year=${year}`);
+  }
+  srru_strategies_chart(year=2018){
+    console.log(`service_strategies = ${year}`)
+    return this.http.get(`${environment.api_url}/kpi/srru_strategies?strategy_year=${year}`);
   }
 
 

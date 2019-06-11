@@ -47,6 +47,7 @@ export class AgeComponent implements OnInit {
       setTimeout(() => {
         this.dataSource.sort = this.sort;
       });
+      console.log(data);
       this.createChart(data);
       this.ready = true;
       this.isDataLoaded = true;
@@ -93,12 +94,12 @@ export class AgeComponent implements OnInit {
 
       this.createAxisAndSeries("dataset_male", "ชาย", "triangle");
       this.createAxisAndSeries("dataset_female", "หญิง", "rectangle");
-      
+
     });
   }
 
   createAxisAndSeries(field, name, bullet) {
-    this.zone.runOutsideAngular(() => {   
+    this.zone.runOutsideAngular(() => {
       let series = this.chart.series.push(new am4charts.LineSeries());
       let scrollbarX = new am4charts.XYChartScrollbar();
       let interfaceColors = new am4core.InterfaceColorSet();
@@ -108,11 +109,11 @@ export class AgeComponent implements OnInit {
       series.strokeWidth = 2;
       series.name = name;
       series.tooltipText = "{valueY}[/]";
-      
+
       scrollbarX.series.push(series);
       this.chart.scrollbarX = scrollbarX;
       this.chart.cursor = new am4charts.XYCursor();
-      
+
       switch(bullet) {
         case "triangle": {
           let bullet = series.bullets.push(new am4charts.Bullet());
@@ -120,7 +121,7 @@ export class AgeComponent implements OnInit {
           bullet.height = 12;
           bullet.horizontalCenter = "middle";
           bullet.verticalCenter = "middle";
-          
+
           let triangle = bullet.createChild(am4core.Triangle);
           triangle.stroke = interfaceColors.getFor("background");
           triangle.strokeWidth = 2;
@@ -135,7 +136,7 @@ export class AgeComponent implements OnInit {
           bullet.height = 10;
           bullet.horizontalCenter = "middle";
           bullet.verticalCenter = "middle";
-          
+
           let rectangle = bullet.createChild(am4core.Rectangle);
           rectangle.stroke = interfaceColors.getFor("background");
           rectangle.strokeWidth = 2;

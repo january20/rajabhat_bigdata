@@ -38,6 +38,7 @@ export class PopulationAllComponent implements OnInit {
     this.isDataLoaded = false;
 
     this.refService.districts().subscribe((data: any) => this.districts = data);
+
     this.infoService.populationAll(query).subscribe((data: any) => {
       this.dataSource = new MatTableDataSource(data);
       setTimeout(() => {
@@ -88,12 +89,12 @@ export class PopulationAllComponent implements OnInit {
       this.createAxisAndSeries("female", "หญิง", "rectangle", true);
       this.createAxisAndSeries("house", "ครัวเรือน", "circle", true);
 
-      
+
     });
   }
 
   createAxisAndSeries(field, name, bullet, active) {
-    this.zone.runOutsideAngular(() => {   
+    this.zone.runOutsideAngular(() => {
       let series = this.chart.series.push(new am4charts.LineSeries());
       let scrollbarX = new am4charts.XYChartScrollbar();
       let interfaceColors = new am4core.InterfaceColorSet();
@@ -104,11 +105,11 @@ export class PopulationAllComponent implements OnInit {
       series.name = name;
       series.hidden = active;
       series.tooltipText = "{valueY}[/]";
-      
+
       scrollbarX.series.push(series);
       this.chart.scrollbarX = scrollbarX;
       this.chart.cursor = new am4charts.XYCursor();
-      
+
       switch(bullet) {
         case "triangle": {
           let bullet = series.bullets.push(new am4charts.Bullet());
@@ -116,7 +117,7 @@ export class PopulationAllComponent implements OnInit {
           bullet.height = 12;
           bullet.horizontalCenter = "middle";
           bullet.verticalCenter = "middle";
-          
+
           let triangle = bullet.createChild(am4core.Triangle);
           triangle.stroke = interfaceColors.getFor("background");
           triangle.strokeWidth = 2;
@@ -131,7 +132,7 @@ export class PopulationAllComponent implements OnInit {
           bullet.height = 10;
           bullet.horizontalCenter = "middle";
           bullet.verticalCenter = "middle";
-          
+
           let rectangle = bullet.createChild(am4core.Rectangle);
           rectangle.stroke = interfaceColors.getFor("background");
           rectangle.strokeWidth = 2;
