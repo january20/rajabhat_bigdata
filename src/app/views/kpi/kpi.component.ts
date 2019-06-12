@@ -47,10 +47,10 @@ export class KpiComponent implements OnInit {
       this.createChart(data,"nationalStrategyChart","name","projects","info");
     });
 
-    this.kpi.project_schemes_chart(this.kpi_year).subscribe(data=>{
+    this.kpi.project_schemes_chart().subscribe(data=>{
       this.createChart(data,"projectSchemesChart","name","projects","info");
     });
-    this.kpi.project_benefits_chart(this.kpi_year).subscribe(data=>{
+    this.kpi.project_benefits_chart().subscribe(data=>{
       this.createChart(data,"projectBenefitsChart","name","projects","info");
     });
 
