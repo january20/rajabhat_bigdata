@@ -16,8 +16,6 @@ export class KpiComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   kpi_year:number = 2018;
-  srruStrategies:any;
-
 
   constructor(
     private zone: NgZone,
@@ -26,18 +24,34 @@ export class KpiComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loadData();
+
+  }
+
+  loadData(){
     this.kpi.srru_strategies(this.kpi_year).subscribe(data=>{
       this.srru_kpis = data;
     });
 
     this.kpi.srru_strategies_chart(this.kpi_year).subscribe(data=>{
-      //console.log(data);
-      this.srruStrategies = data;
-      this.createChart(this.srruStrategies,"srruStrategyChart","name","projects","info");
+      this.createChart(data,"srruStrategyChart","name","projects","info");
     });
 
-     //this.srru_strategies_data = new MatTableDataSource([100,200,300]); "srruStrategyChart"
-     this.ready = true;
+    this.kpi.rajabhat_strategies_chart(this.kpi_year).subscribe(data=>{
+      this.createChart(data,"rajabhatStrategyChart","name","projects","info");
+    });
+
+    this.kpi.national_strategies_chart(this.kpi_year).subscribe(data=>{
+      this.createChart(data,"nationalStrategyChart","name","projects","info");
+    });
+
+    this.kpi.project_schemes_chart(this.kpi_year).subscribe(data=>{
+      this.createChart(data,"projectSchemesChart","name","projects","info");
+    });
+    this.kpi.project_benefits_chart(this.kpi_year).subscribe(data=>{
+      this.createChart(data,"projectBenefitsChart","name","projects","info");
+    });
+//project_benefits_chart
   }
 
   createChart(data,chartId,xField,yField,infoField) {
