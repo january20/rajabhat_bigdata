@@ -26,5 +26,11 @@ export class InfoService {
   populationOccupation(query?) {
     return this.http.get(`${environment.api_url}/info/population/occupation${query ? query : ''}`);
   }
+  weatherDuration(duration_id?){
+    return this.http.get(`${environment.api_url}/ref/weather/${duration_id} ? duration_id : 'duration'`);
+  }
+  weatherStations(){
+    return this.http.get(`${environment.api_url}/ref/weather/stations`);
+  }
 
 }
