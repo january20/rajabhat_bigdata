@@ -117,8 +117,66 @@
         <div class="card-header">
           <h3 class="card-title"><i class="zmdi zmdi-check-all"></i>  ผลการประเมินโครงการ</h3>
         </div>
-        <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+        <div class="card-body">
+
+
+<h2 class="section-title text-center">ผลการประเมินรวม <B *ngIf="project_summary!=null" class="color-danger">{{project_summary.total_projects}}</B> โครงการ</h2>
+<p  *ngIf="project_summary!=null" class=" text-center">ผลการประเมินจากผู้ทรงคุณวุฒิ ตามวัตถุประสงค์ กิจกรรม ผลลัพท์หลังจากการดำเนินกิจกรรม และตัวชี้วัดของโครงการ ภายใต้โครงการยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่นมหาวิทยาลัยราชภัฏสุรินทร์ พร้อมข้อเสนอแนะจากผู้ทรงคุณวุฒิจำนวน {{project_summary.total_suggestion}} รายการ
+สำหรับผลการดำเนินการตามตัวบ่งชี้ต่าง ๆ สามารถสรุปได้ดังนี้</p>
+    <div class="row mt-4">
+      <div class="col-md-3">
+        <div class="card card-warning">
+          <div class="card-body overflow-hidden text-center">
+            <!-- <span class="ms-icon ms-icon-circle ms-icon-xxlg mb-4 color-warning"><i class="zmdi zmdi-cocktail"></i></span> -->
+            <h4 class="color-warning">วัตถุประสงค์ของโครงการ</h4>
+            <p *ngIf="project_summary">บรรลุ {{project_summary.total_objectives.achieve}} ข้อ</p>
+            <p *ngIf="project_summary">ไม่บรรลุ {{project_summary.total_objectives.not_achieve}} ข้อ</p>
+          </div>
         </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-warning">
+          <div class="card-body overflow-hidden text-center">
+            <!-- <span class="ms-icon ms-icon-circle ms-icon-xxlg mb-4 color-warning"><i class="zmdi zmdi-cocktail"></i></span> -->
+            <h4 class="color-warning">การดำเนินกิจกรรม</h4>
+            <p>บรรลุ</p>
+            <p>ไม่บรรลุ</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-warning">
+          <div class="card-body overflow-hidden text-center">
+            <!-- <span class="ms-icon ms-icon-circle ms-icon-xxlg mb-4 color-warning"><i class="zmdi zmdi-cocktail"></i></span> -->
+            <h4 class="color-warning">ผลลัพธ์ของโครงการ</h4>
+            <p>บรรลุ</p>
+            <p>ไม่บรรลุ</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-warning">
+          <div class="card-body overflow-hidden text-center">
+            <!-- <span class="ms-icon ms-icon-circle ms-icon-xxlg mb-4 color-warning"><i class="zmdi zmdi-cocktail"></i></span> -->
+            <h4 class="color-warning">เป็นไปตามตัวชี้วัด</h4>
+            <p>บรรลุ</p>
+            <p>ไม่บรรลุ</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+        </div>
+        <p class="h6">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          ข้อมูลนี้เป็นการสรุปจากภาพรวมของโครงการ ข้อมูลในรายละเอียดจะเห็นได้เฉพาะผู้ดำเนินโครงการและผู้ทรงคุณวุฒิ
+        </p>
+        <div class="card-footer">
+        </div>
+
         <div class="card-footer">
         </div>
       </div>

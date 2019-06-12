@@ -16,6 +16,7 @@ export class KpiComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   kpi_year:number = 2018;
+  project_summary:any;
 
   constructor(
     private zone: NgZone,
@@ -50,6 +51,11 @@ export class KpiComponent implements OnInit {
     });
     this.kpi.project_benefits_chart(this.kpi_year).subscribe(data=>{
       this.createChart(data,"projectBenefitsChart","name","projects","info");
+    });
+
+    this.kpi.project_summary().subscribe(data=>{
+       console.log(data);
+       this.project_summary = data;
     });
 //project_benefits_chart
   }
