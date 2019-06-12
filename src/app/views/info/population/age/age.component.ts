@@ -47,7 +47,6 @@ export class AgeComponent implements OnInit {
       setTimeout(() => {
         this.dataSource.sort = this.sort;
       });
-      console.log(data);
       this.createChart(data);
       this.ready = true;
       this.isDataLoaded = true;
