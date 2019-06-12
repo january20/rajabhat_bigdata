@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, Inject} from '@angular/core';
 import { KpiService } from './shared/kpi.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,6 +11,9 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
   templateUrl: './kpi.component.html',
   styleUrls: ['./kpi.component.scss']
 })
+
+
+
 export class KpiComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
@@ -18,6 +21,7 @@ export class KpiComponent implements OnInit {
   kpi_year:number = 2018;
   project_summary:any;
   srru_kpis:any;
+
 
   constructor(
     private zone: NgZone,
@@ -29,6 +33,7 @@ export class KpiComponent implements OnInit {
     this.loadData();
 
   }
+
 
   loadData(){
     this.kpi.srru_strategies(this.kpi_year).subscribe(data=>{

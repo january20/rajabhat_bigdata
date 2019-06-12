@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     if(user.roles.project_assessor) {
       this.projectService.getAssessmentProjects(user.info.assessor_kpi_id).subscribe((data: any) => this.myEvaluationList = data);
     }
-    
+
     if(user.roles.village_headman) {
       this.familiesService.getAll().subscribe((data: any) => this.families = data);
     }

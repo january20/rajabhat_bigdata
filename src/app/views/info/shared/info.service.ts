@@ -26,5 +26,5 @@ export class InfoService {
   populationOccupation(query?) {
     return this.http.get(`${environment.api_url}/info/population/occupation${query ? query : ''}`);
   }
-  
+
 }

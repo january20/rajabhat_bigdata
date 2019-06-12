@@ -139,8 +139,8 @@
           <div class="card-body overflow-hidden text-center">
             <!-- <span class="ms-icon ms-icon-circle ms-icon-xxlg mb-4 color-warning"><i class="zmdi zmdi-cocktail"></i></span> -->
             <h4 class="color-warning">การดำเนินกิจกรรม</h4>
-            <p>บรรลุ</p>
-            <p>ไม่บรรลุ</p>
+            <p *ngIf="project_summary">บรรลุ {{project_summary.total_activities.achieve}} ข้อ</p>
+            <p *ngIf="project_summary">ไม่บรรลุ {{project_summary.total_activities.not_achieve}} ข้อ</p>
           </div>
         </div>
       </div>
@@ -149,8 +149,8 @@
           <div class="card-body overflow-hidden text-center">
             <!-- <span class="ms-icon ms-icon-circle ms-icon-xxlg mb-4 color-warning"><i class="zmdi zmdi-cocktail"></i></span> -->
             <h4 class="color-warning">ผลลัพธ์ของโครงการ</h4>
-            <p>บรรลุ</p>
-            <p>ไม่บรรลุ</p>
+            <p *ngIf="project_summary">บรรลุ {{project_summary.total_outputs.achieve}} ข้อ</p>
+            <p *ngIf="project_summary">ไม่บรรลุ {{project_summary.total_outputs.not_achieve}} ข้อ</p>
           </div>
         </div>
       </div>
@@ -159,8 +159,8 @@
           <div class="card-body overflow-hidden text-center">
             <!-- <span class="ms-icon ms-icon-circle ms-icon-xxlg mb-4 color-warning"><i class="zmdi zmdi-cocktail"></i></span> -->
             <h4 class="color-warning">เป็นไปตามตัวชี้วัด</h4>
-            <p>บรรลุ</p>
-            <p>ไม่บรรลุ</p>
+            <p *ngIf="project_summary">บรรลุ {{project_summary.total_kpi.achieve}} ข้อ</p>
+            <p *ngIf="project_summary">ไม่บรรลุ {{project_summary.total_kpi.not_achieve}} ข้อ</p>
           </div>
         </div>
       </div>
@@ -174,10 +174,10 @@
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           ข้อมูลนี้เป็นการสรุปจากภาพรวมของโครงการ ข้อมูลในรายละเอียดจะเห็นได้เฉพาะผู้ดำเนินโครงการและผู้ทรงคุณวุฒิ
         </p>
-        <div class="card-footer">
-        </div>
+
 
         <div class="card-footer">
+          
         </div>
       </div>
     </div>
