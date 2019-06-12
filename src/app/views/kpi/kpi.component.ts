@@ -15,15 +15,9 @@ export class KpiComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  ready = false;
-  srru_kpis:any;
+  kpi_year:number = 2018;
+  srruStrategies:any;
 
-  srru_strategies:string[] = ["Y1","Y2","Y3"];
-
-  //srru_strategies_data: MatTableDataSource<any>;
-  private srru_strategies_chart: am4charts.XYChart;
-
-  kpi_year:Number = 2018;
 
   constructor(
     private zone: NgZone,
@@ -32,16 +26,65 @@ export class KpiComponent implements OnInit {
 
   ngOnInit() {
 
-    this.kpi.srru_strategies(2018).subscribe(data=>{
+    this.kpi.srru_strategies(this.kpi_year).subscribe(data=>{
       this.srru_kpis = data;
     });
 
-    this.kpi.srru_strategies_chart(2018).subscribe(data=>{
-      console.log(data);
+    this.kpi.srru_strategies_chart(this.kpi_year).subscribe(data=>{
+      //console.log(data);
+      this.srruStrategies = data;
+      this.createChart(this.srruStrategies,"srruStrategyChart","name","projects","info");
     });
 
-     //this.srru_strategies_data = new MatTableDataSource([100,200,300]);
+     //this.srru_strategies_data = new MatTableDataSource([100,200,300]); "srruStrategyChart"
      this.ready = true;
+  }
+
+  createChart(data,chartId,xField,yField,infoField) {
+    this.zone.runOutsideAngular(() => {
+      let bigDataChart = am4core.create(chartId, am4charts.XYChart)
+      let categoryAxis = bigDataChart.xAxes.push(new am4charts.CategoryAxis());
+      let valueAxis = bigDataChart.yAxes.push(new am4charts.ValueAxis());
+      let series = bigDataChart.series.push(new am4charts.ColumnSeries());
+
+      bigDataChart.data = data;
+      bigDataChart.scrollbarX = new am4core.Scrollbar();
+
+      categoryAxis.dataFields.category = xField;
+      categoryAxis.renderer.grid.template.location = 0;
+      categoryAxis.renderer.minGridDistance = 30;
+      categoryAxis.renderer.labels.template.horizontalCenter = "right";
+      categoryAxis.renderer.labels.template.verticalCenter = "middle";
+      categoryAxis.renderer.labels.template.rotation = 270;
+      categoryAxis.tooltip.disabled = true;
+      categoryAxis.renderer.minHeight = 110;
+
+      valueAxis.renderer.minWidth = 50;
+
+      series.sequencedInterpolation = true;
+      series.dataFields.valueY = yField;
+      //series.dataFields.valueYShow = infoField;
+      series.dataFields.categoryX = xField;
+      series.tooltipText = "[{categoryX}: bold]{info}[/]";
+      series.columns.template.strokeWidth = 0;
+      series.tooltip.pointerOrientation = "vertical";
+      series.columns.template.column.cornerRadiusTopLeft = 10;
+      series.columns.template.column.cornerRadiusTopRight = 10;
+      series.columns.template.column.fillOpacity = 0.8;
+
+      let hoverState = series.columns.template.column.states.create("hover");
+
+      hoverState.properties.cornerRadiusTopLeft = 0;
+      hoverState.properties.cornerRadiusTopRight = 0;
+      hoverState.properties.fillOpacity = 1;
+
+      series.columns.template.adapter.add("fill", function(fill, target) {
+        return bigDataChart.colors.getIndex(target.dataItem.index);
+      });
+
+      bigDataChart.cursor = new am4charts.XYCursor();
+
+    });
   }
 
 }

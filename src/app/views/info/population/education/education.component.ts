@@ -61,7 +61,7 @@ export class EducationComponent implements OnInit {
   filter(place_id, type) {
     this.loadData(`/${place_id}`);
 
-    if(type === 1) {     
+    if(type === 1) {
       this.loadSubDistricts(place_id);
     } else if(type === 2) {
       this.loadVillages(place_id);
@@ -112,9 +112,9 @@ export class EducationComponent implements OnInit {
       popChart.cursor = new am4charts.XYCursor();
 
       this.chart = null;
-      this.chart = popChart;      
+      this.chart = popChart;
     });
   }
 
-  
+
 }

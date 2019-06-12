@@ -15,7 +15,7 @@
   </div>
 
   <div class="container">
-    <div class="card card-hero card-primary">     
+    <div class="card card-hero card-primary">
       <h3 class="text-center flex-grow-1 mt-5">จำนวนประชากรต่อระดับการศึกษา <mat-icon [className]="!isDataLoaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></h3>
       <div class="d-flex flex-row justify-content-center">
         <mat-form-field class="mx-2">
@@ -47,12 +47,12 @@
           <th mat-header-cell *matHeaderCellDef>ระดับการศึกษา</th>
           <td mat-cell *matCellDef="let row"> {{row.name_th}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="families_count">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>จำนวน</th>
           <td mat-cell *matCellDef="let row">{{ row.families_count }}</td>
         </ng-container>
-      
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
