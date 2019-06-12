@@ -17,6 +17,7 @@ export class KpiComponent implements OnInit {
 
   kpi_year:number = 2018;
   project_summary:any;
+  srru_kpis:any;
 
   constructor(
     private zone: NgZone,
