@@ -4,9 +4,9 @@
     <a routerLink="/projects/create" mat-raised-button color="success" *ngIf="currentUser.roles.srru_personnel">
       <mat-icon>add</mat-icon>
       เสนอโครงการ
-    </a>   
+    </a>
   </div>
-  
+
   <div class="card-body" *ngIf="!dataSource && myProjectList.length === 0">
     <h3 class="text-center">ไม่พบข้อมูล</h3>
   </div>
@@ -48,7 +48,7 @@
             <mat-icon>list_alt</mat-icon>
           </a>
       </ng-container>
-      
+
       <ng-container matColumnDef="manage">
         <th mat-header-cell *matHeaderCellDef class="text-center">จัดการ<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
         <td mat-cell *matCellDef="let row">
@@ -60,10 +60,18 @@
           </a>
         </td>
       </ng-container>
-    
+      <ng-container matColumnDef="result">
+        <th mat-header-cell *matHeaderCellDef class="text-center">ผลประเมิน<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
+        <td mat-cell *matCellDef="let row">
+          <a mat-icon-button routerLink="/projects/assessment/{{ row.id }}/result" matTooltip="ผลการประเมินโครงการ" *ngIf="row.approved === 1">
+            <mat-icon>playlist_add_check</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[15, 30, 100]"></mat-paginator>
-  </ng-container>  
+  </ng-container>
 </div>
