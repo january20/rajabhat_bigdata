@@ -26,4 +26,11 @@ export class BioService {
   storeBio(formData, group_id) {
     return this.http.post(`${environment.api_url}/bio?method=browser&diversity_group=${group_id}`, formData);
   }
+
+  animalsCount() {
+    return this.http.get(`${environment.api_url}/bio/animals_count`);
+  }
+  plantsCount() {
+    return this.http.get(`${environment.api_url}/bio/plants_count`);
+  }
 }

@@ -42,4 +42,8 @@ export class ExpertService {
   delete(id) {
     return this.http.delete(`${environment.api_url}/experts/${id}`);
   }
+
+  count() {
+    return this.http.get(`${environment.api_url}/experts/count`);
+  }
 }

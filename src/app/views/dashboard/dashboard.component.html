@@ -10,16 +10,8 @@
     <div class="text-center color-dark mw-800 center-block mb-4">
       <h1 class="mb-2 wow fadeInDown animation-delay-4">{{ currentUser.info.display_name }}</h1>
       <h2 class="mb-2 wow fadeInDown animation-delay-4">{{ currentUser.info.email }}</h2>
+      <h2 class="mb-2 wow fadeInDown animation-delay-4" *ngIf="currentUser.roles.village_headman">{{ currentUser.info.role_name }}</h2>
     </div>
-
-    <!-- <app-admin
-      *ngIf="currentUser.roles.admin"
-      [currentUser]="currentUser"
-      [adminProjectList]="adminProjectList"
-      [adminExpertList]="adminExpertList"
-      [adminOtopList]="adminOtopList"
-      [adminVillageHeadmanUserList]="adminVillageHeadmanUserList"
-    ></app-admin> -->
 
     <app-srru-personnel
       *ngIf="currentUser.roles.srru_personnel && myProjectList"
@@ -28,18 +20,69 @@
       (projectDeleted)="deleteProject($event)"
     ></app-srru-personnel>
 
+    <app-admin
+      *ngIf="currentUser.roles.admin"
+      [currentUser]="currentUser"
+      [adminProjectList]="adminProjectList"
+      (projectDeleted)="deleteProject($event)"
+    ></app-admin>
+
     <app-assessor
       *ngIf="currentUser.roles.project_assessor && myEvaluationList"
       [currentUser]="currentUser"
       [myEvaluationList]="myEvaluationList"
     ></app-assessor>
 
+    <div class="row">
+      <div class="col">
+        <div class="card card-success-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;">
+          <div class="text-center card-body">
+            <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="fa fa-leaf"></i></span>
+            <h4 class="">พืช</h4>
+            <p class="">{{ countMyPlants }} รายการที่ฉันเพิ่ม</p>
+            <a routerLink="/bio/plants/create" class="btn btn-white color-success btn-raised">เพิ่ม</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-warning-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;">
+          <div class="text-center card-body">
+            <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="fa fa-paw"></i></span>
+            <h4 class="">สัตว์</h4>
+            <p class="">{{ countMyAnimals }} รายการที่ฉันเพิ่ม</p>
+            <a routerLink="/bio/animals/create" class="btn btn-white color-warning btn-raised">เพิ่ม</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-primary-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;">
+          <div class="text-center card-body">
+            <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="fa fa-user"></i></span>
+            <h4 class="">ผู้เชี่ยวชาญ</h4>
+            <p class="">{{ countMyExperts }} รายการที่ฉันเพิ่ม</p>
+            <a routerLink="/experts/mylist" class="btn btn-white color-primary btn-raised">รายการ</a>
+            <a routerLink="/experts/create" class="btn btn-white color-primary btn-raised">เพิ่ม</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-danger-inverse wow fadeInLeft animation-delay-3" style="visibility: visible; animation-name: fadeInLeft;">
+          <div class="text-center card-body">
+            <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="fa fa-shopping-bag"></i></span>
+            <h4 class="">สินค้า Otop</h4>
+            <p class="">{{ countMyOtop }} รายการที่ฉันเพิ่ม</p>
+            <a routerLink="/otop/mylist" class="btn btn-white color-danger btn-raised">รายการ</a>
+            <a routerLink="/otop/create" class="btn btn-white color-danger btn-raised">เพิ่ม</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <app-village-headman
       *ngIf="currentUser.roles.village_headman && families"
       [currentUser]="currentUser"
       [families]="families"
     ></app-village-headman>
-
     
   </div>
 </ng-container>

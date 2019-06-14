@@ -18,6 +18,10 @@ export class OtopService {
     return this.http.get<Array<Otop>>(`${environment.api_url}/otop?${category ? 'category_id='+category+'&' : ''}page=${page}`);
   }
 
+  all() {
+    return this.http.get<Array<Otop>>(`${environment.api_url}/otop/all`);
+  }
+
   getMyList(page) {
     return this.http.get<Array<Otop>>(`${environment.api_url}/otop/mylist?page=${page}`);
   }
@@ -56,5 +60,9 @@ export class OtopService {
 
   searchSubDistricts(query: string): Observable<any> {
     return this.http.get<any>(`${environment.api_url}/ref/sub_districts?t=q&name=${query}`);
+  }
+
+  count() {
+    return this.http.get(`${environment.api_url}/otop/count`);
   }
 }

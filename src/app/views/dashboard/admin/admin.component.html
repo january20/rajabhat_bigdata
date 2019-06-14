@@ -1,3 +1,15 @@
-<p>
-  admin works!
-</p>
+<div class="container" *ngIf="!adminProjectList" style="height: 100vh;">
+  <div class="my-5 py-5 text-center">
+    <div class="center">
+      <mat-spinner class="mx-auto"></mat-spinner>
+      กำลังโหลดข้อมูล.
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="adminProjectList">
+  <app-all-projects
+    [adminProjectList]="adminProjectList"
+    (projectDeleted)="deleteProject($event)"
+  ></app-all-projects>
+</ng-container>
