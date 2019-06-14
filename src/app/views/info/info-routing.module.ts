@@ -6,6 +6,7 @@ import { AgeComponent } from './population/age/age.component';
 import { OccupationComponent } from './population/occupation/occupation.component';
 import { EducationComponent } from './population/education/education.component';
 import { WeatherComponent } from './env/weather/weather.component';
+import { AirComponent } from './env/air/air.component';
 const routes: Routes = [
   {
     path: 'population',
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'weather',
         component: WeatherComponent
+      },
+      {
+        path: 'air',
+        component: AirComponent
       }
     ]
   }
