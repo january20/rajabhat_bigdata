@@ -13,3 +13,17 @@
     (projectDeleted)="deleteProject($event)"
   ></app-all-projects>
 </ng-container>
+
+<div class="row">
+  <div class="col">
+    <div class="card card-info-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;">
+      <div class="text-center card-body">
+        <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="fa fa-users"></i></span>
+        <h4 class="">ผู้ใช้งาน</h4>
+        <p class="">สำหรับจัดการผู้ใช้งาน(ผู้ใหญ่บ้าน)</p>
+        <a routerLink="/admin/users/list" class="btn btn-white color-primary btn-raised">รายการผู้ใช้งาน</a>
+        <a routerLink="/admin/users/create" class="btn btn-white color-info btn-raised">เพิ่มผู้ใช้งาน</a>
+      </div>
+    </div>
+  </div>
+</div>
