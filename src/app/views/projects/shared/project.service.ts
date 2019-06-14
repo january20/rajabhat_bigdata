@@ -55,8 +55,8 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/projects/result`);
   }
 
-  getProjectList(page: number) {
-    return this.http.get(`${environment.api_url}/projects?page=${page}`);
+  getProjectList() {
+    return this.http.get(`${environment.api_url}/projects`);
   }
 
   getMyProjectList() {

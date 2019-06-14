@@ -8,9 +8,14 @@ import { AdminComponent } from './admin/admin.component';
 import { AssessorComponent } from './assessor/assessor.component';
 import { SrruPersonnelComponent } from './srru-personnel/srru-personnel.component';
 import { VillageHeadmanComponent } from './village-headman/village-headman.component';
+import { AllProjectsComponent } from './admin/all-projects/all-projects.component';
+import { AllOtopComponent } from './admin/all-otop/all-otop.component';
+import { AllExpertsComponent } from './admin/all-experts/all-experts.component';
+import { AllFamiliesComponent } from './admin/all-families/all-families.component';
+import { AllVillageHeadmanUsersComponent } from './admin/all-village-headman-users/all-village-headman-users.component';
 
 @NgModule({
-  declarations: [DashboardComponent, AdminComponent, AssessorComponent, SrruPersonnelComponent, VillageHeadmanComponent],
+  declarations: [DashboardComponent, AdminComponent, AssessorComponent, SrruPersonnelComponent, VillageHeadmanComponent, AllProjectsComponent, AllOtopComponent, AllExpertsComponent, AllFamiliesComponent, AllVillageHeadmanUsersComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

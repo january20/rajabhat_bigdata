@@ -12,10 +12,14 @@
       <h2 class="mb-2 wow fadeInDown animation-delay-4">{{ currentUser.info.email }}</h2>
     </div>
 
-    <app-admin
+    <!-- <app-admin
       *ngIf="currentUser.roles.admin"
       [currentUser]="currentUser"
-    ></app-admin>
+      [adminProjectList]="adminProjectList"
+      [adminExpertList]="adminExpertList"
+      [adminOtopList]="adminOtopList"
+      [adminVillageHeadmanUserList]="adminVillageHeadmanUserList"
+    ></app-admin> -->
 
     <app-srru-personnel
       *ngIf="currentUser.roles.srru_personnel && myProjectList"

@@ -3,7 +3,9 @@ import { ProjectService } from '../../shared/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SuggestionsComponent } from './suggestions/suggestions.component';
 
 @Component({
   selector: 'app-assessment-result',
@@ -20,13 +22,14 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class AssessmentResultComponent implements OnInit {
 
   project: any;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  // @ViewChild(MatSort, { static: false }) sort: MatSort;
   displayedColumns: string[] = ['name', 'achieve', 'not_achieve', 'suggestion'];
   dataSource: MatTableDataSource<any>;
 
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -37,11 +40,13 @@ export class AssessmentResultComponent implements OnInit {
     this.projectService.getAssessmentResult(this.route.snapshot.params.id).subscribe((data: any) => {
       this.project = data;
       this.dataSource = new MatTableDataSource(data.assessment_result);
-      console.log(this.dataSource)
-      setTimeout(() => {
-        // this.dataSource.sort = this.sort;
-      });
     });
   }
 
+  openSuggestions(suggestions): void {
+    this.dialog.open(SuggestionsComponent, {
+      width: '50%',
+      data: { suggestions: suggestions }
+    });
+  }
 }

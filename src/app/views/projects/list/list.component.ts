@@ -1,5 +1,8 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { ProjectService } from '../shared/project.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -13,10 +16,16 @@ am4core.useTheme(am4themes_animated);
 })
 export class ListComponent implements OnInit {
 
-  result: any = null;
-  projects: any = null;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+
+  result: any;
+  projectReady = false;
+  resultReady = false;
   isChange = false;
   currentUser;
+  displayedColumns: string[] = ['status', 'project_name', 'faculty', 'budget', 'assessment_result'];
+  dataSource: MatTableDataSource<any>;
 
   private pchart: am4charts.PieChart;
   private bchart: am4charts.XYChart;
@@ -37,21 +46,45 @@ export class ListComponent implements OnInit {
       this.result = data;
       this.createProjectChart(data.fac_projects);
       this.createBudgetChart(data.fac_budget);
+
+      this.resultReady = true;
     });
-    this.projectService.getProjectList(1).subscribe(data => this.projects = data);
+    this.projectService.getProjectList().subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource(data);
+      setTimeout(() => {
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch(property) {
+            case 'faculty': return item.fac_id;
+            default: return item[property];
+          }
+        };
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
+        this.projectReady = true;
+      });
+    });
   }
 
   loadUser() {
     this.currentUser = this.authService.currentUserValue;
   }
 
-  changePage(page) {
-    this.isChange = true;
-    this.projectService.getProjectList(page).subscribe(data => {
-      this.isChange = false;
-      this.projects = data
-    });
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
+
+  // changePage(page) {
+  //   this.isChange = true;
+  //   this.projectService.getProjectList(page).subscribe(data => {
+  //     this.isChange = false;
+  //     this.projects = data
+  //   });
+  // }
 
   createProjectChart(project: any) {
     this.zone.runOutsideAngular(() => {

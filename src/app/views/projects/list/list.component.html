@@ -1,11 +1,11 @@
-<div class="my-5 text-center" *ngIf="!result || !projects" style="height: 100vh;">
+<div class="my-5 text-center" *ngIf="!projectReady && !resultReady" style="height: 100vh;">
   <div class="absolute-center">
     <mat-spinner class="mx-auto"></mat-spinner>
     กำลังโหลดข้อมูล.
   </div>
 </div>
 
-<ng-container [style.display]="result && projects ? 'block' : 'none'">
+<div [style.display]="projectReady && resultReady ? 'block' : 'none'">
   <div class="container">
     <h3 class="color-dark text-center">
       งบประมาณดำเนินการโครงการยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น ระยะ 20 ปี (พ.ศ.2560-2579)
@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-sm-3">
         <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
-          <h2 class="counter color-success">{{ result?.total_budget | number }}</h2>
+          <h2 class="color-success">{{ result?.total_budget | number }}</h2>
           <i class="fa fa-4x fa-money color-success"></i>
           <p class="mt-2 no-mb lead small-caps color-success">งบประมาณที่ใช้ทั้งหมด</p>
         </div>
@@ -26,7 +26,7 @@
       
       <div class="col-sm-3">
         <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
-          <h2 class="counter color-danger">{{ result?.total_projects }}</h2>
+          <h2 class="color-danger">{{ result?.total_projects }}</h2>
           <i class="fa fa-4x fas fa-archive color-danger"></i>
           <p class="mt-2 no-mb lead small-caps color-danger">จำนวนโครงการ</p>
         </div>
@@ -36,7 +36,7 @@
       <div class="col-sm-3">
         <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
           <a href="/">
-          <h2 class="counter color-primary">{{ result?.total_villages }}</h2>
+          <h2 class="color-primary">{{ result?.total_villages }}</h2>
           <i class="fa fa-4x fa fa-map-marker color-primary" title="ดูรายละเอียด"></i>
           <p class="mt-2 no-mb lead small-caps color-primary">พื้นที่บริการ</p>
           <span class="color-primary">{{ result?.total_districts+' อำเภอ '+result?.total_sub_districts+' ตำบล '+result?.total_villages+' หมู่บ้าน' }}</span>
@@ -47,7 +47,7 @@
       <div class="col-sm-3">
         <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
           <a href="/aboutus">
-          <h2 class="counter color-info">6</h2>
+          <h2 class="color-info">6</h2>
           <i class="fa fa-4x fa fa-ioxhost color-info" title="ดูรายละเอียด"></i>
           <p class="mt-2 no-mb lead small-caps color-info">ตัวชี้วัดโครงการ</p>
           </a>
@@ -57,7 +57,7 @@
   </div>
 
   <div class="container">
-    <div class="card mt-5">
+    <div class="card mt-5 animated fadeInUp">
       <div class="card-body m-5 p-5">
         <h3 class="text-center mb-5">สรุปหน่วยงานที่รับผิดชอบโครงการ</h3>
         <div id="projectChart" style="width: 100%; height: 500px"></div>
@@ -65,7 +65,7 @@
       </div>
     </div>
   
-    <div class="card mt-5">
+    <div class="card mt-5 animated fadeInUp">
       <div class="card-body m-5 p-5">
         <h3 class="text-center">งบประมาณของแต่ละหน่วยงาน</h3>
         
@@ -76,73 +76,58 @@
   </div>
 
   <div class="container">
-    <h3 class="color-dark text-center">
+    <h3 class="color-dark text-center animated fadeInUp">
       โครงการที่ได้รับอนุมัติ
     </h3>
     <div class="card card-primary">
-      <div class="card-body">
-        <div class="col-lg-12">
-          <div class="relative-center text-center" *ngIf="isChange">
-            <mat-spinner class="mx-auto"></mat-spinner>
-            กำลังโหลดข้อมูล.
-          </div>
-          <table class="table table-hover" *ngIf="!isChange || !projects">
-            <thead>
-              <tr>
-                <th>โครงการ</th>
-                <th>หน่วยงาน</th>
-                <th>งบประมาณ</th>
-                <!--<th>ผู้เสนอโครงการ</th>-->
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let project of projects?.data">
-                <td>
-                  <a routerLink="/projects/{{ project?.id }}"  data-toggle="tooltip" data-placement="top"   class="color-info" title="">
-                    {{ project?.project_name }}
-                  </a>
-                </td>
-                
-                <td>
-                  {{ project?.faculty.fac_name }}
-                </td>
+      <ng-container>
+        <mat-form-field class="px-5 pt-5">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ค้นหา">
+        </mat-form-field>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef class="px-2 text-center" style="width: 10%">สถานะ</th>
+            <td mat-cell class="text-center" *matCellDef="let row">
+              <button mat-icon-button>
+                <mat-icon class="green-icon" matTooltip="อนุมัติแล้ว" *ngIf="row.approved === 1">checked</mat-icon>
+                <mat-icon class="red-icon" matTooltip="ยังไม่อนุมัติ" *ngIf="row.approved === 0">close</mat-icon>
+              </button>
+            </td>
+          </ng-container>
 
-                <td>
-                  {{ project?.budget | number }}
-                </td>
+          <ng-container matColumnDef="project_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 40%">โครงการ</th>
+            <td mat-cell *matCellDef="let row">
+              <a routerLink="/projects/{{ row.id }}" class="color-primary">
+                {{ row.project_name }}
+              </a>
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="faculty">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30%">หน่วยงาน</th>
+            <td mat-cell *matCellDef="let row">{{ row.faculty.fac_name }}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="budget">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%">งบประมาณ</th>
+            <td mat-cell *matCellDef="let row"> {{ row.budget | number }} </td>
+          </ng-container>
 
-                <td>
-                  <a href="/projects/{{ project?.id }}" class="ms-icon ms-icon-sm ms-icon-circle ms-icon-inverse color-info">
-                    <i data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด" class="fa fa-check color-success" aria-hidden="true"></i>
-                  </a>                   
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <nav aria-label="Page navigation" class="d-flex justify-content-center">
-            <ul class="pagination pagination-round">
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0)" (click)="changePage(1)" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-
-              <ng-container *ngFor="let i of counter(projects?.last_page); let idx = index">
-                <li [className]="(idx+1) == projects?.current_page ? 'page-item active' : 'page-item'">
-                  <a class="page-link" href="javascript:void(0)" (click)="changePage(idx+1)">{{ idx+1 }}</a>
-                </li>
-              </ng-container>              
-
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0)" aria-label="Next" (click)="changePage(projects?.last_page)">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+          <ng-container matColumnDef="assessment_result">
+            <th mat-header-cell *matHeaderCellDef style="width: 10%">ผลการประเมิน</th>
+            <td mat-cell *matCellDef="let row">
+              <a mat-icon-button routerLink="/projects/assessment/{{ row.id }}/result" color="accent" matTooltip="ผลการประเมิน" *ngIf="row.approved === 1">
+                <mat-icon>playlist_add_check</mat-icon>
+              </a>
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[15, 30, 100]"></mat-paginator>
+      </ng-container>
     </div>
   </div>
-</ng-container>
+</div>

@@ -14,6 +14,10 @@ export class DashboardComponent implements OnInit {
   currentUser: any;
   myProjectList: any;
   myEvaluationList: any;
+  adminProjectList: any;
+  adminExpertList: any;
+  adminOtopList: any;
+  adminVillageHeadmanUserList: any;
   families: any;
 
   constructor(
@@ -31,7 +35,7 @@ export class DashboardComponent implements OnInit {
     const user = this.authService.currentUserValue;
 
     if(user.roles.admin) {
-
+      this.projectService.getMyProjectList().subscribe((data: any) => this.myProjectList = data);
     }
 
     if(user.roles.srru_personnel) {

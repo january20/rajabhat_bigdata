@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AdminComponent implements OnInit {
 
   @Input() currentUser;
+  @Input() myProjectList;
 
   constructor() { }
 
