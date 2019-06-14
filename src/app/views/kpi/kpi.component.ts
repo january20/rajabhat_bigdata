@@ -16,7 +16,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 export class KpiComponent implements OnInit {
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   kpi_year:number = 2018;
   project_summary:any;

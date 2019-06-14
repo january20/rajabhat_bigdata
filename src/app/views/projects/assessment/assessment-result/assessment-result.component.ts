@@ -20,7 +20,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class AssessmentResultComponent implements OnInit {
 
   project: any;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
   displayedColumns: string[] = ['name', 'achieve', 'not_achieve', 'suggestion'];
   dataSource: MatTableDataSource<any>;
 

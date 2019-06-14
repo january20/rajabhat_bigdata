@@ -10,8 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AssessorComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   @Input() myEvaluationList;
   @Input() currentUser;
   displayedColumns: string[] = ['project_name', 'file', 'assessment'];

@@ -15,7 +15,7 @@ am4core.useTheme(am4themes_animated);
 })
 export class AgeComponent implements OnInit {
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   rangeStart = '0';
   rangeEnd = '100';
   age_range = '';

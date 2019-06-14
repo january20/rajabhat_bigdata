@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class FormComponent implements OnInit {
 
-  @ViewChild('avatarUploader') avatarInput;
+  @ViewChild('avatarUploader', { static: false }) avatarInput;
 
   title = this.route.snapshot.data['title'];
   form: FormGroup;

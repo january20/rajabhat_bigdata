@@ -10,8 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class SrruPersonnelComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
   @Input() myProjectList;
   @Input() currentUser;
   @Output() projectDeleted = new EventEmitter<number>();

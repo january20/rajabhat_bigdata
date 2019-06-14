@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 })
 export class ListComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   families: any;
   displayedColumns: string[] = ['house_address', 'householder_name', 'family_members', 'manage'];

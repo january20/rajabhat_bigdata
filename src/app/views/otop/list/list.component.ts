@@ -11,7 +11,7 @@ import { MatRadioButton, PageEvent, MatPaginator } from '@angular/material';
 })
 export class ListComponent implements OnInit {
 
-  @ViewChild('paginator') paginator: MatPaginator;
+  @ViewChild('paginator', { static: false }) paginator: MatPaginator;
   otop: any;
   categories: any;
   current_category = 0;

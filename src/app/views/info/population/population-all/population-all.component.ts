@@ -15,7 +15,7 @@ am4core.useTheme(am4themes_animated);
 })
 export class PopulationAllComponent implements OnInit {
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   ready = false;
   isDataLoaded = false;
   districts = [];
