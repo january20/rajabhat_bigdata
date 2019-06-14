@@ -57,12 +57,11 @@ export class WeatherComponent implements OnInit {
 
     this.infoService.weatherPeriod(this.current_station.id,duration.id).subscribe(data=>{
       //console.log(data);
-
-      this.createChart(data,"temperatureChart","name","avg_temp","อุณหภูมิ (C)","rectangle");
-      this.createChart(data,"humidityChart","name","humidity","ความชื้น (rH)","triangle");
-      this.createChart(data,"windSpeedChart","name","wind_speed","ความเร็วลม (m/s)","rectangle");
-      this.ready = true;
-      this.isDataLoaded = true;
+        this.createChart(data,"temperatureChart","name","avg_temp","อุณหภูมิ (C)","rectangle");
+        this.createChart(data,"humidityChart","name","humidity","ความชื้น (rH)","triangle");
+        this.createChart(data,"windSpeedChart","name","wind_speed","ความเร็วลม (m/s)","rectangle");
+        this.ready = true;
+        this.isDataLoaded = true;
     });
   }
   changeStation(station){
