@@ -59,7 +59,7 @@ export class OccupationComponent implements OnInit {
   }
 
   filter(place_id, type) {
-    this.loadData(`/${place_id}`);
+    place_id === 0 ? this.loadData() : this.loadData(`/${place_id}`);
 
     if(type === 1) {     
       this.loadSubDistricts(place_id);
