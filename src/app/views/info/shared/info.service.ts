@@ -38,5 +38,10 @@ export class InfoService {
   weatherPeriod(station,duration){
     return this.http.get(`${environment.api_url}/ref/weather/${station}/${duration}`);
   }
+  airQuality(){
+    return this.http.get(`${environment.api_url}/info/air`);
+  }
+
+
 
 }

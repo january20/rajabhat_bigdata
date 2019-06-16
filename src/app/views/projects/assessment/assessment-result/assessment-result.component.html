@@ -4,7 +4,7 @@
     กำลังโหลดข้อมูล.
   </div>
 </div>
-  
+
 <div class="ms-site-container mt-5" *ngIf="dataSource">
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
@@ -26,23 +26,23 @@
     <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
       <div class="card-header">
         <span class="card-title">1. ผลการประเมินวัตถุประสงค์</span>
-      </div>      
+      </div>
       <table mat-table [dataSource]="dataSource.data.objectives" class="mat-elevation-z8 w-100" multiTemplateDataRows matSort>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>วัตถุประสงค์</th>
           <td mat-cell *matCellDef="let row">{{ row.objective }} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="achieve">
           <th mat-header-cell *matHeaderCellDef>บรรลุ</th>
           <td mat-cell *matCellDef="let row">{{ row.assessment_result.achieve }}</td>
         </ng-container>
-      
+
         <ng-container matColumnDef="not_achieve">
           <th mat-header-cell *matHeaderCellDef>ไม่บรรลุ</th>
           <td mat-cell *matCellDef="let row">{{ row.assessment_result.not_achieve }}</td>
         </ng-container>
-        
+
         <ng-container matColumnDef="suggestion">
           <th mat-header-cell *matHeaderCellDef>ข้อเสนอแนะ<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
           <td mat-cell *matCellDef="let row">
@@ -51,7 +51,7 @@
             </button>
           </td>
         </ng-container>
-      
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row" [class.expanded-row]="dataSource.data.objectives === row" ></tr>
       </table>
@@ -60,23 +60,23 @@
     <div class="card card-royal animated fadeInUp animation-delay-7">
       <div class="card-header">
         <span class="card-title">2. ผลการประเมินกิจกรรม</span>
-      </div>      
+      </div>
       <table mat-table [dataSource]="dataSource.data.activities" class="mat-elevation-z8 w-100" multiTemplateDataRows matSort>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>กิจกรรม</th>
           <td mat-cell *matCellDef="let row">{{ row.activity }} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="achieve">
           <th mat-header-cell *matHeaderCellDef>บรรลุ</th>
           <td mat-cell *matCellDef="let row">{{ row.assessment_result.achieve }}</td>
         </ng-container>
-      
+
         <ng-container matColumnDef="not_achieve">
           <th mat-header-cell *matHeaderCellDef>ไม่บรรลุ</th>
           <td mat-cell *matCellDef="let row">{{ row.assessment_result.not_achieve }}</td>
         </ng-container>
-        
+
         <ng-container matColumnDef="suggestion">
           <th mat-header-cell *matHeaderCellDef>ข้อเสนอแนะ<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
           <td mat-cell *matCellDef="let row">
@@ -85,7 +85,7 @@
             </button>
           </td>
         </ng-container>
-      
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row" [class.expanded-row]="dataSource.data.objectives === row" ></tr>
       </table>
@@ -94,23 +94,23 @@
     <div class="card card-royal animated fadeInUp animation-delay-7">
       <div class="card-header">
         <span class="card-title">3. ผลการประเมินผลลัพธ์</span>
-      </div>      
+      </div>
       <table mat-table [dataSource]="dataSource.data.outputs" class="mat-elevation-z8 w-100" multiTemplateDataRows matSort>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>ผลลัพธ์</th>
           <td mat-cell *matCellDef="let row">{{ row.output }} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="achieve">
           <th mat-header-cell *matHeaderCellDef>บรรลุ</th>
           <td mat-cell *matCellDef="let row">{{ row.assessment_result.achieve }}</td>
         </ng-container>
-      
+
         <ng-container matColumnDef="not_achieve">
           <th mat-header-cell *matHeaderCellDef>ไม่บรรลุ</th>
           <td mat-cell *matCellDef="let row">{{ row.assessment_result.not_achieve }}</td>
         </ng-container>
-        
+
         <ng-container matColumnDef="suggestion">
           <th mat-header-cell *matHeaderCellDef>ข้อเสนอแนะ<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
           <td mat-cell *matCellDef="let row">
@@ -119,7 +119,7 @@
             </button>
           </td>
         </ng-container>
-      
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row" [class.expanded-row]="dataSource.data.objectives === row" ></tr>
       </table>
@@ -128,23 +128,23 @@
     <div class="card card-royal animated fadeInUp animation-delay-7">
       <div class="card-header">
         <span class="card-title">4. ผลการประเมินตัวชี้วัด</span>
-      </div>      
+      </div>
       <table mat-table [dataSource]="dataSource.data.kpi" class="mat-elevation-z8 w-100" multiTemplateDataRows matSort>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>ตัวชี้วัด</th>
           <td mat-cell *matCellDef="let row">{{ row.kpi }} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="achieve">
           <th mat-header-cell *matHeaderCellDef>บรรลุ</th>
           <td mat-cell *matCellDef="let row">{{ row.assessment_result.achieve }}</td>
         </ng-container>
-      
+
         <ng-container matColumnDef="not_achieve">
           <th mat-header-cell *matHeaderCellDef>ไม่บรรลุ</th>
           <td mat-cell *matCellDef="let row">{{ row.assessment_result.not_achieve }}</td>
         </ng-container>
-        
+
         <ng-container matColumnDef="suggestion">
           <th mat-header-cell *matHeaderCellDef>ข้อเสนอแนะ<mat-icon [className]="isDeleted ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></th>
           <td mat-cell *matCellDef="let row">
@@ -153,7 +153,7 @@
             </button>
           </td>
         </ng-container>
-      
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row" [class.expanded-row]="dataSource.data.objectives === row" ></tr>
       </table>
@@ -162,7 +162,7 @@
     <div class="card card-royal animated fadeInUp animation-delay-7">
       <div class="card-header">
         <span class="card-title">5. ผลปรากฏตามสภาพจริงในระหว่างทำการประเมิน (จากการสังเกต/สัมภาษณ์)</span>
-      </div>   
+      </div>
       <div class="card-body">
         <h3><strong>รูปแบบ/วิธีการจัดกิจกรรมหลัก</strong></h3>
         <ol>
@@ -187,7 +187,7 @@
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
           </ng-container>
         </div>
 
@@ -205,7 +205,7 @@
     <div class="card card-royal animated fadeInUp animation-delay-7">
       <div class="card-header">
         <span class="card-title">6. ปัญหาอุปสรรค แนวทางการปรับปรุงพัฒนาโครงการ</span>
-      </div>   
+      </div>
       <div class="card-body">
         <h3><strong>ปัญหาและอุปสรรค</strong></h3>
         <ol>
@@ -222,7 +222,7 @@
     <div class="card card-royal animated fadeInUp animation-delay-7">
       <div class="card-header">
         <span class="card-title">7. ข้อเสนอแนะในการพัฒนากิจกรรม/งาน/โครงการ หรือการต่อยอดผลงาน ครั้งต่อไป</span>
-      </div>   
+      </div>
       <div class="card-body">
         <h3><strong>จุดแข็งของโครงการ</strong></h3>
         <ol>
@@ -239,10 +239,11 @@
     <div class="card card-royal animated fadeInUp animation-delay-7">
       <div class="card-header">
         <span class="card-title">8. ผู้ประเมินโครงการ</span>
-      </div>   
+      </div>
       <div class="card-body">
         <ol>
-          <li *ngFor="let assessor of project.assessment_result.assessors">{{ assessor.position_work + assessor.stf_fname + ' ' + assessor.stf_lname }}</li>
+          <li *ngFor="let assessor of project.assessment_result.assessors">-</li>
+          <!-- {{ assessor.position_work + assessor.stf_fname + ' ' + assessor.stf_lname }} -->
         </ol>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { AgmCoreModule } from '@agm/core';
 import { InfoRoutingModule } from './info-routing.module';
 import { InfoComponent } from './info.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -13,13 +13,18 @@ import { EducationComponent } from './population/education/education.component';
 import { EnvComponent } from './env/env.component';
 import { AirComponent } from './env/air/air.component';
 import { WeatherComponent } from './env/weather/weather.component';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [InfoComponent, IncomeComponent, PopulationComponent, AgeComponent, OccupationComponent, PopulationAllComponent, EducationComponent, EnvComponent, AirComponent, WeatherComponent],
   imports: [
     CommonModule,
     InfoRoutingModule,
-    SharedModule
+    SharedModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.gmap_api_key
+    })
   ]
 })
 export class InfoModule { }

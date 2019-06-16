@@ -16,7 +16,7 @@ import { ShowComponent } from './show/show.component';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
-  declarations: [PlantsComponent, AnimalsComponent, AnimalFormComponent, PlantFormComponent, ShowComponent],
+  declarations: [ PlantsComponent, AnimalsComponent, AnimalFormComponent, PlantFormComponent, ShowComponent ],
   imports: [
     CommonModule,
     AgmCoreModule.forRoot({
@@ -30,4 +30,5 @@ import { environment } from 'src/environments/environment';
     BioService
   ]
 })
+
 export class BioModule { }

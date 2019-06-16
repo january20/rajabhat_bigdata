@@ -103,7 +103,6 @@ export class WeatherComponent implements OnInit {
         categoryAxis.renderer.labels.template.rotation = 270;
 
         this.createAxisAndSeries(bigDataChart,xField,yField, legendField, bullet);
-        // this.createAxisAndSeries("dataset_female", "หญิง", "rectangle");
 
     });
   }
