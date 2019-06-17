@@ -4,6 +4,7 @@ import { BioRoutingModule } from './bio-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AgmCoreModule } from '@agm/core';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 import { BioService } from './shared/bio.service';
 
@@ -22,6 +23,7 @@ import { environment } from 'src/environments/environment';
     AgmCoreModule.forRoot({
       apiKey: environment.gmap_api_key
     }),
+    AgmJsMarkerClustererModule,
     BioRoutingModule,
     SharedModule,
     NgxDropzoneModule

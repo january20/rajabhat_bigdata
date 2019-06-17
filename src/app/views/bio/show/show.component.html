@@ -19,20 +19,24 @@
     <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
       <div class="card-body p-2">        
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="10">
-          <ng-container *ngFor="let plant of plants">
-            <agm-marker [latitude]="plant.lat" [longitude]="plant.lng" [iconUrl]="'/assets/img/plant.png'">
-              <agm-info-window [disableAutoPan]="true">
-                <a href="javascript:void(0)">{{ plant.id }}</a>
-              </agm-info-window>
-            </agm-marker>
-          </ng-container>
-          <ng-container *ngFor="let animal of animals">
-            <agm-marker [latitude]="animal.lat" [longitude]="animal.lng" [iconUrl]="'/assets/img/paw.png'">
-              <agm-info-window [disableAutoPan]="true">
-                <a href="javascript:void(0)">{{ animal.id }}</a>
-              </agm-info-window>
-            </agm-marker>
-          </ng-container>
+          <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+            <ng-container *ngFor="let plant of plants">              
+              <agm-marker [latitude]="plant.lat" [longitude]="plant.lng" [iconUrl]="'/assets/img/plant.png'">
+                <agm-info-window [disableAutoPan]="true">
+                  <a href="javascript:void(0)">{{ plant.id }}</a>
+                </agm-info-window>
+              </agm-marker>              
+            </ng-container>
+          </agm-marker-cluster>
+          <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+            <ng-container *ngFor="let animal of animals">              
+              <agm-marker [latitude]="animal.lat" [longitude]="animal.lng" [iconUrl]="'/assets/img/paw.png'">
+                <agm-info-window [disableAutoPan]="true">
+                  <a href="javascript:void(0)">{{ animal.id }}</a>
+                </agm-info-window>
+              </agm-marker>
+            </ng-container>
+          </agm-marker-cluster>
         </agm-map>
       </div>
     </div>

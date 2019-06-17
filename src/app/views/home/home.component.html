@@ -36,11 +36,12 @@
             [longitude]="googleMapOptions.lng"
             iconUrl="assets/img/logo.png"></agm-marker>
           <ng-container *ngFor="let village of villages">
-            <agm-info-window [latitude]="village.lat"
+            <agm-marker [latitude]="village.lat" [longitude]="village.lng"></agm-marker>
+            <!-- <agm-info-window [latitude]="village.lat"
             [longitude]="village.lng"
             [isOpen]="true">
             <a href='javascript:void(0);' (click)="toggleModal(village)">{{ village.village.village_name_th+' ตำบล'+ village.sub_district.sub_district_name_th+' อำเภอ'+village.district.district_name_th }}</a>
-          </agm-info-window>
+          </agm-info-window> -->
           </ng-container>
         </agm-map>
       </div>
