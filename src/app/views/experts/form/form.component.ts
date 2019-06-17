@@ -22,6 +22,7 @@ export class FormComponent implements OnInit {
   expertTypes: Array<Object>;
   lat: number = 14.882564;
   lng: number = 103.494215;
+  img_path: string
   images: Array<Object>;
   documents: Array<Object>;
   isSubmit = false;
@@ -124,7 +125,7 @@ export class FormComponent implements OnInit {
             this.isSubmit = false;
           }
         );
-      })
+      });
     }
   }
 
@@ -154,6 +155,7 @@ export class FormComponent implements OnInit {
       this.form.get('expertise').setValue(data.expertise_id);
       this.form.get('expert_type').setValue(data.expert_type);
 
+      this.img_path = data.img_path;
       this.images = data.images;
       this.documents = data.files;
       this.previewAvatar = data.sys_user.profile_image ? '/app/images/users/avatar/'+data.sys_user.profile_image : null;
@@ -206,8 +208,8 @@ export class FormComponent implements OnInit {
   }
 
   async addDeleted() {
-    this.deleted_files.controls = [];
-    this.deleted_images.controls = [];
+    this.clearFormArray(this.deleted_files);
+    this.clearFormArray(this.deleted_images);
     
     if(this.documents) {
       this.documents.map((file: any) => {
@@ -226,11 +228,13 @@ export class FormComponent implements OnInit {
   manageImages(status) {
     this.images.map((image: any) => image.status = status);
     this.removeImagesAll = status === 0 ? true : false;
+    if(status === 1) this.clearFormArray(this.deleted_images);
   }
 
   manageDocuments(status) {
     this.documents.map((file: any) => file.status = status);
     this.removeDocumentsAll = status === 0 ? true : false;
+    if(status === 1) this.clearFormArray(this.deleted_files);
   }
 
   changePosition(event) {
@@ -288,6 +292,12 @@ export class FormComponent implements OnInit {
       }
     }
 
+  }
+
+  clearFormArray(formArray: FormArray) {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
   }
 
   get files() { return this.form.get('files') as FormArray; }

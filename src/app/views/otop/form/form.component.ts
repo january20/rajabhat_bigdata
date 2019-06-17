@@ -19,6 +19,7 @@ export class FormComponent implements OnInit {
   categories: any;
   subDistricts: Observable<any> = null;
   isSubmit = false;
+  img_path: string;
   images = [];
   removeImagesAll = false;
   formErrors = {sub_district: '', category: '', name: '', description: '', price: ''};
@@ -123,7 +124,7 @@ export class FormComponent implements OnInit {
   }
 
   async addDeleted() {
-    this.deleted_images.controls = [];
+    this.clearFormArray(this.deleted_images);
     
     if(this.images) {
       this.images.map((image: any) => {
@@ -136,6 +137,7 @@ export class FormComponent implements OnInit {
   manageImages(status) {
     this.images.map((image: any) => image.status = status);
     this.removeImagesAll = status === 0 ? true : false;
+    if(status === 1) this.clearFormArray(this.deleted_images);
   }
 
   addFiles(files: File[]) {
@@ -181,6 +183,7 @@ export class FormComponent implements OnInit {
       this.form.get('sub_district').setValue(data.sub_district);
       this.form.get('note').setValue(data.note);
 
+      this.img_path = data.images;
       this.images = data.pictures;
     });
   }
@@ -225,6 +228,12 @@ export class FormComponent implements OnInit {
           this.formErrors[field] += messages[key] + ' ';
         }
       }
+    }
+  }
+
+  clearFormArray(formArray: FormArray) {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
     }
   }
 

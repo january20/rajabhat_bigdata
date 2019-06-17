@@ -16,6 +16,7 @@ export class ActivityFormComponent implements OnInit {
   formType: 'CREATE' | 'EDIT' = this.route.snapshot.data['formType'];
   project: any;
   form: FormGroup;
+  img_path: string;
   images: Array<Object>;
   documents: Array<Object>;
   formErrors = this.createFormErrors();
@@ -115,6 +116,7 @@ export class ActivityFormComponent implements OnInit {
       this.form.get('budget').setValue(data.budget);
       this.form.get('created_at').setValue(new Date(data.created_at));
 
+      this.img_path = data.images_path;
       this.images = data.images;
       this.documents = data.files;
       
@@ -141,9 +143,9 @@ export class ActivityFormComponent implements OnInit {
   }
 
   async addDeleted() {
-    this.deleted_files.controls = [];
-    this.deleted_images.controls = [];
-    
+    this.clearFormArray(this.deleted_files);
+    this.clearFormArray(this.deleted_images);
+
     if(this.documents) {
       this.documents.map((file: any) => {
         if(file.status === 0) this.deleted_files.push(this.formBuilder.group(file));
@@ -161,11 +163,13 @@ export class ActivityFormComponent implements OnInit {
   manageImages(status) {
     this.images.map((image: any) => image.status = status);
     this.removeImagesAll = status === 0 ? true : false;
+    if(status === 1) this.clearFormArray(this.deleted_images);
   }
 
   manageDocuments(status) {
     this.documents.map((file: any) => file.status = status);
     this.removeDocumentsAll = status === 0 ? true : false;
+    if(status === 1) this.clearFormArray(this.deleted_files);
   }
 
   buildForm() {
@@ -229,6 +233,12 @@ export class ActivityFormComponent implements OnInit {
       }
     }
 
+  }
+
+  clearFormArray(formArray: FormArray) {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
   }
 
 }

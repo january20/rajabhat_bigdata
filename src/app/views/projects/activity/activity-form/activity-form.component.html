@@ -92,7 +92,7 @@
               <div class="col-lg-3 col-md-4" *ngFor="let image of images">
                 <div class="card">
                   <figure class="ms-thumbnail">
-                    <img src="/app/{{ image.src }}" style="height: 200px" [className]="image.status === 1 ? 'img-fluid' : 'img-fluid grayscale'">
+                    <img src="/app/images/projects/activities/{{ img_path }}/{{ image.src }}" style="height: 200px" [className]="image.status === 1 ? 'img-fluid' : 'img-fluid grayscale'">
                     <figcaption class="ms-thumbnail-caption text-center">
                       <div class="ms-thumbnail-caption-content">
                         <a *ngIf="image.status === 1" (click)="image.status = 0" href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-lg mr-1 btn-circle-white color-danger">
