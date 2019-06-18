@@ -18,6 +18,8 @@
 
   <div class="container">
 
+  
+
     <div class="card card-hero card-primary">
       <div class="justify-content-center text-center flex-grow-1 mt-5">
         <p *ngIf="current_duration && current_station">{{current_duration.duration_txt}} อำเภอ {{current_station.station_name}} <mat-icon [className]="!isDataLoaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></p>
