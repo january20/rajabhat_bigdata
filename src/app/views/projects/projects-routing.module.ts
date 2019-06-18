@@ -11,6 +11,7 @@ import { AssessmentFormComponent } from './assessment/assessment-form/assessment
 import { AssessmentManualComponent } from './assessment/assessment-manual/assessment-manual.component';
 import { ActivityListComponent } from './activity/activity-list/activity-list.component';
 import { ActivityFormComponent } from './activity/activity-form/activity-form.component';
+import { AuthRolesGuard } from 'src/app/shared/guards/auth-roles.guard';
 
 const routes: Routes = [
   {
@@ -19,15 +20,20 @@ const routes: Routes = [
   },
   {
     path: 'mylist',
-    component: MylistComponent
+    component: MylistComponent,
+    canActivate: [AuthRolesGuard],
+    data: { expectedRole: 'srru_personnel' }
   },
   {
     path: 'create',
     component: FormComponent,
-    data: { formType: 'CREATE' }
+    canActivate: [AuthRolesGuard],
+    data: { formType: 'CREATE', expectedRole: 'srru_personnel' }
   },
   {
     path: 'assessment',
+    canActivate: [AuthRolesGuard],
+    data: { expectedRole: 'project_assessor' },
     children: [
       {
         path: 'project_list',
@@ -50,10 +56,13 @@ const routes: Routes = [
   {
     path: ':id/edit',
     component: FormComponent,
-    data: { formType: 'EDIT' }
+    canActivate: [AuthRolesGuard],
+    data: { formType: 'EDIT', expectedRole: 'srru_personnel' }
   },
   {
     path: ':id/activity',
+    canActivate: [AuthRolesGuard],
+    data: { expectedRole: 'srru_personnel' },
     children: [
       {
         path: '',
