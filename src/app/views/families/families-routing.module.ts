@@ -3,25 +3,31 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { ShowComponent } from './show/show.component';
 import { FormComponent } from './form/form.component';
+import { AuthRolesGuard } from 'src/app/shared/guards/auth-roles.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: ListComponent
+    component: ListComponent,
+    canActivate: [AuthRolesGuard],
+    data: { expectedRole: 'village_headman' }
   },
   {
     path: 'create',
     component: FormComponent,
-    data: { formType: 'CREATE', title: 'เพิ่มครอบครัว' }
+    canActivate: [AuthRolesGuard],
+    data: { formType: 'CREATE', title: 'เพิ่มครอบครัว', expectedRole: 'village_headman' }
   },
   {
     path: ':id/edit',
     component: FormComponent,
-    data: { formType: 'EDIT', title: 'แก้ไขครอบครัว' }
+    data: { formType: 'EDIT', title: 'แก้ไขครอบครัว', expectedRole: 'village_headman' }
   },
   {
     path: ':id',
-    component: ShowComponent
+    component: ShowComponent,
+    canActivate: [AuthRolesGuard],
+    data: { expectedRole: 'village_headman' }
   }
 ];
 

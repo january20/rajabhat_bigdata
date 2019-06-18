@@ -14,12 +14,14 @@ import {
   HeaderComponent,
   FooterComponent
 } from './shared/layout';
+import { Error401Component } from './views/errors/error401/error401.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    Error401Component
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
