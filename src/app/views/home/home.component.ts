@@ -3,6 +3,7 @@ import { HomeService } from './shared/home.service';
 import { LatLngLiteral } from '@agm/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
+// declare const google: any;
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,30 @@ export class HomeComponent implements OnInit {
   geoJsonObject: Object;
   polygonPaths: Array<Array<LatLngLiteral>> = [];
   villages: any = [];
+  air_quality: any;
+  weathers: any;
+  weatherIcon = { url: 'assets/img/weather-icon.png', scaledSize: {height: 40, width: 40} };
+  weatherDescriptions = {
+    fewclouds: 'มีเมฆน้อย',
+    brokenclouds: 'มีเมฆกระจัดกระจาย',
+    overcastclouds: 'มีเมฆปกคลุมมาก',
+    scatteredclouds: 'มีเมฆปกคลุมเป็นแห่งๆ',
+    lightrain: 'มีฝนเล็กน้อย',
+    moderaterain: 'มีฝนปานกลาง',
+    showerrain: 'มีฝนตกเป็นแห่งๆ',
+    heavyintensityrain: 'มีฝนตกหนัก',
+    veryheavyrain: 'มีฝนตกหนักมาก',
+    thunderstorm: 'มีฝนฟ้าคะนอง',
+    thunderstormwithrain: 'มีพายุฝนฟ้าคะนอง',
+    thunderstormwithheavyrain: 'มีพายุฝนฟ้าคะนอง กับมีฝนตกหนัก',
+    thunderstormwithlightrain: 'มีพายุฝนฟ้าคะนอง กับมีฝนตกเล็กน้อย',
+    clearsky: 'ท้องฟ้าโปร่งใส',
+    fog: 'มีหมอกหนาวปกคลุมพื้นที่',
+    mist: 'มีหมอกฝนปกคลุมพื้นที่',
+    haze: 'มีฝุ่นปกคลุมพื้นที่',
+  }
+  // private map: google.maps.Map = null;
+  // private heatmap: google.maps.visualization.HeatmapLayer = null;
 
   constructor(
     private homeService: HomeService,
@@ -28,6 +53,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getGeoJson();
     this.getVillages();
+    this.getWeathers();
+    this.getAirQuality();
   }
 
   toggleModal(village): void {
@@ -83,6 +110,14 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getWeathers() {
+    this.homeService.getWeathers().subscribe((data: any) => this.weathers = data);
+  }
+
+  getAirQuality() {
+    this.homeService.getAirQuality().subscribe((data: any) => this.air_quality = data);
+  }
+
   setGeoJsonStyle(feature) {
     return {
       strokeColor: '#FF0000',
@@ -93,5 +128,27 @@ export class HomeComponent implements OnInit {
       // fillOpacity: 0.0
     }
   }
+
+  markerMouseOver(infoWindow, map) {
+
+    if (map.lastOpen != null) {
+      map.lastOpen.close();
+    }
+
+    map.lastOpen = infoWindow;
+
+    infoWindow.open();
+  }
+
+  // onMapLoad(mapInstance: google.maps.Map) {
+  //   this.map = mapInstance;
+  //   const coords: google.maps.LatLng[] = new google.maps.LatLng(14.882564, 103.494215);
+  //   this.heatmap = new google.maps.visualization.HeatmapLayer({
+  //       map: this.map,
+  //       data: [coords],
+  //       radius: 200,
+  //       gradient: ['#ff0000']
+  //   });
+  // }
 
 }

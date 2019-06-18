@@ -22,4 +22,12 @@ export class HomeService {
   getVillage(id) {
     return this.http.get(`${environment.api_url}/villages/${id}`);
   }
+
+  getWeathers() {
+    return this.http.get(`${environment.api_url}/info/weather/stations`);
+  }
+
+  getAirQuality() {
+    return this.http.get(`${environment.api_url}/info/air/stations`);
+  }
 }
