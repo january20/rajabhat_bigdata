@@ -26,19 +26,19 @@ export class HomeComponent implements OnInit {
   weatherDescriptions = {
     fewclouds: {
       description: 'มีเมฆน้อย',
-      icon: { url: 'assets/img/weathers/weather04.png', scaledSize: {height: 40, width: 40} }
+      icon: { url: 'assets/img/weathers/weather02.png', scaledSize: {height: 40, width: 40} }
     },
     brokenclouds: {
       description: 'มีเมฆกระจัดกระจาย',
-      icon: { url: 'assets/img/weathers/weather11.png', scaledSize: {height: 40, width: 40} }
+      icon: { url: 'assets/img/weathers/weather03.png', scaledSize: {height: 40, width: 40} }
     },
     overcastclouds: {
       description: 'มีเมฆปกคลุมมาก',
-      icon: { url: 'assets/img/weathers/weather13.png', scaledSize: {height: 40, width: 40} }
+      icon: { url: 'assets/img/weathers/weather04.png', scaledSize: {height: 40, width: 40} }
     },
     scatteredclouds: {
       description: 'มีเมฆปกคลุมเป็นแห่งๆ',
-      icon: { url: 'assets/img/weathers/weather12.png', scaledSize: {height: 40, width: 40} }
+      icon: { url: 'assets/img/weathers/weather03.png', scaledSize: {height: 40, width: 40} }
     },
     lightrain: {
       description: 'มีฝนเล็กน้อย',
