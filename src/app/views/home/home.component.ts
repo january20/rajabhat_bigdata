@@ -22,25 +22,76 @@ export class HomeComponent implements OnInit {
   villages: any = [];
   air_quality: any;
   weathers: any;
-  weatherIcon = { url: 'assets/img/weather-icon.png', scaledSize: {height: 40, width: 40} };
+  // weatherIcon = { url: 'assets/img/weather-icon.png', scaledSize: {height: 40, width: 40} };
   weatherDescriptions = {
-    fewclouds: 'มีเมฆน้อย',
-    brokenclouds: 'มีเมฆกระจัดกระจาย',
-    overcastclouds: 'มีเมฆปกคลุมมาก',
-    scatteredclouds: 'มีเมฆปกคลุมเป็นแห่งๆ',
-    lightrain: 'มีฝนเล็กน้อย',
-    moderaterain: 'มีฝนปานกลาง',
-    showerrain: 'มีฝนตกเป็นแห่งๆ',
-    heavyintensityrain: 'มีฝนตกหนัก',
-    veryheavyrain: 'มีฝนตกหนักมาก',
-    thunderstorm: 'มีฝนฟ้าคะนอง',
-    thunderstormwithrain: 'มีพายุฝนฟ้าคะนอง',
-    thunderstormwithheavyrain: 'มีพายุฝนฟ้าคะนอง กับมีฝนตกหนัก',
-    thunderstormwithlightrain: 'มีพายุฝนฟ้าคะนอง กับมีฝนตกเล็กน้อย',
-    clearsky: 'ท้องฟ้าโปร่งใส',
-    fog: 'มีหมอกหนาวปกคลุมพื้นที่',
-    mist: 'มีหมอกฝนปกคลุมพื้นที่',
-    haze: 'มีฝุ่นปกคลุมพื้นที่',
+    fewclouds: {
+      description: 'มีเมฆน้อย',
+      icon: { url: 'assets/img/weathers/weather04.png', scaledSize: {height: 40, width: 40} }
+    },
+    brokenclouds: {
+      description: 'มีเมฆกระจัดกระจาย',
+      icon: { url: 'assets/img/weathers/weather11.png', scaledSize: {height: 40, width: 40} }
+    },
+    overcastclouds: {
+      description: 'มีเมฆปกคลุมมาก',
+      icon: { url: 'assets/img/weathers/weather13.png', scaledSize: {height: 40, width: 40} }
+    },
+    scatteredclouds: {
+      description: 'มีเมฆปกคลุมเป็นแห่งๆ',
+      icon: { url: 'assets/img/weathers/weather12.png', scaledSize: {height: 40, width: 40} }
+    },
+    lightrain: {
+      description: 'มีฝนเล็กน้อย',
+      icon: { url: 'assets/img/weathers/weather05.png', scaledSize: {height: 40, width: 40} }
+    },
+    moderaterain: {
+      description: 'มีฝนปานกลาง',
+      icon: { url: 'assets/img/weathers/weather06.png', scaledSize: {height: 40, width: 40} }
+    },
+    showerrain: {
+      description: 'มีฝนตกเป็นแห่งๆ',
+      icon: { url: 'assets/img/weathers/weather06.png', scaledSize: {height: 40, width: 40} }
+    },
+    heavyintensityrain: {
+      description: 'มีฝนตกหนัก',
+      icon: { url: 'assets/img/weathers/weather07.png', scaledSize: {height: 40, width: 40} }
+    },
+    veryheavyrain: {
+      description: 'มีฝนตกหนักมาก',
+      icon: { url: 'assets/img/weathers/weather07.png', scaledSize: {height: 40, width: 40} }
+    },
+    thunderstorm: {
+      description: 'มีฝนฟ้าคะนอง',
+      icon: { url: 'assets/img/weathers/weather09.png', scaledSize: {height: 40, width: 40} }
+    },
+    thunderstormwithrain: {
+      description: 'มีพายุฝนฟ้าคะนอง',
+      icon: { url: 'assets/img/weathers/weather08.png', scaledSize: {height: 40, width: 40} }
+    },
+    thunderstormwithheavyrain: {
+      description: 'มีพายุฝนฟ้าคะนอง กับมีฝนตกหนัก',
+      icon: { url: 'assets/img/weathers/weather08.png', scaledSize: {height: 40, width: 40} }
+    },
+    thunderstormwithlightrain: {
+      description: 'มีพายุฝนฟ้าคะนอง กับมีฝนตกเล็กน้อย',
+      icon: { url: 'assets/img/weathers/weather08.png', scaledSize: {height: 40, width: 40} }
+    },
+    clearsky: {
+      description: 'ท้องฟ้าโปร่งใส',
+      icon: { url: 'assets/img/weathers/weather01.png', scaledSize: {height: 40, width: 40} }
+    },
+    fog: {
+      description: 'มีหมอกหนาวปกคลุมพื้นที่',
+      icon: { url: 'assets/img/weathers/weather16.png', scaledSize: {height: 40, width: 40} }
+    },
+    mist: {
+      description: 'มีหมอกฝนปกคลุมพื้นที่',
+      icon: { url: 'assets/img/weathers/weather16.png', scaledSize: {height: 40, width: 40} }
+    },
+    haze: {
+      description: 'มีฝุ่นปกคลุมพื้นที่',
+      icon: { url: 'assets/img/weathers/weather02.png', scaledSize: {height: 40, width: 40} }
+    },
   }
   // private map: google.maps.Map = null;
   // private heatmap: google.maps.visualization.HeatmapLayer = null;

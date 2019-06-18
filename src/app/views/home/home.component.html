@@ -43,10 +43,10 @@
             </agm-marker>            
           </ng-container>
           <ng-container *ngFor="let station of weathers">
-            <agm-marker [iconUrl]="weatherIcon" [latitude]="station.lat" [longitude]="station.lon" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
+            <agm-marker [iconUrl]="weatherDescriptions[station.weather.description.split(' ').join('')].icon" [latitude]="station.lat" [longitude]="station.lon" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
               <agm-info-window [disableAutoPan]="false" #weatherInfoWindow>
                 <h3>สภาพอากาศสถานี{{ station.station_name_th }}</h3>
-                <p><strong>สภาพอากาศตอนนี้:</strong> {{ weatherDescriptions[station.weather.description.split(' ').join('')] }}</p>
+                <p><strong>สภาพอากาศตอนนี้:</strong> {{ weatherDescriptions[station.weather.description.split(' ').join('')].description }}</p>
                 <p><strong>อุณหภูมิเฉลี่ย:</strong> {{ station.weather.temp }}°</p>
                 <p><strong>ความกดอากาศ:</strong> {{ station.weather.pressure }} hPa</p>
                 <p><strong>ความชื้น:</strong> {{ station.weather.humidity }} %</p>
