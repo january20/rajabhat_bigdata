@@ -13,8 +13,8 @@
     <!--<span><img src="assets/img/i_1.png" alt="" width="200" height="200">xx</span></h3>-->
     <!--<div class="text-center wow zoomInUp animation-delay-2"><h1 class="color-primary"><img src="assets/img/i_1.png" width="130" height="110">30,000,000 <span class="color-warning">&nbsp;&nbsp;&nbsp; บาท</span></h1></div>-->
   </div>
-  
-  <div class="container">  
+
+  <div class="container">
     <div class="row">
       <div class="col-sm-3">
         <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
@@ -23,7 +23,7 @@
           <p class="mt-2 no-mb lead small-caps color-success">งบประมาณที่ใช้ทั้งหมด</p>
         </div>
       </div>
-      
+
       <div class="col-sm-3">
         <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
           <h2 class="color-danger">{{ result?.total_projects }}</h2>
@@ -31,8 +31,8 @@
           <p class="mt-2 no-mb lead small-caps color-danger">จำนวนโครงการ</p>
         </div>
       </div>
-      
-      
+
+
       <div class="col-sm-3">
         <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
           <a href="/">
@@ -43,10 +43,10 @@
           </a>
         </div>
       </div>
-  
+
       <div class="col-sm-3">
         <div class="card card-warning card-body overflow-hidden text-center zoomInUp animation-delay-2 h-100">
-          <a href="/aboutus">
+          <a routerLink="/kpi">
           <h2 class="color-info">6</h2>
           <i class="fa fa-4x fa fa-ioxhost color-info" title="ดูรายละเอียด"></i>
           <p class="mt-2 no-mb lead small-caps color-info">ตัวชี้วัดโครงการ</p>
@@ -61,18 +61,18 @@
       <div class="card-body m-5 p-5">
         <h3 class="text-center mb-5">สรุปหน่วยงานที่รับผิดชอบโครงการ</h3>
         <div id="projectChart" style="width: 100%; height: 500px"></div>
-  
+
       </div>
     </div>
-  
+
     <div class="card mt-5 animated fadeInUp">
       <div class="card-body m-5 p-5">
         <h3 class="text-center">งบประมาณของแต่ละหน่วยงาน</h3>
-        
+
         <div id="budgetChart" style="width: 100%; height: 500px"></div>
       </div>
-    </div>  
-    
+    </div>
+
   </div>
 
   <div class="container">
@@ -103,12 +103,12 @@
               </a>
             </td>
           </ng-container>
-        
+
           <ng-container matColumnDef="faculty">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30%">หน่วยงาน</th>
             <td mat-cell *matCellDef="let row">{{ row.faculty.fac_name }}</td>
           </ng-container>
-        
+
           <ng-container matColumnDef="budget">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%">งบประมาณ</th>
             <td mat-cell *matCellDef="let row"> {{ row.budget | number }} </td>
@@ -122,7 +122,7 @@
               </a>
             </td>
           </ng-container>
-        
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
