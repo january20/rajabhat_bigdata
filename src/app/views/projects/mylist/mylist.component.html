@@ -71,7 +71,7 @@
               </td>
 
               <td>
-                <a *ngIf="project.approved == 1" routerLink="/projects/{{ project.id }}/edit"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
+                <a *ngIf="project.approved == 0" routerLink="/projects/{{ project.id }}/edit"  class="btn-circle btn-circle-sm btn-circle-raised btn-circle-info">
                   <i data-toggle="tooltip" data-placement="top" title="แก้ไข" class="fa fa-edit" aria-hidden="true"></i>
                 </a>&nbsp;
                 <a *ngIf="project.approved == 0" href="javascript:void(0)" (click)="deleteProject(project.id)" class="btn-circle btn-circle-sm btn-circle-raised btn-circle-danger">

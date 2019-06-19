@@ -32,11 +32,11 @@ const routes: Routes = [
   },
   {
     path: 'assessment',
-    canActivate: [AuthRolesGuard],
-    data: { expectedRole: 'project_assessor' },
     children: [
       {
         path: 'project_list',
+        canActivate: [AuthRolesGuard],
+        data: { expectedRole: 'project_assessor' },
         component: AssessmentProjectListComponent
       },
       {
@@ -45,10 +45,14 @@ const routes: Routes = [
       },
       {
         path: 'manual',
+        canActivate: [AuthRolesGuard],
+        data: { expectedRole: 'project_assessor' },
         component: AssessmentManualComponent
       },
       {
         path: ':id/create',
+        canActivate: [AuthRolesGuard],
+        data: { expectedRole: 'project_assessor' },
         component: AssessmentFormComponent
       }
     ]
