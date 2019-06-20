@@ -44,12 +44,12 @@
 
         <ng-container matColumnDef="year60">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>รายได้เฉลี่ย ปี 2560</th>
-          <td mat-cell *matCellDef="let row">{{ row.y60 }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.y60 | number }}</td>
         </ng-container>
 
         <ng-container matColumnDef="year61">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>รายได้เฉลี่ย ปี 2561</th>
-          <td mat-cell *matCellDef="let row">{{ row.y61 }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.y61 | number }}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>

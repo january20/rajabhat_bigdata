@@ -50,12 +50,12 @@
       
         <ng-container matColumnDef="dataset_male">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>ชาย</th>
-          <td mat-cell *matCellDef="let row">{{ row.dataset_male }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.dataset_male | number }}</td>
         </ng-container>
       
         <ng-container matColumnDef="dataset_female">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>หญิง</th>
-          <td mat-cell *matCellDef="let row"> {{ row.dataset_female }} </td>
+          <td mat-cell *matCellDef="let row"> {{ row.dataset_female | number }} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>

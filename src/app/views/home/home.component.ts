@@ -3,6 +3,7 @@ import { HomeService } from './shared/home.service';
 import { LatLngLiteral } from '@agm/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
+import { Router } from '@angular/router';
 // declare const google: any;
 
 @Component({
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   }
   geoJsonObject: Object;
   polygonPaths: Array<Array<LatLngLiteral>> = [];
+  countData: any;
   villages: any = [];
   air_quality: any;
   weathers: any;
@@ -98,7 +100,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private homeService: HomeService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -106,6 +109,7 @@ export class HomeComponent implements OnInit {
     this.getVillages();
     this.getWeathers();
     this.getAirQuality();
+    this.getCountData();
   }
 
   toggleModal(village): void {
@@ -169,6 +173,10 @@ export class HomeComponent implements OnInit {
     this.homeService.getAirQuality().subscribe((data: any) => this.air_quality = data);
   }
 
+  getCountData() {
+    this.homeService.getCountData().subscribe((data: any) => this.countData = data);
+  }
+
   setGeoJsonStyle(feature) {
     return {
       strokeColor: '#FF0000',
@@ -189,6 +197,10 @@ export class HomeComponent implements OnInit {
     map.lastOpen = infoWindow;
 
     infoWindow.open();
+  }
+
+  navigate(path: string) {
+    this.router.navigate([path]);
   }
 
   // onMapLoad(mapInstance: google.maps.Map) {

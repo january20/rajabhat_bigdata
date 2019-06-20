@@ -44,22 +44,22 @@
       
         <ng-container matColumnDef="male">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>ชาย</th>
-          <td mat-cell *matCellDef="let row">{{ row.male }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.male | number }}</td>
         </ng-container>
       
         <ng-container matColumnDef="female">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>หญิง</th>
-          <td mat-cell *matCellDef="let row"> {{ row.female }} </td>
+          <td mat-cell *matCellDef="let row"> {{ row.female | number }} </td>
         </ng-container>
 
         <ng-container matColumnDef="total">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>รวม</th>
-          <td mat-cell *matCellDef="let row"> {{ row.total }} </td>
+          <td mat-cell *matCellDef="let row"> {{ row.total | number }} </td>
         </ng-container>
 
         <ng-container matColumnDef="house">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>ครัวเรือน</th>
-          <td mat-cell *matCellDef="let row"> {{ row.house }} </td>
+          <td mat-cell *matCellDef="let row"> {{ row.house | number }} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>

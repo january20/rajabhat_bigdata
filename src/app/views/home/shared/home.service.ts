@@ -11,6 +11,10 @@ export class HomeService {
     private http: HttpClient
   ) { }
 
+  getCountData() {
+    return this.http.get(`${environment.api_url}/home`);
+  }
+
   getSurinCoorddinates() {
     return this.http.get('assets/json/surin-polygon.json');
   }

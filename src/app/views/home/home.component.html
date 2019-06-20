@@ -1,4 +1,4 @@
-<div class="my-5 text-center" *ngIf="!villages && !weathers && !air_quality" style="height: 100vh;">
+<div class="my-5 text-center" *ngIf="!villages && !weathers && !air_quality && !countData" style="height: 100vh;">
   <div class="absolute-center">
     <mat-spinner class="mx-auto"></mat-spinner>
     กำลังโหลดข้อมูล.
@@ -11,7 +11,7 @@
 	<i class="fa fa-apple"></i>
 </a>
 
-<div class="ms-site-container mt-5" *ngIf="villages && weathers && air_quality">
+<div class="ms-site-container mt-5" *ngIf="villages && weathers && air_quality && countData">
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
@@ -21,54 +21,124 @@
   </div>
 
   <div class="container">
-    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
-      <div class="card-body p-1">
-        <agm-map #gm [latitude]="googleMapOptions.lat" [longitude]="googleMapOptions.lng" [zoom]="googleMapOptions.zoom">
-          <agm-polygon *ngIf="polygonPaths.length > 0" [paths]="polygonPaths"
-            strokeColor="#FF0000"
-            strokeOpacity="0.8"
-            strokeWeight="2"
-            fillColor="#FF0000"
-            fillOpacity="0.35"></agm-polygon>
-          <agm-data-layer [geoJson]="geoJsonObject"
-            [style]="setGeoJsonStyle"></agm-data-layer>
-          <agm-marker [latitude]="googleMapOptions.lat"
-            [longitude]="googleMapOptions.lng"
-            iconUrl="assets/img/logo.png"></agm-marker>
-          <ng-container *ngFor="let village of villages">
-            <agm-marker (markerClick)="toggleModal(village)" [latitude]="village.lat" [longitude]="village.lng" (mouseOver)="markerMouseOver(infoWindow,gm)">
-              <agm-info-window [disableAutoPan]="false" #infoWindow>
-                <a href='javascript:void(0);'>{{ village.village.village_name_th+' ตำบล'+ village.sub_district.sub_district_name_th+' อำเภอ'+village.district.district_name_th }}</a>
-              </agm-info-window>
-            </agm-marker>            
-          </ng-container>
-          <ng-container *ngFor="let station of weathers">
-            <agm-marker [iconUrl]="weatherDescriptions[station.weather.description.split(' ').join('')].icon" [latitude]="station.lat" [longitude]="station.lon" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
-              <agm-info-window [disableAutoPan]="false" #weatherInfoWindow>
-                <h3>สภาพอากาศสถานี{{ station.station_name_th }}</h3>
-                <p><strong>สภาพอากาศตอนนี้:</strong> {{ weatherDescriptions[station.weather.description.split(' ').join('')].description }}</p>
-                <p><strong>อุณหภูมิเฉลี่ย:</strong> {{ station.weather.temp }}°</p>
-                <p><strong>ความกดอากาศ:</strong> {{ station.weather.pressure }} hPa</p>
-                <p><strong>ความชื้น:</strong> {{ station.weather.humidity }} %</p>
-                <p><strong>ความเร็วลม:</strong> {{ station.weather.wind_speed }} นอต</p>
-                <p><strong>เมฆ:</strong> ร้อยละ {{ station.weather.clouds }}</p>
-                <!-- <p><strong>พระอาทิตย์ขึ้น:</strong> เวลา {{ station.weather.sunrise | date: 'HH:mm' }} น.</p>
-                <p><strong>พระอาทิตย์ตก:</strong> เวลา {{ station.weather.sunset | date: 'HH:mm' }} น.</p> -->
-              </agm-info-window>
-            </agm-marker>            
-          </ng-container>
-          <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-            <ng-container *ngFor="let station of air_quality">              
-              <agm-marker *ngIf="station.air" label="PM 2.5" [latitude]="station?.lat" [longitude]="station?.lng" (mouseOver)="markerMouseOver(airInfoWindow,gm)">
-                <agm-info-window [disableAutoPan]="false" #airInfoWindow>
-                  <h3>ฝุ่นละออง สถานี{{ station.name }}</h3>
-                  <p><strong>PM 2.5:</strong> {{ station?.air.ugm3 }} μg/m3</p>
-                  <p><strong>AQI:</strong> {{ station?.air.aqi }}</p>
+    <div class="row">
+      <div class="card card-royal card-hero animated fadeInUp animation-delay-7 p-1 col-10">
+        <div class="card-body p-0 m-0">
+          <agm-map #gm [latitude]="googleMapOptions.lat" [longitude]="googleMapOptions.lng" [zoom]="googleMapOptions.zoom" class="h-100">
+            <agm-polygon *ngIf="polygonPaths.length > 0" [paths]="polygonPaths"
+              strokeColor="#FF0000"
+              strokeOpacity="0.8"
+              strokeWeight="2"
+              fillColor="#FF0000"
+              fillOpacity="0.35"></agm-polygon>
+            <agm-data-layer [geoJson]="geoJsonObject"
+              [style]="setGeoJsonStyle"></agm-data-layer>
+            <agm-marker [latitude]="googleMapOptions.lat"
+              [longitude]="googleMapOptions.lng"
+              iconUrl="assets/img/logo.png"></agm-marker>
+            <ng-container *ngFor="let village of villages">
+              <agm-marker (markerClick)="toggleModal(village)" [latitude]="village.lat" [longitude]="village.lng" (mouseOver)="markerMouseOver(infoWindow,gm)">
+                <agm-info-window [disableAutoPan]="false" #infoWindow>
+                  <a href='javascript:void(0);'>{{ village.village.village_name_th+' ตำบล'+ village.sub_district.sub_district_name_th+' อำเภอ'+village.district.district_name_th }}</a>
                 </agm-info-window>
-              </agm-marker>
+              </agm-marker>            
             </ng-container>
-          </agm-marker-cluster>
-        </agm-map>
+            <ng-container *ngFor="let station of weathers">
+              <agm-marker [iconUrl]="weatherDescriptions[station.weather.description.split(' ').join('')].icon" [latitude]="station.lat" [longitude]="station.lon" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
+                <agm-info-window [disableAutoPan]="false" #weatherInfoWindow>
+                  <h3>สภาพอากาศสถานี{{ station.station_name_th }}</h3>
+                  <p><strong>สภาพอากาศตอนนี้:</strong> {{ weatherDescriptions[station.weather.description.split(' ').join('')].description }}</p>
+                  <p><strong>อุณหภูมิเฉลี่ย:</strong> {{ station.weather.temp }}°</p>
+                  <p><strong>ความกดอากาศ:</strong> {{ station.weather.pressure }} hPa</p>
+                  <p><strong>ความชื้น:</strong> {{ station.weather.humidity }} %</p>
+                  <p><strong>ความเร็วลม:</strong> {{ station.weather.wind_speed }} นอต</p>
+                  <p><strong>เมฆ:</strong> ร้อยละ {{ station.weather.clouds }}</p>
+                  <!-- <p><strong>พระอาทิตย์ขึ้น:</strong> เวลา {{ station.weather.sunrise | date: 'HH:mm' }} น.</p>
+                  <p><strong>พระอาทิตย์ตก:</strong> เวลา {{ station.weather.sunset | date: 'HH:mm' }} น.</p> -->
+                </agm-info-window>
+              </agm-marker>            
+            </ng-container>
+            <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+              <ng-container *ngFor="let station of air_quality">              
+                <agm-marker *ngIf="station.air" label="PM 2.5" [latitude]="station?.lat" [longitude]="station?.lng" (mouseOver)="markerMouseOver(airInfoWindow,gm)">
+                  <agm-info-window [disableAutoPan]="false" #airInfoWindow>
+                    <h3>ฝุ่นละออง สถานี{{ station.name }}</h3>
+                    <p><strong>PM 2.5:</strong> {{ station?.air.ugm3 }} μg/m3</p>
+                    <p><strong>AQI:</strong> {{ station?.air.aqi }}</p>
+                  </agm-info-window>
+                </agm-marker>
+              </ng-container>
+            </agm-marker-cluster>
+          </agm-map>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="row">
+          <div class="col">
+            <div class="card card-hero card-success-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/projects')">
+              <div class="text-center card-body p-1">
+                <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-file"></i></span>
+                <p class="">โครงการ: {{ countData.count_projects }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card card-warning-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/projects')">
+              <div class="text-center card-body p-1">
+                <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-star"></i></span>
+                <p class="">กิจกรรม: {{ countData.count_project_activities }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card card-info-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/info/population')">
+              <div class="text-center card-body p-1">
+                <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-users"></i></span>
+                <p class="mb-0">ประชากร</p>
+                <span>{{ countData.count_families + countData.count_family_members | number }}</span>
+                <p class="mb-0 mt-1">รายได้เฉลี่ย</p>
+                <span class="">{{ (countData.avg_income_60 + countData.avg_income_61) / 2 | number }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card card-danger-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/otop')">
+              <div class="text-center card-body p-1">
+                <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-shopping-bag"></i></span>
+                <p class="">โอทอป: {{ countData.count_otop }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card card-success-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/bio')">
+              <div class="text-center card-body p-1">
+                <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-leaf"></i></span>
+                <p class="">พืช: {{ countData.count_plants }}</p>
+                <p class="">สัตว์: {{ countData.count_animals }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card card-royal-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/info/env/weather')">
+              <div class="text-center card-body p-1">
+                <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-cloud"></i></span>
+                <p class="">สถานีวัดอากาศ: {{ countData.count_weather_stations }}</p>
+                <p class="">สถานีวัดผุ่น: {{ countData.count_air_stations }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
