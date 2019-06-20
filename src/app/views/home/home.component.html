@@ -37,9 +37,10 @@
               [longitude]="googleMapOptions.lng"
               iconUrl="assets/img/logo.png"></agm-marker>
             <ng-container *ngFor="let village of villages">
-              <agm-marker (markerClick)="toggleModal(village)" [latitude]="village.lat" [longitude]="village.lng" (mouseOver)="markerMouseOver(infoWindow,gm)">
+              <agm-marker [iconUrl]="houseIcon" (markerClick)="toggleModal(village)" [latitude]="village.lat" [longitude]="village.lng" (mouseOver)="markerMouseOver(infoWindow,gm)">
                 <agm-info-window [disableAutoPan]="false" #infoWindow>
                   <a href='javascript:void(0);'>{{ village.village.village_name_th+' ตำบล'+ village.sub_district.sub_district_name_th+' อำเภอ'+village.district.district_name_th }}</a>
+                  <p class="color-primary">จำนวนโครงการในพื้นที่: {{ village.projects_count }}</p>
                 </agm-info-window>
               </agm-marker>            
             </ng-container>

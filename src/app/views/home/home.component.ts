@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   villages: any = [];
   air_quality: any;
   weathers: any;
-  // weatherIcon = { url: 'assets/img/weather-icon.png', scaledSize: {height: 40, width: 40} };
+  houseIcon = { url: 'assets/img/house.png', scaledSize: {height: 40, width: 40} };
   weatherDescriptions = {
     fewclouds: {
       description: 'มีเมฆน้อย',
