@@ -22,7 +22,9 @@ import {
   MatCardModule,
   MatPaginatorModule,
   MatAutocompleteModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatListModule,
+  MatSidenavModule
 } from '@angular/material';
 
 import { StriphtmlPipe } from './pipes/striphtml.pipe';
@@ -66,7 +68,9 @@ import { ReferenceService } from './services/reference.service';
     MatCardModule,
     MatPaginatorModule,
     MatAutocompleteModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatListModule,
+    MatSidenavModule
   ]
 })
 export class SharedModule { }

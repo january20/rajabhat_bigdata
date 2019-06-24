@@ -1,0 +1,45 @@
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!refApi">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<mat-sidenav-container class="sidenav-container" *ngIf="refApi">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <ng-container *ngFor="let api of refApi">
+      <!-- <p class="h4 mt-3 mx-3 text-muted">{{ list.name }}</p> -->
+      <mat-nav-list class="p-0">
+        <a [ngClass]="active_id == api.id ? 'active': ''" mat-list-item (click)="changeApi(api.id)">
+          <mat-icon matListIcon>{{ api.icon }}</mat-icon>
+          <h3 matLine> {{ api.title }}</h3>
+        </a>
+      </mat-nav-list>
+    </ng-container>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="container-fluid p-5">
+      <h2 class="text-center">Api</h2>
+      
+      <ng-container *ngIf="api">
+        <p class="text-center">{{ api.description }}</p>
+        <p class="text-center">Endpoint: {{ api.path }}</p>
+        
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-2">
+            <mat-label>Method</mat-label>
+            <input matInput [value]="api.method | uppercase">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-8">
+            <mat-label>endpoint</mat-label>
+            <input matInput placeholder="Endpoint" [value]="api.example_path">
+          </mat-form-field>
+          <div class="col-2">
+            <button mat-raised-button color="primary" class="my-auto">Test</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

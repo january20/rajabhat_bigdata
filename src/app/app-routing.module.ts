@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'media', loadChildren: () => import('./views/media/media.module').then(m => m.MediaModule) },
   { path: 'info', loadChildren: () => import('./views/info/info.module').then(m => m.InfoModule) },
   { path: 'kpi', loadChildren: () => import('./views/kpi/kpi.module').then(m => m.KpiModule) },
+  { path: 'developers', loadChildren: () => import('./views/developers/developers.module').then(m => m.DevelopersModule) },
   { path: '401', component: Error401Component },
   {
     path: '',
