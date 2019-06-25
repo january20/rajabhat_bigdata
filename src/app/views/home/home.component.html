@@ -77,7 +77,20 @@
       <div class="col-2">
         <div class="row">
           <div class="col">
-            <div class="card card-hero card-success-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/projects')">
+            <div class="card card-hero card-info-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/info/population')">
+              <div class="text-center card-body p-1">
+                <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-users"></i></span>
+                <p class="mb-0">ประชากร</p>
+                <span>{{ countData.count_families + countData.count_family_members | number }}</span>
+                <p class="mb-0 mt-1">รายได้เฉลี่ย</p>
+                <span class="">{{ (countData.avg_income_60 + countData.avg_income_61) / 2 | number }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card card-success-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/projects')">
               <div class="text-center card-body p-1">
                 <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-file"></i></span>
                 <p class="">โครงการ: {{ countData.count_projects }}</p>
@@ -91,19 +104,6 @@
               <div class="text-center card-body p-1">
                 <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-star"></i></span>
                 <p class="">กิจกรรม: {{ countData.count_project_activities }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="card card-info-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/info/population')">
-              <div class="text-center card-body p-1">
-                <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-users"></i></span>
-                <p class="mb-0">ประชากร</p>
-                <span>{{ countData.count_families + countData.count_family_members | number }}</span>
-                <p class="mb-0 mt-1">รายได้เฉลี่ย</p>
-                <span class="">{{ (countData.avg_income_60 + countData.avg_income_61) / 2 | number }}</span>
               </div>
             </div>
           </div>
@@ -135,7 +135,9 @@
               <div class="text-center card-body p-1">
                 <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-sm "><i class="fa fa-cloud"></i></span>
                 <p class="">สถานีวัดอากาศ: {{ countData.count_weather_stations }}</p>
-                <p class="">สถานีวัดผุ่น: {{ countData.count_air_stations }}</p>
+                <p class="">ข้อมูลอากาศ: {{ countData.count_weathers | number }}</p>
+                <p class="">สถานีวัดฝุ่น: {{ countData.count_air_stations }}</p>
+                <p class="">ข้อมูลฝุ่น: {{ countData.count_air | number }}</p>
               </div>
             </div>
           </div>
