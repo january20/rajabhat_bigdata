@@ -19,26 +19,54 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div class="container-fluid p-5">
-      <h2 class="text-center">Api</h2>
-      
+    <div class="container-fluid p-5">      
+      <div class="d-flex flex-column" *ngIf="!api">
+        <h1 class="text-center mx-auto">Api Documents</h1>
+        <img src="assets/img/srru-symbol.png" alt="" class="mx-auto mt-5" width="300" height="395">
+      </div>
       <ng-container *ngIf="api">
-        <p class="text-center">{{ api.description }}</p>
-        <p class="text-center">Endpoint: {{ api.path }}</p>
-        
-        <div class="row">
+        <p class="lead text-center">{{ api.description }}</p>
+        <p class="mt-3 lead">Request: <span class="badge badge-info">{{ api.method | uppercase}}</span>&nbsp;{{ base_path + api.path }}</p>
+        <table class="table table-bordered" style="width: 50%" *ngIf="api.par1 && api.des1">
+          <thead>
+            <tr>
+              <th>Parameters</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="api.par1 && api.des1">
+              <td>{{ api.par1 }}</td>
+              <td>{{ api.des1 }}</td>
+            </tr>
+            <tr *ngIf="api.par2 && api.des2">
+              <td>{{ api.par2 }}</td>
+              <td>{{ api.des2 }}</td>
+            </tr>
+            <tr *ngIf="api.par3 && api.des3">
+              <td>{{ api.par3 }}</td>
+              <td>{{ api.des3 }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row mt-3" [formGroup]="exampleForm">
           <mat-form-field appearance="outline" class="col-2">
             <mat-label>Method</mat-label>
-            <input matInput [value]="api.method | uppercase">
+            <input matInput formControlName="method">
           </mat-form-field>
           <mat-form-field appearance="outline" class="col-8">
-            <mat-label>endpoint</mat-label>
-            <input matInput placeholder="Endpoint" [value]="api.example_path">
+            <mat-label>Example Path</mat-label>
+            <input matInput placeholder="Endpoint" formControlName="url">
           </mat-form-field>
           <div class="col-2">
-            <button mat-raised-button color="primary" class="my-auto">Test</button>
+            <button mat-raised-button color="primary" class="p-3" (click)="testApi()">Test</button>
           </div>
         </div>
+
+        <p class="lead">Response</p>
+        <mat-card *ngIf="response">
+          <pre>{{ response | json }}</pre>
+        </mat-card>
       </ng-container>
     </div>
   </mat-sidenav-content>

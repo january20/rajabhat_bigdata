@@ -14,4 +14,9 @@ export class DevelopersService {
   getApi() {
     return this.http.get(`${environment.api_url}/dev`);
   }
+
+  testApi(method, url, data?) {
+    if(method === 'get') return this.http.get(url);
+    else if(method === 'post') return this.http.post(url, data);
+  }
 }
