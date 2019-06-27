@@ -48,6 +48,16 @@ export class AirComponent implements OnInit {
     });
   }
 
+  getAirPeriod(duration){
+
+    this.isDataLoaded = true;
+
+    this.infoService.airPeriod(duration).subscribe((data: any) => {
+      this.createChart(data.data,'windSpeedChart','xField','station_4',"xx",'triangle');
+      this.isDataLoaded = false;
+    });
+  }
+
   createChart(data,chartId,xField,yField,legendField,bullet) {
       this.zone.runOutsideAngular(() => {
         console.log("Trying to create chart....");

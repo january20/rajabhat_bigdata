@@ -41,7 +41,8 @@ export class InfoService {
   airQuality(){
     return this.http.get(`${environment.api_url}/info/air`);
   }
-
-
+  airPeriod(year){
+    return this.http.get(`${environment.api_url}/info/air/period/${year}`);
+  }
 
 }

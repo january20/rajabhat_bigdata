@@ -20,16 +20,14 @@
 
 
     <div class="card card-hero card-primary" >
-      <div class="justify-content-center text-center flex-grow-1 mt-5">
-        Realtime - Air Quality Index (AQI)
-      </div>
+      <h3 class="text-center mt-5">Realtime - Air Quality Index (AQI)</h3>
 
       <BR>
 
       <div class="row p-5">
 
         <div class="col" *ngFor="let station of stations">
-          <div class="card wow fadeInLeft animation-delay-4 h-100 " style="visibility: visible; animation-name: fadeInLeft;">
+          <div class="card wow fadeInLeft animation-delay-4 h-100" style="visibility: visible; animation-name: fadeInLeft;" [ngClass]="station.aqi < 51 ? 'aqi-green': station.aqi < 101 ? 'aqi-yellow': station.aqi < 151 ? 'aqi-orange': station.aqi < 201 ? 'aqi-red': station.aqi < 301 ? 'aqi-purple': station.aqi > 300 ? 'aqi-over': ''">
             <div class="text-center card-body">
               <h2 class="">{{station.aqi}}</h2>
               <p class="">{{station.name}}</p>
@@ -41,7 +39,22 @@
 
 
       <div class="d-flex flex-row justify-content-center">
-
+        <mat-form-field class="mx-2">
+          <mat-label>ข้อมูลฝุ่นละอองย้อนหลัง<mat-icon [className]="isDataLoaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></mat-label>
+          <mat-select (selectionChange)="getAirPeriod($event.value)">
+            <mat-option value="0">ปัจจุบัน</mat-option>
+            <mat-option value="1">1 ปี</mat-option>
+            <mat-option value="2">2 ปี</mat-option>
+            <mat-option value="3">3 ปี</mat-option>
+            <mat-option value="4">4 ปี</mat-option>
+            <mat-option value="5">5 ปี</mat-option>
+            <mat-option value="6">6 ปี</mat-option>
+            <mat-option value="7">7 ปี</mat-option>
+            <mat-option value="8">8 ปี</mat-option>
+            <mat-option value="9">9 ปี</mat-option>
+            <mat-option value="10">10 ปี</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div id="windSpeedChart" style="width: 100%; height: 500px"></div>
     </div>
