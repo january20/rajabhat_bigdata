@@ -21,7 +21,7 @@
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="10">
           <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
             <ng-container *ngFor="let plant of plants">              
-              <agm-marker [latitude]="plant.lat" [longitude]="plant.lng" [iconUrl]="'/assets/img/plant.png'">
+              <agm-marker [latitude]="plant.lat" [longitude]="plant.lng" [iconUrl]="'assets/img/plant.png'">
                 <agm-info-window [disableAutoPan]="true">
                   <a href="javascript:void(0)">{{ plant.id }}</a>
                 </agm-info-window>
@@ -30,7 +30,7 @@
           </agm-marker-cluster>
           <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
             <ng-container *ngFor="let animal of animals">              
-              <agm-marker [latitude]="animal.lat" [longitude]="animal.lng" [iconUrl]="'/assets/img/paw.png'">
+              <agm-marker [latitude]="animal.lat" [longitude]="animal.lng" [iconUrl]="'assets/img/paw.png'">
                 <agm-info-window [disableAutoPan]="true">
                   <a href="javascript:void(0)">{{ animal.id }}</a>
                 </agm-info-window>

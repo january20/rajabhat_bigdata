@@ -47,6 +47,10 @@
               <td>{{ api.par3 }}</td>
               <td>{{ api.des3 }}</td>
             </tr>
+            <tr *ngIf="api.par4 && api.des4">
+              <td>{{ api.par4 }}</td>
+              <td>{{ api.des4 }}</td>
+            </tr>
           </tbody>
         </table>
         <div class="row mt-3" [formGroup]="exampleForm">
