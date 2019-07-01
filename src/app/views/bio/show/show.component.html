@@ -23,8 +23,10 @@
             <ng-container *ngFor="let plant of plants">              
               <agm-marker [latitude]="plant.lat" [longitude]="plant.lng" [iconUrl]="'assets/img/plant.png'">
                 <agm-info-window [disableAutoPan]="true">
-                  <a href="javascript:void(0)">{{ plant.id }}</a>
-                </agm-info-window>
+                  <a routerLink="/bio/plants/{{ plant.id }}" href="javascript:void(0)">
+                    <img src="/app/images/bio/{{ plant.image.file_name }}" width="50" height="50">
+                  </a>
+                  </agm-info-window>
               </agm-marker>              
             </ng-container>
           </agm-marker-cluster>
@@ -32,7 +34,9 @@
             <ng-container *ngFor="let animal of animals">              
               <agm-marker [latitude]="animal.lat" [longitude]="animal.lng" [iconUrl]="'assets/img/paw.png'">
                 <agm-info-window [disableAutoPan]="true">
-                  <a href="javascript:void(0)">{{ animal.id }}</a>
+                  <a routerLink="/bio/animals/{{ animal.id }}" href="javascript:void(0)">
+                    <img src="/app/images/bio/{{ animal.image.file_name }}" width="50" height="50">
+                  </a>
                 </agm-info-window>
               </agm-marker>
             </ng-container>

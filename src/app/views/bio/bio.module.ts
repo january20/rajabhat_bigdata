@@ -15,9 +15,11 @@ import { PlantFormComponent } from './plants/plant-form/plant-form.component';
 import { ShowComponent } from './show/show.component';
 
 import { environment } from 'src/environments/environment';
+import { PlantShowComponent } from './plants/plant-show/plant-show.component';
+import { AnimalShowComponent } from './animals/animal-show/animal-show.component';
 
 @NgModule({
-  declarations: [ PlantsComponent, AnimalsComponent, AnimalFormComponent, PlantFormComponent, ShowComponent ],
+  declarations: [ PlantsComponent, AnimalsComponent, AnimalFormComponent, PlantFormComponent, ShowComponent, PlantShowComponent, AnimalShowComponent ],
   imports: [
     CommonModule,
     AgmCoreModule.forRoot({

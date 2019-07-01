@@ -33,4 +33,12 @@ export class BioService {
   plantsCount() {
     return this.http.get(`${environment.api_url}/bio/plants_count`);
   }
+
+  getPlant(id) {
+    return this.http.get(`${environment.api_url}/bio/plants/${id}`)
+  }
+
+  getAnimal(id) {
+    return this.http.get(`${environment.api_url}/bio/animals/${id}`)
+  }
 }

@@ -1,0 +1,66 @@
+<div class="my-5 text-center" *ngIf="!plant" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container" *ngIf="plant">
+  <div class="ms-hero-page mb-6 ms-hero-bg-primary ms-hero-img-mountain">
+    <h1 class="text-center no-m pt-4 pb-4 color-white index-1">{{ plant.name_th }}</h1>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="ms-hero-bg-primary ms-hero-img-mountain">
+            <h2 class="text-center no-m pt-4 pb-4 color-white index-1">ข้อมูลทั่วไป</h2>
+          </div>
+          <div class="card-body">
+            <h3 class="color-primary no-mt">ข้อมูล</h3>
+            <ul class="list-unstyled">
+              <li>
+                <strong>ชื่อ:</strong> {{ plant.name_th }}</li>
+              <li>
+                <!--<strong>ผู้เก็บข้อมูล:</strong> {{ plant.user_agent ? plant.user_agent : '-' }}-->
+                
+                </li>
+              <li>
+                <strong>ปีที่เก็บข้อมูล:</strong> {{ plant.year || '-' }}</li>
+            </ul>
+            <h3 class="color-primary">รายละเอียด</h3>
+            <p>-</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <a href="javascript:void(0)" class="img-thumbnail withripple">
+          <div class="thumbnail-container">
+            <img [src]="'/app/images/bio/'+plant.images[0].file_name || 'assets/img/noimg.jpg'" class="img-fluid">
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="card card-primary">
+      <div class="ms-hero-bg-primary ms-hero-img-mountain">
+        <h3 class="text-left no-m p-4 color-white index-1">
+          <i class="zmdi zmdi-collection-folder-image"></i> รูปภาพ
+        </h3>
+      </div>
+      <div class="card-body" *ngIf="plant.images && plant.images.length">
+        <div class="row">
+          <div class="col-lg-2 col-md-4 mix" *ngFor="let image of plant.images">
+            <div class="card">
+              <figure class="ms-thumbnail">
+                <img src="/app/images/bio/{{ image.file_name }}" class="img-fluid">
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

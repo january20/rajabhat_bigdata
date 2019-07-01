@@ -1,11 +1,11 @@
-<div class="my-5 text-center" style="height: 100vh;" *ngIf="!experts">
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!experts && !expertises">
   <div class="absolute-center">
     <mat-spinner class="mx-auto"></mat-spinner>
     กำลังโหลดข้อมูล.
   </div>
 </div>
 
-<div class="ms-site-container mt-5" *ngIf="experts">
+<div class="ms-site-container mt-5" *ngIf="experts && expertises">
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
@@ -29,22 +29,21 @@
             <div class="row">
               <mat-form-field class="col">
                 <mat-label>เลือกประเภทความเชี่ยวชาญ</mat-label>
-                <mat-select>
-                  <mat-option>
-                      xxx
-                  </mat-option>
+                <mat-select (selectionChange)="selectExpertise($event.value)" [formControl]="expertSelect">
+                  <mat-option [value]='0'>ทั้งหมด</mat-option>
+                  <mat-option *ngFor="let expertise of expertises" [value]="expertise.id">{{ expertise.name_th }}</mat-option>
                 </mat-select>
               </mat-form-field>
 
               <mat-form-field class="col">
                 <mat-icon matSuffix>search</mat-icon>
-                <input type="text" matInput placeholder="ค้นหา ชื่อ-นามสกุล">                
+                <input type="text" matInput placeholder="ค้นหา ชื่อ-นามสกุล" [formControl]="search">                
               </mat-form-field>
             </div>
 
             <div class="row d-flex justify-content-center">
               <div class="col-lg-4 col-sm-6" *ngFor="let expert of experts">
-                <div [className]="'card mt-4 card-'+expert_type_color[expert.expert_type.id]+' wow zoomInUp animation-delay-7'">
+                <div [className]="'card mt-4 card-'+expert_type_color[expert.expert_type.id]+' wow zoomInUp'">
                   <div [className]="'ms-hero-bg-'+expert_type_color[expert.expert_type.id]+' ms-hero-img-city'">
                     <img src="/app/images/users/avatar/{{ expert.sys_user.profile_image }}" alt="..." class="img-avatar-circle"> </div>
                   <div class="card-body pt-6 text-center">
@@ -52,15 +51,7 @@
                     <div class="row"><span [className]="'mx-auto badge badge-'+expert_type_color[expert.expert_type.id]+' my-1'">{{ expert.expert_type.name_th }}</span></div>
                     <div class="row"><span class="mx-auto badge badge-info my-1">{{ expert.expertise.name_th }}</span></div>
                     <div class="row mt-2">
-                      <div class="col">
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook">
-                          <i class="zmdi zmdi-facebook"></i>
-                        </a>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram">
-                          <i class="zmdi zmdi-instagram"></i>
-                        </a>
-                      </div>
-                      <div class="col text-right">
+                      <div class="col text-center">
                         <a routerLink="/experts/{{ expert.id }}"  [className]="'btn btn-raised btn-sm btn-'+expert_type_color[expert.expert_type.id]">
                           <i class="zmdi zmdi-account"></i> ดูข้อมูล</a>
                       </div>
@@ -71,13 +62,67 @@
             </div>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="inside">
-              ในมหาวิทยาลัย
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-4 col-sm-6" *ngFor="let expert of filter(2)">
+                <div [className]="'card mt-4 card-'+expert_type_color[expert.expert_type.id]+' wow zoomInUp'">
+                  <div [className]="'ms-hero-bg-'+expert_type_color[expert.expert_type.id]+' ms-hero-img-city'">
+                    <img src="/app/images/users/avatar/{{ expert.sys_user.profile_image }}" alt="..." class="img-avatar-circle"> </div>
+                  <div class="card-body pt-6 text-center">
+                    <h3 [className]="'color-'+expert_type_color[expert.expert_type.id]">{{ expert.sys_user.firstname + ' ' + expert.sys_user.lastname}}</h3>
+                    <div class="row"><span [className]="'mx-auto badge badge-'+expert_type_color[expert.expert_type.id]+' my-1'">{{ expert.expert_type.name_th }}</span></div>
+                    <div class="row"><span class="mx-auto badge badge-info my-1">{{ expert.expertise.name_th }}</span></div>
+                    <div class="row mt-2">
+                      <div class="col text-center">
+                        <a routerLink="/experts/{{ expert.id }}"  [className]="'btn btn-raised btn-sm btn-'+expert_type_color[expert.expert_type.id]">
+                          <i class="zmdi zmdi-account"></i> ดูข้อมูล</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="outside">
-              ในพื้นที่
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-4 col-sm-6" *ngFor="let expert of filter(1)">
+                <div [className]="'card mt-4 card-'+expert_type_color[expert.expert_type.id]+' wow zoomInUp'">
+                  <div [className]="'ms-hero-bg-'+expert_type_color[expert.expert_type.id]+' ms-hero-img-city'">
+                    <img src="/app/images/users/avatar/{{ expert.sys_user.profile_image }}" alt="..." class="img-avatar-circle"> </div>
+                  <div class="card-body pt-6 text-center">
+                    <h3 [className]="'color-'+expert_type_color[expert.expert_type.id]">{{ expert.sys_user.firstname + ' ' + expert.sys_user.lastname}}</h3>
+                    <div class="row"><span [className]="'mx-auto badge badge-'+expert_type_color[expert.expert_type.id]+' my-1'">{{ expert.expert_type.name_th }}</span></div>
+                    <div class="row"><span class="mx-auto badge badge-info my-1">{{ expert.expertise.name_th }}</span></div>
+                    <div class="row mt-2">
+                      <div class="col text-center">
+                        <a routerLink="/experts/{{ expert.id }}"  [className]="'btn btn-raised btn-sm btn-'+expert_type_color[expert.expert_type.id]">
+                          <i class="zmdi zmdi-account"></i> ดูข้อมูล</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="villager">
-              ปราชญ์ชาวบ้าน
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-4 col-sm-6" *ngFor="let expert of filter(3)">
+                <div [className]="'card mt-4 card-'+expert_type_color[expert.expert_type.id]+' wow zoomInUp'">
+                  <div [className]="'ms-hero-bg-'+expert_type_color[expert.expert_type.id]+' ms-hero-img-city'">
+                    <img src="/app/images/users/avatar/{{ expert.sys_user.profile_image }}" alt="..." class="img-avatar-circle"> </div>
+                  <div class="card-body pt-6 text-center">
+                    <h3 [className]="'color-'+expert_type_color[expert.expert_type.id]">{{ expert.sys_user.firstname + ' ' + expert.sys_user.lastname}}</h3>
+                    <div class="row"><span [className]="'mx-auto badge badge-'+expert_type_color[expert.expert_type.id]+' my-1'">{{ expert.expert_type.name_th }}</span></div>
+                    <div class="row"><span class="mx-auto badge badge-info my-1">{{ expert.expertise.name_th }}</span></div>
+                    <div class="row mt-2">
+                      <div class="col text-center">
+                        <a routerLink="/experts/{{ expert.id }}"  [className]="'btn btn-raised btn-sm btn-'+expert_type_color[expert.expert_type.id]">
+                          <i class="zmdi zmdi-account"></i> ดูข้อมูล</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

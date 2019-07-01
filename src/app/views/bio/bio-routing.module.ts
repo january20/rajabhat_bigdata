@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ShowComponent } from './show/show.component';
 import { PlantFormComponent } from './plants/plant-form/plant-form.component';
 import { AnimalFormComponent } from './animals/animal-form/animal-form.component';
+import { PlantShowComponent } from './plants/plant-show/plant-show.component';
+import { AnimalShowComponent } from './animals/animal-show/animal-show.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: PlantFormComponent
+      },
+      {
+        path: ':id',
+        component: PlantShowComponent
       }
     ]
   },
@@ -24,6 +30,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: AnimalFormComponent
+      },
+      {
+        path: ':id',
+        component: AnimalShowComponent
       }
     ]
   }

@@ -46,4 +46,8 @@ export class ExpertService {
   count() {
     return this.http.get(`${environment.api_url}/experts/count`);
   }
+
+  getExpertises() {
+    return this.http.get(`${environment.api_url}/experts/expertises`);
+  }
 }
