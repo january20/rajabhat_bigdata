@@ -36,9 +36,9 @@ export class AirComponent implements OnInit {
     this.infoService.airQuality().subscribe((data:any)=>{
       //console.log(data);
       if(data.stations){
-        console.log(data.stations);
+        // console.log(data.stations);
         this.stations = data.stations;
-        console.log(data.data);
+        // console.log(data.data);
         this.data = data.data;
         this.ready = true;
         this.createChart(this.data,'windSpeedChart','xField','station_4',"xx",'triangle');
