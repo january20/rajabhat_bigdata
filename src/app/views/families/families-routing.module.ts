@@ -4,6 +4,8 @@ import { ListComponent } from './list/list.component';
 import { ShowComponent } from './show/show.component';
 import { FormComponent } from './form/form.component';
 import { AuthRolesGuard } from 'src/app/shared/guards/auth-roles.guard';
+import { HealthInfoComponent } from './health/health-info/health-info.component';
+import { HealthFormComponent } from './health/health-form/health-form.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,19 @@ const routes: Routes = [
     path: ':id/edit',
     component: FormComponent,
     data: { formType: 'EDIT', title: 'แก้ไขครอบครัว', expectedRole: 'village_headman' }
+  },
+  {
+    path: ':id/health',
+    children: [
+      {
+        path: '',
+        component: HealthInfoComponent
+      },
+      {
+        path: 'create',
+        component: HealthFormComponent
+      }
+    ]
   },
   {
     path: ':id',

@@ -34,4 +34,8 @@ export class FamiliesService {
   destroy(id) {
     return this.http.delete(`${environment.api_url}/families/${id}`);
   }
+
+  getMembers(family_id) {
+    return this.http.get(`${environment.api_url}/families/family_members?family_id=${family_id}`);
+  }
 }

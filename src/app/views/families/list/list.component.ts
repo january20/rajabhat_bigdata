@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MembersModalComponent } from '../members-modal/members-modal.component';
 
 @Component({
   selector: 'app-list',
@@ -22,7 +24,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private familiesService: FamiliesService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -36,6 +39,13 @@ export class ListComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
+    });
+  }
+
+  openMembers(family_id) {
+    const dialogRef = this.dialog.open(MembersModalComponent, {
+      width: '50%',
+      data: { family_id: family_id }
     });
   }
 
