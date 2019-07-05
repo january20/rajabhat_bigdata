@@ -47,6 +47,10 @@ export class ListComponent implements OnInit {
       width: '50%',
       data: { family_id: family_id }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate([`/families/${result.id}`, { role: result.role }]);
+    })
   }
 
   createFamily() {

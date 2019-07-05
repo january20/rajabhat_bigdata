@@ -17,14 +17,14 @@
         <td>{{ chief.firstname + ' ' + chief.lastname }}</td>
         <td>{{ chief.family_occupation.name_th }}</td>
         <td>
-          <button mat-icon-button color="primary" matTooltip="สุขภาพ"><mat-icon>favorite</mat-icon></button>
+          <button (click)="navigate(chief.id, 1)" mat-icon-button color="primary" matTooltip="สุขภาพ"><mat-icon>favorite</mat-icon></button>
         </td>
       </tr>
       <tr *ngFor="let member of members">
         <td>{{ member.firstname + ' ' + member.lastname }}</td>
         <td>{{ member.family_occupation.name_th }}</td>
         <td>
-          <button mat-icon-button color="primary" matTooltip="สุขภาพ"><mat-icon>favorite</mat-icon></button>
+          <button (click)="navigate(member.id, 2)" mat-icon-button color="primary" matTooltip="สุขภาพ"><mat-icon>favorite</mat-icon></button>
         </td>
       </tr>
     </tbody>

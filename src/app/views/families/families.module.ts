@@ -20,6 +20,10 @@ import { MembersModalComponent } from './members-modal/members-modal.component';
     FamiliesRoutingModule,
     SharedModule
   ],
-  entryComponents: [ MembersModalComponent ]
+  entryComponents: [ MembersModalComponent ],
+  exports: [
+    ListComponent,
+    MembersModalComponent
+  ]
 })
 export class FamiliesModule { }

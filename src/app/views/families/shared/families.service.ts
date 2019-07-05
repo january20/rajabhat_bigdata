@@ -15,6 +15,10 @@ export class FamiliesService {
     return this.http.get(`${environment.api_url}/families`);
   }
 
+  get(id, role) {
+    return this.http.get(`${environment.api_url}/families/${id}?role=${role}`);
+  }
+
   create() {
     return this.http.get(`${environment.api_url}/families/create`);
   }

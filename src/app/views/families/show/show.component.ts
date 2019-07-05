@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FamiliesService } from '../shared/families.service';
 
 @Component({
   selector: 'app-show',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowComponent implements OnInit {
 
-  constructor() { }
+  member: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private familiesService: FamiliesService
+  ) { }
 
   ngOnInit() {
+    this.familiesService.get(this.route.snapshot.params.id, this.route.snapshot.params.role).subscribe((data: any) => this.member = data);
   }
 
 }
