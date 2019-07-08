@@ -34,7 +34,8 @@ const routes: Routes = [
       },
       {
         path: 'create',
-        component: HealthFormComponent
+        component: HealthFormComponent,
+        data: { formType: 'CREATE', title: 'บันทึก' }
       }
     ]
   },

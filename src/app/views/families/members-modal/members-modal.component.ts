@@ -28,7 +28,13 @@ export class MembersModalComponent implements OnInit {
   }
 
   navigate(id, role) {
-    this.dialogRef.close({id: id, role: role});
+    this.dialogRef.close();
+    this.router.navigate([`/families/${id}`, { role: role }]);
+  }
+
+  createHealth(id, role) {
+    this.dialogRef.close();
+    this.router.navigate([`/families/${id}/health/create`, { role: role }]);
   }
 
 }

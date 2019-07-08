@@ -14,17 +14,17 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{ chief.firstname + ' ' + chief.lastname }}</td>
+        <td><a href="javascript:void(0)" (click)="navigate(chief.id, 1)">{{ chief.firstname + ' ' + chief.lastname }}</a></td>
         <td>{{ chief.family_occupation.name_th }}</td>
         <td>
-          <button (click)="navigate(chief.id, 1)" mat-icon-button color="primary" matTooltip="สุขภาพ"><mat-icon>favorite</mat-icon></button>
+          <a href="javascript:void(0)" (click)="createHealth(chief.id, 1)" mat-icon-button color="primary" matTooltip="สุขภาพ"><mat-icon>favorite</mat-icon></a>
         </td>
       </tr>
       <tr *ngFor="let member of members">
-        <td>{{ member.firstname + ' ' + member.lastname }}</td>
+        <td><a href="javascript:void(0)" (click)="navigate(member.id, 2)">{{ member.firstname + ' ' + member.lastname }}</a></td>
         <td>{{ member.family_occupation.name_th }}</td>
         <td>
-          <button (click)="navigate(member.id, 2)" mat-icon-button color="primary" matTooltip="สุขภาพ"><mat-icon>favorite</mat-icon></button>
+          <a href="javascript:void(0)" (click)="createHealth(member.id, 2)" mat-icon-button color="primary" matTooltip="สุขภาพ"><mat-icon>favorite</mat-icon></a>
         </td>
       </tr>
     </tbody>

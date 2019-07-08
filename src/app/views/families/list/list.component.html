@@ -58,7 +58,7 @@
       
         <ng-container matColumnDef="family_members">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>สมาชิก</th>
-          <td mat-cell *matCellDef="let row"> {{ row.family_members }} </td>
+          <td mat-cell *matCellDef="let row"> {{ row.family_members + 1 }} </td>
         </ng-container>
         
         <ng-container matColumnDef="manage">

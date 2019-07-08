@@ -48,9 +48,9 @@ export class ListComponent implements OnInit {
       data: { family_id: family_id }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.router.navigate([`/families/${result.id}`, { role: result.role }]);
-    })
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.router.navigate([`/families/${result.id}`, { role: result.role }]);
+    // })
   }
 
   createFamily() {

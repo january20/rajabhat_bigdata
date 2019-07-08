@@ -42,4 +42,12 @@ export class FamiliesService {
   getMembers(family_id) {
     return this.http.get(`${environment.api_url}/families/family_members?family_id=${family_id}`);
   }
+
+  healthCreate() {
+    return this.http.get(`${environment.api_url}/families/health/create`);
+  }
+
+  healthStore(formData) {
+    return this.http.post(`${environment.api_url}/families/health`, formData);
+  }
 }

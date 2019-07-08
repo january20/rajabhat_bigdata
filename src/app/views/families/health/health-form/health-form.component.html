@@ -1,3 +1,81 @@
-<p>
-  health-form works!
-</p>
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!icd_group">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="icd_group">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{ title }}ข้อมูลสุขภาพ</h1>
+        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10"></h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero animated fadeInUp animation-delay-7">
+      <div class="card-body">        
+        <form [formGroup]="form">
+          <h3><strong>1. ข้อมูลทั่วไป</strong></h3>
+          <div class="row">
+            <mat-form-field class="col-6">
+              <input matInput [matDatepicker]="picker" placeholder="วันที่ตรวจ" formControlName="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-3">
+              <mat-label>น้ำหนัก</mat-label>
+              <input type="number" matInput formControlName="weigth">
+            </mat-form-field>
+            <mat-form-field class="col-3">
+              <mat-label>ส่วนสูง</mat-label>
+              <input type="number" matInput formControlName="height">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="col-4">
+              <mat-label>ความดัน</mat-label>
+              <input type="number" matInput formControlName="blood_pressure">
+            </mat-form-field>
+            <mat-form-field class="col-4">
+              <mat-label>อุณหภูมิร่างกาย</mat-label>
+              <input type="number" matInput formControlName="body_temp">
+            </mat-form-field>
+            <mat-form-field class="col-4">
+              <mat-label>ระดับน้ำตาลในเลือด</mat-label>
+              <input type="number" matInput formControlName="blood_sugar">
+            </mat-form-field>
+          </div>
+
+          <h3><strong>2. โรคที่พบ</strong></h3>
+          <div class="row">
+            <mat-form-field class="col-6">
+              <mat-label>กลุ่มของโรค</mat-label>
+              <mat-select (selectionChange)="icd = $event.value">                
+                <mat-option *ngFor="let group of icd_group" [value]="group.icd">
+                  {{ group.name_th }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-6">
+              <mat-label>โรค</mat-label>
+              <mat-select formControlName="ref_icd_code">                
+                <mat-option *ngFor="let i of icd" [value]="i.icd_code">{{ i.name_th }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <mat-form-field class="w-100">
+            <mat-label>อาการ</mat-label>
+            <textarea matInput rows="10"></textarea>
+          </mat-form-field>
+
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
