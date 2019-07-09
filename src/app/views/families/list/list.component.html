@@ -69,6 +69,9 @@
             </a>&nbsp;
             <a href="javascript:void(0)" (click)="deleteFamily(row.id)" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-danger">
               <i data-toggle="tooltip" data-placement="top" title="ลบ" class="fa fa-close color-white" aria-hidden="true"></i>
+            </a>&nbsp;
+            <a (click)="openMembers(row.id)" href="javascript:void(0)" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-royal">
+              <i data-toggle="tooltip" data-placement="top" title="สมาชิก" class="fa fa-list color-white" aria-hidden="true"></i>
             </a>
           </td>
         </ng-container>

@@ -10,7 +10,7 @@
     <div class="container">
       <div class="text-center">
         <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{ title }}ข้อมูลสุขภาพ</h1>
-        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10"></h3>
+        <h3 class="color-medium no-mb animated fadeInUp animation-delay-10">{{ member_name }}</h3>
       </div>
     </div>
   </div>
@@ -28,29 +28,34 @@
             </mat-form-field>
             <mat-form-field class="col-3">
               <mat-label>น้ำหนัก</mat-label>
-              <input type="number" matInput formControlName="weigth">
+              <input matInput formControlName="weight">
+              <mat-error *ngIf="formErrors.weight">{{ formErrors.weight }}</mat-error>
             </mat-form-field>
             <mat-form-field class="col-3">
               <mat-label>ส่วนสูง</mat-label>
-              <input type="number" matInput formControlName="height">
+              <input matInput formControlName="height">
+              <mat-error *ngIf="formErrors.height">{{ formErrors.height }}</mat-error>
             </mat-form-field>
           </div>
           <div class="row">
             <mat-form-field class="col-4">
               <mat-label>ความดัน</mat-label>
-              <input type="number" matInput formControlName="blood_pressure">
+              <input matInput formControlName="blood_pressure">
+              <mat-error *ngIf="formErrors.blood_pressure">{{ formErrors.blood_pressure }}</mat-error>
             </mat-form-field>
             <mat-form-field class="col-4">
               <mat-label>อุณหภูมิร่างกาย</mat-label>
-              <input type="number" matInput formControlName="body_temp">
+              <input matInput formControlName="body_temp">
+              <mat-error *ngIf="formErrors.body_temp">{{ formErrors.body_temp }}</mat-error>
             </mat-form-field>
             <mat-form-field class="col-4">
               <mat-label>ระดับน้ำตาลในเลือด</mat-label>
-              <input type="number" matInput formControlName="blood_sugar">
+              <input matInput formControlName="blood_sugar">
+              <mat-error *ngIf="formErrors.blood_sugar">{{ formErrors.blood_sugar }}</mat-error>
             </mat-form-field>
           </div>
 
-          <h3><strong>2. โรคที่พบ</strong></h3>
+          <h3 class="mt-3"><strong>2. โรคที่พบ</strong></h3>
           <div class="row">
             <mat-form-field class="col-6">
               <mat-label>กลุ่มของโรค</mat-label>
@@ -65,15 +70,22 @@
               <mat-select formControlName="ref_icd_code">                
                 <mat-option *ngFor="let i of icd" [value]="i.icd_code">{{ i.name_th }}</mat-option>
               </mat-select>
+              <mat-error *ngIf="formErrors.icd_code">{{ formErrors.icd_code }}</mat-error>
             </mat-form-field>
           </div>
           
           <mat-form-field class="w-100">
             <mat-label>อาการ</mat-label>
-            <textarea matInput rows="10"></textarea>
+            <textarea matInput rows="10" formControlName="symptom"></textarea>
+            <mat-error *ngIf="formErrors.symptom">{{ formErrors.symptom }}</mat-error>
           </mat-form-field>
 
-          
+          <div class="form-group d-flex justify-content-center">
+            <button (click)="submit()" mat-raised-button color="primary" [disabled]="!form.valid || isSubmit">
+              {{ title }}
+              <mat-icon [className]="isSubmit ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+            </button>
+          </div>
         </form>
       </div>
     </div>

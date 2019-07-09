@@ -27,6 +27,8 @@ const routes: Routes = [
   },
   {
     path: ':id/health',
+    canActivate: [AuthRolesGuard],
+    data: { expectedRole: 'village_health_volunteer' },
     children: [
       {
         path: '',

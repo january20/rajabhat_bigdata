@@ -20,4 +20,11 @@ export class ShowComponent implements OnInit {
     this.familiesService.get(this.route.snapshot.params.id, this.route.snapshot.params.role).subscribe((data: any) => this.member = data);
   }
 
+  convertDate(d) {
+    const day_th = ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์', 'อาทิตย์'];
+    const month_th = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
+    const date = new Date(d);
+    return day_th[date.getUTCDay()] + ' ' + date.getDate() + ' ' + month_th[date.getUTCMonth()] + ' ' + (Number(date.getFullYear()) + 543);
+  }
+
 }

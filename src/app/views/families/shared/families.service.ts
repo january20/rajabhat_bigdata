@@ -43,8 +43,8 @@ export class FamiliesService {
     return this.http.get(`${environment.api_url}/families/family_members?family_id=${family_id}`);
   }
 
-  healthCreate() {
-    return this.http.get(`${environment.api_url}/families/health/create`);
+  healthCreate(id, role) {
+    return this.http.get(`${environment.api_url}/families/health/create?id=${id}&role=${role}`);
   }
 
   healthStore(formData) {
