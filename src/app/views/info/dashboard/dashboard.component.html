@@ -1,3 +1,38 @@
-<ol>
-  <li *ngFor="let humd of data">{{ humd }}</li>
-</ol>
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!info_types">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<mat-sidenav-container class="sidenav-container" *ngIf="info_types">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <ng-container *ngFor="let type of info_types">
+      <!-- <p class="h4 mt-3 mx-3 text-muted">{{ list.name }}</p> -->
+      <mat-nav-list class="p-0">
+        <a [ngClass]="active_id == type.id ? 'active': ''" mat-list-item (click)="changeType(type.id)">
+          <h3 matLine> {{ type.iot_type_name }}</h3>
+        </a>
+      </mat-nav-list>
+    </ng-container>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="container-fluid p-5">      
+      <ng-container *ngIf="type">
+        <div class="row">
+          <div class="col-6" *ngFor="let name of type.mqtt_name">
+            <div class="card card-info">
+              <div class="card-header">
+                <div class="card-title">{{ name.device.location_name }}</div>
+              </div>
+              <div class="card-body">
+                xxxxxxx
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
