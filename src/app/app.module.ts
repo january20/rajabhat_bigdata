@@ -1,6 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import {
+  MqttModule,
+  IMqttServiceOptions
+} from 'ngx-mqtt';
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: 'iot.eclipse.org',
+  port: 80,
+  path: '/ws'
+};
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { JWTInterceptor } from './shared/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './shared/helpers/error.interceptor';
@@ -27,7 +37,8 @@ import { Error401Component } from './views/errors/error401/error401.component';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

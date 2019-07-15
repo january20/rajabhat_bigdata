@@ -7,7 +7,13 @@ import { OccupationComponent } from './population/occupation/occupation.componen
 import { EducationComponent } from './population/education/education.component';
 import { WeatherComponent } from './env/weather/weather.component';
 import { AirComponent } from './env/air/air.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 const routes: Routes = [
+  {
+    path: '',
+    component: DashboardComponent
+  },
   {
     path: 'population',
     children: [
