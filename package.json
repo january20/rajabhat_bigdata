@@ -40,6 +40,7 @@
     "jquery": "^3.4.1",
     "js-marker-clusterer": "^1.0.0",
     "jwt-decode": "^2.2.0",
+    "mqtt": "^3.0.0",
     "ngx-dropzone": "^1.2.0",
     "ngx-mqtt": "^6.11.0",
     "rxjs": "~6.5.2",

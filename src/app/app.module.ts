@@ -7,9 +7,12 @@ import {
 } from 'ngx-mqtt';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: 'iot.eclipse.org',
-  port: 80,
-  path: '/ws'
+  hostname: 'mqtt.srru.ac.th',
+  clientId: 'ng-srru-bigdata',
+  port: 1883,
+  path: '/',
+  username: 'miot',
+  password: 'SrruMIoT@2019'
 };
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { JWTInterceptor } from './shared/helpers/jwt.interceptor';

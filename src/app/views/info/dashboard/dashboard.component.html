@@ -11,7 +11,7 @@
       <!-- <p class="h4 mt-3 mx-3 text-muted">{{ list.name }}</p> -->
       <mat-nav-list class="p-0">
         <a [ngClass]="active_id == type.id ? 'active': ''" mat-list-item (click)="changeType(type.id)">
-          <h3 matLine> {{ type.iot_type_name }}</h3>
+          <h3 matLine> {{ type.iot_type_name_th }}</h3>
         </a>
       </mat-nav-list>
     </ng-container>
@@ -27,7 +27,7 @@
                 <div class="card-title">{{ name.device.location_name }}</div>
               </div>
               <div class="card-body">
-                xxxxxxx
+                <div id="iot{{ name.mas_iot_device_id + '' + name.ref_iot_type_id }}" style="width: 100%; height: 100%"></div>
               </div>
             </div>
           </div>
