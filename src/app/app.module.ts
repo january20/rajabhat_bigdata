@@ -9,11 +9,13 @@ import {
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'mqtt.srru.ac.th',
   clientId: 'ng-srru-bigdata',
-  port: 1883,
-  path: '/',
+  port: 443,
+  path: '',
+  protocol: 'wss',
   username: 'miot',
   password: 'SrruMIoT@2019'
 };
+
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { JWTInterceptor } from './shared/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './shared/helpers/error.interceptor';

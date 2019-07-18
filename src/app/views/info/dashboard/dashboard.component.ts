@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // this.currentTypeData = model;
     this.createCharts(model);
-   
+
     // this.getData(model.mqtt_name);
   }
 
@@ -176,7 +176,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public unsafePublish(topic: string, message: string): void {
     this.mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
-  } 
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
