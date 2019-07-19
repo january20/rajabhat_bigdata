@@ -21,6 +21,8 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   type: any;
   currentTypeData: any;
   mqttClient: any;
+  charts: any = {};
+  latest: any = {};
 
   constructor(
     private infoService: InfoService,
@@ -30,10 +32,6 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async ngOnInit() {
     this.loadData();
-    this.subscription = this.mqttService.observe('/srru/humid/9').subscribe((message: IMqttMessage) => {
-      // this.data[name.field].push({ val: message.payload.toString() });
-      console.log(message.payload.toString());
-    });
   }
 
   ngAfterViewInit() {
@@ -45,36 +43,45 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   changeType(id) {
     const model = this.info_types.find(x => x.id === id);
-    console.log(model);
+    // console.log(model);
     this.type = model;
     this.active_id = id;
 
+    setTimeout(() => {
+      if(this.subscription) this.subscription.unsubscribe();
+      model.mqtt_name.forEach(name => {
+        this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = am4core.create(`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`, am4charts.XYChart);
+        this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = name.data[name.data.length - 1][model.field];
+        // console.log(this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`]);
+        this.createCharts(this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`], model, name);
+      });
+
+      
+      
+    });
+
+    
+   
     // this.currentTypeData = model;
-    this.createCharts(model);
+    
 
     // this.getData(model.mqtt_name);
   }
 
   loadData() {
     this.infoService.dashboard().subscribe((data: any) => {
+      
       this.info_types = data;
       this.changeType(data[0].id);
     });
   }
 
-  getData(mqtt_name) {
-    // mqtt_name.forEach(name => {
-      // this.subscription = this.mqttService.observe('/srru/humid/9').subscribe((message: IMqttMessage) => {
-      //   // this.data[name.field].push({ val: message.payload.toString() });
-      //   console.log(message.payload.toString());
-      // });
-    // });
-  }
 
-  createCharts(type) {
-    type.mqtt_name.forEach((name: any) => {
+  createCharts(chart, model, name) {
+    // field.mqtt_name.forEach((name: any) => {
       setTimeout(() => {
-        let chart = am4core.create(`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`, am4charts.XYChart);
+        // let chart = am4core.create(`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`, am4charts.XYChart);
+        // let chart = this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`];
         let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
         let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         let series = chart.series.push(new am4charts.LineSeries());
@@ -85,66 +92,39 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
           d.date = new Date(d.created_at)
           return d;
         });
-        chart.hiddenState.properties.opacity = 0;
-        chart.padding(0, 0, 0, 0);
-        chart.zoomOutButton.disabled = true;
         dateAxis.baseInterval = {
           "timeUnit": "minute",
-          "count": 5
+          "count": 1
         }
-        dateAxis.renderer.grid.template.location = 0;
-        dateAxis.renderer.minGridDistance = 30;
-        dateAxis.dateFormats.setKey("second", "ss");
-        dateAxis.periodChangeDateFormats.setKey("second", "[bold]h:mm a");
-        dateAxis.periodChangeDateFormats.setKey("minute", "[bold]h:mm a");
-        dateAxis.periodChangeDateFormats.setKey("hour", "[bold]h:mm a");
         dateAxis.renderer.inside = true;
-        dateAxis.renderer.axisFills.template.disabled = true;
-        dateAxis.renderer.ticks.template.disabled = true;
-
-        valueAxis.tooltip.disabled = true;
-        valueAxis.interpolationDuration = 500;
-        valueAxis.rangeChangeDuration = 500;
-        valueAxis.renderer.inside = true;
-        valueAxis.renderer.minLabelPosition = 0.05;
-        valueAxis.renderer.maxLabelPosition = 0.95;
-        valueAxis.renderer.axisFills.template.disabled = true;
-        valueAxis.renderer.ticks.template.disabled = true;
-
+        dateAxis.renderer.minGridDistance = 50;
+        series.dataFields.valueY = model.field;
         series.dataFields.dateX = "date";
-        series.dataFields.valueY = type.field;
-        series.interpolationDuration = 500;
-        series.defaultState.transitionDuration = 0;
-        series.tensionX = 0.8;
+        series.tooltipText = "{value}"
+        // series.strokeWidth = 2;
+        // series.minBulletDistance = 0.5;
+        // series.interpolationDuration = 500;
+        // series.defaultState.transitionDuration = 0;
+        // series.tensionX = 0.8;
+        series.fillOpacity = 0.5;
+        series.strokeWidth = 3;
 
-        chart.events.on("datavalidated", function () {
-          dateAxis.zoom({ start: 1 / 15, end: 1.2 }, false, true);
-        });
+        bullet.circle.strokeWidth = 2;
+        bullet.circle.radius = 4;
+        bullet.circle.fill = am4core.color("#fff");
 
-        dateAxis.interpolationDuration = 500;
-        dateAxis.rangeChangeDuration = 500;
+        let bullethover = bullet.states.create("hover");
+        bullethover.properties.scale = 1.3;
 
-        // this.subscription = this.mqttService.observe(name.mqtt_name).subscribe((message: IMqttMessage) => {
-        //   console.log(this.data);
-        //   let lastdataItem = series.dataItems.getIndex(series.dataItems.length - 1);
-        //   chart.addData({ date: new Date(), value: message.payload.toString() }, 1);
-        // });
+        // Make a panning cursor
+        chart.cursor = new am4charts.XYCursor();
+        chart.cursor.behavior = "panXY";
+        chart.cursor.xAxis = dateAxis;
+        chart.cursor.snapToSeries = series;
 
-        series.fillOpacity = 1;
-        gradient.addColor(chart.colors.getIndex(0), 0.2);
-        gradient.addColor(chart.colors.getIndex(0), 0);
-        series.fill = gradient;
-
-        dateAxis.renderer.labels.template.adapter.add("fillOpacity", function (fillOpacity, target) {
-          let dataItem = target.dataItem;
-          return dataItem.position;
-        })
-
-        dateAxis.events.on("validated", function () {
-          am4core.iter.each(dateAxis.renderer.labels.iterator(), function (label) {
-            label.fillOpacity = label.fillOpacity;
-          })
-        })
+        // gradient.addColor(chart.colors.getIndex(0), 0.2);
+        // gradient.addColor(chart.colors.getIndex(0), 0);
+        // series.fill = gradient;
 
         dateAxis.renderer.labels.template.adapter.add("rotation", function (rotation, target) {
           let dataItem: any = target.dataItem;
@@ -158,19 +138,16 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
               target.horizontalCenter = "middle";
               return 0;
           }
+       });
+
+        this.subscription = this.mqttService.observe(name.mqtt_name).subscribe((message: IMqttMessage) => {
+          // let lastdataItem = series.dataItems.getIndex(series.dataItems.length - 1);
+          // console.log(message.payload.toString())
+          this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = message.payload.toString();
+          this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`].addData({ date: new Date(), [model.field]: message.payload.toString() }, 1);
         });
 
-        bullet.circle.radius = 5;
-        bullet.fillOpacity = 1;
-        bullet.fill = chart.colors.getIndex(0);
-        bullet.isMeasured = false;
-
-        series.events.on("validated", function() {
-            // bullet.moveTo(series.dataItems.last.point);
-            bullet.validatePosition();
-        });
-
-      });
+      // });
     });
   }
 

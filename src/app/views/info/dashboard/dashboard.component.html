@@ -21,13 +21,14 @@
     <div class="container-fluid p-5">      
       <ng-container *ngIf="type">
         <div class="row">
-          <div class="col-6" *ngFor="let name of type.mqtt_name">
+          <div class="col-12" *ngFor="let name of type.mqtt_name">
             <div class="card card-info">
               <div class="card-header">
                 <div class="card-title">{{ name.device.location_name }}</div>
               </div>
               <div class="card-body">
-                <div id="iot{{ name.mas_iot_device_id + '' + name.ref_iot_type_id }}" style="width: 100%; height: 100%"></div>
+                <p class="display-4 pb-2">ล่าสุด: {{ latest['iot' + name.mas_iot_device_id + '' + name.ref_iot_type_id] + type.unit }}</p>
+                <div id="iot{{ name.mas_iot_device_id + '' + name.ref_iot_type_id }}" style="width: 100%; height: 300px"></div>
               </div>
             </div>
           </div>
