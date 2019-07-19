@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     setTimeout(() => {
       if(this.subscription) this.subscription.unsubscribe();
       model.mqtt_name.forEach(name => {
-        console.log(name.data);
+        // console.log(name.data);
         this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = am4core.create(`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`, am4charts.XYChart);
         this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = name.data && name.data.length ? name.data[name.data.length - 1][model.field] : 0;
         // console.log(this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`]);
