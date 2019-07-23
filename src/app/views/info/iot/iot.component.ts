@@ -14,10 +14,10 @@ am4core.useTheme(am4themes_animated);
 })
 export class IotComponent implements OnInit {
 
-  years = Array.from({length: 24}, (v, k) => k + 1);
+  years = Array.from({length: 48}, (v, k) => k + 1);
   data: any;
   isDataLoaded = false;
-  previous = 12;
+  previous = 24;
   private chart: am4charts.XYChart;
 
   constructor(
@@ -40,11 +40,15 @@ export class IotComponent implements OnInit {
       this.data = data;
       this.previous = previous;
       this.isDataLoaded = true;
-      this.createCharts(data);
+
+      // if(previous === 'w') this.createCharts(data, 'w');
+      if(previous === 'm') this.createCharts(data, 'm');
+      else if(previous === 'y') this.createCharts(data, 'y');
+      else this.createCharts(data);
     })
   }
   
-  createCharts(data) {
+  createCharts(data, type?) {
     setTimeout(() => {
       let iotChart = am4core.create("iotChart", am4charts.XYChart)
       let dateAxis = iotChart.xAxes.push(new am4charts.DateAxis());
@@ -52,17 +56,31 @@ export class IotComponent implements OnInit {
       let series = iotChart.series.push(new am4charts.LineSeries());
       let gradient = new am4core.LinearGradient();
 
-      iotChart.data = data.data.map((d: any) => {
-        d.date = new Date(d.created_at)
-        return d;
-      });
-      dateAxis.baseInterval = {
-        "timeUnit": "minute",
-        "count": 1
+      console.log(type);
+
+      if(type === 'm') {
+        iotChart.data = data.data;
+      } else if(type === 'y') {
+        iotChart.data = data.data.map((d: any) => {
+          d.date = d.month
+          return d;
+        });
+      } else {
+        iotChart.data = data.data.map((d: any) => {
+          d.date = new Date(d.created_at)
+          return d;
+        });
+        
+        dateAxis.baseInterval = {
+          "timeUnit": "minute",
+          "count": 1
+        }
       }
+
+      
       dateAxis.renderer.inside = true;
       dateAxis.renderer.minGridDistance = 50;
-      series.dataFields.valueY = data.iot_type.field;
+      series.dataFields.valueY = type ? 'sum_' + data.iot_type.field : data.iot_type.field;
       series.dataFields.dateX = "date";
       series.tooltipText = "{value}"
       series.fillOpacity = 0.5;

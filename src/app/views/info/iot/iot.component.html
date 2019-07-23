@@ -21,9 +21,16 @@
         <h3 class="text-center flex-grow-1 mt-5">ข้อมูล{{ data.iot_type.iot_type_name_th }}ย้อนหลัง {{ previous }} ชั่วโมง <mat-icon [className]="!isDataLoaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></h3>
         <div class="d-flex flex-row justify-content-center">
           <mat-form-field class="mx-2">
-            <mat-label>ข้อมูลย้อนหลัง</mat-label>
+            <mat-label>ข้อมูลย้อนหลัง(ชั่วโมง)</mat-label>
             <mat-select (selectionChange)="changePrevious($event.value)">
-              <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+              <!-- <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option> -->
+              <mat-option value="1">1 ชั่วโมง</mat-option>
+              <mat-option value="12">12 ชั่วโมง</mat-option>
+              <mat-option value="24">24 ชั่วโมง</mat-option>
+              <mat-option value="48">48 ชั่วโมง</mat-option>
+              <mat-option value="168">1 สัปดาห์</mat-option>
+              <mat-option value="m">1 เดือน</mat-option>
+              <mat-option value="y">1 ปี</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
