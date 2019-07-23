@@ -45,7 +45,10 @@ export class InfoService {
     return this.http.get(`${environment.api_url}/info/air/period/${year}`);
   }
   dashboard() {
-    return this.http.get(`${environment.api_url}/info/dashboard`);
+    return this.http.get(`${environment.api_url}/info/`);
+  }
+  iotShow(type, previous) {
+    return this.http.get(`${environment.api_url}/info/${type}?previous=${previous}`);
   }
 
 }

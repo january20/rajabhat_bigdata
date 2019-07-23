@@ -8,11 +8,17 @@ import { EducationComponent } from './population/education/education.component';
 import { WeatherComponent } from './env/weather/weather.component';
 import { AirComponent } from './env/air/air.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DeviceComponent } from './device/device.component';
+import { IotComponent } from './iot/iot.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent
+  },
+  {
+    path: 'iot/:id',
+    component: IotComponent
   },
   {
     path: 'population',

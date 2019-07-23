@@ -21,15 +21,21 @@
     <div class="container-fluid p-5">      
       <ng-container *ngIf="type">
         <div class="row">
-          <div class="col-12" *ngFor="let name of type.mqtt_name">
+          <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12" *ngFor="let name of type.mqtt_name">
             <div class="card card-info">
               <div class="card-header">
                 <div class="card-title">{{ name.device.location_name }}</div>
               </div>
-              <div class="card-body">
-                <p class="display-4 pb-2">ล่าสุด: {{ latest['iot' + name.mas_iot_device_id + '' + name.ref_iot_type_id] + type.unit }}</p>
+              <div class="card-body px-0">
+                <blockquote class="blockquote pt-0" style="font-style: normal">
+                  <p class="display-4 text-left m-0">ล่าสุด: {{ ((latest['iot' + name.mas_iot_device_id + '' + name.ref_iot_type_id] ? latest['iot' + name.mas_iot_device_id + '' + name.ref_iot_type_id].value: 0) | number : '1.0-1') + type.unit }}</p>
+                  <footer class="blockquote-footer text-left">เมื่อ <cite title="Source Title">{{ (latest['iot' + name.mas_iot_device_id + '' + name.ref_iot_type_id] ? latest['iot' + name.mas_iot_device_id + '' + name.ref_iot_type_id].time: '00.00') | date: 'medium' }}</cite></footer>
+                </blockquote>
+                
                 <div id="iot{{ name.mas_iot_device_id + '' + name.ref_iot_type_id }}" style="width: 100%; height: 300px"></div>
               </div>
+              <p class="h5 text-right mx-5"><strong><a routerLink="/info/iot/{{ name.id }}" class="text-info">ดูข้อมูลย้อนหลัง</a></strong></p>
+              
             </div>
           </div>
         </div>

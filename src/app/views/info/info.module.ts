@@ -16,10 +16,12 @@ import { AirComponent } from './env/air/air.component';
 import { WeatherComponent } from './env/weather/weather.component';
 import { environment } from 'src/environments/environment';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DeviceComponent } from './device/device.component';
+import { IotComponent } from './iot/iot.component';
 
 
 @NgModule({
-  declarations: [InfoComponent, IncomeComponent, PopulationComponent, AgeComponent, OccupationComponent, PopulationAllComponent, EducationComponent, EnvComponent, AirComponent, WeatherComponent, DashboardComponent],
+  declarations: [InfoComponent, IncomeComponent, PopulationComponent, AgeComponent, OccupationComponent, PopulationAllComponent, EducationComponent, EnvComponent, AirComponent, WeatherComponent, DashboardComponent, DeviceComponent, IotComponent],
   imports: [
     CommonModule,
     InfoRoutingModule,

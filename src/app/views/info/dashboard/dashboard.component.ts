@@ -50,10 +50,9 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     setTimeout(() => {
       if(this.subscription) this.subscription.unsubscribe();
       model.mqtt_name.forEach(name => {
-        // console.log(name.data);
         this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = am4core.create(`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`, am4charts.XYChart);
-        this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = name.data && name.data.length ? name.data[name.data.length - 1][model.field] : 0;
-        // console.log(this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`]);
+        this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = { value: name.data && name.data.length ? name.data[name.data.length - 1][model.field] : 0, time: name.data && name.data.length ? name.data[name.data.length - 1]['created_at']: '00.00'};
+        // console.log(this.latest);
         this.createCharts(this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`], model, name);
       });
 
@@ -86,7 +85,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
         let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
         let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         let series = chart.series.push(new am4charts.LineSeries());
-        let bullet = series.bullets.push(new am4charts.CircleBullet());
+        // let bullet = series.bullets.push(new am4charts.CircleBullet());
         let gradient = new am4core.LinearGradient();
 
         chart.data = name.data.map((d: any) => {
@@ -102,22 +101,9 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
         series.dataFields.valueY = model.field;
         series.dataFields.dateX = "date";
         series.tooltipText = "{value}"
-        // series.strokeWidth = 2;
-        // series.minBulletDistance = 0.5;
-        // series.interpolationDuration = 500;
-        // series.defaultState.transitionDuration = 0;
-        // series.tensionX = 0.8;
         series.fillOpacity = 0.5;
-        series.strokeWidth = 3;
+        series.strokeWidth = 1;
 
-        bullet.circle.strokeWidth = 2;
-        bullet.circle.radius = 4;
-        bullet.circle.fill = am4core.color("#fff");
-
-        let bullethover = bullet.states.create("hover");
-        bullethover.properties.scale = 1.3;
-
-        // Make a panning cursor
         chart.cursor = new am4charts.XYCursor();
         chart.cursor.behavior = "panXY";
         chart.cursor.xAxis = dateAxis;
@@ -144,7 +130,8 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
         this.subscription = this.mqttService.observe(name.mqtt_name).subscribe((message: IMqttMessage) => {
           // let lastdataItem = series.dataItems.getIndex(series.dataItems.length - 1);
           // console.log(message.payload.toString())
-          this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = message.payload.toString();
+          this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`]['value'] = message.payload.toString();
+          this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`]['time'] = new Date();
           this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`].addData({ date: new Date(), [model.field]: message.payload.toString() }, 1);
         });
 
