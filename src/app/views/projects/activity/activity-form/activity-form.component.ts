@@ -52,11 +52,11 @@ export class ActivityFormComponent implements OnInit {
             duration: 2000,
             panelClass: ['color-white', 'bg-success']
           });
-  
+
           setTimeout(() => {
             this.isSubmit = false;
             this.router.navigateByUrl('/projects/'+this.route.snapshot.params.id);
-          }, 2000);          
+          }, 2000);
         },
         err => {
           this.snackBar.open('เกิดขข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
@@ -76,11 +76,11 @@ export class ActivityFormComponent implements OnInit {
               duration: 2000,
               panelClass: ['color-white', 'bg-success']
             });
-    
+
             setTimeout(() => {
               this.isSubmit = false;
               this.router.navigateByUrl('/projects/'+this.route.snapshot.params.id+'/activity');
-            }, 2000);          
+            }, 2000);
           },
           err => {
             this.snackBar.open('เกิดขข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
@@ -93,7 +93,7 @@ export class ActivityFormComponent implements OnInit {
         );
       })
     }
-
+    
   }
 
   loadData() {
@@ -119,16 +119,16 @@ export class ActivityFormComponent implements OnInit {
       this.img_path = data.images_path;
       this.images = data.images;
       this.documents = data.files;
-      
+
       this.formReady = true;
     });
   }
-  
+
   addFiles(files: File[]) {
     this.files.controls = [];
     files.forEach((file, index) => {
       const reader = new FileReader();
-   
+
       reader.onload = (e: ProgressEvent) => {
         const content = (e.target as FileReader).result;
         this.files.push(this.formBuilder.group({
@@ -151,7 +151,7 @@ export class ActivityFormComponent implements OnInit {
         if(file.status === 0) this.deleted_files.push(this.formBuilder.group(file));
       });
     }
-    
+
     if(this.images) {
       this.images.map((image: any) => {
         if(image.status === 0) this.deleted_images.push(this.formBuilder.group(image));

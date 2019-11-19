@@ -1,0 +1,32 @@
+Information-Centric Networking (ICN) is an approach to evolve
+the Internet infrastructure to directly support accessing Named Data
+Objects (NDOs) as a first-order network service.
+
+Information Centric Networking (ICN) is a new paradigm where
+the network provides users with named content, instead of
+communication channels between hosts.
+   รแื
+Content-Centric Networking (CCNx) is a network protocol
+that uses a hierarchical name to forward requests and to
+match responses to requests.
+
+This document describes the core concepts of the Content-Centric
+Networking (CCNx) architecture and presents a network protocol based
+on two messages: Interests and Content Objects.
+
+Information-centric networking (ICN) marks a fundamental shift in
+communications and networking.
+
+In networking scenarios with an increasing number of wireless
+systems, there are two networking paradigms highly correlated
+to the efficiency of pervasive data sharing: Information-Centric
+Networking (ICN), and opportunistic wireless networking.
+
+Information-Centric Networking (ICN) is now reaching technological
+maturity after many years of fundamental research and
+experimentation.
+
+Information-Centric Networks in general, and Content-Centric
+Networking (CCN) [3] or Named Data Networking (NDN) [4] in
+particular, are the emerging network architectures enabling in-
+network caching and data retrievals through their names.

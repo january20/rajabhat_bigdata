@@ -93,10 +93,10 @@ export class ListComponent implements OnInit {
       projectChart.data = project.map(d => {
         return { "fac": d.faculty.fac_name, "project": d.total }
       })
-      
+
 
       let projectSeries = projectChart.series.push(new am4charts.PieSeries());
-      
+
       projectSeries.dataFields.value = "project";
       projectSeries.dataFields.category = "fac";
 
