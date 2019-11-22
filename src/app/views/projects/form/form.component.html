@@ -20,20 +20,20 @@
         <div class="text-center">
           <p class="h2">
             <strong>
-              ระบบทำงานได้ดีใน 
+              ระบบทำงานได้ดีใน
               <a href="https://www.google.com/intl/th_ALL/chrome/">
-                Chrome 
+                Chrome
                 <i class="fa fa-chrome" aria-hidden="true"></i>
-              </a>&nbsp; 
-              และ 
+              </a>&nbsp;
+              และ
               <a href="https://www.mozilla.org/th/firefox/new/">
-                FireFox 
+                FireFox
                 <i class="fa fa-firefox" aria-hidden="true"></i>
               </a>
             </strong>
           </p>
         </div>
-        
+
         <p>คำอธิบาย</p>
         <ol>
           <li>
@@ -47,18 +47,18 @@
             <a href="/user/projects/">ผ่านระบบ</a>
             )
           </li>
-          <li>
+          <!-- <li>
             ดาวน์โหลดเอกสาร
             <a href="/files/proposal_template.docx" target="_blank">proposal template</a>
             กรอกข้อมูลให้ถูกต้องและเสนอโครงการผ่านคณะฯมาที่ สถาบันวิจัยและพัฒนา มหาวิทยาลัยราชภัฏสุรินทร์
             (ไม่สามารถตรวจสอบสถานะผ่านระบบออนไลน์ได้)(Optional)
-          </li>
+          </li> -->
         </ol>
         <hr class="dashed">
 
         <form [formGroup]="form" accept-charset="UTF-8" enctype="multipart/form-data">
           <fieldset>
-            <legend class="color-primary">ส่วนที่ 1 ข้อมูลทั่วไป</legend> 
+            <legend class="color-primary">ส่วนที่ 1 ข้อมูลทั่วไป</legend>
 
             <!-- ***project_name -->
             <h3 [className]="formErrors.project_name ? 'color-danger' : ''">1. ชื่อโครงการ</h3>
@@ -70,16 +70,16 @@
             <!-- end project_name -->
 
             <!-- ***target_areas -->
-            <app-target-areas 
+            <app-target-areas
               [formType]="formType"
-              [target_areas]="target_areas" 
-              [districts]="districts" 
-              [subDistrictArr]="subDistrictArr" 
-              [villageArr]="villageArr" 
+              [target_areas]="target_areas"
+              [districts]="districts"
+              [subDistrictArr]="subDistrictArr"
+              [villageArr]="villageArr"
               [editTargetAreas]="editObj.targetAreas"
 
-              (subDistrictsLoaded)="loadSubDistricts($event)" 
-              (villagesLoaded)="loadVillages($event)" 
+              (subDistrictsLoaded)="loadSubDistricts($event)"
+              (villagesLoaded)="loadVillages($event)"
               (targetAreaRemoved)="removeTargetArea($event)">
             </app-target-areas>
             <!-- end target_areas -->
@@ -89,16 +89,16 @@
             <!-- ***main_staffs-->
             <app-main-staffs
               [formType]="formType"
-              [main_staffs]="main_staffs" 
+              [main_staffs]="main_staffs"
               [faculty]="faculty"
-              [mainSubFacultyArr]="mainSubFacultyArr" 
-              [mainBranchArr]="mainBranchArr" 
-              [mainStaffArr]="mainStaffArr" 
+              [mainSubFacultyArr]="mainSubFacultyArr"
+              [mainBranchArr]="mainBranchArr"
+              [mainStaffArr]="mainStaffArr"
               [editMainStaffs]="editObj.mainStaffs"
 
-              (subFacultyLoaded)="loadSubFaculty($event)" 
-              (branchLoaded)="loadBranch($event)" 
-              (staffLoaded)="loadStaff($event)" 
+              (subFacultyLoaded)="loadSubFaculty($event)"
+              (branchLoaded)="loadBranch($event)"
+              (staffLoaded)="loadStaff($event)"
               (staffRemoved)="removeMainStaff($event)"
             >
             </app-main-staffs>
@@ -107,16 +107,16 @@
             <!-- ***sub_staffs -->
             <app-sub-staffs
               [formType]="formType"
-              [sub_staffs]="sub_staffs" 
+              [sub_staffs]="sub_staffs"
               [faculty]="faculty"
-              [subSubFacultyArr]="subSubFacultyArr" 
-              [subBranchArr]="subBranchArr" 
-              [subStaffArr]="subStaffArr" 
+              [subSubFacultyArr]="subSubFacultyArr"
+              [subBranchArr]="subBranchArr"
+              [subStaffArr]="subStaffArr"
               [editSubStaffs]="editObj.subStaffs"
 
-              (subFacultyLoaded)="loadSubFaculty($event)" 
-              (branchLoaded)="loadBranch($event)" 
-              (staffLoaded)="loadStaff($event)" 
+              (subFacultyLoaded)="loadSubFaculty($event)"
+              (branchLoaded)="loadBranch($event)"
+              (staffLoaded)="loadStaff($event)"
               (staffRemoved)="removeSubStaff($event)"
             >
             </app-sub-staffs>
@@ -130,7 +130,7 @@
               [prefixName]="prefixName"
               [userGroup]="userGroup"
               [editExtStaffs]="editObj.extStaffs"
-              
+
               (extStaffRemoved)="removeExtStaff($event)">
             </app-ext-staffs>
             <!-- end ext_staffs -->
@@ -143,11 +143,11 @@
               </mat-radio-button>
               <mat-error *ngIf="formErrors.scheme">{{ formErrors.scheme }}</mat-error>
             </mat-radio-group>
-            
-            <!-- <app-schemes 
+
+            <!-- <app-schemes
               [formType]="formType"
-              [schemes]="schemes" 
-              [projectSchemes]="projectSchemes" 
+              [schemes]="schemes"
+              [projectSchemes]="projectSchemes"
               [editSchemes]="editObj.schemes">
             </app-schemes>
             <p class="color-danger" *ngIf="formErrors.schemes">{{ formErrors.schemes }}</p> -->
@@ -157,7 +157,7 @@
             <h3 [className]="formErrors.srru_strategy ? 'color-danger mt-2' : 'mt-2'">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h3>
             <mat-radio-group class="d-flex flex-column" formControlName="srru_strategy">
               <mat-radio-button color="primary" *ngFor="let strategy of srruStrategies" [value]="strategy.id">
-                {{ strategy.details }}
+                {{ strategy.group }}
               </mat-radio-button>
               <mat-error *ngIf="formErrors.srru_strategy">{{ formErrors.srru_strategy }}</mat-error>
             </mat-radio-group>
@@ -165,9 +165,9 @@
 
             <!-- ***rajabhat_strategies -->
             <h3 [className]="formErrors.rajabhat_strategies ? 'color-danger mt-2' : 'mt-2'">6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
-            <app-rajabhat-strategies 
+            <app-rajabhat-strategies
               [formType]="formType"
-              [rajabhat_strategies]="rajabhat_strategies" 
+              [rajabhat_strategies]="rajabhat_strategies"
               [rajabhatStrategies]="rajabhatStrategies"
               [editRajabhatStrategies]="editObj.rajabhatStrategies">
             </app-rajabhat-strategies>
@@ -176,9 +176,9 @@
 
             <!-- ***national_strategies -->
             <h3 [className]="formErrors.national_strategies ? 'color-danger mt-2' : 'mt-2'">7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
-            <app-national-strategies 
+            <app-national-strategies
               [formType]="formType"
-              [national_strategies]="national_strategies" 
+              [national_strategies]="national_strategies"
               [nationalStrategies]="nationalStrategies"
               [editNationalStrategies]="editObj.nationalStrategies">
             </app-national-strategies>
@@ -196,9 +196,9 @@
 
             <!-- ***integration_plans -->
             <h3 [className]="formErrors.integration_plans ? 'color-danger mt-2' : 'mt-2'">9. แผนการบูรณาการกับพันธกิจอื่น</h3>
-            <app-integration-plans 
+            <app-integration-plans
               [formType]="formType"
-              [integration_plans]="integration_plans" 
+              [integration_plans]="integration_plans"
               [integrationPlans]="integrationPlans"
               [editPlans]="editObj.integration_plans">
             </app-integration-plans>
@@ -208,7 +208,7 @@
           </fieldset>
 
           <fieldset class="mt-5">
-            <legend class="color-primary">ส่วนที่ 2 รายละเอียดโครงการ</legend> 
+            <legend class="color-primary">ส่วนที่ 2 รายละเอียดโครงการ</legend>
 
             <!-- ***history -->
             <h3 [className]="formErrors.history ? 'color-danger' : ''">10. ความเป็นมา/หลักการและเหตุผล</h3>
@@ -223,9 +223,9 @@
             <h3>11. วัตถุประสงค์โครงการและตัวชี้วัด</h3>
             <app-objectives
               [formType]="formType"
-              [objectives]="objectives" 
-              [activities]="activities" 
-              [outputs]="outputs" 
+              [objectives]="objectives"
+              [activities]="activities"
+              [outputs]="outputs"
               [kpi]="kpi"
               [editObjectives]="editObj.objectives"
               [editActivities]="editObj.activities"
@@ -271,7 +271,7 @@
 
             <!-- ***benefits -->
             <h3 [className]="formErrors.benefits ? 'color-danger mt-2' : 'mt-2'">16. ประโยชน์ที่คาดว่าจะได้รับ</h3>
-            <app-benefits 
+            <app-benefits
               [formType]="formType"
               [benefits]="benefits"
               [editBenefits]="editObj.benefits">
@@ -303,7 +303,7 @@
             <div class="row" *ngIf="formType === 'EDIT'">
               <p [className]="file_delete ? 'h4 col-8 color-warning' : 'h4 col-8'">{{ file_delete ? 'ไฟล์นี้จะถูกลบ กรุณาแนบไฟล์ใหม่' : project_file }}</p>
               <a href="javascript:void(0)" class="color-danger col-4" (click)="toggleFileButton()"><p class="h4">{{ file_delete ? 'ยกเลิก' : 'ลบไฟล์' }}</p></a>
-            </div>    
+            </div>
             <div class="form-group animated fadeInDown" *ngIf="file_delete || formType === 'CREATE'">
               <input type="file" (change)="onFileChange($event)">
               <div class="input-group">
@@ -316,7 +316,7 @@
               </div>
               <p class="color-danger" *ngIf="formErrors.file">{{ formErrors.file }}</p>
             </div>
-        
+
             <!-- end file -->
 
           </fieldset>
