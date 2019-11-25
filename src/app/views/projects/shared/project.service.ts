@@ -12,63 +12,63 @@ export class ProjectService {
   ) { }
 
   storeProject(formData) {
-    return this.http.post(`${environment.api_url}/projects`, formData);
+    return this.http.post(`${environment.api_url}/old_projects`, formData);
   }
 
   storeProjectActivity(formData) {
-    return this.http.post(`${environment.api_url}/projects/activity`, formData);
+    return this.http.post(`${environment.api_url}/old_projects/activity`, formData);
   }
 
   storeProjectAssessment(formData) {
-    return this.http.post(`${environment.api_url}/projects/assessment`, formData);
+    return this.http.post(`${environment.api_url}/old_projects/assessment`, formData);
   }
 
   updateProject(formData, id) {
-    return this.http.put(`${environment.api_url}/projects/${id}`, formData);
+    return this.http.put(`${environment.api_url}/old_projects/${id}`, formData);
   }
 
   updateProjectActivity(formData, id) {
-    return this.http.put(`${environment.api_url}/projects/activity/${id}`, formData);
+    return this.http.put(`${environment.api_url}/old_projects/activity/${id}`, formData);
   }
 
   deleteProject(id) {
-    return this.http.delete(`${environment.api_url}/projects/${id}`);
+    return this.http.delete(`${environment.api_url}/old_projects/${id}`);
   }
 
   deleteActivity(id) {
-    return this.http.delete(`${environment.api_url}/projects/activity/${id}`);
+    return this.http.delete(`${environment.api_url}/old_projects/activity/${id}`);
   }
 
   getProject(id: number) {
-    return this.http.get(`${environment.api_url}/projects/${id}`);
+    return this.http.get(`${environment.api_url}/old_projects/${id}`);
   }
 
   getEditProject(id: number) {
-    return this.http.get(`${environment.api_url}/projects/${id}/edit`);
+    return this.http.get(`${environment.api_url}/old_projects/${id}/edit`);
   }
 
   getProjectFormData() {
-    return this.http.get(`${environment.api_url}/projects/create`);
+    return this.http.get(`${environment.api_url}/old_projects/create`);
   }
 
   getResult() {
-    return this.http.get(`${environment.api_url}/projects/result`);
+    return this.http.get(`${environment.api_url}/old_projects/result`);
   }
 
   getProjectList() {
-    return this.http.get(`${environment.api_url}/projects`);
+    return this.http.get(`${environment.api_url}/old_projects`);
   }
 
   getMyProjectList() {
-    return this.http.get(`${environment.api_url}/projects/my_projects`);
+    return this.http.get(`${environment.api_url}/old_projects/my_projects`);
   }
 
   getActivity(id) {
-    return this.http.get(`${environment.api_url}/projects/activity/${id}`);
+    return this.http.get(`${environment.api_url}/old_projects/activity/${id}`);
   }
 
   getProjectActivities(id) {
-    return this.http.get(`${environment.api_url}/projects/activity?project_id=${id}`);
+    return this.http.get(`${environment.api_url}/old_projects/activity?project_id=${id}`);
   }
 
   getSubDistricts(district_id: number) {
@@ -92,23 +92,23 @@ export class ProjectService {
   }
 
   getCreateActivity(id) {
-    return this.http.get(`${environment.api_url}/projects/activity/create?project_id=${id}`);
+    return this.http.get(`${environment.api_url}/old_projects/activity/create?project_id=${id}`);
   }
 
   getEditActivity(id) {
-    return this.http.get(`${environment.api_url}/projects/activity/${id}/edit`);
+    return this.http.get(`${environment.api_url}/old_projects/activity/${id}/edit`);
   }
 
   getAssessmentProjects(id) {
-    return this.http.get(`${environment.api_url}/projects/assessment/project_list?strategy_id=${id}`);
+    return this.http.get(`${environment.api_url}/old_projects/assessment/project_list?strategy_id=${id}`);
   }
 
   getCreateAssessment(id) {
-    return this.http.get(`${environment.api_url}/projects/assessment/create?project_id=${id}`);
+    return this.http.get(`${environment.api_url}/old_projects/assessment/create?project_id=${id}`);
   }
 
   getAssessmentResult(project_id) {
-    return this.http.get(`${environment.api_url}/projects/assessment/result?project_id=${project_id}`);
+    return this.http.get(`${environment.api_url}/old_projects/assessment/result?project_id=${project_id}`);
   }
 
 }
