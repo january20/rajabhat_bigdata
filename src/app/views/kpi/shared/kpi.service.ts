@@ -38,7 +38,7 @@ export class KpiService {
   }
 
   project_summary(){
-    return this.http.get(`${environment.api_url}/projects/summary`);
+    return this.http.get(`${environment.api_url}/old_projects/summary`);
   }
 
 
