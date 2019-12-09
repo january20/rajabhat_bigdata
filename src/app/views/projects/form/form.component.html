@@ -141,10 +141,10 @@
             <!-- end ext_staffs -->
 
             <!-- ***project_schemes -->
-            <h3 [className]="formErrors.scheme ? 'color-danger mt-2' : 'mt-2'">4. รูปแบบโครงการ</h3>
+            <h3 [className]="formErrors.scheme ? 'color-danger mt-2' : 'mt-2'">4. รูปแบบโครงการ (ระบุได้ 1 รูปแบบเท่านั้น)</h3>
             <mat-radio-group class="d-flex flex-column" formControlName="scheme">
               <mat-radio-button color="primary" *ngFor="let scheme of projectSchemes" [value]="scheme.id">
-                {{ scheme.name }}
+                {{ scheme.name }} {{ scheme.details }}
               </mat-radio-button>
               <mat-error *ngIf="formErrors.scheme">{{ formErrors.scheme }}</mat-error>
             </mat-radio-group>
@@ -159,7 +159,7 @@
             <!-- end project_schemes -->
 
             <!-- ***srru_strategy -->
-            <h3 [className]="formErrors.srru_strategy ? 'color-danger mt-2' : 'mt-2'">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น</h3>
+            <h3 [className]="formErrors.srru_strategy ? 'color-danger mt-2' : 'mt-2'">5. ความสอดคล้องกับโครงการภายใต้ยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น (ระบุได้ 1 ความสอดคล้องเท่านั้น)</h3>
             <mat-radio-group class="d-flex flex-column" formControlName="srru_strategy">
               <mat-radio-button color="primary" *ngFor="let strategy of srruStrategies" [value]="strategy.id">
                 {{ strategy.group }}
@@ -169,7 +169,7 @@
             <!-- end srru_strategy -->
 
             <!-- ***rajabhat_strategies -->
-            <h3 [className]="formErrors.rajabhat_strategies ? 'color-danger mt-2' : 'mt-2'">6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
+            <h3 [className]="formErrors.rajabhat_strategies ? 'color-danger mt-2' : 'mt-2'">6. ความสอดคล้องกับยุทธศาสตร์มหาวิทยาลัยราชภัฏ ระยะ 20 ปี พ.ศ. 2560-2579 (ระบุได้ 1 ยุทธศาสตร์ท่านั้น)</h3>
             <app-rajabhat-strategies
               [formType]="formType"
               [rajabhat_strategies]="rajabhat_strategies"
@@ -180,7 +180,7 @@
             <!-- end rajabhat_strategies -->
 
             <!-- ***national_strategies -->
-            <h3 [className]="formErrors.national_strategies ? 'color-danger mt-2' : 'mt-2'">7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี (พ.ศ. 2560-2579)</h3>
+            <h3 [className]="formErrors.national_strategies ? 'color-danger mt-2' : 'mt-2'">7. ความสอดคล้องกับยุทธศาสตร์ชาติ ระยะ 20 ปี พ.ศ. 2560-2579 (ระบุได้ 1 ยุทธศาสตร์เท่านั้น)</h3>
             <app-national-strategies
               [formType]="formType"
               [national_strategies]="national_strategies"
@@ -216,9 +216,9 @@
             <legend class="color-primary">ส่วนที่ 2 รายละเอียดโครงการ</legend>
 
             <!-- ***history -->
-            <h3 [className]="formErrors.history ? 'color-danger' : ''">10. ความเป็นมา/หลักการและเหตุผล</h3>
+            <h3 [className]="formErrors.history ? 'color-danger' : ''">10. ความเป็นมา/หลักการและเหตุผล (ชี้แจงถึงปัญหาตามเป้าหมายของการพัฒนาเพียง 1 ด้าน และควรอ้างอิงสถิติ และข้อมูลใน surin.srru.ac.th)</h3>
             <mat-form-field class="w-100">
-              <mat-label>ความเป็นมา/หลักการและเหตุผล</mat-label>
+              <mat-label>(ปัญหาด้านเศรษฐกิจ/ปัญหาด้านสังคม/ปัญหาด้านสิ่งแวดล้อม/ปัญหาด้านการศึกษาและเครือข่ายอบรม)</mat-label>
               <textarea matInput formControlName="history" rows="15" required></textarea>
               <mat-error *ngIf="formErrors.history">{{ formErrors.history }}</mat-error>
             </mat-form-field>
@@ -275,7 +275,7 @@
             <!-- end assessment_method -->
 
             <!-- ***benefits -->
-            <h3 [className]="formErrors.benefits ? 'color-danger mt-2' : 'mt-2'">16. ประโยชน์ที่คาดว่าจะได้รับ</h3>
+            <h3 [className]="formErrors.benefits ? 'color-danger mt-2' : 'mt-2'">16. ประโยชน์ที่คาดว่าจะได้รับ/เป้าหมายการพัฒนา/ผลกระทบ (Impact)<br>(ระบุได้ 1 ด้านเท่านั้น โดยให้สอดคล้องกับรูปแบบโครงการในข้อ 5 และปัญหาของพื้นที่ในข้อ 10)</h3>
             <app-benefits
               [formType]="formType"
               [benefits]="benefits"
@@ -296,15 +296,15 @@
             <!-- ***budget -->
             <h3 [className]="formErrors.budget ? 'color-danger mt-2' : 'mt-2'">18. งบประมาณ(บาท)</h3>
             <mat-form-field class="w-100">
-              <mat-label>งบประมาณ</mat-label>
+              <mat-label>กรุณาระบุเป็นตัวเลขเท่านั้น</mat-label>
               <input matInput formControlName="budget" required>
               <mat-error *ngIf="formErrors.budget">{{ formErrors.budget }}</mat-error>
             </mat-form-field>
             <!-- end budget -->
 
             <!-- ***file -->
-            <h3 *ngIf="formType === 'CREATE'" [className]="!file.valid ? 'color-danger mt-2' : 'mt-2'">19. รายละเอียดงบประมาณ</h3>
-            <h3 *ngIf="formType === 'EDIT'" [className]="!project_file ? 'color-danger mt-2' : 'mt-2'">19. รายละเอียดงบประมาณ</h3>
+            <h3 *ngIf="formType === 'CREATE'" [className]="!file.valid ? 'color-danger mt-2' : 'mt-2'">19.  แผนการดำเนินงานและรายละเอียดงบประมาณ</h3>
+            <h3 *ngIf="formType === 'EDIT'" [className]="!project_file ? 'color-danger mt-2' : 'mt-2'">19.  แผนการดำเนินงานและรายละเอียดงบประมาณ</h3>
             <div class="row" *ngIf="formType === 'EDIT'">
               <p [className]="file_delete ? 'h4 col-8 color-warning' : 'h4 col-8'">{{ file_delete ? 'ไฟล์นี้จะถูกลบ กรุณาแนบไฟล์ใหม่' : project_file }}</p>
               <a href="javascript:void(0)" class="color-danger col-4" (click)="toggleFileButton()"><p class="h4">{{ file_delete ? 'ยกเลิก' : 'ลบไฟล์' }}</p></a>

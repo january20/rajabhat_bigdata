@@ -79,7 +79,7 @@ export class FormComponent extends AbstractForm implements OnInit {
       this.loadData();
     }
 
-    this.subscribeToFormChanged();    
+    this.subscribeToFormChanged();
   }
 
   loadData() {
@@ -114,12 +114,12 @@ export class FormComponent extends AbstractForm implements OnInit {
 
       this.project_file = data.project_detail_file_path;
 
-      
+
     });
   }
 
   submit() {
-    if(confirm('คุณต้องการเสนนอโครงการใช่หรือไม่')) {
+    if(confirm('คุณต้องการเสนอโครงการใช่หรือไม่')) {
       this.isSubmit = true;
 
       if(this.formType === 'CREATE') {
@@ -134,10 +134,10 @@ export class FormComponent extends AbstractForm implements OnInit {
             setTimeout(() => {
               this.isSubmit = false;
               this.router.navigate(['projects/mylist']);
-            }, 2000);          
+            }, 2000);
           },
           err => {
-            this.snackBar.open('เกิดขข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
+            this.snackBar.open('เกิดข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
               horizontalPosition: 'right',
               duration: 2000,
               panelClass: ['color-white', 'bg-danger']
@@ -160,15 +160,15 @@ export class FormComponent extends AbstractForm implements OnInit {
             }, 2000);
           },
           err => {
-            this.snackBar.open('เกิดขข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
+            this.snackBar.open('เกิดข้อผิดพลาด กรุณาตรวจสอบแบบฟอร์มอีกครั้ง', '', {
               horizontalPosition: 'right',
               duration: 2000,
               panelClass: ['color-white', 'bg-danger']
             });
-            this.isSubmit = false;        
+            this.isSubmit = false;
           }
         )
-      }      
+      }
     }
   }
 
@@ -245,8 +245,8 @@ export class FormComponent extends AbstractForm implements OnInit {
       assessment_method: { required: '*กรุณาระบุวิธีการประเมินผลโครงการ' },
       benefits: { required: '*กรุณาเลือกประโยชน์' },
       reporting: { required: '*กรุณาระบุการรายงานผล' },
-      budget: { required: '*กรุณาระบุงบประมาณ', pattern: '*กรุณาระบุเป็นตัวเลขเท่านั้น' },
-      file: { required: '*กรุณาแนบรายละเอียดงบประมาณ' }
+      budget: { required: '*กรุณาระบุงบประมาณเป็นตัวเลขเท่านั้น', pattern: '*กรุณาระบุเป็นตัวเลขเท่านั้น' },
+      file: { required: '*กรุณาแนบไฟล์แผนการดำเนินงานและรายละเอียดงบประมาณ' }
     }
   }
   // End Validation Errors //
@@ -285,7 +285,7 @@ export class FormComponent extends AbstractForm implements OnInit {
   }
 
   // ***Dynamic Target Area Fields //
-  removeTargetArea(index): void { 
+  removeTargetArea(index): void {
     this.subDistrictArr.splice(index, 1);
     this.villageArr.splice(index, 1);
     this.subDistrictArr = this.subDistrictArr.filter(val => val);
@@ -297,7 +297,7 @@ export class FormComponent extends AbstractForm implements OnInit {
   removeMainStaff(index) {
     this.mainSubFacultyArr.splice(index, 1);
     this.mainBranchArr.splice(index, 1);
-    this.mainStaffArr.splice(index, 1);      
+    this.mainStaffArr.splice(index, 1);
     this.mainSubFacultyArr = this.mainSubFacultyArr.filter(val => val);
     this.mainBranchArr = this.mainBranchArr.filter(val => val);
     this.mainStaffArr = this.mainStaffArr.filter(val => val);
@@ -305,7 +305,7 @@ export class FormComponent extends AbstractForm implements OnInit {
   removeSubStaff(index) {
     this.subSubFacultyArr.splice(index, 1);
     this.subBranchArr.splice(index, 1);
-    this.subStaffArr.splice(index, 1);      
+    this.subStaffArr.splice(index, 1);
     this.subSubFacultyArr = this.subSubFacultyArr.filter(val => val);
     this.subBranchArr = this.subBranchArr.filter(val => val);
     this.subStaffArr = this.subStaffArr.filter(val => val);
@@ -313,7 +313,7 @@ export class FormComponent extends AbstractForm implements OnInit {
   // End Dynamic Srru Staffs Fields //
 
   // ***Dynamic External Staffs Fields //
-  removeExtStaff(idx): void { 
+  removeExtStaff(idx): void {
     this.ext_staffs.removeAt(idx);
   }
   // End Dynamic External Staffs Fields //
@@ -323,7 +323,7 @@ export class FormComponent extends AbstractForm implements OnInit {
     let reader = new FileReader();
 
     if(event.target.files && event.target.files.length) {
-      const [file] = event.target.files;    
+      const [file] = event.target.files;
 
       reader.onload = () => {
         this.form.patchValue({
@@ -334,7 +334,7 @@ export class FormComponent extends AbstractForm implements OnInit {
       reader.readAsDataURL(file);
 
       this.changeDetector.markForCheck();
-    } 
+    }
   }
   // End Handle File //
 
@@ -347,7 +347,7 @@ export class FormComponent extends AbstractForm implements OnInit {
     }
   }
 
-  // ***Getter Functions //  
+  // ***Getter Functions //
   get target_areas() { return this.form.get('target_areas') as FormArray; }
   get main_staffs() { return this.form.get('main_staffs') as FormArray; }
   get sub_staffs() { return this.form.get('sub_staffs') as FormArray; }
@@ -373,7 +373,7 @@ export class FormComponent extends AbstractForm implements OnInit {
         .map(control => control.value)
         .reduce((prev, next) => next ? prev + next : prev, 0);
       return totalSelected >= min ? null : { required: true };
-    };  
+    };
     return validator;
   }
 
@@ -383,7 +383,7 @@ export class FormComponent extends AbstractForm implements OnInit {
         .map(control => control.value.status)
         .reduce((prev, next) => next ? prev + next : prev, 0);
       return totalSelected >= min ? null : { required: true };
-    };  
+    };
     return validator;
   }
 
@@ -394,9 +394,9 @@ export class FormComponent extends AbstractForm implements OnInit {
           return control.value.status
         })
         .reduce((prev, next) => next ? prev + next : prev, 0);
-      
+
       return totalSelected >= min ? null : { required: true };
-    };  
+    };
     return validator;
   }
   // End Validations Function //

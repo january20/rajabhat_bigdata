@@ -11,11 +11,34 @@
 	<i class="fa fa-apple"></i>
 </a>
 
+
+<!-- banner -->
+<div class="ms-site-container mt-5">
+  <div class="container">
+    <a href="#"><h2 class="text-center text-dark mb-6 wow fadeInDown animation-delay-5"><strong>โครงการยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น ระยะ 20 ปี มหาวิทยาลัยราชภัฏสุรินทร์</strong></h2></a>
+    <div class="row">
+      <div class="col-lg-6 order-lg-2 mb-4  center-block">
+        <img src="assets/img/demo/mock.png" alt="" class="img-fluid center-block wow zoomIn animation-delay-12 "> </div>
+      <div class="col-lg-6 order-lg-1 pr-6">
+        <p class="wow fadeInLeft animation-delay-6"><strong>อยู่ระหว่างพิจารณาโครงการ ประจำปีงบประมาณ 2563</strong> **ระบบจะเปิดให้แก้ไขข้อเสนอโครงการภายในวันที่ 16 ธันวาคม 2563 เป็นต้นไป สอบถามรายละเอียดเพิ่มเติมได้ที่ หมายเลขโทรศัพท์: 0616144799</p>
+        <div class="text-center">
+          <a href="https://surin.srru.ac.th/newsite" class="btn btn-warning btn-raised mr-1 wow flipInX animation-delay-14">
+            <i class="zmdi zmdi-chart-edit"></i> แก้ไขข้อเสนอโครงการ </a>
+          <a href="https://research.srru.ac.th/research/wp-content/uploads/2019/12/%E0%B8%84%E0%B8%B3%E0%B8%8A%E0%B8%B5%E0%B9%89%E0%B9%81%E0%B8%88%E0%B8%87-%E0%B9%81%E0%B8%99%E0%B8%A7%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%97%E0%B8%B3%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%AA%E0%B9%88%E0%B8%87%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B9%82%E0%B8%84%E0%B8%A3%E0%B8%87-V.1.pdf" class="btn btn-info btn-raised wow flipInX animation-delay-16">
+            <i class="zmdi zmdi-download"></i> ดาวน์โหลดกำหนดการ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end banner -->
+
+
 <div class="ms-site-container mt-5" *ngIf="villages && weathers && air_quality && countData">
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
-        <h4>โครงการยุทธศาสตร์มหาวิทยาลัยราชภัฏเพื่อการพัฒนาท้องถิ่น มหาวิทยาลัยราชภัฏสุรินทร์</h4>
+        <h2><strong>**ข้อมูลประจำปีงบประมาณ 2562 เท่านั้น</strong></h2>
       </div>
     </div>
   </div>
@@ -42,7 +65,7 @@
                   <a href='javascript:void(0);'>{{ village.village.village_name_th+' ตำบล'+ village.sub_district.sub_district_name_th+' อำเภอ'+village.district.district_name_th }}</a>
                   <p class="color-primary">จำนวนโครงการในพื้นที่: {{ village.projects_count }}</p>
                 </agm-info-window>
-              </agm-marker>            
+              </agm-marker>
             </ng-container>
             <ng-container *ngFor="let station of weathers">
               <agm-marker [iconUrl]="weatherDescriptions[station.weather.description.split(' ').join('')].icon" [latitude]="station.lat" [longitude]="station.lon" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
@@ -57,10 +80,10 @@
                   <!-- <p><strong>พระอาทิตย์ขึ้น:</strong> เวลา {{ station.weather.sunrise | date: 'HH:mm' }} น.</p>
                   <p><strong>พระอาทิตย์ตก:</strong> เวลา {{ station.weather.sunset | date: 'HH:mm' }} น.</p> -->
                 </agm-info-window>
-              </agm-marker>            
+              </agm-marker>
             </ng-container>
             <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-              <ng-container *ngFor="let station of air_quality">              
+              <ng-container *ngFor="let station of air_quality">
                 <agm-marker *ngIf="station.air" label="PM 2.5" [latitude]="station?.lat" [longitude]="station?.lng" (mouseOver)="markerMouseOver(airInfoWindow,gm)">
                   <agm-info-window [disableAutoPan]="false" #airInfoWindow>
                     <h3>ฝุ่นละออง สถานี{{ station.name }}</h3>
