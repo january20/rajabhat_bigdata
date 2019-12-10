@@ -3,7 +3,7 @@
   กำลังโหลดข้อมูล.
 </div>
 
-<div mat-dialog-content [style.display]="village ? 'block' : 'none'">  
+<div mat-dialog-content [style.display]="village ? 'block' : 'none'">
   <div class="row animated fadeIn">
     <div class="col-12">
       <div class="card-body"><h2 class="color-primary no-mb">ข้อมูลทั่วไป</h2></div>
@@ -49,7 +49,7 @@
         <h2 class="color-primary">โครงการในพื้นที่</h2>
         <ol>
           <li *ngFor="let project of village?.projects">
-            <a href="/projects/{{ project.id }}">{{ project.project_name }}</a>
+            <a href="/#/projects/{{ project.id }}">{{ project.project_name }}</a>
           </li>
         </ol>
       </div>
