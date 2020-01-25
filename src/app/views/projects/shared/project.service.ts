@@ -111,4 +111,8 @@ export class ProjectService {
     return this.http.get(`${environment.api_url}/old_projects/assessment/result?project_id=${project_id}`);
   }
 
+  getMyProjects() {
+    return this.http.get(`${environment.api_url}/dashboard/my_projects`);
+  }
+
 }

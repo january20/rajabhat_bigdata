@@ -20,18 +20,18 @@
       (projectDeleted)="deleteProject($event)"
     ></app-srru-personnel>
 
-    <app-admin
+    <!-- <app-admin
       *ngIf="currentUser.roles.admin"
       [currentUser]="currentUser"
       [adminProjectList]="adminProjectList"
       (projectDeleted)="deleteProject($event)"
-    ></app-admin>
+    ></app-admin> -->
 
-    <app-assessor
+    <!-- <app-assessor
       *ngIf="currentUser.roles.project_assessor && myEvaluationList"
       [currentUser]="currentUser"
       [myEvaluationList]="myEvaluationList"
-    ></app-assessor>
+    ></app-assessor> -->
 
     <div class="row">
       <div class="col">

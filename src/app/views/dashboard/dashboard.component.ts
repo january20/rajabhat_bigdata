@@ -48,12 +48,12 @@ export class DashboardComponent implements OnInit {
     this.bioService.plantsCount().subscribe((count: number) => this.countMyPlants = count);
     this.otopService.count().subscribe((count: number) => this.countMyOtop = count);
 
-    if(user.roles.admin) {
-      this.projectService.getProjectList().subscribe((data: any) => this.adminProjectList = data);
-    }
+    // if(user.roles.admin) {
+    //   this.projectService.getProjectList().subscribe((data: any) => this.adminProjectList = data);
+    // }
 
     if(user.roles.srru_personnel) {
-      this.projectService.getMyProjectList().subscribe((data: any) => this.myProjectList = data);
+      this.projectService.getMyProjects().subscribe((data: any) => this.myProjectList = data);
     }
 
     if(user.roles.project_assessor) {

@@ -15,7 +15,8 @@ export class SrruPersonnelComponent implements OnInit {
   @Input() myProjectList;
   @Input() currentUser;
   @Output() projectDeleted = new EventEmitter<number>();
-  displayedColumns: string[] = ['status', 'project_name', 'file', 'activity', 'manage','result'];
+  // displayedColumns: string[] = ['status', 'project_name', 'file', 'activity', 'manage','result'];
+  displayedColumns: string[] = ['year', 'project_name'];
   dataSource: MatTableDataSource<any>;
   isDeleted = false;
 
