@@ -43,6 +43,8 @@ export class DashboardComponent implements OnInit {
   loadData() {
     const user = this.authService.currentUserValue;
 
+    console.log(user);
+
     this.expertService.count().subscribe((count: number) => this.countMyExperts = count);
     this.bioService.animalsCount().subscribe((count: number) => this.countMyAnimals = count);
     this.bioService.plantsCount().subscribe((count: number) => this.countMyPlants = count);

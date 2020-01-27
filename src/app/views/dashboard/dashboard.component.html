@@ -78,6 +78,20 @@
           </div>
         </div>
       </div>
+
+      <div class="col" *ngIf="currentUser.roles.admin">
+        <div class="card card-warning-inverse wow fadeInLeft animation-delay-3" style="visibility: visible; animation-name: fadeInLeft;">
+          <div class="text-center card-body">
+            <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="fa fa-shopping-bag"></i></span>
+            <h4 class="">ผู้ใหญ่บ้าน</h4>
+            <p class="">รายการผู้ใหญ่บ้าน</p>
+            <a routerLink="/admin/users/list" class="btn btn-white color-danger btn-raised">รายการ</a>
+            <a routerLink="/admin/users/create" class="btn btn-white color-danger btn-raised">เพิ่ม</a>
+          </div>
+        </div>
+      </div>
+
+
     </div>
 
     <app-village-headman
@@ -85,6 +99,6 @@
       [currentUser]="currentUser"
       [families]="families"
     ></app-village-headman>
-    
+
   </div>
 </ng-container>
