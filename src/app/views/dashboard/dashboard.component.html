@@ -17,6 +17,7 @@
       *ngIf="currentUser.roles.srru_personnel && myProjectList"
       [currentUser]="currentUser"
       [myProjectList]="myProjectList"
+      [myVillageList]="myVillageList"
       (projectDeleted)="deleteProject($event)"
     ></app-srru-personnel>
 

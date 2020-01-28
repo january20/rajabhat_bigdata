@@ -114,5 +114,8 @@ export class ProjectService {
   getMyProjects() {
     return this.http.get(`${environment.api_url}/dashboard/my_projects`);
   }
+  getMyVillages() {
+    return this.http.get(`${environment.api_url}/dashboard/my_villages`);
+  }
 
 }

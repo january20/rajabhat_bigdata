@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
 
   currentUser: any;
   myProjectList: any;
+  myVillageList: any;
   myEvaluationList: any;
   adminProjectList: any;
   adminExpertList: any;
@@ -56,6 +57,7 @@ export class DashboardComponent implements OnInit {
 
     if(user.roles.srru_personnel) {
       this.projectService.getMyProjects().subscribe((data: any) => this.myProjectList = data);
+      this.projectService.getMyVillages().subscribe((data: any) => this.myVillageList = data);
     }
 
     if(user.roles.project_assessor) {

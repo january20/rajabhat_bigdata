@@ -11,8 +11,11 @@ import { MatTableDataSource } from '@angular/material/table';
 export class SrruPersonnelComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) vpaginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @Input() myProjectList;
+  @Input() myVillageList;
+
   @Input() currentUser;
   @Output() projectDeleted = new EventEmitter<number>();
   // displayedColumns: string[] = ['status', 'project_name', 'file', 'activity', 'manage','result'];
@@ -20,14 +23,54 @@ export class SrruPersonnelComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   isDeleted = false;
 
+  vdisplayedColumns: string[] = ['vname', 'sub_district','district','province','inspect'];
+  vdataSource: MatTableDataSource<any>;
+
   constructor() { }
 
-  ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.myProjectList);
-    setTimeout(() => {
+
+  waitVllages(){
+    if(this.myVillageList !=null ){
+      console.log(this.myVillageList);
+      this.vdataSource = new MatTableDataSource(this.myVillageList);
+      //this.vdataSource.sort = this.sort;
+      this.vdataSource.paginator = this.vpaginator;
+      return;
+    }else{
+      setTimeout(()=>{
+        this.waitVllages();
+      },1000);
+    }
+  }
+  waitProjects(){
+    if(this.myProjectList !=null ){
+      console.log(this.myProjectList);
+      this.dataSource = new MatTableDataSource(this.myProjectList);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-    });
+      return;
+    }else{
+      setTimeout(()=>{
+        this.waitProjects();
+      },1000);
+    }
+
+  }
+
+  ngOnInit() {
+
+    this.waitProjects();
+    this.waitVllages();
+
+    // this.dataSource = new MatTableDataSource(this.myProjectList);
+    // setTimeout(() => {
+    //   this.dataSource.sort = this.sort;
+    //   this.dataSource.paginator = this.paginator;
+    // });
+
+
+
+
   }
 
   deleteProject(id) {
