@@ -50,4 +50,8 @@ export class FamiliesService {
   healthStore(formData) {
     return this.http.post(`${environment.api_url}/families/health`, formData);
   }
+
+  getWithVid(vid, term, pageSize, pageIndex) {
+    return this.http.get(`${environment.api_url}/families/vid/${vid}?term=${term}&pageSize=${pageSize}&page=${pageIndex + 1}`);
+  }
 }

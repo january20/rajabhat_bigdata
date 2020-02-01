@@ -21,6 +21,10 @@ const routes: Routes = [
     data: { formType: 'CREATE', title: 'เพิ่มครอบครัว', expectedRole: 'village_headman' }
   },
   {
+    path: 'vid',
+    loadChildren: () => import('./village/village.module').then(m => m.VillageModule)
+  },
+  {
     path: ':id/edit',
     component: FormComponent,
     data: { formType: 'EDIT', title: 'แก้ไขครอบครัว', expectedRole: 'village_headman' }
