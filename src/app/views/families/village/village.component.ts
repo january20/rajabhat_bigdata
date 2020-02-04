@@ -28,7 +28,7 @@ export class VillageComponent implements OnInit, AfterViewInit {
     private _route: ActivatedRoute,
     private _familiesService: FamiliesService,
     // private _dialog: MatDialog
-  ) { 
+  ) {
     this.vid = _route.snapshot.params.vid;
   }
 

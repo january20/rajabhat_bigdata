@@ -43,34 +43,35 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   changeType(id) {
     const model = this.info_types.find(x => x.id === id);
-    // console.log(model);
+    console.log(model);
     this.type = model;
     this.active_id = id;
 
     setTimeout(() => {
       if(this.subscription) this.subscription.unsubscribe();
       model.mqtt_name.forEach(name => {
+        console.log(name)
         this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = am4core.create(`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`, am4charts.XYChart);
         this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`] = { value: name.data && name.data.length ? name.data[name.data.length - 1][model.field] : 0, time: name.data && name.data.length ? name.data[name.data.length - 1]['created_at']: '00.00'};
         // console.log(this.latest);
         this.createCharts(this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`], model, name);
       });
 
-      
-      
+
+
     });
 
-    
-   
+
+
     // this.currentTypeData = model;
-    
+
 
     // this.getData(model.mqtt_name);
   }
 
   loadData() {
     this.infoService.dashboard().subscribe((data: any) => {
-      
+
       this.info_types = data;
       this.changeType(data[0].id);
     });

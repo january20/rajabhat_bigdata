@@ -15,7 +15,10 @@ export class FamiliesService {
     return this.http.get(`${environment.api_url}/families`);
   }
 
+
   get(id, role) {
+    console.log(id);
+    console.log(role);
     return this.http.get(`${environment.api_url}/families/${id}?role=${role}`);
   }
 
@@ -24,6 +27,7 @@ export class FamiliesService {
   }
 
   edit(id) {
+    console.log(`${environment.api_url}/families/${id}/edit`)
     return this.http.get(`${environment.api_url}/families/${id}/edit`)
   }
 
