@@ -12,6 +12,7 @@ Download & install nodejs => https://nodejs.org/en/
  - clone project & prepare libs <br>
  git clone https://github.com/january20/rajabhat_bigdata.git <br>
  cd /_path-to_/rajabhat_bigdata <br>
+ npm cache clean<br>
  npm install 
 
 - edit mqtt client id  in [src/app/app.module.ts] <br>
