@@ -15,7 +15,6 @@ Download & install nodejs => https://nodejs.org/en/
  npm install 
 
 - edit mqtt client id  in [src/app/app.module.ts] 
-
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {<br>
 &nbsp;&nbsp;&nbsp;hostname: 'mqtt.srru.ac.th',<br>
 &nbsp;&nbsp;&nbsp;clientId: 'ng-srru-bigdata',  <= Change the clinetId (maybe a random string) <br>
