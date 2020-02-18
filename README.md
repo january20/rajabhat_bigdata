@@ -14,7 +14,18 @@ Download & install nodejs => https://nodejs.org/en/
  cd /_path-to_/rajabhat_bigdata <br>
  npm install 
 
-- edit mqtt client id  in 
+- edit mqtt client id  in [src/app/app.module.ts] 
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {<br>
+  hostname: 'mqtt.srru.ac.th',<br>
+  clientId: 'ng-srru-bigdata',  <= Change the clinetId (maybe a random string) <br>
+  port: 443,<br>
+  path: '',<br>
+  protocol: 'wss',<br>
+  username: 'miot',<br>
+  password: '<passowrd>'<br>
+};
+
 
 
 ## Run  
