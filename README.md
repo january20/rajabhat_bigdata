@@ -34,14 +34,16 @@ ng serve
 
 open http://localhost:4200 
 
-## Build & Deploy 
+## Build & Deploy
+cd /_path-to_/rajabhat_bigdata <br>
+ng build --prod --base-href /web/ --deploy-url /web/
 
 ## Merge code
 
 cd /_path-to_/rajabhat_bigdata <br>
-git add . <br>
-git commit -m "branch comments" <br>
-git push
+git add .
+git commit -m "branch comments"
+git push 
 
 ## API 
 please contact srru dev team 
