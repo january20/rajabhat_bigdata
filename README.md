@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
+## Requirements  
+
+Download & install nodejs => https://nodejs.org/en/ 
+node 
+npm 
+
 ## Configure 
 
 git clone https://github.com/january20/rajabhat_bigdata.git 
@@ -10,12 +16,14 @@ cd /_path-to_/rajabhat_bigdata
 
 npm install 
 
+- edit mqtt client id  in 
+
+
+## Run  
+
 ng serve 
 
-
-## Merge Branch 
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+open http://localhost:4200 
 
 ## Build
 
