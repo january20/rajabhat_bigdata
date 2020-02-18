@@ -5,7 +5,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Requirements  
 
 Download & install nodejs => https://nodejs.org/en/ 
+
 node 
+
 npm 
 
 ## Configure 
