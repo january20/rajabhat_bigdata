@@ -39,9 +39,9 @@ open http://localhost:4200
 ## Merge code
 
 cd /_path-to_/rajabhat_bigdata <br>
-git add .
-git commit -m "branch comments"
-git push 
+git add . <br>
+git commit -m "branch comments" <br>
+git push
 
 ## API 
 please contact srru dev team 
