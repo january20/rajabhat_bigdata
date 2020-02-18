@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 git clone https://github.com/january20/rajabhat_bigdata.git 
 
-cd _path-to_/rajabhat_bigdata 
+cd *_path-to_*/rajabhat_bigdata 
 
 npm install 
 
