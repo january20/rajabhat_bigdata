@@ -9,7 +9,7 @@ Download & install nodejs => https://nodejs.org/en/
  - npm 
 
 ## Configure 
-
+ - clone project & prepare libs 
 git clone https://github.com/january20/rajabhat_bigdata.git 
 
 cd /_path-to_/rajabhat_bigdata 
