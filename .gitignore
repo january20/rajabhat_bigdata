@@ -9,6 +9,7 @@
 
 # dependencies
 /node_modules
+/backup
 
 # profiling files
 chrome-profiler-events.json
