@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'download', loadChildren: () => import('./views/download/download.module').then(m => m.DownloadModule) },
   // { path: 'media', loadChildren: () => import('./views/media/media.module').then(m => m.MediaModule) },
   { path: 'info', loadChildren: () => import('./views/info/info.module').then(m => m.InfoModule) },
+  { path: 'schools', loadChildren: () => import('./views/schools/schools.module').then(m => m.SchoolsModule) },
   // { path: 'kpi', loadChildren: () => import('./views/kpi/kpi.module').then(m => m.KpiModule) },
   { path: 'developers', loadChildren: () => import('./views/developers/developers.module').then(m => m.DevelopersModule) },
   { path: '401', component: Error401Component },
