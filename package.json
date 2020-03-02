@@ -36,7 +36,7 @@
     "@material/dialog": "^2.3.0",
     "@nguniversal/express-engine": "^7.1.1",
     "@nguniversal/module-map-ngfactory-loader": "0.0.0",
-    "@swimlane/ngx-charts": "^13.0.2",
+    "@swimlane/ngx-charts": "^12.0.1",
     "chart.js": "^2.9.3",
     "core-js": "^2.5.4",
     "express": "^4.15.2",
