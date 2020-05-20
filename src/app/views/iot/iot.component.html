@@ -1,0 +1,31 @@
+<div class="ms-site-container mt-5">
+
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">
+            ข้อมูลผู้มีรายได้น้อย
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="card card-hero card-primary">
+
+
+      <div *ngIf="sub_districts" class="justify-content-center text-center flex-grow-1 mt-5">
+        <a *ngFor="let d of sub_districts" href="javascript:void(0)" (click)="testClick(d.id)">
+          {{ d.sub_district_name_th }}
+        </a>
+      </div>
+
+
+      <div id="populationChart" style="width: 100%; height: 500px"></div>
+
+
+    </div>
+
+  </div>
+</div>

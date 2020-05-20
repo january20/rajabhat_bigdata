@@ -93,9 +93,6 @@ export class WeatherComponent implements OnInit {
         bigDataChart.data = data;
         bigDataChart.legend = new am4charts.Legend();
         bigDataChart.cursor = new am4charts.XYCursor();
-        // bigDataChart.events.on("datavalidated", function () {
-        // //  categoryAxis.zoomToIndexes(Math.round(bigDataChart.data.length * 0.4), Math.round(bigDataChart.data.length * 0.55));
-        // });
 
         categoryAxis.dataFields.category = xField;
         categoryAxis.renderer.minGridDistance = 50;
@@ -109,7 +106,6 @@ export class WeatherComponent implements OnInit {
   createAxisAndSeries(bigDataChart,xField,yField, name, bullet) {
     this.zone.runOutsideAngular(() => {
 
-      
       let series = bigDataChart.series.push(new am4charts.LineSeries());
       let scrollbarX = new am4charts.XYChartScrollbar();
       let interfaceColors = new am4core.InterfaceColorSet();
@@ -120,8 +116,6 @@ export class WeatherComponent implements OnInit {
       series.name = name;
       series.tooltipText = "{valueY}[/]";
 
-      // scrollbarX.series.push(series);
-      // bigDataChart.scrollbarX = scrollbarX;
       bigDataChart.cursor = new am4charts.XYCursor();
 
       let bullet = series.bullets.push(new am4charts.Bullet());
@@ -136,45 +130,6 @@ export class WeatherComponent implements OnInit {
       rectangle.width = 5;
       rectangle.height = 5;
 
-
-      // switch(bullet) {
-      //   case "triangle": {
-      //     let bullet = series.bullets.push(new am4charts.Bullet());
-      //     bullet.width = 8;
-      //     bullet.height = 8;
-      //     bullet.horizontalCenter = "middle";
-      //     bullet.verticalCenter = "middle";
-      //
-      //     let triangle = bullet.createChild(am4core.Triangle);
-      //     triangle.stroke = interfaceColors.getFor("background");
-      //     triangle.strokeWidth = 1;
-      //     triangle.direction = "top";
-      //     triangle.width = 6;
-      //     triangle.height = 6;
-      //     break;
-      //   }
-      //   case "rectangle": {
-      //     let bullet = series.bullets.push(new am4charts.Bullet());
-      //     bullet.width = 5;
-      //     bullet.height = 5;
-      //     bullet.horizontalCenter = "middle";
-      //     bullet.verticalCenter = "middle";
-      //
-      //     let rectangle = bullet.createChild(am4core.Rectangle);
-      //     rectangle.stroke = interfaceColors.getFor("background");
-      //     rectangle.strokeWidth = 1;
-      //     rectangle.width = 5;
-      //     rectangle.height = 5;
-      //     break;
-      //   }
-      //   default:
-      //     let bullet = series.bullets.push(new am4charts.CircleBullet());
-      //     bullet.width = 5;
-      //     bullet.height = 5;
-      //     bullet.circle.stroke = interfaceColors.getFor("background");
-      //     bullet.circle.strokeWidth = 1;
-      //     break;
-      // }
     });
   }
 

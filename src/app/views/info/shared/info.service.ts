@@ -47,6 +47,9 @@ export class InfoService {
   dashboard() {
     return this.http.get(`${environment.api_url}/info/`);
   }
+  loadIotData(mas_iot_device_id,field, hr){
+    return this.http.get(`${environment.api_url}/info/data?mas_iot_device_id=${mas_iot_device_id}&field=${field}&hr=${hr}`);
+  }
   iotShow(type, previous) {
     return this.http.get(`${environment.api_url}/info/${type}?previous=${previous}`);
   }

@@ -17,7 +17,7 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'iot/:id',
+    path: 'iot/:field/:id',
     component: IotComponent
   },
   {
