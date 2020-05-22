@@ -15,10 +15,12 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class IotComponent implements OnInit {
 
-  years = Array.from({length: 48}, (v, k) => k + 1);
-  data: any;
+  //years = Array.from({length: 48}, (v, k) => k + 1);
+  //data: any;
+  device:any;
+  field:any;
   isDataLoaded = false;
-  previous = 24;
+  //previous = 24;
   hr = 24;
   yField:any;
   private chart: am4charts.XYChart;
@@ -31,7 +33,16 @@ export class IotComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.route.snapshot.params.field, this.route.snapshot.params.id);
-    this.loadData(this.hr);
+    this.loadDeviceInfo();
+
+  }
+  loadDeviceInfo(){
+    this.infoService.deviceInfo(this.route.snapshot.params.id, this.route.snapshot.params.field).subscribe((data:any)=>{
+      console.log(data);
+      this.field = data.field;
+      this.device = data.device;
+      this.loadData(this.hr);
+    });
   }
 
   changePrevious(hr) {
@@ -41,7 +52,7 @@ export class IotComponent implements OnInit {
 
   loadData(hr) {
     this.isDataLoaded = false;
-    this.yField = this.route.snapshot.params.field
+    this.yField = this.route.snapshot.params.field;
     this.infoService.loadIotData(this.route.snapshot.params.id, this.yField, hr).subscribe((data:any)=>{
       console.log(data);
       this.isDataLoaded  = true;
@@ -68,7 +79,13 @@ export class IotComponent implements OnInit {
       let categoryAxis = chart.xAxes.push(  new am4charts.CategoryAxis() );
       let valueAxis = chart.yAxes.push( new am4charts.ValueAxis() );
       let series = chart.series.push( new am4charts.LineSeries() );
-      let gradient = new am4core.LinearGradient();
+      //chart.legend = new am4charts.Legend();
+
+      // valueAxis.renderer.opposite = true;
+      // categoryAxis.renderer.opposite = true;
+
+
+      //let gradient = new am4core.LinearGradient();
 
       chart.data = data;
 
@@ -80,14 +97,25 @@ export class IotComponent implements OnInit {
       series.fillOpacity = 0.5;
       series.strokeWidth = 1;
 
+      valueAxis.title.text = this.field.iot_type_name_th+"("+this.field.unit+")";
+
+
       categoryAxis.dataFields.category = 'xField';
       categoryAxis.renderer.minGridDistance = 50;
-      categoryAxis.renderer.grid.template.location = 0;
+      categoryAxis.renderer.grid.template.location = 0.5;
       categoryAxis.renderer.labels.template.rotation = 270;
+      categoryAxis.startLocation = 0.5;
+      categoryAxis.endLocation = 0.5;
+      categoryAxis.title.text = "เวลา";
+
 
       series.tooltipText = "{value}"
       //series.fillOpacity = 0.5;
-      series.strokeWidth = 1;
+      //series.strokeWidth = 1;
+      series.strokeWidth = 2;
+      series.tensionX = 0.77;
+      //series.name = this.field.iot_type_name_th+"("+this.field.unit+")";
+
 
       chart.cursor = new am4charts.XYCursor();
       chart.cursor.behavior = "panXY";

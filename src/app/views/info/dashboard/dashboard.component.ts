@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  private subscription: Subscription;
+  private subscription: Subscription[] = [];
   data = {};
   info_types: any;
   active_id: number;
@@ -50,17 +50,24 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.active_id = id;
 
     // setTimeout(() => {
-    //   if(this.subscription) this.subscription.unsubscribe();
+    //if(this.subscription) this.subscription.unsubscribe();
+    this.unsubAll();
+
       model.mqtt_name.forEach(name => {
+
+        console.log(name);
         const chartId = uuidv4();
         this.charts.push({
           mas_iot_device_id: name.mas_iot_device_id,
           field: model.field,
           dom_id: chartId,
           unit: model.unit,
-          location_name: name.device.location_name
+          location_name: name.device.location_name,
+          chart:null,
+          latest:0,
+          latest_at : null
         });
-        this.loadData(chartId, name.mas_iot_device_id, model.field, model.iot_type_name_th, name.device);
+        this.loadData(chartId, name.mas_iot_device_id, name.mqtt_name, model.field, model.iot_type_name_th, name.device);
       });
     //
     //
@@ -77,25 +84,63 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
       this.changeType(data[0].id);
     });
   }
-  loadData(chartId, mas_iot_device_id, yField, iot_type_name_th, device){
+  loadData(chartId, mas_iot_device_id, mqtt_name, yField, iot_type_name_th, device){
     this.infoService.loadIotData(mas_iot_device_id, yField, 12).subscribe((data:any)=>{
 
       let index = this.charts.findIndex(d => d.dom_id === chartId);
       if(data.length>0){
-      //  this.charts[index].latest = `${data[data.length-1]}.${yField}`;
-        this.createChartV2(data, chartId , 'xField', yField, iot_type_name_th);
+        console.log(data[data.length-1]);
+        let latest = data[data.length-1];
+        this.charts[index].latest = latest[yField];
+        this.charts[index].latest_at = latest['xField'];
+        //this.charts[index].data = data;
+        let chart = am4core.create( chartId , am4charts.XYChart);
+        this.charts[index].chart = chart;
+
+        this.createChartV2(data, chart , 'xField', yField, iot_type_name_th);
+        console.log(mqtt_name);
+        this.mqttSubscribe(index, mqtt_name, yField);
+
       }else{
         this.charts.splice(index,1);
       }
     });
   }
-  createChartV2(data,chartId, xField,yField,legendField) {
 
+  mqttSubscribe(index, name, yField){
+      const sub = this.mqttService.observe(name).subscribe((message: IMqttMessage) => {
+      // let lastdataItem = series.dataItems.getIndex(series.dataItems.length - 1);
+      console.log(name, message.payload.toString());
+      try{
+         let d = new Date(); // for now
+         let dtext = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();;
+         let data = {};
+         data[yField]  = message.payload.toString();
+         data['xField'] = dtext;
+         console.log(data);
+         this.charts[index].latest = message.payload.toString();
+         this.charts[index].latest_at = dtext;
+         this.charts[index].chart.addData(data);// = message.payload.toString();
+         //this.charts[index].data.splice(0,1);
+         //this.charts[index].data.push( data );
+         // this.charts[index].push({
+         //   `${yField}`: 0,
+         //   'xField':0
+         // });
+      }catch(e){
 
+      }
+      // this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`]['value'] = message.payload.toString();
+      // this.latest[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`]['time'] = new Date();
+      // this.charts[`iot${name.mas_iot_device_id}${name.ref_iot_type_id}`].addData({ date: new Date(), [model.field]: message.payload.toString() }, 1);
+      });
+      this.subscription.push(sub);
+
+  }
+  createChartV2(data,chart, xField,yField,legendField) {
 
       this.zone.runOutsideAngular(() => {
 
-        let chart = am4core.create( chartId , am4charts.XYChart);
         let categoryAxis = chart.xAxes.push(  new am4charts.CategoryAxis() );
         let valueAxis = chart.yAxes.push( new am4charts.ValueAxis() );
         let series = chart.series.push( new am4charts.LineSeries() );
@@ -109,7 +154,9 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
         series.dataFields.categoryX  = xField;
         series.tooltipText = "{value}"
         series.fillOpacity = 0.5;
-        series.strokeWidth = 1;
+        series.strokeWidth = 2;
+        series.tensionX = 0.77;
+
 
         categoryAxis.dataFields.category = xField;
         categoryAxis.renderer.minGridDistance = 50;
@@ -179,13 +226,20 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
       // });
     });
   }
+  unsubAll(){
+    console.log("unsubscribe all ");
 
+    this.subscription.forEach(e => {
+      e.unsubscribe();
+    });
+  }
   public unsafePublish(topic: string, message: string): void {
     this.mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
   }
 
   ngOnDestroy() {
-  //  this.subscription.unsubscribe();
+    this.unsubAll();
+   //if(this.subscription) this.subscription.unsubscribe();
   }
 
 }

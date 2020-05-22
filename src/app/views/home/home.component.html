@@ -1,4 +1,4 @@
-<div class="my-5 text-center" *ngIf="!villages && !weathers && !air_quality && !countData" style="height: 100vh;">
+<div class="my-5 text-center" *ngIf="!villages || !weathers || !air_quality || !countData" style="height: 100vh;">
   <div class="absolute-center">
     <mat-spinner class="mx-auto"></mat-spinner>
     กำลังโหลดข้อมูล.

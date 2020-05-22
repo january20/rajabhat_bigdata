@@ -5,10 +5,13 @@ import {
   MqttModule,
   IMqttServiceOptions
 } from 'ngx-mqtt';
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'mqtt.srru.ac.th',
-  clientId: 'ng-srru-bigdata',
+  clientId: uuidv4(),
   port: 443,
   path: '',
   protocol: 'wss',
