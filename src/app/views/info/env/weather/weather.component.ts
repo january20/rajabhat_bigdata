@@ -110,7 +110,7 @@ export class WeatherComponent implements OnInit {
         series.dataFields.valueY = yField;
         series.dataFields.categoryX  = xField;
         series.strokeWidth = 2;
-        series.tensionX = 0.77;
+        //series.tensionX = 0.77;
         series.fillOpacity = 0.5;
         //series.name = legendField;
         series.tooltipText = "{valueY}[/]";

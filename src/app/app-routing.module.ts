@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('./views/auth/auth.module').then(m => m.AuthModule) },
   // { path: 'projects', loadChildren: () => import('./views/projects/projects.module').then(m => m.ProjectsModule) },
   { path: 'bio', loadChildren: () => import('./views/bio/bio.module').then(m => m.BioModule) },
+  { path: 'economics', loadChildren: () => import('./views/economics/economics.module').then(m => m.EconomicsModule) },
   { path: 'experts', loadChildren: () => import('./views/experts/experts.module').then(m => m.ExpertsModule) },
   { path: 'families', loadChildren: () => import('./views/families/families.module').then(m => m.FamiliesModule) },
   { path: 'otop', loadChildren: () => import('./views/otop/otop.module').then(m => m.OtopModule) },
