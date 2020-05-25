@@ -1,3 +1,42 @@
-<p>
-  bestseller works!
-</p>
+<div class="ms-site-container">
+  <!-- <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg  animated zoomInDown">ปริมาณการซื้อขายสินค้าในจังหวัดสุรินทร์</h1>
+        <h3 class="color-medium no-mb animated fadeInUp">ข้อมูลจากแพลตฟอร์มตลาดนัดเมืองช้าง/พาณิชย์จังหวัด</h3>
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="container">
+
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="zmdi zmdi-graduation-cap"></i>รายการสินค้าขายดีภายในจังหวัดสุรินทร์</h3>
+      </div>
+      <table class="table table-no-border table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ชื่อสินค้า</th>
+            <th>จำนวนการซื้อขาย</th>
+            <th>มูลค่า (บาท)</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="products">
+          <tr *ngFor="let product of products;let xx = index ">
+            <td>{{ xx+1 }}</td>
+            <td>{{ product.product.product_th }}</td>
+            <td>{{ product.total_amount }}</td>
+            <td>{{ product.total_price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <small>*ข้อมูลจาก แพล็ตฟอร์มตลาดนัดเมืองช้าง/พานิชย์จังหวัด</small>
+
+  </div>
+
+</div>

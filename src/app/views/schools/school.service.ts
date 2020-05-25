@@ -16,4 +16,10 @@ export class SchoolService {
   schoolList(area_code) {
     return this._http.get(`${environment.api_url}/schools/school_list?area_code=${area_code}`);
   }
+
+  loadSchools(province){
+    return this._http.get(`${environment.api_url}/instutions/academic?province=${province}`);
+
+  }
+
 }

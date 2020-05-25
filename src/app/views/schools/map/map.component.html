@@ -1,0 +1,52 @@
+<div class="my-5 text-center" *ngIf="!schools" style="height: 100vh;">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" *ngIf="schools">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2">แผนที่สถานศึกษา</h1>
+        <h3 class="color-medium no-mb">ของจังหวัดสุรินทร์ มี {{schools.length}} สถานศึกษา</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card card-royal card-hero">
+      <div class="card-body p-2">
+        <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="10">
+
+          <ng-container *ngFor="let school of schools">
+            <agm-marker [latitude]="school.lat" [longitude]="school.lon" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
+              <agm-info-window [disableAutoPan]="false" #weatherInfoWindow>
+                <h3>โรงเรียน {{ school.institution_name_th }}</h3>
+                <p>{{ school.institution_type }}</p>
+                <p>{{ school.department }}</p>
+                <p><strong>โทร:</strong>{{ school.tel_number }}</p>
+                <p><strong>แพ็ก:</strong>{{ school.fax_number }} </p>
+                <p><strong>เว็บไซต์:</strong>{{ school.website }}</p>
+                <!-- <p><strong>พระอาทิตย์ขึ้น:</strong> เวลา {{ station.weather.sunrise | date: 'HH:mm' }} น.</p>
+                <p><strong>พระอาทิตย์ตก:</strong> เวลา {{ station.weather.sunset | date: 'HH:mm' }} น.</p> -->
+              </agm-info-window>
+            </agm-marker>
+          </ng-container>
+
+            <!-- <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+              <ng-container *ngFor="let school of schools">
+                <agm-marker [latitude]="school.lat" [longitude]="school.lon" [iconUrl]="'assets/img/plant.png'">
+                  <agm-info-window [disableAutoPan]="true">
+                    <p>xx</p>
+                  </agm-info-window>
+                </agm-marker>
+              </ng-container>
+            </agm-marker-cluster> -->
+
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</div>

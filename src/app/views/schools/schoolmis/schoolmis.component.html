@@ -2,19 +2,19 @@
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
-        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">สถานศึกษา</h1>
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">สถานศึกษาในจังหวัดสุรินทร์</h1>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <div class="card card-hero card-primary">  
+    <div class="card card-hero card-primary">
       <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
         <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
         <div class="rate-limit-reached" *ngIf="isRateLimitReached">
           เกิดข้อผิดพลาดในการดึงข้อมูล
         </div>
-      </div>  
+      </div>
       <form [formGroup]="filterForm" class="mt-2" fxLayout="row" fxLayoutAlign="center center">
         <mat-form-field class="mx-2" appearance="outline">
           <mat-label>พื้นที่การศึกษา</mat-label>
@@ -24,7 +24,7 @@
             <mat-option [value]="3203">สพป.สุรินทร์ เขต 3</mat-option>
             <mat-option [value]="101733">สพม.เขต 33(สุรินทร์)</mat-option>
           </mat-select>
-        </mat-form-field>       
+        </mat-form-field>
         <mat-form-field class="mx-2" appearance="outline">
           <mat-label>โรงเรียน</mat-label>
           <mat-select formControlName="school">
@@ -51,7 +51,7 @@
         </mat-form-field>
       </form>
       <div class="w-100" style="height: 500px;" *ngIf="results && results.length > 0">
-        <ngx-charts-bar-vertical          
+        <ngx-charts-bar-vertical
           [results]="results"
           [gradient]="false"
           [xAxis]="false"
