@@ -22,6 +22,7 @@
             <th>#</th>
             <th>ชื่อสินค้า</th>
             <th>จำนวนการซื้อขาย</th>
+            <th>ราคา (บาท)</th>
             <th>มูลค่า (บาท)</th>
           </tr>
         </thead>
@@ -30,7 +31,8 @@
             <td>{{ xx+1 }}</td>
             <td>{{ product.product.product_th }}</td>
             <td>{{ product.total_amount }}</td>
-            <td>{{ product.total_price }}</td>
+            <td>{{ product.product.price }}</td>
+            <td>{{ product.total_amount * product.product.price }}</td>
           </tr>
         </tbody>
       </table>

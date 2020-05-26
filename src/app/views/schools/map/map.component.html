@@ -1,4 +1,4 @@
-<div class="my-5 text-center" *ngIf="!schools" style="height: 100vh;">
+<div class="my-5 text-center" *ngIf="!ready" style="height: 100vh;">
   <div class="absolute-center">
     <mat-spinner class="mx-auto"></mat-spinner>
     กำลังโหลดข้อมูล.
@@ -10,22 +10,35 @@
     <div class="container">
       <div class="text-center">
         <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2">แผนที่สถานศึกษา</h1>
-        <h3 class="color-medium no-mb">ของจังหวัดสุรินทร์ มี {{schools.length}} สถานศึกษา</h3>
+        <h3 class="color-medium no-mb">ของจังหวัดสุรินทร์ {{selected}} มี {{schools.length}} สถานที่</h3>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <div class="card card-royal card-hero">
-      <div class="card-body p-2">
-        <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="10">
 
+
+    <div class="card card-royal card-hero">
+
+      <div class="d-flex flex-row justify-content-center">
+        <mat-form-field class="mx-2">
+          <mat-select (selectionChange)="changeGroup($event.value)" [value]='selected'>
+            <mat-option value='ทั้งหมด'>ทั้งหมด</mat-option>
+            <mat-option *ngFor="let group of groups" [value]="group.institution_type">{{group.institution_type}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p *ngIf="schools.length<=0"><mat-icon [className]="schools.length<=0 ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></p>
+
+      </div>
+
+      <div class="card-body p-2">
+        <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="9">
           <ng-container *ngFor="let school of schools">
             <agm-marker [latitude]="school.lat" [longitude]="school.lon" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
               <agm-info-window [disableAutoPan]="false" #weatherInfoWindow>
                 <h3>โรงเรียน {{ school.institution_name_th }}</h3>
-                <p>{{ school.institution_type }}</p>
                 <p>{{ school.department }}</p>
+                <p>{{ school.institution_type }}</p>
                 <p><strong>โทร:</strong>{{ school.tel_number }}</p>
                 <p><strong>แพ็ก:</strong>{{ school.fax_number }} </p>
                 <p><strong>เว็บไซต์:</strong>{{ school.website }}</p>
@@ -34,19 +47,47 @@
               </agm-info-window>
             </agm-marker>
           </ng-container>
-
-            <!-- <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-              <ng-container *ngFor="let school of schools">
-                <agm-marker [latitude]="school.lat" [longitude]="school.lon" [iconUrl]="'assets/img/plant.png'">
-                  <agm-info-window [disableAutoPan]="true">
-                    <p>xx</p>
-                  </agm-info-window>
-                </agm-marker>
-              </ng-container>
-            </agm-marker-cluster> -->
-
         </agm-map>
       </div>
     </div>
+    
+    <br>
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="zmdi zmdi-graduation-cap"></i>รายชื่อโรงเรียน</h3>
+      </div>
+      <table class="table table-no-border table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>รหัสโรงเรียน</th>
+            <th>โรงเรียน</th>
+            <th>สำกัด</th>
+            <th>หน่วยงาน</th>
+            <th>โทรศัพท์</th>
+            <!-- <th>แฟ็ก</th> -->
+            <!-- <th>เว็บไซต์</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let school of schools;let xx = index ">
+            <td>{{ xx+1 }}</td>
+            <td>{{ school.institution_id }}</td>
+            <td>{{ school.institution_name_th }}</td>
+            <td>{{ school.department }}</td>
+            <td>{{ school.institution_type }}</td>
+            <td>{{ school.tel_number }}</td>
+            <!-- <td>{{ school.fax_number }}</td> -->
+            <!-- <td>{{ school.website }}</td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <small>*ข้อมูลจาก opendata.go.th</small>
+
+
+
   </div>
+
 </div>
