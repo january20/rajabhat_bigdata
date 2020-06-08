@@ -10,11 +10,16 @@ import { AirComponent } from './env/air/air.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DeviceComponent } from './device/device.component';
 import { IotComponent } from './iot/iot.component';
+import { ThaiqmComponent } from './thaiqm/thaiqm.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent
+  },
+  {
+    path: 'thaiqm',
+    component: ThaiqmComponent
   },
   {
     path: 'iot/:field/:id',

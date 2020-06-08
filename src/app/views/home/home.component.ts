@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   googleMapOptions = {
     lat: 14.882564,
     lng: 103.494215,
-    zoom: 9.6,
+    zoom: 9.8,
   }
   geoJsonObject: Object;
   polygonPaths: Array<Array<LatLngLiteral>> = [];
@@ -106,10 +106,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getGeoJson();
-    this.getVillages();
+    //this.getVillages();
     this.getWeathers();
-    this.getAirQuality();
-    this.getCountData();
+    //this.getAirQuality();
+    //this.getCountData();
   }
 
   toggleModal(village): void {

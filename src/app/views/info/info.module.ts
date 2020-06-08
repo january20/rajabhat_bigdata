@@ -18,10 +18,11 @@ import { environment } from 'src/environments/environment';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DeviceComponent } from './device/device.component';
 import { IotComponent } from './iot/iot.component';
+import { ThaiqmComponent } from './thaiqm/thaiqm.component';
 
 
 @NgModule({
-  declarations: [InfoComponent, IncomeComponent, PopulationComponent, AgeComponent, OccupationComponent, PopulationAllComponent, EducationComponent, EnvComponent, AirComponent, WeatherComponent, DashboardComponent, DeviceComponent, IotComponent],
+  declarations: [InfoComponent, IncomeComponent, PopulationComponent, AgeComponent, OccupationComponent, PopulationAllComponent, EducationComponent, EnvComponent, AirComponent, WeatherComponent, DashboardComponent, DeviceComponent, IotComponent, ThaiqmComponent],
   imports: [
     CommonModule,
     InfoRoutingModule,

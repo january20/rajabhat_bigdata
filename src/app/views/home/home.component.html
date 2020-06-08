@@ -1,4 +1,4 @@
-<div class="my-5 text-center" *ngIf="!villages || !weathers || !air_quality || !countData" style="height: 100vh;">
+<div class="my-5 text-center" *ngIf="!weathers" style="height: 100vh;">
   <div class="absolute-center">
     <mat-spinner class="mx-auto"></mat-spinner>
     กำลังโหลดข้อมูล.
@@ -6,10 +6,10 @@
 </div>
 
 <!-- Overlay -->
-<a href="/landing" class="ms-conf-btn ms-configurator-btn btn-circle-lg btn-circle btn-circle-raised btn-circle-warning animated rubberBand">
+<!-- <a href="/landing" class="ms-conf-btn ms-configurator-btn btn-circle-lg btn-circle btn-circle-raised btn-circle-warning animated rubberBand">
 	<i class="fa fa-android"></i>
 	<i class="fa fa-apple"></i>
-</a>
+</a> -->
 
 
 <!-- banner -->
@@ -35,7 +35,7 @@
 <!-- end banner -->
 
 
-<div class="ms-site-container mt-5" *ngIf="villages && weathers && air_quality && countData">
+<div class="ms-site-container mt-5" *ngIf="weathers">
   <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
     <div class="container">
       <div class="text-center">
@@ -44,30 +44,29 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" >
     <div class="row">
-      <div class="card card-royal card-hero animated fadeInUp animation-delay-7 p-1 col-10">
-        <div class="card-body p-0 m-0">
+      <div class="card card-royal card-hero col-12" >
+        <div class="card-body p-0 m-0" style="height:100vh;">
           <agm-map #gm [latitude]="googleMapOptions.lat" [longitude]="googleMapOptions.lng" [zoom]="googleMapOptions.zoom" class="h-100">
-            <agm-polygon *ngIf="polygonPaths.length > 0" [paths]="polygonPaths"
+            <!-- <agm-polygon *ngIf="polygonPaths.length > 0" [paths]="polygonPaths"
               strokeColor="#FF0000"
               strokeOpacity="0.8"
               strokeWeight="2"
               fillColor="#FF0000"
-              fillOpacity="0.35"></agm-polygon>
+              fillOpacity="0.35"></agm-polygon> -->
             <agm-data-layer [geoJson]="geoJsonObject"
               [style]="setGeoJsonStyle"></agm-data-layer>
-            <agm-marker [latitude]="googleMapOptions.lat"
-              [longitude]="googleMapOptions.lng"
-              iconUrl="assets/img/logo.png"></agm-marker>
-            <ng-container *ngFor="let village of villages">
+            <!-- <agm-marker [latitude]="googleMapOptions.lat"
+              [longitude]="googleMapOptions.lng"></agm-marker> -->
+            <!-- <ng-container *ngFor="let village of villages">
               <agm-marker [iconUrl]="houseIcon" (markerClick)="toggleModal(village)" [latitude]="village.lat" [longitude]="village.lng" (mouseOver)="markerMouseOver(infoWindow,gm)">
                 <agm-info-window [disableAutoPan]="false" #infoWindow>
                   <a href='javascript:void(0);'>{{ village.village.village_name_th+' ตำบล'+ village.sub_district.sub_district_name_th+' อำเภอ'+village.district.district_name_th }}</a>
                   <p class="color-primary">จำนวนโครงการในพื้นที่: {{ village.projects_count }}</p>
                 </agm-info-window>
               </agm-marker>
-            </ng-container>
+            </ng-container> -->
             <ng-container *ngFor="let station of weathers">
               <agm-marker [iconUrl]="weatherDescriptions[station.weather.description.split(' ').join('')].icon" [latitude]="station.lat" [longitude]="station.lon" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
                 <agm-info-window [disableAutoPan]="false" #weatherInfoWindow>
@@ -83,7 +82,7 @@
                 </agm-info-window>
               </agm-marker>
             </ng-container>
-            <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+            <!-- <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
               <ng-container *ngFor="let station of air_quality">
                 <agm-marker *ngIf="station.air" label="PM 2.5" [latitude]="station?.lat" [longitude]="station?.lng" (mouseOver)="markerMouseOver(airInfoWindow,gm)">
                   <agm-info-window [disableAutoPan]="false" #airInfoWindow>
@@ -93,13 +92,13 @@
                   </agm-info-window>
                 </agm-marker>
               </ng-container>
-            </agm-marker-cluster>
+            </agm-marker-cluster> -->
           </agm-map>
         </div>
       </div>
 
       <div class="col-2">
-        <div class="row">
+        <!-- <div class="row">
           <div class="col">
             <div class="card card-hero card-info-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/info/population')">
               <div class="text-center card-body p-1">
@@ -111,7 +110,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- <div class="row">
           <div class="col">
             <div class="card card-success-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/projects')">
@@ -132,7 +131,7 @@
             </div>
           </div>
         </div> -->
-        <div class="row">
+        <!-- <div class="row">
           <div class="col">
             <div class="card card-danger-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/otop')">
               <div class="text-center card-body p-1">
@@ -141,8 +140,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
+        </div> -->
+        <!-- <div class="row">
           <div class="col">
             <div class="card card-success-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/bio')">
               <div class="text-center card-body p-1">
@@ -152,8 +151,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
+        </div> -->
+        <!-- <div class="row">
           <div class="col">
             <div class="card card-royal-inverse wow fadeInLeft animation-delay-4" style="visibility: visible; animation-name: fadeInLeft;cursor: pointer;" (click)="navigate('/info/env/weather')">
               <div class="text-center card-body p-1">
@@ -165,7 +164,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

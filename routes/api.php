@@ -202,6 +202,19 @@ Route::prefix('ref')->group(function () {
 });
 
 Route::prefix('info')->group(function() {
+
+  Route::prefix('thaiqm')->group(function() {
+    Route::get('/p1', 'Api\Info\ThaiQMController@p1');
+    Route::get('/p2', 'Api\Info\ThaiQMController@p2');
+    Route::get('/p3', 'Api\Info\ThaiQMController@p3');
+
+
+    Route::get('/villages', 'Api\Info\ThaiQMController@villages');
+
+
+  });
+
+
   Route::prefix('population')->group(function() {
     Route::resource('/', 'Api\Population\PopulationController');
     Route::resource('/occupation', 'Api\Population\OccupationController');
@@ -229,6 +242,9 @@ Route::prefix('info')->group(function() {
 
 
 
+
+
+
     // Route::resource('/nature', 'Api\Data\Nature\NatureController');
     // Route::resource('/agriculture', 'Api\Data\Agriculture\AgricultureController');
     Route::resource('/health', 'Api\Health\HealthController');
@@ -247,6 +263,8 @@ Route::prefix('info')->group(function() {
 
 
 });
+
+
 
 Route::prefix('trash')->group(function() {
   Route::get('/{id}', 'Api\Trash\TrashController@index');
@@ -311,3 +329,6 @@ Route::resource('test', 'Api\TestController');
 Route::prefix('parking')->group(function() {
   Route::get('/', 'Api\Parking\ParkingController@index');
 });
+
+Route::get('jpt2tacnap', 'Api\Data\Jpt2TacnapController@index');
+
