@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgmCoreModule } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+
 import { InfoRoutingModule } from './info-routing.module';
 import { InfoComponent } from './info.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -28,8 +30,9 @@ import { ThaiqmComponent } from './thaiqm/thaiqm.component';
     InfoRoutingModule,
     SharedModule,
     AgmCoreModule.forRoot({
-      apiKey: environment.gmap_api_key
+      apiKey: environment.gmap_api_key + '&libraries=visualization'
     }),
+    AgmJsMarkerClustererModule
     
   ]
 })

@@ -82,6 +82,23 @@ class ThaiQMController extends Controller
         ));
     }
 
+    public function p4(){
+        $drops = MasTacnapThaiQM::with('village')->with('sub_district')->with('district')
+                ->selectRaw('round(avg(income_day)) as income_day, round(avg(income_month)) as income_month, mcode, tcode, acode')
+                ->groupBy('mcode')
+                ->limit(50)
+                ->get();
+                // = MasTacnapThaiQM::with('village')->selectRaw('mcode, count(mcode) as count')->groupBy('mcode')->get();
+        
+        // foreach($drops as $drop){
+        //     $effects = MasTacnapThaiQM::where('mcode',$drop->mcode)->groupBy('effect')->get(['effect']);
+        //     $drop->effects = $effects;
+        //     //$need->count = MasTacnapThaiQM::where('chk11',$need->id)->count();
+        // }
+
+        return response()->json( $drops );
+    }
+
     public function villages(){
         $mcode = MasTacnapThaiQM::with('village')->selectRaw('mcode, count(mcode) as count')->groupBy('mcode')->get();
         return response()->json(compact(

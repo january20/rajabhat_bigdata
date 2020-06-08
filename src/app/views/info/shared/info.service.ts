@@ -63,6 +63,8 @@ export class InfoService {
       return this.http.get(`${environment.api_url}/info/thaiqm/p2`);
     }else if(p==3){
       return this.http.get(`${environment.api_url}/info/thaiqm/p3`);
+    }else if(p==4){
+      return this.http.get(`${environment.api_url}/info/thaiqm/p4`);
     }
   }
 

@@ -11,8 +11,13 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 })
 export class ThaiqmComponent implements OnInit {
 
+
+  lat = 14.882564;
+  lng = 103.494215;
+
   qmp1:any;
   qmp3:any;
+  thqmp4:any;
 
   constructor(
     private _info: InfoService,
@@ -25,19 +30,44 @@ export class ThaiqmComponent implements OnInit {
   loadThaiQmSummary(){
 
       this._info.loadThaiQmPx(1).subscribe((data:any)=>{
-        console.log(data);
+        //console.log(data);
         this.qmp1 = data;
       });
       this._info.loadThaiQmPx(2).subscribe((data:any)=>{
-        console.log(data);
+        //console.log(data);
         this.createChart(data.effects,'effectChart','effect','count','จำนวน (คน)',"ผลกระทบ");
       });
       this._info.loadThaiQmPx(3).subscribe((data:any)=>{
-        console.log(data);
+        //console.log(data);
         this.qmp3 = data.needs;
       });
+      this._info.loadThaiQmPx(4).subscribe((data:any)=>{
+        
+        this.thqmp4 = data;
+        //console.log(this.thqmp4);
+       
+        // this.qmp4.forEach(e => {
+        //   console.log(e.village);
+        // });
+
+      });
+  }
+
+  markerMouseOver(infoWindow, map) {
+
+    try{
+      if (map.lastOpen != null) {
+        map.lastOpen.close();
+      }
 
 
+      map.lastOpen = infoWindow;
+      infoWindow.open();
+
+    }catch(e){
+      console.log("Error=>",e);
+    }
+    
   }
 
   createChart(data,chartId,xField,yField,xlabel,ylabel) {

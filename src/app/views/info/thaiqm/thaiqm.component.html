@@ -128,8 +128,61 @@
           </tr>
         </tbody>
       </table>
-
     </div>
 
 
+    <!-- <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="zmdi zmdi-graduation-cap"></i>ต้องการความช่วยเหลือ</h3>
+      </div>
+
+    
+    </div> -->
+
+
+
   </div>
+<!-- 
+  <div class="container" fxLayout="column">
+    <div fxFlex="1 1 100%" >
+
+    <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="9">
+      <ng-container *ngFor="let drop of qmp4">
+        <agm-marker [latitude]="lat" [longitude]="lng" (mouseOver)="markerMouseOver(drop,gm)">
+          <agm-info-window [disableAutoPan]="false">
+            <h3>หมู่บ้าน </h3>
+          </agm-info-window>
+        </agm-marker>
+      </ng-container>
+    </agm-map>
+    </div>
+  </div> 
+
+-->
+
+
+
+
+
+</div>
+
+<div class="container" *ngIf="thqmp4">
+  <div class="card">
+    <div class="card-body p-2">
+      <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="9">
+        <ng-container *ngFor="let droppp of thqmp4">
+          <agm-marker *ngIf="droppp.village" [latitude]="droppp.village.latitude" [longitude]="droppp.village.longitude" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
+            <agm-info-window [disableAutoPan]="false" #weatherInfoWindow>
+              <h3> {{ droppp.village.village_name_th }}, {{ droppp.sub_district.sub_district_name_th }}, อำเภอ{{ droppp.district.district_name_th }}</h3>
+              <p><strong>รายได้/วัน:</strong> {{ droppp.income_day | number }}</p>
+              <p><strong>รายได้/เดือน:</strong> {{ droppp.income_month | number }}</p>
+            </agm-info-window>
+          </agm-marker>
+        </ng-container>
+      </agm-map>
+
+
+    </div>
+  </div>
+</div>

@@ -15,6 +15,7 @@ export class MapComponent implements OnInit {
 
   lat = 14.882564;
   lng = 103.494215;
+
   ngOnInit() {
     this.loadSchoolGroups();
     this.loadSchools();
@@ -30,13 +31,13 @@ export class MapComponent implements OnInit {
       console.log(err);
     });
   }
+
   loadSchoolGroups(){
     this.school.loadSchooGroups().subscribe((data:any)=>{
       this.groups = data;
       console.log(data);
-      
     }, err=>{
-
+      
     });
   }
   changeGroup(event){
@@ -46,9 +47,7 @@ export class MapComponent implements OnInit {
   }
 
   markerMouseOver(infoWindow, map) {
-
     try{
-
       if (map.lastOpen != null) {
         map.lastOpen.close();
       }
@@ -58,8 +57,5 @@ export class MapComponent implements OnInit {
     }catch(e){
       console.log("Error=>",e);
     }
-    
   }
-
-
 }
