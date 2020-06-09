@@ -206,7 +206,8 @@ class ThaiQMController extends Controller
                 $needs->prepend( RefThaiQmNeeds::where('id', $d->chk25)->first() );
                 $need_summary[14]->count++ ;
             }
-            $d->needs = $needs;
+            //$r = $needs->reverse();
+            $d->needs = $needs;//->reverse()->toArray();//r->all();
         }
         // for($i = 11 ; $i<26 ; $i++){
         //     $chks->prepend($i);
