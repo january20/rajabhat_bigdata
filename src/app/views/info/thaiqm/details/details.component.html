@@ -1,0 +1,121 @@
+<div class="ms-site-container mt-5" >
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center" *ngIf="village">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2">หมู่บ้าน {{village.village_name_th}}</h1>
+        <h3 class="color-medium no-mb">{{ village.sub_district.sub_district_name_th}}, อำเภอ{{ village.district.district_name_th}}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="ms-feature col-xl-3 col-lg-6 col-md-6 card wow flipInX animation-delay-4" style="visibility: visible; animation-name: flipInX;">
+        <div class="text-center card-body">
+          <span class="ms-icon ms-icon-circle ms-icon-xxlg color-info">
+            <i class="zmdi zmdi-assignment-o"></i>
+          </span>
+          <h1 class="color-info">สำรวจ</h1>
+          <h1 class="color-info" *ngIf="data">{{ data.length }} คน</h1>
+        </div>
+      </div>
+      <div class="ms-feature col-xl-3 col-lg-6 col-md-6 card wow flipInX animation-delay-8" style="visibility: visible; animation-name: flipInX;">
+        <div class="text-center card-body">
+          <span class="ms-icon ms-icon-circle ms-icon-xxlg color-warning">
+            <i class="zmdi zmdi-money"></i>
+          </span>
+          <h1 class="color-warning">รายได้เฉลี่ย/วัน</h1>
+          <h1 class="color-warning" *ngIf="avg_income_day">{{ avg_income_day | number }} บาท</h1>
+        </div>
+      </div>
+      <div class="ms-feature col-xl-3 col-lg-6 col-md-6 card wow flipInX animation-delay-10" style="visibility: visible; animation-name: flipInX;">
+        <div class="text-center card-body">
+          <span class="ms-icon ms-icon-circle ms-icon-xxlg color-success">
+            <i class="zmdi zmdi-money"></i>
+          </span>
+          <h1 class="color-success">รายได้เฉลี่ย/เดือน</h1>
+          <h1 class="color-success" *ngIf="avg_income_month">{{ avg_income_month | number }} บาท</h1>
+
+        </div>
+      </div>
+      <div class="ms-feature col-xl-3 col-lg-6 col-md-6 card wow flipInX animation-delay-6" style="visibility: visible; animation-name: flipInX;">
+        <div class="text-center card-body">
+          <span class="ms-icon ms-icon-circle ms-icon-xxlg  color-danger">
+            <i class="zmdi zmdi-face"></i>
+          </span>
+          <h1 class="color-danger">เพศ</h1>
+          <h1 class="color-danger" *ngIf="male && female">ชาย {{ male}} คน /หญิง {{female}} คน</h1>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="container mt-4" >
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="zmdi zmdi-graduation-cap"></i>สัดส่วนผู้ได้รับผลกระทบจากมาตรการป้องกันแก้ไขปัญหาโควิด-19</h3>
+      </div>
+      <div id="effectChart" style="width: 100%; height: 650px"></div>
+    </div>
+  </div>
+
+  <div class="container mt-4" >
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="zmdi zmdi-graduation-cap"></i>สัดส่วนความต้องการความช่วยเหลือ</h3>
+      </div>
+      <div id="needChart" style="width: 100%; height: 650px"></div>
+    </div>
+  </div>
+
+
+  <div class="container mt-4" >
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="zmdi zmdi-graduation-cap"></i>รายละเอียดความต้องการ</h3>
+      </div>
+
+      <table class="table table-no-border table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>เทศ</th>
+            <th>รายได้ต่อวัน</th>
+            <th>รายได้ต่อเดือน</th>
+            <th>ผลกระทดบ</th>
+            <th>ความต้องการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let datum of data;let xx = index ">
+            <td>{{ xx+1 }}</td>
+            <td>{{ datum.sex }}</td>
+            <td>{{ datum.income_day }}</td>
+            <td>{{ datum.income_month }}</td>
+            <td ><p *ngIf="datum.effect">{{ datum.effect.effect }}</p></td>
+            <td> 
+
+              <ol *ngIf="datum.needs">
+                <li *ngFor="let need of datum.needs"> {{ need.need }} </li>
+              </ol>  
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
+
+
+    </div>
+  </div>
+
+</div>

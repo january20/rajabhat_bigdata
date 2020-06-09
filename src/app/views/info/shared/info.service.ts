@@ -68,5 +68,10 @@ export class InfoService {
     }
   }
 
+  villageInfo(village){
+    return this.http.get(`${environment.api_url}/info/thaiqm/details?mcode=${village}`);
+
+  }
+
 
 }

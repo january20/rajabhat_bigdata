@@ -17,6 +17,9 @@ class MasTacnapThaiQM extends Model
     public function district(){
         return $this->hasOne('\App\Http\Models\Ref\RefDistricts', 'id', 'acode')->select(['id','district_name_th']);
     }
+    public function effect(){
+        return $this->hasOne('\App\Http\Models\Ref\RefThaiQmEffects', 'id', 'effect');
+    }
     // public function daily_income(){
     //     return $this->hasOne('\App\Http\Models\MasTacnapThaiQM', 'mcode', 'mcode')->whereNotNull('income_day')->avg();
     // }

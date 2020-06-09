@@ -21,10 +21,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DeviceComponent } from './device/device.component';
 import { IotComponent } from './iot/iot.component';
 import { ThaiqmComponent } from './thaiqm/thaiqm.component';
+import { DetailsComponent } from './thaiqm/details/details.component';
 
 
 @NgModule({
-  declarations: [InfoComponent, IncomeComponent, PopulationComponent, AgeComponent, OccupationComponent, PopulationAllComponent, EducationComponent, EnvComponent, AirComponent, WeatherComponent, DashboardComponent, DeviceComponent, IotComponent, ThaiqmComponent],
+  declarations: [InfoComponent, IncomeComponent, PopulationComponent, AgeComponent, OccupationComponent, PopulationAllComponent, EducationComponent, EnvComponent, AirComponent, WeatherComponent, DashboardComponent, DeviceComponent, IotComponent, ThaiqmComponent, DetailsComponent],
   imports: [
     CommonModule,
     InfoRoutingModule,

@@ -208,6 +208,7 @@ Route::prefix('info')->group(function() {
     Route::get('/p2', 'Api\Info\ThaiQMController@p2');
     Route::get('/p3', 'Api\Info\ThaiQMController@p3');
     Route::get('/p4', 'Api\Info\ThaiQMController@p4');
+    Route::get('/details', 'Api\Info\ThaiQMController@details');
 
 
     Route::get('/villages', 'Api\Info\ThaiQMController@villages');

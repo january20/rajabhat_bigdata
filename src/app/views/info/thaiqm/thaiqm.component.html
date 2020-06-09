@@ -175,8 +175,9 @@
           <agm-marker *ngIf="droppp.village" [latitude]="droppp.village.latitude" [longitude]="droppp.village.longitude" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">
             <agm-info-window [disableAutoPan]="false" #weatherInfoWindow>
               <h3> {{ droppp.village.village_name_th }}, {{ droppp.sub_district.sub_district_name_th }}, อำเภอ{{ droppp.district.district_name_th }}</h3>
-              <p><strong>รายได้/วัน:</strong> {{ droppp.income_day | number }}</p>
-              <p><strong>รายได้/เดือน:</strong> {{ droppp.income_month | number }}</p>
+              <p><strong>รายได้/วัน:</strong> {{ droppp.income_day | number }} บาท</p>
+              <p><strong>รายได้/เดือน:</strong> {{ droppp.income_month | number }} บาท</p>
+              <h3 class="h5 text-right mx-5"><strong><a routerLink="/info/thaiqm/{{droppp.mcode}}" class="text-info">ดูข้อมูล</a></strong></h3>
             </agm-info-window>
           </agm-marker>
         </ng-container>

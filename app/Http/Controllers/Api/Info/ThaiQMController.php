@@ -86,7 +86,7 @@ class ThaiQMController extends Controller
         $drops = MasTacnapThaiQM::with('village')->with('sub_district')->with('district')
                 ->selectRaw('round(avg(income_day)) as income_day, round(avg(income_month)) as income_month, mcode, tcode, acode')
                 ->groupBy('mcode')
-                ->limit(50)
+                //->limit(10)
                 ->get();
                 // = MasTacnapThaiQM::with('village')->selectRaw('mcode, count(mcode) as count')->groupBy('mcode')->get();
         
@@ -97,6 +97,127 @@ class ThaiQMController extends Controller
         // }
 
         return response()->json( $drops );
+    }
+    public function details(Request $request){
+
+        $mcode = $request->get('mcode');
+        if(!$mcode){
+            return response()->json('....');
+        }
+
+
+        $village = RefVillages::with('sub_district')->with('district')->where('id',$mcode)->first();
+        $data = MasTacnapThaiQM::with('effect')->where('mcode',$mcode)->get();
+
+
+        $effect_summary = RefThaiQmEffects::get(['id','effect']);
+        $effect_summary[0]->count = 0;
+        $effect_summary[1]->count = 0;
+        $effect_summary[2]->count = 0;
+        $effect_summary[3]->count = 0;
+        $effect_summary[4]->count = 0;
+
+
+        $need_summary = RefThaiQmNeeds::orderBy('id')->get(['id','need']);
+        $need_summary[0]->count = 0 ;
+        $need_summary[1]->count = 0 ;
+        $need_summary[2]->count = 0 ;
+        $need_summary[3]->count = 0 ;
+        $need_summary[4]->count = 0 ;
+        $need_summary[5]->count = 0 ;
+        $need_summary[6]->count = 0 ;
+        $need_summary[7]->count = 0 ;
+        $need_summary[8]->count = 0 ;
+        $need_summary[9]->count = 0 ;
+        $need_summary[10]->count = 0 ;
+        $need_summary[11]->count = 0 ;
+        $need_summary[12]->count = 0 ;
+        $need_summary[13]->count = 0 ;
+        $need_summary[14]->count = 0 ;
+
+        $avg_income_day = round($data->avg('income_day'));
+        $avg_income_month = round($data->avg('income_month'));
+        $male = $data->where('sex','male')->count();
+        $female = $data->where('sex','female')->count();
+        foreach($data as $d){
+            $needs = collect([]);
+
+
+            $tmp = $effect_summary->where('id',$d->effect)->first();
+            if($tmp)$tmp->count++;
+            
+            if($d->chk11){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk11)->first() );
+                $need_summary[0]->count++ ;
+            }
+            if($d->chk12){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk12)->first() );
+                $need_summary[1]->count++ ;
+            }
+            if($d->chk13){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk13)->first() );
+                $need_summary[2]->count++ ;
+            }
+            if($d->chk14){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk14)->first() );
+                $need_summary[3]->count++ ;
+            }
+            if($d->chk15){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk15)->first() );
+                $need_summary[4]->count++ ;
+            }
+            if($d->chk16){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk16)->first() );
+                $need_summary[5]->count++ ;
+            }
+            if($d->chk17){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk17)->first() );
+                $need_summary[6]->count++ ;
+            }
+            if($d->chk18){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk18)->first() );
+                $need_summary[7]->count++ ;
+            }
+            if($d->chk19){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk19)->first() );
+                $need_summary[8]->count++ ;
+            }
+            if($d->chk20){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk20)->first() );
+                $need_summary[9]->count++ ;
+            }
+            if($d->chk21){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk21)->first() );
+                $need_summary[10]->count++ ;
+            }
+            if($d->chk22){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk22)->first() );
+                $need_summary[11]->count++ ;
+            }
+            if($d->chk23){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk23)->first() );
+                $need_summary[12]->count++ ;
+            }
+            if($d->chk24){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk24)->first() );
+                $need_summary[3]->count++ ;
+            }
+            if($d->chk25){
+                $needs->prepend( RefThaiQmNeeds::where('id', $d->chk25)->first() );
+                $need_summary[14]->count++ ;
+            }
+            $d->needs = $needs;
+        }
+        // for($i = 11 ; $i<26 ; $i++){
+        //     $chks->prepend($i);
+        // }
+        
+        //$data->need_summary = $need_summary;
+
+        return response()->json( compact('avg_income_day','avg_income_month','male','female','village','effect_summary','need_summary','data') );
+
+
+
     }
 
     public function villages(){

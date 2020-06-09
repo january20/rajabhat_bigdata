@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DeviceComponent } from './device/device.component';
 import { IotComponent } from './iot/iot.component';
 import { ThaiqmComponent } from './thaiqm/thaiqm.component';
+import { DetailsComponent } from './thaiqm/details/details.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,16 @@ const routes: Routes = [
   },
   {
     path: 'thaiqm',
-    component: ThaiqmComponent
+    children: [
+      {
+        path: '',
+        component: ThaiqmComponent
+      },
+      {
+        path: ':id',
+        component: DetailsComponent
+      }
+    ]
   },
   {
     path: 'iot/:field/:id',
