@@ -15,7 +15,7 @@
           <span class="ms-icon ms-icon-circle ms-icon-xxlg color-info">
             <i class="zmdi zmdi-assignment-o"></i>
           </span>
-          <h1 class="color-info">สำรวจ</h1>
+          <h1 class="color-info">ผู้ได้รับผลกระทบ</h1>
           <h1 class="color-info" *ngIf="data">{{ data.length }} คน</h1>
         </div>
       </div>
@@ -102,19 +102,15 @@
             <td> 
 
               <ol *ngIf="datum.needs">
-                <li *ngFor="let need of datum.needs"> {{ need.need }} </li>
+                <li *ngFor="let need of datum.needs">
+                  <p *ngIf="need">{{ need.need }}</p>
+                </li>
               </ol>  
 
             </td>
           </tr>
         </tbody>
       </table>
-
-
-
-
-
-
     </div>
   </div>
 
