@@ -334,3 +334,14 @@ Route::prefix('parking')->group(function() {
 
 Route::get('jpt2tacnap', 'Api\Data\Jpt2TacnapController@index');
 
+Route::prefix('cleaner')->group(function() {
+
+  Route::get('/', function (Request $request) {
+    return response()->json(['oops' => ':)', 'version'=>"0.68"]);
+  });
+
+  Route::get('/traveler', 'Api\Cleaner\TravelerController@index');
+
+  
+});
+

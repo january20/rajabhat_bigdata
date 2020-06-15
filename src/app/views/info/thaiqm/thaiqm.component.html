@@ -162,14 +162,17 @@
 -->
 
 
-
-
-
 </div>
 
 <div class="container" *ngIf="thqmp4">
   <div class="card">
     <div class="card-body p-2">
+
+      <div class="justify-content-center text-center flex-grow-1 mt-5">
+        <p><mat-icon [className]="!ready ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></p>
+        <a *ngFor="let district of districts" href="javascript:void(0)" (click)="changeDistrict(district)" [className]="district.acode == default_acode ? 'btn btn-xs btn-default btn-raised' : 'btn btn-xs btn-default'" > <p *ngIf="district.district">{{district.district.district_name_th}}</p></a>
+      </div>
+
       <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="9">
         <ng-container *ngFor="let droppp of thqmp4">
           <agm-marker *ngIf="droppp.village" [latitude]="droppp.village.latitude" [longitude]="droppp.village.longitude" (mouseOver)="markerMouseOver(weatherInfoWindow,gm)">

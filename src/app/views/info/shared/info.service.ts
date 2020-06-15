@@ -56,7 +56,7 @@ export class InfoService {
   iotShow(type, previous) {
     return this.http.get(`${environment.api_url}/info/${type}?previous=${previous}`);
   }
-  loadThaiQmPx(p){
+  loadThaiQmPx(p, acode=3201){
     if(p==1){
       return this.http.get(`${environment.api_url}/info/thaiqm/p1`);
     }else if(p==2){
@@ -64,7 +64,7 @@ export class InfoService {
     }else if(p==3){
       return this.http.get(`${environment.api_url}/info/thaiqm/p3`);
     }else if(p==4){
-      return this.http.get(`${environment.api_url}/info/thaiqm/p4`);
+      return this.http.get(`${environment.api_url}/info/thaiqm/p4?acode=${acode}`);
     }
   }
 

@@ -18,6 +18,9 @@ export class ThaiqmComponent implements OnInit {
   qmp1:any;
   qmp3:any;
   thqmp4:any;
+  districts:any;
+  default_acode:any;
+  ready = false;
 
   constructor(
     private _info: InfoService,
@@ -26,6 +29,20 @@ export class ThaiqmComponent implements OnInit {
 
   ngOnInit() {
     this.loadThaiQmSummary();
+  }
+
+  changeDistrict(district){
+    console.log(district);
+    this.default_acode = district.acode;
+    this.ready = false;
+    this._info.loadThaiQmPx(4, district.acode).subscribe((data:any)=>{
+      this.default_acode = data.default_acode;
+      this.thqmp4 = data.data;
+      this.districts = data.districts;
+      this.ready = true;
+    });
+
+
   }
   loadThaiQmSummary(){
 
@@ -42,14 +59,10 @@ export class ThaiqmComponent implements OnInit {
         this.qmp3 = data.needs;
       });
       this._info.loadThaiQmPx(4).subscribe((data:any)=>{
-        
-        this.thqmp4 = data;
-        //console.log(this.thqmp4);
-       
-        // this.qmp4.forEach(e => {
-        //   console.log(e.village);
-        // });
-
+        this.default_acode = data.default_acode;
+        this.thqmp4 = data.data;
+        this.districts = data.districts;
+        this.ready = true;
       });
   }
 
@@ -65,6 +78,7 @@ export class ThaiqmComponent implements OnInit {
       infoWindow.open();
 
     }catch(e){
+      map.lastOpen = null;
       console.log("Error=>",e);
     }
     

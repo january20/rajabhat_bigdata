@@ -26,7 +26,7 @@ class ThaiQMController extends Controller
         $total_tcode = count($tcode);
 
         $acode = MasTacnapThaiQM::selectRaw('acode, count(acode) as count')->groupBy('acode')->get();
-        $total_acode = count($acode);
+        $total_acode = count($acode)-1;
 
         $mcode = MasTacnapThaiQM::selectRaw('mcode, count(mcode) as count')->groupBy('mcode')->get();
         $total_mcode = count($mcode);
@@ -82,9 +82,24 @@ class ThaiQMController extends Controller
         ));
     }
 
-    public function p4(){
-        $drops = MasTacnapThaiQM::with('village')->with('sub_district')->with('district')
+    public function p4(Request $request){
+        $districts = MasTacnapThaiQM::with("district")
+                     ->where('acode','!=',3200)
+                     ->groupBy('acode')
+                     ->get(['acode']);
+
+        $default_acode = $request->get('acode');
+        
+        // foreach($districts as $district){
+        //     $district->raised = null;
+        //     if($default_acode == $district->acode){
+        //         $district->raised = true;
+        //     }
+        // }
+        
+        $data = MasTacnapThaiQM::with('village')->with('sub_district')->with('district')
                 ->selectRaw('round(avg(income_day)) as income_day, round(avg(income_month)) as income_month, mcode, tcode, acode')
+                ->where('acode',$default_acode)
                 ->groupBy('mcode')
                 //->limit(10)
                 ->get();
@@ -96,7 +111,7 @@ class ThaiQMController extends Controller
         //     //$need->count = MasTacnapThaiQM::where('chk11',$need->id)->count();
         // }
 
-        return response()->json( $drops );
+        return response()->json( compact('default_acode','districts','data') );
     }
     public function details(Request $request){
 
