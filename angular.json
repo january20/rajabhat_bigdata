@@ -164,5 +164,8 @@
       }
     }
   },
-  "defaultProject": "ng-srru-bigdata"
+  "defaultProject": "ng-srru-bigdata",
+  "cli": {
+    "analytics": "c85448d9-4859-4cfd-993a-d1054043c416"
+  }
 }
