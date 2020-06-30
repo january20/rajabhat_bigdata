@@ -841,11 +841,12 @@ legend {
 
 .s006 form .inner-form {
   width: 100%;
-  margin-bottom: 17px;
+  /* height: 20px; */
+  margin-bottom: 0px;
 }
 
 .s006 form .inner-form .input-field {
-  height: 70px;
+  height: 50px;
   width: 100%;
   position: relative;
 }
