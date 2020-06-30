@@ -1,3 +1,4 @@
+@import url(/assets/search/css/fonts/thsarabunnew.css);
 html {
   line-height: 1.15;
   /* 1 */
@@ -221,7 +222,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: sans-serif;
+  font-family: 'THSarabunNew', sans-serif;
   /* 1 */
   font-size: 100%;
   /* 1 */
@@ -811,14 +812,14 @@ legend {
 }
 
 .s006 {
-  min-height: 100vh;
+  min-height: 100%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
-  font-family: 'Poppins', sans-serif;
+      font-family: 'THSarabunNew', sans-serif;
   /* background: url("assets/search/images/Searchs_006.png");
   background-size: cover;
   background-position: center center; */
@@ -831,8 +832,8 @@ legend {
 }
 
 .s006 form legend {
-  font-size: 36px;
-  color: #fff;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
   font-weight: 800;
   text-align: center;
   margin-bottom: 59px;
@@ -924,7 +925,8 @@ legend {
 
 .s006 form .suggestion-wrap span {
   font-size: 14px;
-  font-family: 'Helvetica', sans-serif;
+  /* font-family: 'Helvetica', sans-serif; */
+  font-family: 'THSarabunNew', sans-serif;
   display: inline-block;
   background: rgba(0, 0, 0, 0.6);
   padding: 0 15px;
