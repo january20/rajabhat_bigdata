@@ -855,12 +855,12 @@ legend {
   width: 100%;
   background: transparent;
   border: 0;
-  background: #fff;
+  background: rgb(125, 54, 128);
   display: block;
   width: 100%;
   padding: 10px 32px 10px 70px;
   font-size: 18px;
-  color: #666;
+  color: rgb(255, 255, 255);
   border-radius: 34px;
 }
 
