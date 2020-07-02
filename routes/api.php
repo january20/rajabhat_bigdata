@@ -202,6 +202,7 @@ Route::prefix('ref')->group(function () {
 });
 
 Route::prefix('info')->group(function() {
+  Route::get('/homes', 'Api\Info\HomesController@index');
 
   Route::prefix('thaiqm')->group(function() {
     Route::get('/p1', 'Api\Info\ThaiQMController@p1');
@@ -209,6 +210,7 @@ Route::prefix('info')->group(function() {
     Route::get('/p3', 'Api\Info\ThaiQMController@p3');
     Route::get('/p4', 'Api\Info\ThaiQMController@p4');
     Route::get('/details', 'Api\Info\ThaiQMController@details');
+
 
 
     Route::get('/villages', 'Api\Info\ThaiQMController@villages');
