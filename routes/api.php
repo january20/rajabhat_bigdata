@@ -202,8 +202,7 @@ Route::prefix('ref')->group(function () {
 });
 
 Route::prefix('info')->group(function() {
-  Route::get('/homes', 'Api\Info\HomesController@index');
-
+  
   Route::prefix('thaiqm')->group(function() {
     Route::get('/p1', 'Api\Info\ThaiQMController@p1');
     Route::get('/p2', 'Api\Info\ThaiQMController@p2');
@@ -321,6 +320,7 @@ Route::prefix('dashboard')->group(function() {
 
 
 Route::resource('home', 'Api\HomeController');
+Route::get('/homes', 'Api\Info\HomesController@index');
 Route::resource('dev', 'Api\Developers\DevelopersController');
 Route::resource('test', 'Api\TestController');
 // Route::resource('info', 'Api\Info\InfoController');
