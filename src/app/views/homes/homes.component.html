@@ -1,7 +1,6 @@
 <!-- for landing -->
 <link href="assets/search/css/main.css" rel="stylesheet" />
 <!-- end for landing-->
-
   <div class="s006">
     <form>
       <fieldset>
@@ -13,7 +12,7 @@
                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
               </svg>
             </button>
-            <input id="search" type="text" placeholder="" value="ค้นหา" />
+            <input id="search" type="text" placeholder="ค้นหา" (keyup)="onKeyUp($event)"/>
           </div>
         </div>
 
@@ -24,184 +23,34 @@
 <!-- Query Data -->
 <section id="team">
   <div class="container pt-6">
-  <!-- <h2 class="section-title no-margin-top">Cards with Material Icon</h2> -->
-  <div class="row"> <!-- row1-->
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-        <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/{{ government.logo }}" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">{{ government.goverment_name_th }}</h4>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/spcdo.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานพัฒนาชุมชนจังหวัดสุรินทร์</h4>
+    <div class="row">
+      <div *ngFor="let datum of filtered" class="col-xs-6 col-sm-4 col-lg-2">
+        <a *ngIf="datum.route" [routerLink]="datum.route" >
+          <div class="card card-royal h-75">
+            <div class="withripple zoom-img">
+              <img src="https://surin.srru.ac.th/app/images/{{datum.icon}}" alt="" class="img-fluid">
+            </div>
+            <div class="card-body overflow-hidden text-center">
+              <h4 class="color-royal">{{ datum.topic }}</h4>
+            </div>
+          </div>
+        </a>
 
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/splo.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานที่ดินจังหวัดสุรินทร์</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/sppwtpo.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานโยธาธิการและผังเมืองจังหวัดสุรินทร์</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/spdpmo.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานป้องกันและบรรเทาสาธารณภัยจังหวัดสุรินทร์</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/splao.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานส่งเสริมการปกครองท้องถิ่นจังหวัดสุรินทร์</h4>
-        </div>
-      </div>
-    </div> -->
-    
-  </div>
+        <a *ngIf="datum.uri" [href]="datum.uri" target="_blank" >
+          <div class="card card-royal h-75">
+            <div class="withripple zoom-img">
+              <img src="https://surin.srru.ac.th/app/images/{{datum.icon}}" alt="" class="img-fluid">
+            </div>
+            <div class="card-body overflow-hidden text-center">
+              <h4 class="color-royal">{{ datum.topic }}</h4>
+            </div>
+          </div>
+        </a>
 
-  <div class="row"> <!-- row2-->
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-        <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/spfo.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานคลังจังหวัดสุรินทร์</h4>
-        </div>
       </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/sptso.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานการท่องเที่ยวและกีฬาจังหวัดสุรินทร์</h4>
 
-        </div>
-      </div>
+      
     </div>
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/spsdhso.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานพัฒนาสังคมและความมั่นคงของมนุษย์จังหวัดสุรินทร์</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/spaco.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานเกษตรและสหกรณ์จังหวัดสุรินทร์</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/spao1.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานเกษตรจังหวัดสุรินทร์</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-lg-2">
-      <div class="card card-royal">
-        <div class="withripple zoom-img">
-          <a href="javascript:void(0);">
-            <img src="assets/search/images/logo/spalro.jpg" alt="" class="img-fluid"> </a>
-        </div>
-        <div class="card-body overflow-hidden text-center">
-          <a href="javascript:void(0)" class="btn-circle btn-circle-royal btn-circle-raised btn-card-float left wow zoomInDown">
-            <i class="glyphicon glyphicon-link"></i>
-          </a>
-          <h4 class="color-royal">สํานักงานการปฏิรูปที่ดินจังหวัดสุรินทร์</h4>
-        </div>
-      </div>
-    </div>
-    
-  </div>
   </div>
 </section>
 

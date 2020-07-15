@@ -45,7 +45,7 @@
               <div class="col-lg-4 col-sm-6" *ngFor="let expert of experts">
                 <div [className]="'card mt-4 card-'+expert_type_color[expert.expert_type.id]+' wow zoomInUp'">
                   <div [className]="'ms-hero-bg-'+expert_type_color[expert.expert_type.id]+' ms-hero-img-city'">
-                    <img src="/app/images/users/avatar/{{ expert.sys_user.profile_image }}" alt="..." class="img-avatar-circle"> </div>
+                    <img src="https://surin.srru.ac.th/app/images/users/avatar/{{ expert.sys_user.profile_image }}" alt="..." class="img-avatar-circle"> </div>
                   <div class="card-body pt-6 text-center">
                     <h3 [className]="'color-'+expert_type_color[expert.expert_type.id]">{{ expert.sys_user.firstname + ' ' + expert.sys_user.lastname}}</h3>
                     <div class="row"><span [className]="'mx-auto badge badge-'+expert_type_color[expert.expert_type.id]+' my-1'">{{ expert.expert_type.name_th }}</span></div>

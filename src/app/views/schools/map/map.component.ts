@@ -11,7 +11,7 @@ export class MapComponent implements OnInit {
   schools: any[] = [];
   groups:any[] = [];
   ready = false;
-  selected:string = 'ทั้งหมด';
+  selected:string = 'สถาบันอุดมศึกษาของรัฐ';
 
   lat = 14.882564;
   lng = 103.494215;
