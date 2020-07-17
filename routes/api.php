@@ -154,6 +154,10 @@ Route::prefix('bio')->group(function() {
   Route::get('/plants_count', 'Api\Bio\BioController@countPlants')->middleware('jwt.auth');
 });
 
+Route::prefix('welfare')->group(function() {
+  Route::resource('/', 'Api\Welfare\WelfareControllers');
+});
+
 Route::get('/mis', 'Api\MISController@index');
 
 

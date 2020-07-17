@@ -6,7 +6,7 @@
   //return View::make('index');
   //return "X";
 
-  return redirect("newsite/#/home");
+  return redirect("web");
  });
 
 //ชั่วคราว
@@ -207,7 +207,6 @@ Route::get('/media/show', 'MediasController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/homes', 'HomesController@index')->name('homes');
 
 // Route::get('/admin', function () {
 //     return view('admin.index');
