@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Ref\RefGoverments;
 use App\Http\Models\Ref\RefProvinces;
-// use App\Http\Models\Institutions\AcademicInstitution;
+
 
 use Carbon\Carbon;
  
 class HomesController extends Controller
 {
-    //
+    
     public function index(Request $request, $id=0){
 
       if($id>0){

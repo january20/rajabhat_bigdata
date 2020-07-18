@@ -1,0 +1,80 @@
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!ready">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" [style.display]="ready ? 'block' : 'none'">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2">ปริมาณฝนตกในจังหวัดสุรินทร์</h1>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="container">
+    <div class="card card-primary">
+      <h3 class="text-center flex-grow-1 mt-5">ปริมาณฝนตกรวมทั้งจังหวัด</h3>
+      <div id="mainChart" style="width: 100%; height: 500px"></div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="card card-primary">
+      <h3 class="text-center flex-grow-1 mt-5">ปริมาณฝนตกแยกเป็นรายอำเภอ           
+        <mat-icon [className]="!loaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+      </h3>
+
+
+      <div class="d-flex flex-row justify-content-center">
+        <mat-form-field class="mx-2">
+          <mat-label>อำเภอ</mat-label>
+          <mat-select (selectionChange)="changeStation($event.value)">
+            <mat-option *ngFor="let station of stations" [value]="station.id">{{ station.station_name_th }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+      <div class="row">
+
+        <div class="col-xl-3 col-lg-3 col-md-3">
+          <div *ngIf="current_station" class="text-left card-body">
+            <h2 class="color-danger">อำเภอ {{ current_station.station_name_th}}</h2>
+            <h3 class="color-info">สภาพอากาศ {{ current_station.weather.weather }}</h3>
+            <h3 class="color-info">ความชื้น {{ current_station.weather.humidity}} RH</h3>
+            <h3 class="color-info">อุณหภูมิ {{ current_station.weather.temp}} C</h3>
+            <h3 class="color-info">ความเร็วลม {{ current_station.weather.wind_speed }} m/s</h3>
+            <h3 class="color-info">ความดันอากาศ {{ current_station.weather.pressure }} Pa</h3>
+
+            <small>เมื่อ: {{ current_station.weather.created_at }}</small>
+
+          </div>
+        </div>
+  
+        <div class="col-xl-9 col-lg-9 col-md-9">
+          <div class="text-center card-body">
+            <div id="districtChart" style="width: 100%; height: 500px"></div>
+          </div>
+        </div>
+  
+      </div>
+
+
+
+
+    </div>
+
+
+  </div>
+  <div class="container">
+    <small>*กราฟจากหน้าต่างนี้เกิดจากการเก็บข้อมูลจากสถานีวัดภูมิอากาศของอำเภอต่าง ๆ ทุก ๆ 20 นาที โดยการแสดงผลจะทำการนับจากฟิลด์ที่มีค่า Rain (เกิดฝนตก) อย่างง่าย</small>
+  </div>
+
+</div>

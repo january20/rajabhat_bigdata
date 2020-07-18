@@ -271,6 +271,13 @@ Route::prefix('info')->group(function() {
 });
 
 
+Route::prefix('weather')->group(function() {
+  Route::get('stations', 'Api\Env\WeatherController@stations');
+  Route::get('rain', 'Api\Env\RainController@index');
+
+});
+
+
 
 Route::prefix('trash')->group(function() {
   Route::get('/{id}', 'Api\Trash\TrashController@index');

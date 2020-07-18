@@ -93,11 +93,21 @@ export class ThaiqmComponent implements OnInit {
       chart.data = data;
       chart.cursor = new am4charts.XYCursor();
       categoryAxis.dataFields.category = xField;
-      categoryAxis.renderer.minGridDistance = 50;
+      categoryAxis.renderer.minGridDistance = 30;
       categoryAxis.renderer.grid.template.location = 0;
       categoryAxis.renderer.labels.template.rotation = 270;
       categoryAxis.title.text = ylabel;
       valueAxis.title.text = xlabel;
+      // categoryAxis.renderer.labels.template.adapter.add("dy", function(dy, target) {
+      //   if (target.dataItem && target.dataItem.index & 2 == 2) {
+      //     return dy + 25;
+      //   }
+      //   return dy;
+      // });
+      
+
+
+
       let series = chart.series.push(new am4charts.ColumnSeries());
       series.dataFields.valueY = yField;
       series.dataFields.categoryX  = xField;
@@ -106,7 +116,10 @@ export class ThaiqmComponent implements OnInit {
       series.columns.template.column.cornerRadiusTopLeft = 10;
       // series.strokeWidth = 2;
       // series.fillOpacity = 0.5;
-      series.tooltipText = "{valueY}[/]";
+      series.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+      // series.tooltipText = "{valueY}[/]";
+      // series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+
 
 
     var labelBullet = series.bullets.push(new am4charts.LabelBullet());

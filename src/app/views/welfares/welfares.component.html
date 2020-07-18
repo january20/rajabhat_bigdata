@@ -1,0 +1,99 @@
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!ready">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" [style.display]="ready ? 'block' : 'none'">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2">ข้อมูลผู้ถือบัตรสวัสดิการแห่งรัฐ</h1>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+
+    <br>
+    <div class="row">
+
+      <div class="ms-feature col-xl-6 col-lg-6 col-md-6 card wow flipInX" style="visibility: visible; animation-name: flipInX;">
+        <div class="text-center card-body">
+          <span class="ms-icon ms-icon-circle ms-icon-xxlg color-info">
+            <i class="zmdi zmdi-account-box-o"></i>
+          </span>
+          <h1 class="color-info">ผู้ได้รับบัตรสวัสดิการแห่งรัฐ</h1>
+          <h1 *ngIf="data" class="color-warning">{{ data.total | number}} คน</h1>
+          <h1 *ngIf="data" class="color-danger">อายุเฉลี่ย {{ data.avg_age }} ปี</h1>
+
+        </div>
+      </div>
+
+      <div class="ms-feature col-xl-6 col-lg-6 col-md-6 card wow flipInX" style="visibility: visible; animation-name: flipInX;">
+        <div class="text-center card-body">
+          <div id="welfareChart" style="width: 100%; height: 500px"></div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="container">
+    <div class="card card-primary">
+      <h3 class="text-center flex-grow-1 mt-5">ข้อมูลผู้ถือบัตรสวัสดิการแห่งรัฐ <mat-icon [className]="isDataLoaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon></h3>
+      <div class="d-flex flex-row justify-content-center">
+        <mat-form-field class="mx-2">
+          <mat-label>อำเภอ</mat-label>
+          <mat-select (selectionChange)="filter($event.value, 1)">
+            <mat-option [value]="0">ทุกอำเภอ</mat-option>
+            <mat-option *ngFor="let district of districts" [value]="district.district_id">{{ district.xField }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field class="mx-2">
+          <mat-label>ตำบล</mat-label>
+          <mat-select (selectionChange)="filter($event.value, 1)">
+            <mat-option [value]="0">ทุกตำบล</mat-option>
+            <mat-option *ngFor="let sub_district of sub_districts" [value]="sub_district.id">{{ sub_district.xField }}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+      </div>
+      <div id="popChart" style="width: 100%; height: 500px"></div>
+    </div>
+  </div>
+
+
+  <div class="container">
+
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="zmdi zmdi-graduation-cap"></i>ข้อมูลการถือบัตรสวัสดิการแห่งรัฐ แยกตามพื้นที่</h3>
+      </div>
+      <table class="table table-no-border table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>สถานที่</th>
+            <th>รวมผู้ถือบัตร (คน)</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="table">
+          <tr *ngFor="let row of table;let xx = index ">
+            <td>{{ xx+1 }}</td>
+            <td>{{ row.xField }}</td>
+            <td>{{ row.yField }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <small>*ข้อมูลจาก สํานักงานส่งเสริมการปกครองท้องถิ่นจังหวัดสุรินทร์</small>
+
+  </div>
+
+
+</div>
