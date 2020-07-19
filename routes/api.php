@@ -277,6 +277,11 @@ Route::prefix('weather')->group(function() {
 
 });
 
+Route::prefix('human')->group(function() {
+  Route::get('/{route}', 'Api\Human\HumanSecurityController@index');
+
+});
+
 
 
 Route::prefix('trash')->group(function() {

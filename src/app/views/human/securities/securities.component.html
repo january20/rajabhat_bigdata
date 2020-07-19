@@ -1,3 +1,96 @@
-<p>
-  securities works!
-</p>
+<div class="my-5 text-center" style="height: 100vh;" *ngIf="!ready">
+  <div class="absolute-center">
+    <mat-spinner class="mx-auto"></mat-spinner>
+    กำลังโหลดข้อมูล.
+  </div>
+</div>
+
+<div class="ms-site-container mt-5" [style.display]="ready ? 'block' : 'none'">
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2">ข้อมูลผู้พิการ</h1>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div class="container">
+    <div class="card card-primary">
+      <h2 *ngIf="total" class="text-center flex-grow-1 mt-5 color-primary"> สรุปข้อมูลผู้พิการ {{ total | number }} คน</h2>
+      <div id="mainChart" style="width: 100%; height: 600px"></div>
+    </div>
+  </div>
+  
+  <div class="container">
+
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="zmdi zmdi-graduation-cap"></i>ตรวจสอบข้อมูลผู้พิการรายพื้นที่
+        
+          <mat-icon [className]="!loaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+
+        </h3>
+      </div>
+
+      <div class="d-flex flex-row justify-content-center">
+        <mat-form-field class="mx-2">
+          <mat-label>อำเภอ</mat-label>
+          <mat-select (selectionChange)="changeArea($event.value, 1)">
+            <mat-option value="0">ทุกอำเภอ</mat-option>
+
+            <mat-option *ngFor="let district of districts" [value]="district.id">{{ district.district_name_th }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mx-2">
+          <mat-label>ตำบล</mat-label>
+          <mat-select (selectionChange)="changeArea($event.value, 2)">
+            <mat-option *ngFor="let sub_district of sub_districts" [value]="sub_district.id">{{ sub_district.sub_district_name_th }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <div id="areaChart" style="width: 100%; height: 500px"></div>
+    </div>
+
+
+    <div *ngIf="table" class="card card-primary">
+      
+      <table class="table table-no-border table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>สถานที่</th>
+            <th *ngFor="let type of types">{{type.xField}}</th>
+            <th>รวม (คน)</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="table">
+          <tr *ngFor="let row of table;let xx = index ">
+            <td>{{ xx+1 }}</td>
+            <td>{{ row.xField }}</td>
+            <td *ngFor="let type of types">
+                <div *ngFor="let t of row.types">
+                   <p *ngIf="t.id == type.id">{{t.total}}</p>
+                </div>
+            </td>
+            <td>{{ row.yField }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+  <div class="container">
+    <small>*ข้อมูลจากสำนักงานพัฒนาสังคมและความมั่นคงของมนุษย์จังหวัดสุรินทร์</small>
+  </div>
+
+ 
+
+
+</div>
