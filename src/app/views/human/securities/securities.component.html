@@ -29,7 +29,6 @@
         <h3 class="card-title">
           <i class="zmdi zmdi-graduation-cap"></i>ตรวจสอบข้อมูลผู้พิการรายพื้นที่
         
-          <mat-icon [className]="!loaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
 
         </h3>
       </div>
@@ -50,6 +49,7 @@
             <mat-option *ngFor="let sub_district of sub_districts" [value]="sub_district.id">{{ sub_district.sub_district_name_th }}</mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-icon [className]="!loaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
 
       </div>
 
