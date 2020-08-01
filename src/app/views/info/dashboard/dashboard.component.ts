@@ -124,6 +124,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
         let series = chart.series.push( new am4charts.LineSeries() );
         let gradient = new am4core.LinearGradient();
         chart.data = data;
+        //valueAxis.min = 0;
         console.log(yField, xField);
         series.dataFields.valueY = yField;
         series.dataFields.categoryX  = xField;
@@ -138,6 +139,31 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
         series.tooltipText = "{value}"
         //series.fillOpacity = 0.5;
         series.strokeWidth = 1;
+
+        if(this.active_id==4){
+
+          let ranges = [
+            {color:16,start:50,end:0},//16
+            {color:12,start:100,end:50},//12
+            {color:11,start:150,end:100},//11
+            {color:7,start:200,end:150},//7
+            {color:5,start:300,end:200},//5
+            {color:3,start:400,end:300},//3
+            {color:1,start:1000000,end:400}//3
+          ];
+          ranges.forEach(el=>{
+            let range = valueAxis.createSeriesRange(series);
+            range.value = el.start;
+            range.endValue = el.end;
+            range.contents.stroke = chart.colors.getIndex(el.color);
+            range.contents.fill = range.contents.stroke;
+            range.contents.fillOpacity = 0.5;
+    
+          })
+
+        }
+
+
 
         chart.cursor = new am4charts.XYCursor();
         chart.cursor.behavior = "panXY";
