@@ -179,7 +179,7 @@ export class WelfaresComponent implements OnInit {
       sliceTemplate1.strokeWidth = 1;
       sliceTemplate1.strokeOpacity = 1;
 
-
+      chart1.legend = new am4charts.Legend();
 
       // let chart = am4core.create(chartId, am4charts.XYChart);
       // let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());

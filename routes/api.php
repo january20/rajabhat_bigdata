@@ -283,6 +283,18 @@ Route::prefix('human')->group(function() {
 });
 
 
+Route::prefix('religious')->group(function() {
+  Route::prefix('sites')->group(function() {
+    Route::get('', 'Api\Religious\ReligousSitesController@index');
+    Route::get('{route}', 'Api\Religious\ReligousSitesController@index');
+  });
+
+  Route::prefix('masters')->group(function() {
+    Route::get('', 'Api\Religious\ReligousMastersController@index');
+    Route::get('{route}', 'Api\Religious\ReligousMastersController@index');
+  });
+
+});
 
 Route::prefix('trash')->group(function() {
   Route::get('/{id}', 'Api\Trash\TrashController@index');

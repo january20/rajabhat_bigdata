@@ -29,7 +29,7 @@
               <div class="card-body px-0">
                 <blockquote class="blockquote m-0 pt-0" style="font-style: normal">
                   <p class="display-5 text-left m-0">ล่าสุด {{ chart.latest | number }} {{ chart.unit }}
-                    <sub *ngIf="chart.latest_at">,เมื่อ {{ chart.latest_at }}</sub>
+                    <sub *ngIf="chart.latest_at">เมื่อ {{ chart.latest_at }}</sub>
                   </p>
                   <!-- <footer class="blockquote-footer text-left">เมื่อ <cite title="Source Title">xx</cite></footer> -->
                 </blockquote>

@@ -31,7 +31,6 @@ class HumanSecurityController extends Controller
                 return response()->json( $this->all() );
 
         }
-
     }
     private function all(){
 

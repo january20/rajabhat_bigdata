@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'welfares', loadChildren: () => import('./views/welfares/welfares.module').then(m => m.WelfaresModule) }, 
   { path: 'weathers', loadChildren: () => import('./views/weathers/weathers.module').then(m => m.WeathersModule) }, 
   { path: 'human', loadChildren: () => import('./views/human/human.module').then(m => m.HumanModule) }, 
+  { path: 'religious', loadChildren: () => import('./views/religious/religious.module').then(m => m.ReligiousModule) }, 
 
   { path: 'dashboard', loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthGuard] },
   { path: 'admin', loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule) },

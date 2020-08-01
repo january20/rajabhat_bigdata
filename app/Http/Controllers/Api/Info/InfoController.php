@@ -16,9 +16,9 @@ class InfoController extends Controller
 
 
 
-    $info = RefIotTypes::with(['mqtt_name'=>function($query){
+    $info = RefIotTypes::where('displayed',1)->with(['mqtt_name'=>function($query){
       return $query->with('device');
-    }])->get();
+    }])->orderBy('prior')->get();
 
     // $info = RefIotTypes::with(['mqtt_name' => function($query) {
     //     return $query->with('device')->with(['data' => function($query) {
