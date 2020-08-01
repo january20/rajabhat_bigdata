@@ -124,7 +124,6 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
         let series = chart.series.push( new am4charts.LineSeries() );
         let gradient = new am4core.LinearGradient();
         chart.data = data;
-        //valueAxis.min = 0;
         console.log(yField, xField);
         series.dataFields.valueY = yField;
         series.dataFields.categoryX  = xField;
@@ -142,6 +141,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
         if(this.active_id==4){
 
+          //valueAxis.min = 0;
           let ranges = [
             {color:16,start:50,end:0},//16
             {color:12,start:100,end:50},//12
