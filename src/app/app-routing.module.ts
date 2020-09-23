@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: '401', component: Error401Component },
   {
     path: '',
-    redirectTo: '/homes',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
   // {
