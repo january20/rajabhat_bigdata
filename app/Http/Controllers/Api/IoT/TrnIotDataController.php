@@ -59,9 +59,10 @@ class TrnIotDataController extends Controller
     // }])->first();
 
 
-
     $device = MasIotDevices::where('id',  $request->get('device_id') )
       ->with('mqtt_names')->first();
+    $device->ip = $request->ip();
+    $device->save();
 
      $now = Carbon::now('+7:00');
 

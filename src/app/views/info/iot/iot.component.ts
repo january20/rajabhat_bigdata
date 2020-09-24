@@ -54,7 +54,7 @@ export class IotComponent implements OnInit {
     this.isDataLoaded = false;
     this.yField = this.route.snapshot.params.field;
     this.infoService.loadIotData(this.route.snapshot.params.id, this.yField, hr).subscribe((data:any)=>{
-      console.log(data);
+      //console.log(data);
       this.isDataLoaded  = true;
       this.createCharts(data);
     });

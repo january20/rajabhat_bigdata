@@ -359,6 +359,8 @@ Route::resource('test', 'Api\TestController');
 
 Route::prefix('parking')->group(function() {
   Route::get('/', 'Api\Parking\ParkingController@index');
+  Route::get('/available', 'Api\Parking\ParkingController@available');
+
 });
 
 Route::get('jpt2tacnap', 'Api\Data\Jpt2TacnapController@index');
