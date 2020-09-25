@@ -11,7 +11,12 @@ export class InfoService {
     private http: HttpClient
   ) { }
 
-  populationAll(query?) {
+  homesationAll(query?) {
+    return this.http.get(`${environment.api_url}/homes${query ? query : ''}`);
+  }
+
+
+   populationAll(query?) {
     return this.http.get(`${environment.api_url}/info/population${query ? query : ''}`);
   }
 
