@@ -282,6 +282,12 @@ Route::prefix('human')->group(function() {
 
 });
 
+Route::prefix('devplans')->group(function() {
+  Route::get('', 'Api\DevPlans\DevPlansController@index');
+  Route::get('topics', 'Api\DevPlans\DevPlansController@topics');
+  Route::get('locate', 'Api\DevPlans\DevLocationController@index');
+
+});
 
 Route::prefix('religious')->group(function() {
   Route::prefix('sites')->group(function() {

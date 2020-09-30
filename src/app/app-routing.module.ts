@@ -28,6 +28,8 @@ const routes: Routes = [
   // { path: 'kpi', loadChildren: () => import('./views/kpi/kpi.module').then(m => m.KpiModule) },
   { path: 'developers', loadChildren: () => import('./views/developers/developers.module').then(m => m.DevelopersModule) },
   { path: 'iot', loadChildren: () => import('./views/iot/iot.module').then(m => m.IotModule) },
+  { path: 'devplans', loadChildren: () => import('./views/devplans/devplans.module').then(m => m.DevplansModule) },
+
   { path: '401', component: Error401Component },
   {
     path: '',

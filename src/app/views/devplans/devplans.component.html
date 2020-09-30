@@ -1,0 +1,91 @@
+<div class="ms-site-container mt-5" >
+  <div class="ms-hero-page-override ms-hero-img-airplane ms-bg-fixed ms-hero-bg-dark-light">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2"> ข้อมูลความจำเป็นเพื่อการพัฒนาพื้นที่</h1>
+        <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2">&nbsp;ฉบับที่ 12 &nbsp;จังหวัดสุรินทร์</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+
+    <br>
+    <div *ngIf="topics" class="d-flex flex-row justify-content-center">
+      <mat-form-field>
+        <mat-label *ngIf="default_topic">{{default_topic.topic_th}}</mat-label>
+        <mat-select (selectionChange)="changeTopics($event.value)">
+          <mat-option *ngFor="let topic of topics" [value]="topic.que_id">{{ topic.topic_th }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="districts" class="d-flex flex-row justify-content-center">
+      
+      <mat-form-field class="mx-2">
+        <mat-label>อำเภอ</mat-label>
+        <mat-select (selectionChange)="changeArea($event.value, 1)">
+          <mat-option value="0">ทุกอำเภอ</mat-option>
+          <mat-option *ngFor="let district of districts" [value]="district.did">{{ district.district_name_th }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="mx-2">
+        <mat-label>ตำบล</mat-label>
+        <mat-select (selectionChange)="changeArea($event.value, 2)">
+          <mat-option *ngFor="let sub_district of sub_districts" [value]="sub_district.sid">{{ sub_district.sub_district_name_th }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-icon [className]="!loaded ? 'd-inline-block' : 'd-none'"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+
+    </div>
+
+  </div>
+
+  <div class="container">
+    
+    <div class="card card-primary">
+      <div class="card-header">
+        <h2 class="card-title" *ngIf="default_topic">
+          <i class="zmdi zmdi-graduation-cap"></i> {{ default_topic.topic_th }}</h2>
+      </div>
+      <br>
+
+      <div *ngIf="total" class="row d-flex flex-row justify-content-center ">
+        
+        <div class="col-xl-5 col-lg-5 col-md-5 card" >
+          <div class="text-center card-body">
+            <span class="ms-icon ms-icon-circle ms-icon-xxlg color-info">
+              <i class="zmdi zmdi-assignment-o"></i>
+            </span>
+            <h1 class="color-info">สำรวจแล้ว</h1>
+            <h1 class="color-info">{{ total.villages | number }} หมู่บ้าน</h1>
+          </div>
+        </div>
+        <div class="col-xl-5 col-lg-5 col-md-5 card">
+          <div class="text-center card-body">
+            <span class="ms-icon ms-icon-circle ms-icon-xxlg color-warning">
+              <i class="zmdi zmdi-accounts-list-alt"></i>
+            </span>
+            <h1 class="color-warning">จำนวนข้อมูล</h1>
+            <h1 class="color-warning"> {{total.data | number}} ชุด</h1>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div id="que_id" style="width: 100%; height: 550px"></div>
+
+    
+    </div>
+
+  </div>
+
+
+
+
+
+</div>
