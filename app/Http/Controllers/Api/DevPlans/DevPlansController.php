@@ -30,7 +30,7 @@ class DevPlansController extends Controller
                                 ->where('did',$request->district_id)->values()->count();
             $total->data = $total->villages*74;
 
-            $que = QueVillageDevPlans::selectRaw('year, substring(village_id,1,4) as did, substring(village_id,1,6) as name, round(avg('.$request->topic_id.')) as value')
+            $que = QueVillageDevPlans::selectRaw('year, substring(village_id,1,4) as did, substring(village_id,1,6) as name, sum('.$request->topic_id.') as value')
                 ->whereRaw('substring(village_id,1,4)='.$request->district_id)
                 ->groupBy('name')
                 ->groupBy('year')
@@ -61,7 +61,7 @@ class DevPlansController extends Controller
                                ->count();;
             $total->data = $total->villages*74;
 
-            $que = QueVillageDevPlans::selectRaw('year, village_id as name, round(avg('.$request->topic_id.')) as value')
+            $que = QueVillageDevPlans::selectRaw('year, village_id as name, sum('.$request->topic_id.') as value')
                 ->whereRaw('substring(village_id,1,6)='.$request->sub_district_id)
                 ->groupBy('name')
                 ->groupBy('year')
@@ -87,7 +87,7 @@ class DevPlansController extends Controller
             $total->villages = 1;
             $total->data = 74;
 
-            $que = QueVillageDevPlans::selectRaw('year, village_id,  village_id as name, round(avg('.$request->topic_id.')) as value')
+            $que = QueVillageDevPlans::selectRaw('year, village_id,  village_id as name, sum('.$request->topic_id.') as value')
                 ->where('village_id', $request->village_id)
                 ->groupBy('name')
                 ->groupBy('year')
@@ -104,7 +104,7 @@ class DevPlansController extends Controller
 
             $total->villages = QueVillageDevPlans::select(['village_id'])->distinct()->count();
             $total->data = QueVillageDevPlans::count()*74;
-            $que = QueVillageDevPlans::selectRaw('year, substring(village_id,1,4) as name, avg('.$request->topic_id.') as value')
+            $que = QueVillageDevPlans::selectRaw('year, substring(village_id,1,4) as name, sum('.$request->topic_id.') as value')
                    ->groupBy('name')
                    ->groupBy('year')
                    ->get();

@@ -166,7 +166,8 @@ export class DevplansComponent implements OnInit {
 
 
     this.chart = am4core.create(chartId, am4charts.XYChart)
-    this.chart.colors.step = 2;
+    //this.chart.colors.step = 2;
+    this.chart.data =data;
     
     this.chart.legend = new am4charts.Legend()
     this.chart.legend.position = 'top'
@@ -181,13 +182,17 @@ export class DevplansComponent implements OnInit {
     xAxis.renderer.minGridDistance = 20;
     xAxis.renderer.labels.template.rotation = 270;
 
+    
 
     let yAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
     //yAxis.min = 0;
     //yAxis.rotation = 90;
     yAxis.title.text = unit;
+    yAxis.tooltip.disabled = false;
 
-    this.chart.data =data;
+
+    
+    this.chart.cursor = new am4charts.XYCursor();
 
     cols.forEach(el=>{
       this.createSeries(el.name, el.name, this.chart);
@@ -205,7 +210,7 @@ export class DevplansComponent implements OnInit {
     series.name = name
 
     //series.tooltipText = "[{categoryX}: bold]{valueY}[/]";
-    series.columns.template.strokeWidth = 1;
+    series.columns.template.strokeWidth = 0;
 
 
     let bullet = series.bullets.push(new am4charts.LabelBullet())
