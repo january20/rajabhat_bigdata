@@ -214,10 +214,23 @@ export class DevplansComponent implements OnInit {
 
 
     let bullet = series.bullets.push(new am4charts.LabelBullet())
-    bullet.interactionsEnabled = false
+    bullet.interactionsEnabled = true;
     bullet.dy = 30;
     bullet.rotation = 270;
-    bullet.label.text = '{valueY}'
+    bullet.label.text = '{valueY}';
+    bullet.label.truncate = false;
+    bullet.label.hideOversized = false;
+        // bullet.label.wrap = false;
+    // bullet.label.maxWidth = 120;
+    // bullet.label.marginBottom = 0;
+    // bullet.label.marginTop = 0;
+
+    //bullet.label.padding(4, 8, 4, 8);
+    // bullet.label.background.stroke = am4core.color("#555");
+    // bullet.label.background.strokeOpacity = 1;
+    // bullet.label.background = new am4core.RoundedRectangle();
+    // bullet.label.background.cornerRadius(5, 5, 5, 5);
+
     bullet.label.fill = am4core.color('#ffffff')
     return series;
   }

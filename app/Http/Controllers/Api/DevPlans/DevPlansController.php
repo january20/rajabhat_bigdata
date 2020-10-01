@@ -26,7 +26,7 @@ class DevPlansController extends Controller
 
 
         if($request->district_id){
-            $total->villages = QueVillageDevPlans::selectRaw('substring(village_id,1,4) as did, substring(village_id,1,6) as sid')->distinct()->get()
+            $total->villages = QueVillageDevPlans::selectRaw('village_id,substring(village_id,1,4) as did, substring(village_id,1,6) as sid')->distinct()->get()
                                 ->where('did',$request->district_id)->values()->count();
             $total->data = $total->villages*74;
 
@@ -55,7 +55,7 @@ class DevPlansController extends Controller
 
         }else if($request->sub_district_id){
             
-            $total->villages = QueVillageDevPlans::selectRaw('substring(village_id,1,6) as sid')->distinct()->get()
+            $total->villages = QueVillageDevPlans::selectRaw('village_id, substring(village_id,1,6) as sid')->distinct()->get()
                                ->where('sid',$request->sub_district_id)
                                ->values()
                                ->count();;
